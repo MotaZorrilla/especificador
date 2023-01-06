@@ -49,10 +49,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static'); 
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 
-	
+
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 	Route::get('/pdf}', [PdfController::class,'create'])->name('pdf');
 	Route::get('/report}', [PdfController::class,'show'])->name('report');
+	Route::get('/users', [UserProfileController::class, 'search'])->name('users');
 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	

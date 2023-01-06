@@ -4,13 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\models\User;
 
 class UserProfileController extends Controller
 {
     public function show()
-    {
+    {   
         return view('pages.user-profile');
     }
+
+    public function search()
+    {   
+        $users = User::paginate();
+        
+        return view('pages.user-management', compact('users')); 
+    }
+    
 
     public function update(Request $request)
     {
