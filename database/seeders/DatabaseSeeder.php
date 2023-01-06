@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 
 class DatabaseSeeder extends Seeder
@@ -22,5 +23,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@argon.com',
             'password' => bcrypt('secret')
         ]);
+
+        $this->call(UsersTableSeeder::class);
+        //User::factory(250)->create();
+
     }
 }
