@@ -8,19 +8,6 @@ use App\models\User;
 
 class UserProfileController extends Controller
 {
-    public function show()
-    {   
-        return view('pages.user-profile');
-    }
-
-    public function search()
-    {   
-        $users = User::paginate();
-        
-        return view('pages.user-management', compact('users')); 
-    }
-    
-
     public function update(Request $request)
     {
         $attributes = $request->validate([

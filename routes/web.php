@@ -29,6 +29,8 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;         
 use App\Http\Controllers\PdfController;    
+use App\Http\Controllers\DashboardController; 
+use App\Http\Controllers\FileController;
             
 
 //Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -44,16 +46,25 @@ use App\Http\Controllers\PdfController;
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
-	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
+	//Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 	Route::post('/profile', [UserProfileController::class, 'update'])->name('profile.update');
 	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static'); 
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 
 
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-	Route::get('/pdf}', [PdfController::class,'create'])->name('pdf');
-	Route::get('/report}', [PdfController::class,'show'])->name('report');
-	Route::get('/users', [UserProfileController::class, 'search'])->name('users');
+	
+	Route::get('/pdf', 		[PdfController::class,'create'])			->name('pdf');
+	Route::get('/report', 	[PdfController::class,'show'])				->name('report');
+	Route::get('/profile', 	[DashboardController::class, 'profile'])	->name('profile');
+	Route::get('/users', 	[DashboardController::class, 'users'])		->name('users');
+	Route::get('/data', 	[DashboardController::class, 'data'])		->name('data');
+	Route::get('/balance', 	[DashboardController::class, 'balance'])	->name('balance');
+
+	Route::resource('file',  FileController::class);
+	Route::post('/import', 	[FileController::class, 'import'])	->name('import');
+	Route::get('/export', 	[FileController::class, 'export'])	->name('export');
+	Route::get('/excel', 	[FileController::class, 'excel'])	->name('excel');
 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	

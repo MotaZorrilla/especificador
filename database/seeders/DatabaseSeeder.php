@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\File;
 
 
 class DatabaseSeeder extends Seeder
@@ -24,8 +25,8 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('secret')
         ]);
 
-        $this->call(UsersTableSeeder::class);
-        //User::factory(250)->create();
+      //  $this->call(UsersTableSeeder::class);
+        //$this->call(FilesTableSeeder::class);
 
     }
 }
