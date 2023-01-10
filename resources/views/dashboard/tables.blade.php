@@ -1,5 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
+
+
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Tables'])
     <div class="container-fluid py-4">
@@ -11,24 +13,13 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            </th>
-                                        <th class="text-secondary opacity-7"></th>
-                                    </tr>
-                                </thead>
+                            <table class="table align-items-center mb-0"> 
                                 <tbody>
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="/img/team-2.jpg" class="avatar avatar-sm me-3"
-                                                        alt="user1">
+                                                    <img src="/img/icons/import.png" class="avatar avatar-sm me-3">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">Importar Tablas</h6>
@@ -42,12 +33,9 @@
                                                 <p>{{ Session::get('messsage')}}</p>
                                                 @endif
                                                 
-                                                <td class="align-middle text-center text-sm">
                                                     <button class="badge badge-sm bg-gradient-success" type="submit">Importar</button>
-                                                </td>
-                                                <td>
-                                                    <input type="file" name="file">
-                                                </td>
+                                
+                                                    <input type="file" name="file" accept=".xlsx">
                                             </form>
                                         </td>
                                     </tr>
@@ -55,16 +43,15 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="/img/team-3.jpg" class="avatar avatar-sm me-3"
-                                                        alt="user2">
+                                                    <img src="/img/icons/export.png" class="avatar avatar-sm me-3">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">Exportar Tablas</h6>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <a class="badge badge-sm bg-gradient-secondary" href="{{route('export')}}">Exportar</a>
+                                        <td class="align-middle text-right text-sm">
+                                            <a class="badge badge bg-gradient-secondary" href="{{route('export')}}">Exportar</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -80,7 +67,7 @@
                     <div class="card-header pb-0">
                         <h6>Datos de Pinturas</h6>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
+                    <div class="card-body px-3 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center justify-content-center mb-0">
                                 <thead>
@@ -89,59 +76,70 @@
                                             id</th>
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
-                                            Pintura</th>
+                                            Pintura
+                                        </th>
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
-                                            Modelo</th>
+                                            Modelo
+                                        </th>
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
-                                            Certificado</th>
+                                            Certificado
+                                        </th>
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
-                                            Masividad</th>   
+                                            Numero
+                                        </th>
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
-                                            15m</th> 
+                                            Masividad
+                                        </th>   
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
-                                            30m</th>
+                                            15m
+                                        </th> 
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
-                                            60m</th>
+                                            30m
+                                        </th>
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
-                                            90m</th>
+                                            60m
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            90m
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            Actualizado
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($files as $file)
                                     <tr>
-                                        <td>
-                                            <span class="text-xs text-center font-weight-bold ps-2">{{ $file->id }}</span>
+                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->id }}
                                         </td>
-                                        <td>
-                                            <span class="text-xs text-center font-weight-bold ps-2">{{ $file->pintura }}</span>
+                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->pintura }}
                                         </td>
-                                        <td>
-                                            <span class="text-xs text-center font-weight-bold ps-2">{{ $file->modelo }}</span>
+                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->modelo }}
                                         </td>
-                                        <td>
-                                            <span class="text-xs text-center font-weight-bold ps-2">{{ $file->certificado }}</span>
+                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->certificado }}
                                         </td>
-                                        <td>
-                                            <span class="text-xs text-center font-weight-bold ps-2">{{ $file->masividad }}</span>
+                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->numero }}
                                         </td>
-                                        <td>
-                                            <span class="text-xs text-center font-weight-bold ps-2">{{ $file->m15 }}</span>
+                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->masividad }}
                                         </td>
-                                        <td>
-                                            <span class="text-xs text-center font-weight-bold ps-2">{{ $file->m30 }}</span>
+                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->m15 }}
                                         </td>
-                                        <td>
-                                            <span class="text-xs text-center font-weight-bold ps-2">{{ $file->m60 }}</span>
+                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->m30 }}
                                         </td>
-                                        <td>
-                                            <span class="text-xs text-center font-weight-bold ps-2">{{ $file->m90 }}</span>
+                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->m60 }}
+                                        </td>
+                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->m90 }}
+                                        </td>
+                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->updated_at->diffForHumans() }}
                                         </td>
                                     </tr>
                                     @endforeach                                   
@@ -156,3 +154,4 @@
         @include('layouts.footers.auth.footer')
     </div>
 @endsection
+
