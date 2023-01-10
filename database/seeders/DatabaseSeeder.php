@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('secret')
         ]);
 
-      //  $this->call(UsersTableSeeder::class);
+        //$this->call(UsersTableSeeder::class);
         //$this->call(FilesTableSeeder::class);
 
     }
