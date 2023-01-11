@@ -23,7 +23,7 @@ class DashboardController extends Controller
 
     public function data()
     {   
-        $files = File::paginate();
+        $files = File::all();
         
         return view('dashboard.tables', compact('files')); 
     }

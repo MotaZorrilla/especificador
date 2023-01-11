@@ -1,6 +1,11 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
-
+@section('css')
+    <!-- Data Tables Files --
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"/-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap5.min.css">
+@endsection
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Tables'])
@@ -69,7 +74,7 @@
                     </div>
                     <div class="card-body px-3 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center justify-content-center mb-0">
+                            <table class="table align-items-center justify-content-center mb-0" id="files">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
@@ -145,7 +150,6 @@
                                     @endforeach                                   
                                 </tbody>
                             </table>
-                            {{ $files->links()}}
                         </div>
                     </div>
                 </div>
@@ -155,3 +159,16 @@
     </div>
 @endsection
 
+@section('js')
+    <!-- DataTable js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.boot"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/resp"></script>
+    <script>
+            $('#files').DataTable({
+                responsive: true
+            });
+    </script>
+@endsection
