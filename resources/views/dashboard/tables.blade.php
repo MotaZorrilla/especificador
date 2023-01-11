@@ -5,6 +5,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"/>-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap5.min.css">
+    <style>
+        .paginate_button {
+            color: var(--link-color);
+            background-color: transparent;
+            border-color: blue;
+            margin-left: 10px;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+        }       
+    </style>
    
 @endsection
 
@@ -75,7 +85,7 @@
                     </div>
                     <div class="card-body px-3 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center justify-content-center mb-0" id="files">
+                            <table  class="table table-striped " id="files">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
@@ -180,7 +190,7 @@
                     infoFiltered: ", Registros de Pinturas en la Base de Datos: _MAX_ ",
                     search:       "Buscar:",
                     paginate: {
-                                    next: ' Siguiente',
+                                    next: ' Siguiente   ',
                                     previous: 'Anterior '
                     },
                     
@@ -189,6 +199,8 @@
                     decimal: ",",
                     thousands: "."
                 },
+
+                //scrollY: '200px',
 
                 ajax: '{{ route('datatable') }}',
                 columns: [
