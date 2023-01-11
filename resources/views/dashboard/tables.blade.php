@@ -1,10 +1,11 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('css')
-    <!-- Data Tables Files --
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"/-->
+    <!-- Data Tables Files 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css"/>-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.bootstrap5.min.css">
+   
 @endsection
 
 @section('content')
@@ -121,34 +122,34 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($files as $file)
+                                <!--<tbody>
+                                    foreach ($files as $file)
                                     <tr>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->id }}
+                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->id }}
                                         </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->pintura }}
+                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->pintura }}
                                         </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->modelo }}
+                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->modelo }}
                                         </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->certificado }}
+                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->certificado }}
                                         </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->numero }}
+                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->numero }}
                                         </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->masividad }}
+                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->masividad }}
                                         </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->m15 }}
+                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->m15 }}
                                         </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->m30 }}
+                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->m30 }}
                                         </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->m60 }}
+                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->m60 }}
                                         </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->m90 }}
+                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->m90 }}
                                         </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{{ $file->updated_at->diffForHumans() }}
+                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->updated_at->diffForHumans() }}
                                         </td>
                                     </tr>
-                                    @endforeach                                   
-                                </tbody>
+                                    endforeach                                   
+                                </tbody>-->
                             </table>
                         </div>
                     </div>
@@ -166,9 +167,48 @@
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.boot"></script>
     <script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/resp"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script>
             $('#files').DataTable({
-                responsive: true
+                responsive: true,
+                autoWidth: false,
+                language: {
+                    
+                    zeroRecords:  "Nada Encontrado - Intente otra Busqueda",
+                    info:         "Mostrando la Página _PAGE_ de _PAGES_",
+                    infoEmpty:    "Nada Encontrado",
+                    infoFiltered: ", Registros de Pinturas en la Base de Datos: _MAX_ ",
+                    search:       "Buscar:",
+                    paginate: {
+                                    next: ' Siguiente',
+                                    previous: 'Anterior '
+                    },
+                    
+                    lengthMenu:   "Mostrar _MENU_ Registros por Página",
+                    
+                    decimal: ",",
+                    thousands: "."
+                },
+
+                ajax: '{{ route('datatable') }}',
+                columns: [
+                            {data: 'id'},
+                            {data: 'pintura'},
+                            {data: 'modelo'},
+                            {data: 'certificado'},
+                            {data: 'numero'},
+                            {data: 'masividad'},
+                            {data: 'm15'},
+                            {data: 'm30'},
+                            {data: 'm60'},
+                            {data: 'm90'},
+                            {data: 'updated_at',
+                            "render": function ( data, type, row, meta ) {
+                                var date = new Date(data);
+                                return moment(date).fromNow();
+                                }
+                            }
+                        ],                        
             });
     </script>
 @endsection

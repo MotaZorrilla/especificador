@@ -107,4 +107,13 @@ class FileController extends Controller
         $files = File::get();
         return view('pages.excel')->with('files', $files);
     }
+
+    public function datatable()
+    {
+        //$files = File::all();
+        
+        //return view('dashboard.tables', compact('files')); 
+        //return $files;
+        return datatables(File::all())->toJson();
+    }
 }

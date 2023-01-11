@@ -62,10 +62,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/balance', 	[DashboardController::class, 'balance'])	->name('balance');
 
 	Route::resource('file',  FileController::class);
-	Route::post('/import', 	[FileController::class, 'import'])	->name('import');
-	Route::get('/export', 	[FileController::class, 'export'])	->name('export');
-	Route::get('/excel', 	[FileController::class, 'excel'])	->name('excel');
+	Route::post('/import', 	[FileController::class, 'import'])			->name('import');
+	Route::get('/export', 	[FileController::class, 'export'])			->name('export');
+	Route::get('/excel', 	[FileController::class, 'excel'])			->name('excel');
+	Route::get('/datatable',[FileController::class, 'datatable'])		->name('datatable');
 
-	Route::get('/{page}', [PageController::class, 'index'])->name('page');
+	Route::get('/{page}', [PageController::class, 'index'])				->name('page');
 	
 });
