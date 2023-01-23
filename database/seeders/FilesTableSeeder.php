@@ -15,6 +15,6 @@ class FilesTableSeeder extends Seeder
      */
     public function run()
     {
-        File::factory(20000)->create();
+        File::factory(20)->create();
     }
 }

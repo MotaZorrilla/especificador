@@ -12,6 +12,6 @@ class FilesExport implements FromCollection
     */
     public function collection()
     {
-        return File::select("id", "pintura","modelo", "certificado", "masividad", "m15", "m30", "m60", "m90")->get();
+        return File::select("pintura","modelo", "certificado","numero", "masividad", "m15", "m30", "m60", "m90")->get();
     }
 }

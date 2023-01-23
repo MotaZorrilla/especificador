@@ -21,16 +21,6 @@ class PageController extends Controller
         return abort(404);
     }
 
-    public function vr()
-    {
-        return view("pages.virtual-reality");
-    }
-
-    public function rtl()
-    {
-        return view("pages.rtl");
-    }
-
     public function profile()
     {
         return view("pages.profile-static");
