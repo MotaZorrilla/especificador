@@ -65,51 +65,31 @@
                             <table  class="table table-striped " id="project">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
-                                            Nombre del Proyecto</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            ID
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Nombre del Proyecto
+                                        </th>                                        
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
-                                            Perfil
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Tipo de Perfil
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
-                                            Resistencia
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Masividad
                                         </th>
-                                        
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Resistencia al fuego
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Actualizado
+                                        </th>  
                                     </tr>
                                 </thead>
-                                <!--<tbody>
-                                    foreach ($files as $file)
-                                    <tr>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->id }}
-                                        </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->pintura }}
-                                        </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->modelo }}
-                                        </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->certificado }}
-                                        </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->numero }}
-                                        </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->masividad }}
-                                        </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->m15 }}
-                                        </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->m30 }}
-                                        </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->m60 }}
-                                        </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->m90 }}
-                                        </td>
-                                        <td class="text-xs text-center font-weight-bold ps-2">{ $file->updated_at->diffForHumans() }}
-                                        </td>
-                                    </tr>
-                                    endforeach                                   
-                                </tbody>-->
+                                <!--<tbody-->
                             </table>
                         </div>
                     </div>
@@ -152,18 +132,13 @@
 
                 //scrollY: '200px',
 
-                ajax: '{{ route('datatable') }}',
+                ajax: '{{ route('project.show') }}',
                 columns: [
                             {data: 'id'},
-                            /*{data: ''},
-                            {data: 'modelo'},
-                            {data: 'certificado'},
-                            {data: 'numero'},
+                            {data: 'nombre'},
+                            {data: 'perfil'},
                             {data: 'masividad'},
-                            {data: 'm15'},
-                            {data: 'm30'},
-                            {data: 'm60'},
-                            {data: 'm90'},*/
+                            {data: 'resistencia'},
                             {data: 'updated_at',
                             "render": function ( data, type, row, meta ) {
                                 var date = new Date(data);

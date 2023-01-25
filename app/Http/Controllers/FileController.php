@@ -110,10 +110,8 @@ class FileController extends Controller
 
     public function datatable()
     {
-        //$files = File::all();
+        $files = File::all();
         
-        //return view('dashboard.tables', compact('files')); 
-        //return $files;
-        return datatables(File::all())->toJson();
+        return datatables($files)->toJson();
     }
 }

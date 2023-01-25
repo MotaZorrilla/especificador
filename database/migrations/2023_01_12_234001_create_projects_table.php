@@ -15,15 +15,10 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('pintura');  
-            $table->string('modelo')        ->nullable();
-            $table->string('certificado')   ->nullable();
-            $table->string('numero')        ->nullable();
+            $table->string('nombre');  
+            $table->string('perfil')        ->nullable();
             $table->string('masividad')     ->nullable();
-            $table->string('m15')           ->nullable();
-            $table->string('m30')           ->nullable();
-            $table->string('m60')           ->nullable();
-            $table->string('m90')           ->nullable();
+            $table->string('resistencia')    ->nullable();
             $table->timestamps();
         });
     }

@@ -10,8 +10,6 @@ class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {      
@@ -45,9 +43,11 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show()
     {
-        return datatables(Project::all())->toJson();
+        $project = Project::all();
+
+        return datatables($project)->toJson();
     }
 
     /**

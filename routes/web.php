@@ -39,9 +39,11 @@ Route::get('/', function () {return view('welcome');});
 	Route::post('/reset-password', 	[ResetPassword::class, 'send'])				->middleware('guest')->name('reset.perform');
 	Route::get('/change-password', 	[ChangePassword::class, 'show'])			->middleware('guest')->name('change-password');
 	Route::post('/change-password', [ChangePassword::class, 'update'])			->middleware('guest')->name('change.perform');
-	Route::get('/dashboard', 		[HomeController::class, 'index'])			->name('home')->middleware('auth');
+				
 
 Route::group(['middleware'=>'auth'], function () {
+
+	Route::get('/dashboard', 		[HomeController::class, 'index'])			->name('home');
 
 	Route::get('/profile', 			[UserProfileController::class, 'show'])		->name('profile');
 	Route::post('/profile', 		[UserProfileController::class, 'update'])	->name('profile.update');
@@ -55,14 +57,14 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::get('/report', 			[PdfController::class,'show'])				->name('report');
 	Route::get('/profile', 			[DashboardController::class, 'profile'])	->name('profile'); //sin uso
 	Route::get('/users', 			[DashboardController::class, 'users'])		->name('users');
-	Route::get('/data', 			[DashboardController::class, 'data'])		->name('data');
+	Route::get('fileData', 			[DashboardController::class, 'fileData'])	->name('fileData');
 	Route::get('/balance', 			[DashboardController::class, 'balance'])	->name('balance');
 
 	Route::resource('file',  		 FileController::class);
-	Route::post('import', 			[FileController::class, 'import'])			->name('import');
-	Route::get('export', 			[FileController::class, 'export'])			->name('export');
-	Route::get('excel', 			[FileController::class, 'excel'])			->name('excel');
-	Route::get('datatable',			[FileController::class, 'datatable'])		->name('datatable');
+	Route::post('fileImport', 		[FileController::class, 'import'])			->name('fileImport');
+	Route::get('fileExport', 		[FileController::class, 'export'])			->name('fileExport');
+	Route::get('fileExcel', 		[FileController::class, 'excel'])			->name('fileExcel');
+	Route::get('fileDataTable',		[FileController::class, 'datatable'])		->name('fileDataTable');
 
 	
 	Route::get('projectindex',		[ProjectController::class, 'index'])		->name('project.index');
@@ -72,6 +74,7 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::get('projectedit',		[ProjectController::class, 'edit'])			->name('project.edit');	
 	Route::put('projectupdate',		[ProjectController::class, 'update'])		->name('project.update');
 	Route::get('projectdestroy',	[ProjectController::class, 'destroy'])		->name('project.destroy');
+	//Route::get('projectDataTable',	[projectController::class, 'datatable'])	->name('projectDataTable');
 
 	Route::get('/{page}', 			[PageController::class, 'index'])			->name('page');
 	

@@ -78,7 +78,7 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Archivos</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'data' ? 'active' : '' }}" href="{{ route('data') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'fileData' ? 'active' : '' }}" href="{{ route('fileData') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>

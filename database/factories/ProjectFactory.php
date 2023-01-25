@@ -21,15 +21,10 @@ class ProjectFactory extends Factory
     public function definition()
     {
         return [
-            'pintura'       => fake()->name(),
-            'modelo'        => Str::random(10),
-            'certificado'   => Str::random(10),
-            'numero'        => fake()->randomNumber(2),
-            'masividad'     => fake()->randomNumber(2),
-            'm15'           => fake()->randomNumber(1),
-            'm30'           => fake()->randomNumber(2),
-            'm60'           => fake()->randomNumber(3),
-            'm90'           => fake()->randomNumber(4),  
+            'nombre'       => fake()->name(),
+            'perfil'     => fake()->randomNumber(1), 
+            'masividad'     => fake()->randomNumber(2), 
+            'resistencia'     => fake()->randomNumber(4), 
         ];
     }
 }

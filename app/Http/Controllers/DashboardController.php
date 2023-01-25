@@ -21,7 +21,7 @@ class DashboardController extends Controller
         return view('dashboard.user-management', compact('users')); 
     }
 
-    public function data()
+    public function fileData()
     {   
         $files = File::all();
         

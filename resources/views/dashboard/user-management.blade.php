@@ -15,7 +15,7 @@
             <div class="alert alert-light" role="alert">
                 Para imprimir la exportar en <strong>Excel</strong>, Haga Click 
                   <strong>
-                  <a href="{{ route('excel') }}" >
+                  <a href="{{ route('fileExcel') }}" >
                         Aquí.
                     </a>
                 </strong>

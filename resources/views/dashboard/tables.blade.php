@@ -43,7 +43,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <form action="{{ route('import')}}" method="post" enctype="multipart/form-data">
+                                            <form action="{{ route('fileImport')}}" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 @if (Session::has('message'))
                                                 <p>{{ Session::get('messsage')}}</p>
@@ -67,7 +67,7 @@
                                             </div>
                                         </td>
                                         <td class="align-middle text-right text-sm">
-                                            <a class="badge badge bg-gradient-secondary" href="{{route('export')}}">Exportar</a>
+                                            <a class="badge badge bg-gradient-secondary" href="{{route('fileExport')}}">Exportar</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -88,46 +88,46 @@
                             <table  class="table table-striped " id="files">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             id</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Pintura
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Modelo
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Certificado
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Numero
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Masividad
                                         </th>   
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             15m
                                         </th> 
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             30m
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             60m
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             90m
                                         </th>
                                         <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-center opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Actualizado
                                         </th>
                                     </tr>
@@ -202,7 +202,7 @@
 
                 //scrollY: '200px',
 
-                ajax: '{{ route('datatable') }}',
+                ajax: '{{ route('fileDataTable') }}',
                 columns: [
                             {data: 'id'},
                             {data: 'pintura'},
