@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'address'               => fake()->address(),
             'city'                  => fake()->city(),
             'country'               => fake()->country(),
-            'postal'                => Str::random(5),
+            'phone'                 => Str::random(5),
             'about'                 => Str::random(100),        
         ];
     }

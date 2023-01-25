@@ -55,9 +55,9 @@ Route::group(['middleware'=>'auth'], function () {
 	
 	Route::get('/pdf', 				[PdfController::class,'create'])			->name('pdf');
 	Route::get('/report', 			[PdfController::class,'show'])				->name('report');
-	Route::get('/profile', 			[DashboardController::class, 'profile'])	->name('profile'); //sin uso
+	Route::get('/profile', 			[DashboardController::class, 'profile'])	->name('profile'); 
 	Route::get('/users', 			[DashboardController::class, 'users'])		->name('users');
-	Route::get('fileData', 			[DashboardController::class, 'fileData'])	->name('fileData');
+	Route::get('database', 			[DashboardController::class, 'database'])	->name('database');
 	Route::get('/balance', 			[DashboardController::class, 'balance'])	->name('balance');
 
 	Route::resource('file',  		 FileController::class);

@@ -21,15 +21,11 @@ class DashboardController extends Controller
         return view('dashboard.user-management', compact('users')); 
     }
 
-    public function fileData()
+    public function database()
     {   
-        $files = File::all();
+        $files = File::paginate();
         
-        return view('dashboard.tables', compact('files')); 
+        return view('dashboard.database-management', compact('files')); 
     }
         
-    public function balance()
-    {
-        return view("dashboard.billing");
-    }
 }

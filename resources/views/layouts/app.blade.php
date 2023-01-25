@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180"    href="img\icons\apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img\icons\favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img\icons\favicon-16x16.png">
     <title>
         Pintura Intumescente
     </title>
