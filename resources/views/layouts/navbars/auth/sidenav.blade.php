@@ -2,7 +2,7 @@
     id="sidenav-main">
     <div class="sidenav-header">
         <a class="navbar-brand m-0" href="{{ route('home') }}" target="_blank">
-            <img src="img\icons\android-chrome-512x512.png" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="../img\icons\android-chrome-512x512.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold">Especificador de <br> Pintura Intumescente</span>
         </a>
     </div>
@@ -20,15 +20,7 @@
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Perfil</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'users') == true ? 'active' : '' }}" href="{{ route('users') }}">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Usuarios</span>
+                    <span class="nav-link-text ms-1">Mi Perfil</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -37,9 +29,17 @@
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-credit-card text-warning text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Proyectos</span>
+                    <span class="nav-link-text ms-1">Mis Proyectos</span>
                 </a>
-            </li>      
+            </li>  
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'users') == true ? 'active' : '' }}" href="{{ route('users') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Usuarios</span>
+                </a>
+            </li>    
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'database' ? 'active' : '' }}" href="{{ route('database') }}">
                     <div

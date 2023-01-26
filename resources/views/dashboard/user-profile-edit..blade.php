@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Mi Perfil'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Editar Perfil'])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">

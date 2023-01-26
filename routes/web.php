@@ -24,13 +24,8 @@ use App\Http\Controllers\ProjectController;
 |
 */
 
-Route::get('/', function () {return view('welcome');});
+	Route::get('/', function () {return redirect('/dashboard');});
 
-//Auth::routes();
-
-//Route::get('/home', 				[App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-//Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', 		[RegisterController::class, 'create'])		->middleware('guest')->name('register');
 	Route::post('/register', 		[RegisterController::class, 'store'])		->middleware('guest')->name('register.perform');
 	Route::get('/login', 			[LoginController::class, 'show'])			->middleware('guest')->name('login');
@@ -45,7 +40,7 @@ Route::group(['middleware'=>'auth'], function () {
 
 	Route::get('/dashboard', 		[HomeController::class, 'index'])			->name('home');
 
-	Route::get('/profile', 			[UserProfileController::class, 'show'])		->name('profile');
+	Route::get('profile/{id}', 		[UserProfileController::class, 'show'])		->name('profile');
 	Route::post('/profile', 		[UserProfileController::class, 'update'])	->name('profile.update');
 	Route::get('/profile-static', 	[PageController::class, 'profile'])			->name('profile-static'); 
 	Route::get('/sign-in-static', 	[PageController::class, 'signin'])			->name('sign-in-static');
@@ -66,15 +61,9 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::get('fileExcel', 		[FileController::class, 'excel'])			->name('fileExcel');
 	Route::get('fileDataTable',		[FileController::class, 'datatable'])		->name('fileDataTable');
 
+	Route::resource('project',  	ProjectController::class);
 	
-	Route::get('projectindex',		[ProjectController::class, 'index'])		->name('project.index');
-	Route::get('projectcreate',		[ProjectController::class, 'create'])		->name('project.create');
-	Route::post('projectstore',		[ProjectController::class, 'store'])		->name('project.store');
-	Route::get('projectshow',		[ProjectController::class, 'show'])			->name('project.show');	
-	Route::get('projectedit',		[ProjectController::class, 'edit'])			->name('project.edit');	
-	Route::put('projectupdate',		[ProjectController::class, 'update'])		->name('project.update');
-	Route::get('projectdestroy',	[ProjectController::class, 'destroy'])		->name('project.destroy');
-	//Route::get('projectDataTable',	[projectController::class, 'datatable'])	->name('projectDataTable');
+	//Route::get('projectDataTable',	[projectController::class, 'datatable'])	->name('projectDataTable');*/
 
 	Route::get('/{page}', 			[PageController::class, 'index'])			->name('page');
 	

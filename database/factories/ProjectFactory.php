@@ -21,10 +21,11 @@ class ProjectFactory extends Factory
     public function definition()
     {
         return [
-            'nombre'       => fake()->name(),
-            'perfil'     => fake()->randomNumber(1), 
+            'nombre'        => fake()->name(),
+            'descripcion'   => fake()->text(),
+            'perfil'        => fake()->randomNumber(1), 
             'masividad'     => fake()->randomNumber(2), 
-            'resistencia'     => fake()->randomNumber(4), 
+            'resistencia'   => fake()->randomNumber(4), 
         ];
     }
 }

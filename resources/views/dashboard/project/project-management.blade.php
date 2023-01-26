@@ -18,15 +18,15 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="/img/icons/export.png" class="avatar avatar-sm me-3">
+                                                    <a href="{{route('project.create')}}"><img src="/img/icons/export.png" class="avatar avatar-sm me-3"></a>
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">Crear Nuevo Proyecto</h6>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle text-right text-sm">
-                                            <a class="badge badge bg-gradient-secondary" href="{{route('project.create')}}">Crear</a>
+                                        <td class="align-middle text-right ">
+                                            <a class="badge badge bg-gradient-info" href="{{route('project.create')}}">Crear</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -55,15 +55,7 @@
                                         </th>                                        
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Tipo de Perfil
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Masividad
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Resistencia al fuego
+                                            Descripción
                                         </th>
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
@@ -85,21 +77,22 @@
                                             <p class="text-sm font-weight-bold mb-0">{{ $project->nombre }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $project->perfil }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $project->masividad }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $project->resistencia }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $project->descripcion }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $project->updated_at ? $project->updated_at->diffForHumans() : '' }}</p>
                                         </td>
                                         <td class="align-middle ">                                           
                                             <div class="d-flex ">
-                                                <button type="button" class="btn bg-gradient-info m-1">Editar</button>
-                                                <button type="button" class="btn bg-gradient-danger m-1">Borrar</button>
+                                                <form action="{{ route('project.show', $project) }}" method="get" >
+                                                    @csrf
+                                                    <button type="submit" class="btn bg-gradient-info m-1">Editar</button>
+                                                </form>
+                                                <form action="{{ route('project.destroy', $project) }}" method="post" >
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn bg-gradient-danger m-1">Eliminar</button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
