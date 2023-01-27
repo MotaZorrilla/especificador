@@ -6,16 +6,28 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="container">
-                        <div class="card-header pb-0">
-                            <h6>{{ $project->nombre }}</h6>
-                        </div>  
+                    <div class="card-header pb-4">
+                        <h3>Proyecto {{ $project->nombre }}</h3>
                     </div>
-                </div>  
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0"> 
+                                <tbody> 
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">  
@@ -28,7 +40,7 @@
                                     <p>{{ Session::get('messsage')}}</p>
                                 @endif               
                                 <div>
-                                    <h3>Editar {{ $project->nombre }}</h3>
+                                    <h3>Editar Proyecto: {{ $project->nombre }}</h3>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for=>Nombre del Proyecto:</label>
@@ -71,11 +83,25 @@
                                         <label for="resistencia" class="form-control-label">Resistencia al Fuego:</label>
                                         <input class="form-control" type="number" id="resistencia" name="resistencia" value="{{ $project->resistencia }}">
                                     </div>
-                                </div>    
-                                <div>
-                                    <button class="badge badge-sm bg-gradient-info px-3" type="submit">Actualizar</button>
-                                </div>
+                                </div>   
+                                <div class="d-flex ">
+                                    <div>
+                                        <button type="submit" class="btn bg-gradient-info m-1">Actualizar</button>
+                                    </div>
                             </form>
+                                    <div>
+                                        <form action="{{ route('project.destroy', $project) }}" method="post" >
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn bg-gradient-danger m-1">Eliminar</button>
+                                        </form> 
+                                    </div> 
+                                    <div>
+                                        <form action="{{ route('project.index') }}" method="get" >
+                                            <button type="submit" class="btn bg-gradient-success m-1">Volver</button>
+                                        </form> 
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>   

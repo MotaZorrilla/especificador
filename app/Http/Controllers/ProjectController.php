@@ -12,7 +12,7 @@ class ProjectController extends Controller
     {      
         $projects = Project::orderBy('id','desc')->paginate();
 
-        return view('dashboard.project.project-management', compact('projects'));
+        return view('dashboard.project.project-index', compact('projects'));
     }
 
     //Show the form for creating a new resource.
@@ -35,24 +35,18 @@ class ProjectController extends Controller
         $project->save();
 
         return redirect()->route('project.show', $project );
-
     }
 
     //Display the specified resource.
     public function show(Project $project)
     {
-       // $project = Project::find($id);
-
         return view('dashboard.project.project-show', compact('project'));
     }
 
     //Show the form for editing the specified resource.
     public function edit(Project $project)
     {
-        //$project = Project::find($id);
-        //return $project;
         return view('dashboard.project.project-edit', compact('project'));
-
     }
 
     //Update the specified resource in storage.

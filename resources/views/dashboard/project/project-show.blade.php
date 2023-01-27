@@ -6,23 +6,35 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="container">
-                        <div class="card-header pb-0">
-                            <h2>{{ $project->nombre }}</h2>
-                        </div>  
+                    <div class="card-header pb-4">
+                        <h3>Proyecto {{ $project->nombre }}</h3>
                     </div>
-                </div>  
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0"> 
+                                <tbody> 
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">  
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="container py-5 col-5">   
                             <div>
-                                <h3>Proyecto {{ $project->nombre }}</h3>
+                                <h3>{{ $project->nombre }}</h3>
                             </div>
                             <div class="form-group">
                                 <label for="project_data" class="form-control-label">Descripción:</label>
@@ -43,7 +55,6 @@
                             <div>
                                 <div class="d-flex ">
                                     <form action="{{ route('project.edit', $project) }}" method="get" >
-                                        @csrf
                                         <button type="submit" class="btn bg-gradient-info m-1">Editar</button>
                                     </form>
                                     <form action="{{ route('project.destroy', $project) }}" method="post" >
@@ -51,6 +62,9 @@
                                         @method('delete')
                                         <button type="submit" class="btn bg-gradient-danger m-1">Eliminar</button>
                                     </form>
+                                    <form action="{{ route('project.index') }}" method="get" >
+                                        <button type="submit" class="btn bg-gradient-success m-1">Volver</button>
+                                    </form> 
                                 </div>
                             </div>
                         </div>

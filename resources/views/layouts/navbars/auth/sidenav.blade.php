@@ -50,6 +50,5 @@
                 </a>
             </li>
         </ul>
-    </div>
-    
+    </div>  
 </aside>

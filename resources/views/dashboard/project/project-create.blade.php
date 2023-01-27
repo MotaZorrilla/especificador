@@ -6,16 +6,29 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="container">
-                        <div class="card-header pb-0">
-                            <h6>Crear un Nuevo Proyectos</h6>
-                        </div>  
+                    <div class="card-header pb-0">
+                        <h6>Proyectos</h6>
                     </div>
-                </div>  
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0"> 
+                                <tbody> 
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">Crear Nuevo Proyecto</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">  
@@ -69,10 +82,17 @@
                                         <input class="form-control" type="number" id="resistencia" name="resistencia" value="171">
                                     </div>
                                 </div>    
-                                <div>
-                                    <button class="badge badge-sm bg-gradient-info px-3" type="submit">Crear</button>
-                                </div>
+                                <div class="d-flex ">
+                                    <div>
+                                        <button type="submit" class="btn bg-gradient-info m-1">Crear</button>
+                                    </div>
                             </form>
+                                    <div>
+                                        <form action="{{ route('project.index') }}" method="get" >
+                                            <button type="submit" class="btn bg-gradient-danger m-1">Volver</button>
+                                        </form>
+                                    </div>    
+                                </div>
                         </div>
                     </div>
                 </div>   

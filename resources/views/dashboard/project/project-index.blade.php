@@ -26,7 +26,10 @@
                                             </div>
                                         </td>
                                         <td class="align-middle text-right ">
-                                            <a class="badge badge bg-gradient-info" href="{{route('project.create')}}">Crear</a>
+                                            <form action="{{route('project.create')}}" method="get" >
+                                                
+                                                <button type="submit" class="btn bg-gradient-info m-1">Crear</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -44,25 +47,19 @@
                     </div>
                     <div class="card-body px-3 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table  class="table table-striped " id="project">
+                            <table  class="table table-striped table-hover table-condensed" id="project">
                                 <thead>
-                                    <tr>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            ID
-                                        </th>
+                                    <tr> 
                                         <th class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Nombre del Proyecto
                                         </th>                                        
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Descripción
                                         </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Actualizado
                                         </th> 
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Acción
                                         </th>  
                                     </tr>
@@ -70,23 +67,19 @@
                                 <tbody>
                                     @foreach ($projects as $project)
                                     <tr>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $project->id }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
+                                        <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">{{ $project->nombre }}</p>
                                         </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $project->descripcion }}</p>
+                                        <td class="align-middle text-sm ">
+                                            <p class="text-sm font-weight-bold mb-0">{{ substr($project->descripcion, 0, 50) }}...</p>
                                         </td>
-                                        <td class="align-middle text-sm">
+                                        <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">{{ $project->updated_at ? $project->updated_at->diffForHumans() : '' }}</p>
                                         </td>
                                         <td class="align-middle ">                                           
                                             <div class="d-flex ">
                                                 <form action="{{ route('project.show', $project) }}" method="get" >
-                                                    @csrf
-                                                    <button type="submit" class="btn bg-gradient-info m-1">Editar</button>
+                                                    <button type="submit" class="btn bg-gradient-info m-1">Ver Proyecto</button>
                                                 </form>
                                                 <form action="{{ route('project.destroy', $project) }}" method="post" >
                                                     @csrf
