@@ -4,19 +4,19 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\File;
+use App\Models\Filedata;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\File>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Filedata>
  */
-class FileFactory extends Factory
+class FiledataFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    protected $model = File::class;
+    protected $model = Filedata::class;
 
     public function definition()
     {

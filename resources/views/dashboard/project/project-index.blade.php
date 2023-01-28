@@ -13,7 +13,6 @@
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0"> 
                                 <tbody>
-                                    
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">

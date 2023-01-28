@@ -20,7 +20,7 @@ class PageController extends Controller
 
         return abort(404);
     }
-
+/*
     public function profile()
     {
         return view("pages.profile-static");
@@ -35,6 +35,6 @@ class PageController extends Controller
     {
         return view("pages.sign-up-static");
     }
-
+*/
     
 }

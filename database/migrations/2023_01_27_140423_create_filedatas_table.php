@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('filedatas', function (Blueprint $table) {
             $table->id();
             $table->string('pintura');  
             $table->string('modelo')        ->nullable();
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('filedatas');
     }
 };

@@ -20,7 +20,9 @@ class FileController extends Controller
      */
     public function index()
     {
-        return view('dashboard.files');
+        $files = File::orderBy('id','desc')->paginate();
+        
+        return view('dashboard.filedata.filedata-index', compact('files')); 
     }
 
     /**

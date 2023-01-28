@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\File;
+use App\Models\Filedata;
 
-class FilesTableSeeder extends Seeder
+class FiledatasTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,6 @@ class FilesTableSeeder extends Seeder
      */
     public function run()
     {
-        File::factory(20)->create();
+        Filedata::factory(20)->create();
     }
 }

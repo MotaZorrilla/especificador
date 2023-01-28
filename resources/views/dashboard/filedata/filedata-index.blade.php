@@ -24,14 +24,14 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            <form action="{{ route('fileImport')}}" method="post" enctype="multipart/form-data">
+                                        <td class="align-middle text-center">
+                                            <form action="{{ route('filedataImport')}}" method="post" enctype="multipart/form-data">
                                                 @csrf
                                                 @if (Session::has('message'))
                                                 <p>{{ Session::get('messsage')}}</p>
                                                 @endif
-                                                <button class="badge badge-sm bg-gradient-success" type="submit">Importar</button>
-                                                <input type="file" name="file" accept=".xlsx">
+                                                <button type="submit" class="btn bg-gradient-success m-1">Importar</button>
+                                                <input type="file" name="filedata" accept=".xlsx">
                                             </form>
                                         </td>
                                     </tr>
@@ -39,15 +39,34 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <a href="{{route('fileExport')}}"><img src="/img/icons/export.png" class="avatar avatar-sm me-3"></a>
+                                                    <a href="{{route('filedataExport')}}"><img src="/img/icons/export.png" class="avatar avatar-sm me-3"></a>
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">Exportar Tablas</h6>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="align-middle text-right ">
-                                            <a class="badge badge bg-gradient-info" href="{{route('fileExport')}}">Exportar</a>
+                                        <td class="align-middle text-center ">
+                                            <form action="{{route('filedataExport')}}" method="get" >
+                                                <button type="submit" class="btn bg-gradient-info m-1">Exportar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <a href="{{route('filedata.create')}}"><img src="/img/icons/export.png" class="avatar avatar-sm me-3"></a>
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">Crear Nuevo Registro</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle text-center ">
+                                            <form action="{{route('filedata.create')}}" method="get" >
+                                                <button type="submit" class="btn bg-gradient-info m-1">Crear</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -117,52 +136,58 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($files as $file)
+                                    @foreach ($filedata as $filedatum)
                                     <tr>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $file->id }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->id }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $file->pintura }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->pintura }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $file->modelo }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->modelo }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $file->certificado }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->certificado }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $file->numero }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->numero }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $file->masividad }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->masividad }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $file->m15 }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->m15 }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $file->m30 }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->m30 }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $file->m60 }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->m60 }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $file->m90 }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->m90 }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $file->updated_at ? $file->updated_at->diffForHumans() : '' }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->updated_at ? $filedatum->updated_at->diffForHumans() : '' }}</p>
                                         </td>
                                         <td class="align-middle ">                                           
                                             <div class="d-flex ">
-                                                <button type="button" class="btn bg-gradient-info m-1">Editar</button>
-                                                <button type="button" class="btn bg-gradient-danger m-1">Borrar</button>
+                                                <form action="{{ route('filedata.show', $filedatum) }}" method="get" >
+                                                    <button type="submit" class="btn bg-gradient-info m-1">Ver registro</button>
+                                                </form>
+                                                <form action="{{ route('filedata.destroy', $filedatum) }}" method="post" >
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn bg-gradient-danger m-1">Eliminar</button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $files->links() }}
+                            {{ $filedata->links() }}
                         </div>
                     </div>
                 </div>

@@ -13,6 +13,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\DashboardController; 
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\FiledataController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,13 +56,11 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::get('database', 			[DashboardController::class, 'database'])	->name('database');
 	Route::get('/balance', 			[DashboardController::class, 'balance'])	->name('balance');
 
-	Route::resource('file',  		 FileController::class);
-	Route::post('fileImport', 		[FileController::class, 'import'])			->name('fileImport');
-	Route::get('fileExport', 		[FileController::class, 'export'])			->name('fileExport');
-	Route::get('fileExcel', 		[FileController::class, 'excel'])			->name('fileExcel');
-	Route::get('fileDataTable',		[FileController::class, 'datatable'])		->name('fileDataTable');
+	Route::resource('project',  	 ProjectController::class);
 
-	Route::resource('project',  	ProjectController::class);
+	Route::resource('filedata',  	 FiledataController::class);
+	Route::post('filedataImport', 	[FiledataController::class, 'import'])		->name('filedataImport');
+	Route::get('filedataExport', 	[FiledataController::class, 'export'])		->name('filedataExport');
 	
 	//Route::get('projectDataTable',	[projectController::class, 'datatable'])	->name('projectDataTable');*/
 

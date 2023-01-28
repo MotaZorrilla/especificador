@@ -2,19 +2,14 @@
 
 namespace App\Imports;
 
-use App\Models\File;
+use App\Models\Filedata;
 use Maatwebsite\Excel\Concerns\ToModel;
 
-class Filesimport implements ToModel
+class FiledataImport implements ToModel
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
     public function model(array $row)
     {
-        return new File([
+        return new Filedata([
             'pintura'       => $row[0],
             'modelo'        => $row[1],
             'certificado'   => $row[2],      

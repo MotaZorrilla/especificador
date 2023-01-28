@@ -26,7 +26,7 @@
     @endauth
 </head>
 
-<body class="{{ $class ?? '' }}">
+<body class="{{ $class ?? '' }}" >
 
     @guest
         @yield('content')
