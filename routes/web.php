@@ -49,21 +49,22 @@ Route::group(['middleware'=>'auth'], function () {
 
 	Route::post('logout', 			[LoginController::class, 'logout'])			->name('logout');
 	
-	Route::get('/pdf', 				[PdfController::class,'create'])			->name('pdf');
+	Route::get('pdf/{pdf}', 				[PdfController::class,'create'])			->name('pdf');
 	Route::get('/report', 			[PdfController::class,'show'])				->name('report');
 	Route::get('/profile', 			[DashboardController::class, 'profile'])	->name('profile'); 
 	Route::get('/users', 			[DashboardController::class, 'users'])		->name('users');
 	Route::get('database', 			[DashboardController::class, 'database'])	->name('database');
 	Route::get('/balance', 			[DashboardController::class, 'balance'])	->name('balance');
 
-	Route::resource('project',  	 ProjectController::class);
+	Route::resource('project',  	 	 ProjectController::class);
+	Route::get('project/{project}/pdf',	[ProjectController::class,'pdf'])			->name('project.pdf');
 
-	Route::resource('filedata',  	 FiledataController::class);
-	Route::post('filedataImport', 	[FiledataController::class, 'import'])		->name('filedataImport');
-	Route::get('filedataExport', 	[FiledataController::class, 'export'])		->name('filedataExport');
+	Route::resource('filedata',  		 FiledataController::class);
+	Route::post('filedataImport', 		[FiledataController::class, 'import'])		->name('filedata.Import');
+	Route::get('filedataExport', 		[FiledataController::class, 'export'])		->name('filedata.Export');
 	
 	//Route::get('projectDataTable',	[projectController::class, 'datatable'])	->name('projectDataTable');*/
 
-	Route::get('/{page}', 			[PageController::class, 'index'])			->name('page');
+	Route::get('/{page}', 				[PageController::class, 'index'])			->name('page');
 	
 });

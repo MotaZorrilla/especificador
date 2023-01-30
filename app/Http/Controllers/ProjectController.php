@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Models\Project;
+use App\Models\Filedata;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProjectController extends Controller
 {
@@ -69,5 +71,20 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->route('project.index');
+    }
+
+    public function pdf(Project $project)
+    {   
+        
+        $filedata = Filedata::where('masividad', $project->masividad )
+        //  ->where('m90', '!=', 'Fuera de rango')
+        // ->latest('id')
+        // ->take(4)
+        ->get();
+
+        // return view('dashboard.project.project-pdf', compact('project', 'filedata'));
+        $pdf   = PDF::loadView('dashboard.project.project-pdf', compact('project', 'filedata'));
+
+        return $pdf->download('Especificador de pintura.pdf');
     }
 }

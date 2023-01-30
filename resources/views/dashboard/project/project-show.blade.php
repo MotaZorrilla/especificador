@@ -65,6 +65,9 @@
                                     <form action="{{ route('project.index') }}" method="get" >
                                         <button type="submit" class="btn bg-gradient-success m-1">Volver</button>
                                     </form> 
+                                    <form action="{{ route('project.pdf', $project ) }}" method="get" >
+                                        <button type="submit" class="btn bg-gradient-danger m-1">Ver PDF</button>
+                                    </form> 
                                 </div>
                             </div>
                         </div>

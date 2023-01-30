@@ -17,7 +17,7 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <a href="{{route('fileExcel')}}"><img src="/img/icons/export.png" class="avatar avatar-sm me-3"></a>
+                                                    {{-- <a href="{{route('filedataExcel')}}"><img src="/img/icons/export.png" class="avatar avatar-sm me-3"></a> --}}
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">Exportar lista de Usuarios a Excel</h6>
@@ -25,7 +25,7 @@
                                             </div>
                                         </td>
                                         <td class="align-middle text-right ">
-                                            <a class="badge badge-sm bg-gradient-info" href="{{route('fileExcel')}}">Exportar</a>
+                                            {{-- <a class="badge badge-sm bg-gradient-info" href="{{route('fileExcel')}}">Exportar</a> --}}
                                         </td>
                                     </tr>
                                 </tbody>

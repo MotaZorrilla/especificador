@@ -9,7 +9,7 @@
 <body>
     <div >
         <h5 >
-            {{ auth()->user()->firstname ?? 'Firstname' }} {{ auth()->user()->lastname ?? 'Lastname' }}
+            Usuario: {{ auth()->user()->firstname ?? 'Firstname' }} {{ auth()->user()->lastname ?? 'Lastname' }}
         </h5>
         <p >
             {{ auth()->user()->email ?? 'email' }}
@@ -17,9 +17,15 @@
     </div>
     <div >
         <h5 >
-            Para una masividad de: {{ $project->name }}
+            Proyecto: {{ $project->nombre }}
         </h5>
         <p>{{ $project->descripcion }}</p>
+    </div>
+    <div >
+        <h5 >
+            Para una masividad de: {{ $project->masividad }}
+        </h5>
+        <p>Estas son las pinturas que puedes usar</p>
     </div>
     
     <table>
@@ -29,6 +35,7 @@
                 <th>Modelo</th>
                 <th>Certificado</th>
                 <th>Numero</th>
+                <th>Masividad</th>
                 <th>15 m</th>
                 <th>30 m</th>
                 <th>60 m</th>
@@ -41,6 +48,7 @@
                     <td>{{ $filedatum->modelo }}</td> 
                     <td>{{ $filedatum->certificado }}</td>
                     <td>{{ $filedatum->numero }}</td>
+                    <td>{{ $filedatum->masividad }}</td>
                     <td>{{ $filedatum->m15 }}</td>
                     <td>{{ $filedatum->m30 }}</td>
                     <td>{{ $filedatum->m60 }}</td>
