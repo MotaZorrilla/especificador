@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -46,4 +48,29 @@ class LoginController extends Controller
 
         return redirect('/login');
     }
+
+    public function redirect()
+    {
+        return 	Socialite::driver('google')->redirect();
+    }
+
+    public function callback()
+    {
+        $userGoogle = Socialite::driver('google')->user(); 
+        
+ 
+        $user = User::updateOrCreate([
+            'google_id'     => $userGoogle->id,
+        ], [
+            'username'      => $userGoogle->name,
+            'email'         => $userGoogle->email,
+            /*'google_token' => $userGoogle->token,
+            'google_refresh_token' => $userGoogle->refreshToken,*/
+        ]);
+    
+        Auth::login($user);
+    
+        return redirect('/dashboard');
+    }
+
 }
