@@ -7,7 +7,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-4">
-                        <h3>Proyecto {{ $project->nombre }}</h3>
+                        <h3>Proyecto: {{ $projectAdmin->nombre }}</h3>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -33,22 +33,22 @@
                 <div class="card mb-4">  
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="container py-5 col-5">   
-                            <form action="{{ route('project.update', $project) }}" method="post" >
+                            <form action="{{ route('updateProjectAdmin', $projectAdmin) }}" method="post" >
                                 @csrf
                                 @method('put')
                                 @if (Session::has('message'))
                                     <p>{{ Session::get('messsage')}}</p>
                                 @endif               
                                 <div>
-                                    <h3>Editar Proyecto: {{ $project->nombre }}</h3>
+                                    <h3>Editar Proyecto: {{ $projectAdmin->nombre }}</h3>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for=>Nombre del Proyecto:</label>
-                                    <input class="form-control" type="text" id="nombre" name="nombre" value="{{ $project->nombre }}">
+                                    <input class="form-control" type="text" id="nombre" name="nombre" value="{{ $projectAdmin->nombre }}">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label" for=>Descripción:</label>
-                                    <textarea class="form-control" type="text" id="descripcion" name="descripcion" >{{ $project->descripcion }}</textarea>
+                                    <textarea class="form-control" type="text" id="descripcion" name="descripcion" >{{ $projectAdmin->descripcion }}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">¿Conozco la Masividad?:</label>
@@ -62,14 +62,14 @@
                                         <label class="form-control-label">Tipo Perfil:</label>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="abierto" id="open" name="perfil" 
-                                            @if ($project->perfil == "abierto")
+                                            @if ($projectAdmin->perfil == "abierto")
                                             checked=""
                                             @endif>
                                             <label class="custom-control-label" for="open">Perfil Abierto</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" value="cerrado" id="close" name="perfil"
-                                            @if ($project->perfil == "cerrado")
+                                            @if ($projectAdmin->perfil == "cerrado")
                                             checked=""
                                             @endif>
                                             <label class="custom-control-label" for="close">Perfil Cerrado</label>
@@ -77,11 +77,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="masividad" class="form-control-label">Masividad:</label>
-                                        <input class="form-control" type="number" id="masividad" name="masividad" value="{{ $project->masividad }}">
+                                        <input class="form-control" type="number" id="masividad" name="masividad" value="{{ old('masividad') }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="resistencia" class="form-control-label">Resistencia al Fuego:</label>
-                                        <input class="form-control" type="number" id="resistencia" name="resistencia" value="{{ $project->resistencia }}">
+                                        <input class="form-control" type="number" id="resistencia" name="resistencia" value="{{ old('resistencia') }}">
                                     </div>
                                 </div>   
                                 <div class="d-flex ">
@@ -90,14 +90,14 @@
                                     </div>
                             </form>
                                     <div>
-                                        <form action="{{ route('project.destroy', $project) }}" method="post" >
+                                        <form action="{{ route('projectAdmin.destroy', $projectAdmin) }}" method="post" >
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn bg-gradient-danger m-1">Eliminar</button>
                                         </form> 
                                     </div> 
                                     <div>
-                                        <form action="{{ route('project.index') }}" method="get" >
+                                        <form action="{{ route('projectAdmin.index') }}" method="get" >
                                             <button type="submit" class="btn bg-gradient-success m-1">Volver</button>
                                         </form> 
                                     </div>

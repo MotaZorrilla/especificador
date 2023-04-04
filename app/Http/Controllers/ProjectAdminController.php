@@ -42,7 +42,15 @@ class ProjectAdminController extends Controller
     //Display the specified resource.
     public function show(Project $projectAdmin)
     {
-        return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin'));
+        
+        $filedata = Filedata::where('masividad', $projectAdmin->masividad)
+                            ->get();
+
+        
+    
+        
+
+        return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin','filedata'));
     }
 
     //Show the form for editing the specified resource.
@@ -52,17 +60,20 @@ class ProjectAdminController extends Controller
     }
 
     //Update the specified resource in storage.
-    public function update(Request $request, Project $project)
+    public function update(Request $request, Project $projectAdmin)
     {
-        $project->nombre        = $request->nombre;
-        $project->descripcion   = $request->descripcion;
-        $project->perfil        = $request->perfil;
-        $project->masividad     = $request->masividad;
-        $project->resistencia   = $request->resistencia;
+        $projectAdmin->nombre        = $request->nombre;
+        $projectAdmin->descripcion   = $request->descripcion;
+        $projectAdmin->perfil        = $request->perfil;
+        $projectAdmin->masividad     = $request->masividad;
+        $projectAdmin->resistencia   = $request->resistencia;
 
-        $project->save();
+        $projectAdmin->save();
 
-        return view('dashboard.projectAdmin.projectAdmin-show', compact('project'));
+        $filedata = Filedata::where('masividad', $projectAdmin->masividad)
+                            ->get();
+
+        return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin','filedata'));
     }
 
     //Remove the specified resource from storage.
@@ -87,4 +98,20 @@ class ProjectAdminController extends Controller
 
         return $pdf->download('Especificador de pintura Administrador.pdf');
     }
+
+    public function updateProjectAdmin(Request $request, Project $projectAdmin)
+    {
+        // Actualiza los datos del proyecto
+        $projectAdmin->observaciones = $request->observaciones;
+
+        $projectAdmin->save();
+
+        $filedata = Filedata::where('masividad', $projectAdmin->masividad)
+                            ->get();
+        
+        // Redirige al usuario a la página de edición del proyecto
+        return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin','filedata'));
+    }
+
+
 }

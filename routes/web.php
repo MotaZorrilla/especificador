@@ -61,8 +61,9 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::get('database', 				[DashboardController::class, 	'database'])->name('database');
 	Route::get('/balance', 				[DashboardController::class, 	'balance'])	->name('balance');
 
-	Route::resource('projectAdmin',  	 	 			 ProjectAdminController::class);
-	Route::get('projectAdmin/{projectAdmin}/pdf',		[ProjectAdminController::class,		'pdf'])		->name('projectAdmin.pdf');
+	Route::resource('projectAdmin',  	 				 ProjectAdminController::class);
+	Route::put('projectAdmin/{projectAdmin}/update',	[ProjectAdminController::class,		'updateProjectAdmin'])		->name('updateProjectAdmin');
+	Route::get('projectAdmin/{projectAdmin}/pdf',		[ProjectAdminController::class,		'pdf'])						->name('projectAdmin.pdf');
 
 	Route::resource('project',  	 	 ProjectController::class);
 	Route::get('project/{project}/pdf',	[ProjectController::class,		'pdf'])		->name('project.pdf');

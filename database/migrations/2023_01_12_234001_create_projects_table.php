@@ -16,10 +16,14 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');  
-            $table->string('descripcion')   ->nullable();
-            $table->string('perfil')        ->nullable();
-            $table->string('masividad')     ->nullable();
-            $table->string('resistencia')   ->nullable();
+            $table->string('descripcion')                   ->nullable();
+            $table->string('perfil')                        ->nullable();
+            $table->unsignedDecimal('masividad',    5, 0)   ->nullable();
+            $table->unsignedDecimal('resistencia',  5, 0)   ->nullable();
+            $table->unsignedDecimal('altura',       5, 0)   ->nullable();
+            $table->unsignedDecimal('base',         5, 0)   ->nullable();
+            $table->unsignedDecimal('espesor',      5, 0)   ->nullable();
+            $table->string('observaciones')                 ->nullable();
             $table->timestamps();
         });
     }

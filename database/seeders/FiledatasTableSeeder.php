@@ -15,6 +15,6 @@ class FiledatasTableSeeder extends Seeder
      */
     public function run()
     {
-        Filedata::factory(20)->create();
+        Filedata::factory(2)->create();
     }
 }

@@ -23,9 +23,13 @@ class ProjectFactory extends Factory
         return [
             'nombre'        => fake()->name(),
             'descripcion'   => fake()->text(),
-            'perfil'        => fake()->randomNumber(1), 
+            'perfil'        => fake()->text(10), 
             'masividad'     => fake()->randomNumber(2), 
-            'resistencia'   => fake()->randomNumber(4), 
+            'resistencia'   => fake()->randomNumber(3), 
+            'altura'        => fake()->randomNumber(3), 
+            'base'          => fake()->randomNumber(3), 
+            'espesor'       => fake()->randomNumber(1), 
+            'observaciones' => fake()->text(),
         ];
     }
 }
