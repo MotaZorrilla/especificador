@@ -56,7 +56,7 @@ class LoginController extends Controller
 
     public function callback()
     {
-        $userGoogle = Socialite::driver('google')->user(); 
+        $userGoogle = Socialite::driver('google')->stateless()->user(); 
         
  
         $user = User::updateOrCreate([

@@ -13,8 +13,8 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\DashboardController; 
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectAdminController;
 use App\Http\Controllers\FiledataController;
-use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +60,9 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::get('/users', 				[DashboardController::class, 	'users'])	->name('users');
 	Route::get('database', 				[DashboardController::class, 	'database'])->name('database');
 	Route::get('/balance', 				[DashboardController::class, 	'balance'])	->name('balance');
+
+	Route::resource('projectAdmin',  	 	 			 ProjectAdminController::class);
+	Route::get('projectAdmin/{projectAdmin}/pdf',		[ProjectAdminController::class,		'pdf'])		->name('projectAdmin.pdf');
 
 	Route::resource('project',  	 	 ProjectController::class);
 	Route::get('project/{project}/pdf',	[ProjectController::class,		'pdf'])		->name('project.pdf');

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Administrador de Proyectos'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Administrador de Proyectos | Administradores'])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -17,7 +17,7 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <a href="{{route('project.create')}}"><img src="/img/icons/export.png" class="avatar avatar-sm me-3"></a>
+                                                    <a href="{{route('projectAdmin.create')}}"><img src="/img/icons/export.png" class="avatar avatar-sm me-3"></a>
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">Crear Nuevo Proyecto</h6>
@@ -25,7 +25,7 @@
                                             </div>
                                         </td>
                                         <td class="align-middle text-right ">
-                                            <form action="{{route('project.create')}}" method="get" >
+                                            <form action="{{route('projectAdmin.create')}}" method="get" >
                                                 
                                                 <button type="submit" class="btn bg-gradient-info m-1">Crear</button>
                                             </form>
@@ -77,10 +77,10 @@
                                         </td>
                                         <td class="align-middle ">                                           
                                             <div class="d-flex ">
-                                                <form action="{{ route('project.show', $project) }}" method="get" >
+                                                <form action="{{ route('projectAdmin.show', $project) }}" method="get" >
                                                     <button type="submit" class="btn bg-gradient-info m-1">Ver Proyecto</button>
                                                 </form>
-                                                <form action="{{ route('project.destroy', $project) }}" method="post" >
+                                                <form action="{{ route('projectAdmin.destroy', $project) }}" method="post" >
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn bg-gradient-danger m-1">Eliminar</button>

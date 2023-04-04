@@ -80,11 +80,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div
-                            class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+                        <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
                             <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
-                                style="background-image: url('../assets/img/login.jpg');  background-size: 100% auto;">
-                                <span class="mask bg-gradient-primary opacity-6"></span>
+                                style="background-image: url('{{ asset('assets/img/login.jpg') }}');  background-size: 100% auto; position: relative;">
+                                <span class="mask bg-gradient-primary opacity-2"></span>
                                 <h4 class="mt-5 text-white font-weight-bolder position-relative">"Especificador de Pintura Intumescente"</h4>
                                 <p class="text-white position-relative">Calcula de forma rapida y eficaz tu pintura instumescente</p>
                             </div>
@@ -94,4 +93,5 @@
             </div>
         </section>
     </main>
+    @include('layouts.footers.footer')
 @endsection

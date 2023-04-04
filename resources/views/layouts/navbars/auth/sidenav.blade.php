@@ -1,9 +1,8 @@
-<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
+<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-radius-xl my-3 fixed-start ms-4 border border-primary border-2"
     id="sidenav-main">
     <div class="sidenav-header">
-        <a class="navbar-brand m-0" href="{{ route('home') }}" target="_blank">
-            <img src="../img\icons\android-chrome-512x512.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Especificador de <br> Pintura Intumescente</span>
+        <a class="navbar-brand m-0" href="{{ route('home') }}" >
+            <img src="{{ asset('assets/img/logoEntumescenteB.png') }}" class="navbar-brand-img " alt="main_logo" style="width: 150%; max-height: 150px;">
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -21,6 +20,15 @@
                         <i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Mi Perfil</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{  str_contains(request()->url(), 'projectAdmin') == true ? 'active' : '' }}" href="{{ route('projectAdmin.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-credit-card text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Proyectos Administrador</span>
                 </a>
             </li>
             <li class="nav-item">

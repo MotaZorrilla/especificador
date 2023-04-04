@@ -99,7 +99,7 @@
             </div>
         </div>
     </div>
-    @include('layouts.footers.auth.footer')
+    @include('layouts.footers.footer')
 @endsection
 
 @section('js')
