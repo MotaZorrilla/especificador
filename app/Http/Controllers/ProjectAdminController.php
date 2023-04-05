@@ -84,17 +84,17 @@ class ProjectAdminController extends Controller
         return redirect()->route('projectAdmin.index');
     }
 
-    public function pdf(Project $project)
+    public function pdf(Project $projectAdmin)
     {   
         
-        $filedata = Filedata::where('masividad', $project->masividad )
+        $filedata = Filedata::where('masividad', $projectAdmin->masividad )
         //  ->where('m90', '!=', 'Fuera de rango')
         // ->latest('id')
         // ->take(4)
         ->get();
 
         // return view('dashboard.project.project-pdf', compact('project', 'filedata'));
-        $pdf   = PDF::loadView('dashboard.projectAdmin.projectAdmin-pdf', compact('project', 'filedata'));
+        $pdf   = PDF::loadView('dashboard.projectAdmin.projectAdmin-pdf', compact('projectAdmin', 'filedata'));
 
         return $pdf->download('Especificador de pintura Administrador.pdf');
     }
