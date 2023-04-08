@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="masividad" class="form-control-label">Masividad:</label>
-                                        <input class="form-control" type="number" id="masividad" name="masividad" placeholder="Escribe la masividad de tu proyecto" required>
+                                        <input class="form-control" type="number" id="masividad" name="masividad" placeholder="Escribe la masividad de tu proyecto" required >
                                     </div>  
                                 </div>    
                                 {{-- Formulario desconozco la masividad --}}
@@ -150,41 +150,41 @@
                                                     <img id="img" src="/../assets/img/Cortes/H.png" style="max-width: 100% ">
                                                 </div>
                                                 {{-- datos --}}
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for="h">Altura:</label>
-                                                    <input class="form-control" type="text" id="h" name="h" placeholder="H (mm)" required>
+                                                <div class="form-group" id="d_H">
+                                                    <label class="form-control-label" for="dato_H">Altura:</label>
+                                                    <input class="form-control" type="number" id="dato_H"  name="dato_H"  placeholder="H (mm)" >
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for="b1">Base:</label>
-                                                    <input class="form-control" type="text" id="b1" name="b1" placeholder="B1 (mm)" required>
+                                                <div class="form-group" id="d_B1">
+                                                    <label class="form-control-label" for="dato_B1">Base:</label>
+                                                    <input class="form-control" type="number" id="dato_B1" name="dato_B1" placeholder="B1 (mm)" >
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for="b2">Nombre del Proyecto:</label>
-                                                    <input class="form-control" type="text" id="b2" name="b2" placeholder="B2 (mm)" required>
+                                                <div class="form-group" id="d_B2">
+                                                    <label class="form-control-label" for="dato_b2">Base 2:</label>
+                                                    <input class="form-control" type="number" id="dato_B2" name="dato_B2" placeholder="B2 (mm)" >
                                                 </div>
-                                                <div class="form-group">
-                                                    {{-- <label class="form-control-label" for=>Nombre del Proyecto:</label> --}}
-                                                    <input class="form-control" type="text" id="C" name="C" placeholder="C (mm)" required>
+                                                <div class="form-group" id="d_C">
+                                                    <label class="form-control-label" for="dato_C">Pieque:</label> 
+                                                    <input class="form-control" type="number" id="dato_C"  name="dato_C"  placeholder="C (mm)" >
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for=>Nombre del Proyecto:</label>
-                                                    <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Escribe el nombre de tu Proyecto" required>
+                                                <div class="form-group" id="d_e1">
+                                                    <label class="form-control-label" for="dato_e1">Espesor:</label>
+                                                    <input class="form-control" type="number" id="dato_e1" name="dato_e1" placeholder="e (mm)" >
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for=>Nombre del Proyecto:</label>
-                                                    <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Escribe el nombre de tu Proyecto" required>
+                                                <div class="form-group" id="d_e2">
+                                                    <label class="form-control-label" for="dato_e2">Espesor e2:</label>
+                                                    <input class="form-control" type="number" id="dato_e2" name="dato_e2" placeholder="e2 (mm)" >
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for=>Nombre del Proyecto:</label>
-                                                    <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Escribe el nombre de tu Proyecto" required>
+                                                <div class="form-group" id="d_t">
+                                                    <label class="form-control-label" for="dato_t">Espesor t:</label>
+                                                    <input class="form-control" type="number" id="dato_t"  name="dato_t"  placeholder="t (mm)" >
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for=>Nombre del Proyecto:</label>
-                                                    <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Escribe el nombre de tu Proyecto" required>
+                                                <div class="form-group" id="d_r">
+                                                    <label class="form-control-label" for=dato_r>Radio:</label>
+                                                    <input class="form-control" type="number" id="dato_r"  name="dato_r"  placeholder="r (mm)" >
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for=>Nombre del Proyecto:</label>
-                                                    <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Escribe el nombre de tu Proyecto" required>
+                                                <div class="form-group" id="d_D">
+                                                    <label class="form-control-label" for="dato_D">Dimetro Exterior:</label>
+                                                    <input class="form-control" type="number" id="dato_D"  name="dato_D"  placeholder="H (mm)" >
                                                 </div>
                                             </div>
                                         </div>
@@ -232,122 +232,5 @@
 @endsection
 
 @section('js')
-<script>
-        //habilitar la casilla de masividad
-        document.getElementById("conozco_masividad").addEventListener("change", function(){
-            if(this.checked){
-                document.getElementById("form_masividad").style.display = "block";
-                document.getElementById("form_masividad_no").style.display = "none";
-                document.getElementById("conozco_masividad_no").checked=false;
-            }else{
-                document.getElementById("form_masividad").style.display = "none";
-                document.getElementById("form_masividad_no").style.display = "block";
-                document.getElementById("conozco_masividad_no").checked=true;
-            }
-        });
-        document.getElementById("conozco_masividad_no").addEventListener("change", function(){
-            if(this.checked){
-                document.getElementById("form_masividad").style.display = "none";
-                document.getElementById("form_masividad_no").style.display = "block";
-                document.getElementById("conozco_masividad").checked=false;
-            }else{
-                document.getElementById("form_masividad").style.display = "block";
-                document.getElementById("form_masividad_no").style.display = "none";
-                document.getElementById("conozco_masividad").checked=true;
-            }
-        });
 
-        //selecionar solo un tipo de perfil CON MASIVIDAD
-        document.getElementById("perfil_A").addEventListener("change", function(){
-            if(this.checked){
-                document.getElementById("perfil_B").checked=false;
-            }else{
-                document.getElementById("perfil_B").checked=true;
-            }
-        });
-        document.getElementById("perfil_B").addEventListener("change", function(){
-            if(this.checked){
-                document.getElementById("perfil_A").checked=false;
-            }else{
-                document.getElementById("perfil_A").checked=true;
-            }
-        });
-
-        //selecionar solo un tipo de perfil SIN MASIVIDAD
-        document.getElementById("Viga3").addEventListener("change", function(){
-            if(this.checked){
-                document.getElementById("Viga4").checked=false;
-            }else{
-                document.getElementById("Viga4").checked=true;
-            }
-        });
-        document.getElementById("Viga4").addEventListener("change", function(){
-            if(this.checked){
-                document.getElementById("Viga3").checked=false;
-            }else{
-                document.getElementById("Viga3").checked=true;
-            }
-        });
-
-        //selecionar solo un tipo de resistencia
-        document.getElementById("resistencia_15").addEventListener("change", function(){resistencia("resistencia_15");});
-        document.getElementById("resistencia_30").addEventListener("change", function(){resistencia("resistencia_30");});
-        document.getElementById("resistencia_60").addEventListener("change", function(){resistencia("resistencia_60");});
-        document.getElementById("resistencia_90").addEventListener("change", function(){resistencia("resistencia_90");});
-
-        function resistencia(Resistencia) {
-            document.getElementById("resistencia_15").checked = false;
-            document.getElementById("resistencia_30").checked = false;
-            document.getElementById("resistencia_60").checked = false;
-            document.getElementById("resistencia_90").checked = false;
-            switch(Resistencia) {
-                case "resistencia_15":  document.getElementById("resistencia_15").checked = true;   break;
-                case "resistencia_30":  document.getElementById("resistencia_30").checked = true;   break;
-                case "resistencia_60":  document.getElementById("resistencia_60").checked = true;   break;
-                case "resistencia_90":  document.getElementById("resistencia_90").checked = true;   break;
-                default:                                                                            break;
-            };
-        };
-
-        //selecionar solo un tipo de perfil
-        document.getElementById("perfil_HSR").addEventListener("change", function(){perfil("perfil_HSR");});
-        document.getElementById("perfil_HCR").addEventListener("change", function(){perfil("perfil_HCR");});
-        document.getElementById("perfil_R"  ).addEventListener("change", function(){perfil("perfil_R");});
-        document.getElementById("perfil_O"  ).addEventListener("change", function(){perfil("perfil_O");});
-        document.getElementById("perfil_C"  ).addEventListener("change", function(){perfil("perfil_C");});
-        document.getElementById("perfil_IC" ).addEventListener("change", function(){perfil("perfil_IC");});
-        document.getElementById("perfil_CA" ).addEventListener("change", function(){perfil("perfil_CA");});
-        document.getElementById("perfil_ICA").addEventListener("change", function(){perfil("perfil_ICA");});
-        document.getElementById("perfil_OCA").addEventListener("change", function(){perfil("perfil_OCA");});
-        document.getElementById("perfil_L"  ).addEventListener("change", function(){perfil("perfil_L");});
-        document.getElementById("perfil_Z"  ).addEventListener("change", function(){perfil("perfil_Z");});
-        
-        function perfil(perfil) {
-            document.getElementById("perfil_HSR").checked = false;
-            document.getElementById("perfil_HCR").checked = false;
-            document.getElementById("perfil_R"  ).checked = false;
-            document.getElementById("perfil_O"  ).checked = false;
-            document.getElementById("perfil_C"  ).checked = false;
-            document.getElementById("perfil_IC" ).checked = false;
-            document.getElementById("perfil_CA" ).checked = false;
-            document.getElementById("perfil_ICA").checked = false;
-            document.getElementById("perfil_OCA").checked = false;
-            document.getElementById("perfil_L"  ).checked = false;
-            document.getElementById("perfil_Z"  ).checked = false;
-            switch(perfil) {
-                case "perfil_HSR": document.getElementById("perfil_HSR").checked = true;   document.getElementById("img").src="/../assets/img/Cortes/H.png";   break;
-                case "perfil_HCR": document.getElementById("perfil_HCR").checked = true;   document.getElementById("img").src="/../assets/img/Cortes/H.png";   break;
-                case "perfil_R":   document.getElementById("perfil_R"  ).checked = true;   document.getElementById("img").src="/../assets/img/Cortes/R.png";   break;
-                case "perfil_O":   document.getElementById("perfil_O"  ).checked = true;   document.getElementById("img").src="/../assets/img/Cortes/O.png";   break;
-                case "perfil_C":   document.getElementById("perfil_C"  ).checked = true;   document.getElementById("img").src="/../assets/img/Cortes/C.png";   break;
-                case "perfil_IC":  document.getElementById("perfil_IC" ).checked = true;   document.getElementById("img").src="/../assets/img/Cortes/IC.png";  break;
-                case "perfil_CA":  document.getElementById("perfil_CA" ).checked = true;   document.getElementById("img").src="/../assets/img/Cortes/CA.png";  break;
-                case "perfil_ICA": document.getElementById("perfil_ICA").checked = true;   document.getElementById("img").src="/../assets/img/Cortes/ICA.png"; break;
-                case "perfil_OCA": document.getElementById("perfil_OCA").checked = true;   document.getElementById("img").src="/../assets/img/Cortes/OCA.png"; break;
-                case "perfil_L":   document.getElementById("perfil_L"  ).checked = true;   document.getElementById("img").src="/../assets/img/Cortes/L.png";   break;
-                case "perfil_Z":   document.getElementById("perfil_Z"  ).checked = true;   document.getElementById("img").src="/../assets/img/Cortes/Z.png";   break;
-                default:                                                                                                                                       break;
-            }
-        };
-</script>
 @endsection

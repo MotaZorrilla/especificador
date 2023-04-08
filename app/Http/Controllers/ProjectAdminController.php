@@ -28,11 +28,20 @@ class ProjectAdminController extends Controller
     {
         $project = new Project();
 
-        $project->nombre        = $request->nombre;
-        $project->descripcion   = $request->descripcion;
-        $project->perfil        = $request->perfil;
-        $project->masividad     = $request->masividad;
-        $project->resistencia   = $request->resistencia;
+        $project->nombre       = $request->nombre;
+        $project->descripcion  = $request->descripcion;
+        $project->perfil       = $request->perfil;
+        $project->masividad    = $request->masividad;
+        $project->altura       = $request->dato_H;
+        $project->base1        = $request->dato_B1;
+        $project->base2        = $request->dato_B2;
+        $project->espesor1     = $request->dato_e1;
+        $project->espesor2     = $request->dato_e2;
+        $project->espesort     = $request->dato_et;
+        $project->radio        = $request->dato_r;
+        $project->plieque      = $request->dato_C;
+        $project->diametro     = $request->dato_D;
+        $project->observaciones= $request->observaciones;       
 
         $project->save();
 

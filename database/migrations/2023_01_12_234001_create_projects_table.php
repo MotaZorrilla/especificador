@@ -21,8 +21,14 @@ return new class extends Migration
             $table->unsignedDecimal('masividad',    5, 0)   ->nullable();
             $table->unsignedDecimal('resistencia',  5, 0)   ->nullable();
             $table->unsignedDecimal('altura',       5, 0)   ->nullable();
-            $table->unsignedDecimal('base',         5, 0)   ->nullable();
-            $table->unsignedDecimal('espesor',      5, 0)   ->nullable();
+            $table->unsignedDecimal('base1',        5, 0)   ->nullable();
+            $table->unsignedDecimal('base2',        5, 0)   ->nullable();
+            $table->unsignedDecimal('espesor1',     5, 0)   ->nullable();
+            $table->unsignedDecimal('espesor2',     5, 0)   ->nullable();
+            $table->unsignedDecimal('espesort',     5, 0)   ->nullable();
+            $table->unsignedDecimal('radio',        5, 0)   ->nullable();
+            $table->unsignedDecimal('plieque',      5, 0)   ->nullable();
+            $table->unsignedDecimal('diametro',     5, 0)   ->nullable();
             $table->string('observaciones')                 ->nullable();
             $table->timestamps();
         });

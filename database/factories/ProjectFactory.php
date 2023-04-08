@@ -27,8 +27,14 @@ class ProjectFactory extends Factory
             'masividad'     => fake()->randomNumber(2), 
             'resistencia'   => fake()->randomNumber(3), 
             'altura'        => fake()->randomNumber(3), 
-            'base'          => fake()->randomNumber(3), 
-            'espesor'       => fake()->randomNumber(1), 
+            'base1'         => fake()->randomNumber(2), 
+            'base2'         => fake()->randomNumber(2), 
+            'espesor1'      => fake()->randomNumber(2), 
+            'espesor2'      => fake()->randomNumber(2), 
+            'espesort'      => fake()->randomNumber(2), 
+            'radio'         => fake()->randomNumber(2), 
+            'plieque'       => fake()->randomNumber(2), 
+            'diametro'      => fake()->randomNumber(2), 
             'observaciones' => fake()->text(),
         ];
     }
