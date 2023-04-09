@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="mass" class="form-control-label">Tipo Perfil:</label>
-                                    <p>{{ $projectAdmin->perfil }}</p>
+                                    <p>{{ $projectAdmin->perfil }} {{ $projectAdmin->forma ? "con $projectAdmin->forma" : '' }}</p>
                                 </div>
                                 <div class="form-group">
                                     <label for="mass" class="form-control-label">Masividad:</label>

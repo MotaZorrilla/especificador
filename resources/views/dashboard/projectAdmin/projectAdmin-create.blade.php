@@ -67,12 +67,12 @@
                                     <div class="form-group">
                                         <label class="form-control-label">Tipo Perfil:</label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="abierto" id="perfil_A" name="perfil_A" checked="">
-                                            <label class="custom-control-label" for="perfil_A">Perfil Abierto</label>
+                                            <input class="form-check-input" type="checkbox" value="Perfil Abierto"                  id="perfil_A" name="perfil" checked="">
+                                            <label class="custom-control-label" for="perfil_A">Abierto</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="cerrado" id="perfil_B" name="perfil_B">
-                                            <label class="custom-control-label" for="perfil_B">Perfil Cerrado</label>
+                                            <input class="form-check-input" type="checkbox" value="Perfil Cerrado"                  id="perfil_B" name="perfil">
+                                            <label class="custom-control-label" for="perfil_B">Cerrado</label>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -88,59 +88,59 @@
                                         <div class="row">
                                             {{-- Tipo de Viga --}}
                                             <div style="display: inline-block; vertical-align: top;" class="col-4">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Viga3" id="Viga3" name="Viga3" checked="">
-                                                    <label class="custom-control-label" for="Viga3">Viga 3 Caras</label>
+                                               <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="Viga 3 Caras"            id="perfil_3" name="perfil" >
+                                                    <label class="custom-control-label" for="perfil_3">Viga 3 Caras</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="Viga4" id="Viga4" name="Viga4">
-                                                    <label class="custom-control-label" for="Viga4">Pilar y Viga 4 Caras</label>
+                                                    <input class="form-check-input" type="checkbox" value="Pilar y Viga 4 Caras"    id="perfil_4" name="perfil">
+                                                    <label class="custom-control-label" for="perfil_4">Pilar y Viga 4 Caras</label>
                                                 </div>
                                             </div>
                                             {{-- forma del perfil --}}
                                             <div style="display: inline-block; vertical-align: top; " class="col-4" >
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="perfil_HSR" name="perfil_HSR" checked="">
+                                                    <input class="form-check-input" type="checkbox" id="perfil_HSR" value="Perfil H sin radio"  name="forma">
                                                     <label class="custom-control-label" for="perfil_HSR">H Sin Radio</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="perfil_HCR" name="perfil_HCR">
+                                                    <input class="form-check-input" type="checkbox" id="perfil_HCR" value="Perfil H con radio"  name="forma">
                                                     <label class="custom-control-label" for="perfil_HCR">H Con Radio</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="perfil_R" name="perfil_R" >
+                                                    <input class="form-check-input" type="checkbox" id="perfil_R"   value="Perfil Rectangular"  name="forma">
                                                     <label class="custom-control-label" for="perfil_R">Rectangular</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="perfil_O" name="perfil_O">
+                                                    <input class="form-check-input" type="checkbox" id="perfil_O"   value="Perfil Circular"     name="forma">
                                                     <label class="custom-control-label" for="perfil_O">Circular</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="perfil_C" name="perfil_C" >
+                                                    <input class="form-check-input" type="checkbox" id="perfil_C"   value="Perfil C"            name="forma">
                                                     <label class="custom-control-label" for="perfil_C">C</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="perfil_IC" name="perfil_IC">
+                                                    <input class="form-check-input" type="checkbox" id="perfil_IC"  value="Perfil IC"           name="forma">
                                                     <label class="custom-control-label" for="perfil_IC">IC</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="perfil_CA" name="perfil_CA" >
+                                                    <input class="form-check-input" type="checkbox" id="perfil_CA"  value="Perfil CA"           name="forma">
                                                     <label class="custom-control-label" for="perfil_CA">CA</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="perfil_ICA" name="perfil_ICA">
+                                                    <input class="form-check-input" type="checkbox" id="perfil_ICA" value="Perfil ICA"          name="forma">
                                                     <label class="custom-control-label" for="perfil_ICA">ICA</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="perfil_OCA" name="perfil_OCA">
+                                                    <input class="form-check-input" type="checkbox" id="perfil_OCA" value="Perfil OCA"          name="forma">
                                                     <label class="custom-control-label" for="perfil_OCA">OCA</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="perfil_L" name="perfil_L" >
+                                                    <input class="form-check-input" type="checkbox" id="perfil_L"   value="Perfil L ó Angulo"   name="forma">
                                                     <label class="custom-control-label" for="perfil_L">L</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="perfil_Z" name="perfil_Z">
+                                                    <input class="form-check-input" type="checkbox" id="perfil_Z"   value="Perfil Z"            name="forma">
                                                     <label class="custom-control-label" for="perfil_Z">Z</label>
                                                 </div>
                                             </div>
@@ -232,5 +232,5 @@
 @endsection
 
 @section('js')
-
+    <script src="/../assets/js/create.js"></script>
 @endsection

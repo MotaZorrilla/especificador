@@ -24,6 +24,7 @@ class ProjectFactory extends Factory
             'nombre'        => fake()->name(),
             'descripcion'   => fake()->text(),
             'perfil'        => fake()->text(10), 
+            'forma'        => fake()->text(10), 
             'masividad'     => fake()->randomNumber(2), 
             'resistencia'   => fake()->randomNumber(3), 
             'altura'        => fake()->randomNumber(3), 

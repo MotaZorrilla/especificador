@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nombre');  
             $table->string('descripcion')                   ->nullable();
             $table->string('perfil')                        ->nullable();
+            $table->string('forma')                         ->nullable();
             $table->unsignedDecimal('masividad',    5, 0)   ->nullable();
             $table->unsignedDecimal('resistencia',  5, 0)   ->nullable();
             $table->unsignedDecimal('altura',       5, 0)   ->nullable();
