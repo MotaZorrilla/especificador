@@ -11,7 +11,6 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;         
 use App\Http\Controllers\PdfController;    
 use App\Http\Controllers\DashboardController; 
-use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectAdminController;
 use App\Http\Controllers\FiledataController;
@@ -61,10 +60,6 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::get('database', 				[DashboardController::class, 	'database'])->name('database');
 	Route::get('/balance', 				[DashboardController::class, 	'balance'])	->name('balance');
 
-	Route::resource('projectAdmin',  	 				 ProjectAdminController::class);
-	Route::put('projectAdmin/{projectAdmin}/update',	[ProjectAdminController::class,		'updateProjectAdmin'])		->name('updateProjectAdmin');
-	Route::get('projectAdmin/{projectAdmin}/pdf',		[ProjectAdminController::class,		'pdf'])						->name('projectAdmin.pdf');
-
 	Route::resource('project',  	 	 ProjectController::class);
 	Route::get('project/{project}/pdf',	[ProjectController::class,		'pdf'])		->name('project.pdf');
 
@@ -75,6 +70,9 @@ Route::group(['middleware'=>'auth'], function () {
 	//Route::get('projectDataTable',	[projectController::class, 'datatable'])	->name('projectDataTable');*/
 	//Route::post('/dark-mode/toggle', 	[DashboardController::class, 'darkmode'])	->name('darkmode');
 
-	Route::get('/{page}', 				[PageController::class, 		'index'])	->name('page');
+	Route::resource('projectAdmin',  	 				 ProjectAdminController::class);
+	Route::put('projectAdmin/{projectAdmin}/update',	[ProjectAdminController::class,		'updateProjectAdmin'])		->name('updateProjectAdmin');
+	Route::get('projectAdmin/{projectAdmin}/pdf',		[ProjectAdminController::class,		'pdf'])						->name('projectAdmin.pdf');
 	
+	Route::get('/{page}', 								[PageController::class, 		'index'])	->name('page');
 });

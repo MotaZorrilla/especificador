@@ -45,11 +45,14 @@
 <body>
     <!-- Defina bloques de encabezado y pie de página antes de su contenido -->
     <header>
-        <div style="border: 1px solid red; ">
-          <div style="vertical-align: top; text-align: left; border: 1px solid green; max-width: 50vw; display: inline-block;">
+        <div >
+        {{-- style="border: 1px solid red; "> --}}
+          <div style="vertical-align: top; text-align: left; max-width: 50vw; display: inline-block;"> 
+            {{-- border: 1px solid green; --}}
             <p><img src="C:\xampp\htdocs\Especificador\public\assets\img\logoEntumescenteB.png" alt="Logo" style="max-height: 80px;"></p>
           </div> 
-          <div style="vertical-align: top; text-align: right; border: 1px solid blue; max-width: 50vw; display: inline-block;">
+          <div style="vertical-align: top; text-align: right;  max-width: 50vw; display: inline-block;">
+            {{-- border: 1px solid blue; --}}
             <p>Proyecto de Pintura Intumescente<br/>
             Fecha de emisión: {{ $fecha_emision = date('d-m-Y') }}</p>
           </div>
@@ -60,9 +63,12 @@
       
 
     <!-- Envuelva el contenido de su PDF dentro de una etiqueta principal -->
-    <main style="border: 1px solid red; ">
+    <main >
+        {{-- style="border: 1px solid red; "> --}}
         {{-- datos-usuario --}}
-        <h3 style="border: 1px solid red; ">Datos del usuario</h3>
+        <h3 
+        {{-- style="border: 1px solid red; " --}}
+        >Datos del usuario</h3>
             <div class="columnas">
                 <p>Nombre completo:  {{ auth()->user()->firstname ?? 'Firstname' }} {{ auth()->user()->lastname ?? 'Lastname' }}</p>
                 <p>RUT:</p>
@@ -72,7 +78,8 @@
                 <p>Sitio web:</p>
             </div>
         {{-- datos-proyecto --}}
-        <div style="border: 1px solid red; ">
+        <div >
+        {{-- style="border: 1px solid red; "> --}}
             <h3>Datos del proyecto: {{  $projectAdmin->nombre }}</h3>
             <p>Nombre perfil:</p>
             <h3>Descripción:</h3>
@@ -80,19 +87,20 @@
             <p>Tipo perfil: {{ $projectAdmin->perfil }} </p>
             <p>Resistencia al fuego: {{  $projectAdmin->resistencia  }} min</p>
             <p>Masividad: {{ $projectAdmin->masividad }}</p>
-            <p>Longitud:</p>
+            <br/>
             <h4>Medidas</h4>
             <ul>
-                <li>Altura (H):</li>
-                <li>Base (B):</li>
-                <li>Espesor (e):</li>
+                <li>Altura (H):{{ $projectAdmin->altura }}</li>
+                <li>Base (B):{{ $projectAdmin->base1 }}</li>
+                <li>Espesor (e):{{ $projectAdmin->espesor1 }}</li>
             </ul>
                             
-        <div style="border: 1px solid red; ">
+        <div> 
+            {{-- style="border: 1px solid red; "> --}}
             <h3>Recomendación de pinturas</h3>
         </div>
         
-        <table class="table align-items-center mb-0 table-striped" cellpadding="10" style="border: 1px solid red; ">
+        <table class="table align-items-center mb-0 table-striped" cellpadding="10"> {{-- style="border: 1px solid red; "> --}}
             <thead>
                 <tr>
                     <th>Pintura</th>
@@ -179,7 +187,8 @@
     </main>
     
     <footer>
-        <div style="border: 1px solid red; text-align:center;">
+        <div >
+        {{-- style="border: 1px solid red; text-align:center;"> --}}
           <div style="display:inline-block; vertical-align:center; border: 1px solid blue; max-width: 33%; margin: 0 auto;">
             <p><a href="https://www.pinturaintumescente.cl/">https://www.pinturaintumescente.cl/</a></p>
           </div>

@@ -54,9 +54,31 @@ class ProjectAdminController extends Controller
     public function show(Project $projectAdmin)
     {   
         $filedata = [];
-        if ($projectAdmin->masividad) {
-            $filedata = Filedata::where('masividad', $projectAdmin->masividad)->get(); 
-        } 
+
+        if ($projectAdmin->forma == "Perfil Rectangular") {
+        $dato_H     =   $projectAdmin->altura;
+        $dato_B1    =   $projectAdmin->base1;
+        $dato_e1    =   $projectAdmin->espesor1;
+        $dato_r     =   $projectAdmin->espesor1;
+
+        $dato_A     =   2*$dato_B1*$dato_e1+2*$dato_H*$dato_e1-16*$dato_e1*$dato_e1+3*pi()*$dato_e1*$dato_e1;
+        $dato_P     =   2*$dato_B1+2*$dato_H-16*$dato_e1+4*pi()*$dato_e1;
+        $masividad  =   ceil(1000*$dato_P/$dato_A);
+
+        if ($masividad <= 0) {
+            return redirect()->back()->withErrors(['masividad' => 'El cálculo de la masividad no puede resultar en un número negativo o cero.']);
+        }
+        
+
+        // asegurarse de que la masividad sea positiva
+        $masividad = max($masividad, 0);
+
+        $projectAdmin->masividad = $masividad;
+        $projectAdmin->save();
+        }
+
+        // cargar los datos de la tabla $filedata
+        $filedata = Filedata::where('masividad', $projectAdmin->masividad)->get(); 
 
         return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin','filedata'));
     }
