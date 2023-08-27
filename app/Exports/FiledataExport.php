@@ -12,6 +12,23 @@ class FiledataExport implements FromCollection
     */
     public function collection()
     {
-        return Filedata::select("pintura","modelo", "certificado","numero", "masividad", "m15", "m30", "m60", "m90")->get();
+        return Filedata::select(
+            "pintura",
+            "modelo", 
+            "certificado",
+            "numero", 
+            "masividad", 
+            "m15", 
+            "m30", 
+            "m60", 
+            "m90",
+            'm120', 
+            "p4c",
+            "v4c",
+            "v3c",
+            "abierta",
+            "rectangular",
+            "circular"
+        )->get();
     }
 }

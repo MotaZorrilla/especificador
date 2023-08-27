@@ -128,6 +128,34 @@
                                         </th>
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            90m
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            120m
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Pilar 4C
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Viga 4C
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Abierta
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Rectangular
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Circular
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Actualizado
                                         </th>
                                     </tr>
@@ -214,6 +242,13 @@
                             {data: 'm30'},
                             {data: 'm60'},
                             {data: 'm90'},
+                            {data: 'm120'},
+                            {data: 'p4c'},
+                            {data: 'v4c'},
+                            {data: 'v3c'},
+                            {data: 'abierta'},
+                            {data: 'rectangular'},
+                            {data: 'circular'},
                             {data: 'updated_at',
                             "render": function ( data, type, row, meta ) {
                                 var date = new Date(data);

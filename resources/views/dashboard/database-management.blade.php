@@ -108,6 +108,30 @@
                                         </th>
                                         <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            120m
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Pilar 4C
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Viga 4C
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Abierta
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Rectangular
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                            Circular
+                                        </th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Actualizado
                                         </th>
                                         <th
@@ -150,6 +174,27 @@
                                             <p class="text-sm font-weight-bold mb-0">{{ $file->m90 }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $file->m120 }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $file->p4c }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $file->v4c }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $file->v3c }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $file->abierta }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $file->rectangular }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $file->circular }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
                                             <p class="text-sm font-weight-bold mb-0">{{ $file->updated_at ? $file->updated_at->diffForHumans() : '' }}</p>
                                         </td>
                                         <td class="align-middle ">                                           
@@ -168,6 +213,6 @@
                 </div>
             </div>
         </div>
-        @include('layouts.footers.footer')
+        
     </div>
 @endsection

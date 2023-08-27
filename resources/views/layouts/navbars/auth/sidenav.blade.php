@@ -59,5 +59,6 @@
                 {{-- <a class="nav-link {{ Route::currentRouteName() == 'virtual-reality' ? 'active' : '' }}" href="{{ route('virtual-reality') }}"> --}}
             </li>
         </ul>
-    </div>  
+        @include('layouts.footers.footer')  
+    </div> 
 </aside>

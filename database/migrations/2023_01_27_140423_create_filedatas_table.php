@@ -24,6 +24,13 @@ return new class extends Migration
             $table->string('m30')           ->nullable();
             $table->string('m60')           ->nullable();
             $table->string('m90')           ->nullable();
+            $table->string('m120')          ->nullable();
+            $table->string('p4c')           ->nullable();
+            $table->string('v4c')           ->nullable();
+            $table->string('v3c')           ->nullable();
+            $table->string('abierta')       ->nullable();
+            $table->string('rectangular')   ->nullable();
+            $table->string('circular')      ->nullable();
             $table->timestamps();
         });
     }

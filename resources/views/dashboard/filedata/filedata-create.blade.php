@@ -33,7 +33,7 @@
             <div class="col-12">
                 <div class="card mb-4">  
                     <div class="card-body px-0 pt-0 pb-2">
-                        <div class="container py-5 col-5">   
+                        <div class="container py-5 col-6">   
                             <form action="{{ route('filedata.store')}}" method="post" >
                                 @csrf
                                 @if (Session::has('message'))
@@ -43,30 +43,28 @@
                                     <h3>Crear un Nuevo Registro</h3>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>Nombre de la Pintura:</label>
-                                            <input class="form-control" type="text" id="pintura" name="pintura" value="pintura">
+                                            <input class="form-control" type="text" id="pintura" name="pintura" value="">
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>Modelo:</label>
-                                            <input class="form-control" type="text" id="modelo" name="modelo" value="modelo">
+                                            <input class="form-control" type="text" id="modelo" name="modelo" value="">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>Certificado:</label>
-                                            <input class="form-control" type="text" id="certificado" name="certificado" value="certificado">
+                                            <input class="form-control" type="text" id="certificado" name="certificado" value="">
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <div class="form-group">
-                                            <label class="form-control-label" for=>Numero:</label>
-                                            <input class="form-control" type="text" id="numero" name="numero" value="numero">
+                                            <label class="form-control-label" for=>Numero de certificado:</label>
+                                            <input class="form-control" type="text" id="numero" name="numero" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -74,35 +72,79 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>Masividad:</label>
-                                            <input class="form-control" type="text" id="masividad" name="masividad" value="masividad">
+                                            <input class="form-control" type="text" id="masividad" name="masividad" value="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-2">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>15 minutos:</label>
-                                            <input class="form-control" type="text" id="m15" name="m15" value="m15">
+                                            <input class="form-control" type="text" id="m15" name="m15" value="">
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-2">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>30 minutos:</label>
-                                            <input class="form-control" type="text" id="m30" name="m30" value="m30">
+                                            <input class="form-control" type="text" id="m30" name="m30" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>60 minutos:</label>
+                                            <input class="form-control" type="text" id="m60" name="m60" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>90 minutos:</label>
+                                            <input class="form-control" type="text" id="m90" name="m90" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>120 minutos:</label>
+                                            <input class="form-control" type="text" id="m120" name="m120" value="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-2">
                                         <div class="form-group">
-                                            <label class="form-control-label" for=>60 minutos:</label>
-                                            <input class="form-control" type="text" id="m60" name="m60" value="m60">
+                                            <label class="form-control-label" for=>Pilar 4 Caras:</label>
+                                            <input class="form-control" type="text" id="p4c" name="p4c" value="">
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-2">
                                         <div class="form-group">
-                                            <label class="form-control-label" for=>90 minutos:</label>
-                                            <input class="form-control" type="text" id="m90" name="m90" value="m90">
+                                            <label class="form-control-label" for=>Viga 4 Caras:</label>
+                                            <input class="form-control" type="text" id="v4c" name="v4c" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>viga 3 Caras:</label>
+                                            <input class="form-control" type="text" id="v3c" name="v3c" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>abierta:</label>
+                                            <input class="form-control" type="text" id="abierta" name="abierta" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>Rectangular:</label>
+                                            <input class="form-control" type="text" id="rectangular" name="rectangular" value="">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>Circular:</label>
+                                            <input class="form-control" type="text" id="circular" name="circular" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +165,6 @@
             </div>
         </div>
     </div>
-    @include('layouts.footers.footer')
 @endsection
 
 

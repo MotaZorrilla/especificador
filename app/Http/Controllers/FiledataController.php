@@ -38,6 +38,13 @@ class FiledataController extends Controller
         $filedatum->m30          = $request->m30;
         $filedatum->m60          = $request->m60;
         $filedatum->m90          = $request->m90;
+        $filedatum->m120         = $request->m120;
+        $filedatum->p4c          = $request->p4c;
+        $filedatum->v4c          = $request->v4c;
+        $filedatum->v3c          = $request->v3c;
+        $filedatum->abierta      = $request->abierta;
+        $filedatum->rectangular  = $request->rectangular;
+        $filedatum->circular     = $request->circular;
 
         $filedatum->save();
 
@@ -68,6 +75,14 @@ class FiledataController extends Controller
         $filedatum->m30          = $request->m30;
         $filedatum->m60          = $request->m60;
         $filedatum->m90          = $request->m90;
+        $filedatum->m120         = $request->m120;
+        $filedatum->p4c          = $request->p4c;
+        $filedatum->v4c          = $request->v4c;
+        $filedatum->v3c          = $request->v3c;
+        $filedatum->abierta      = $request->abierta;
+        $filedatum->rectangular  = $request->rectangular;
+        $filedatum->circular     = $request->circular;
+
 
         $filedatum->save();
 

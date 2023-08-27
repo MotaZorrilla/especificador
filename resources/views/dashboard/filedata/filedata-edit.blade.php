@@ -33,39 +33,37 @@
             <div class="col-12">
                 <div class="card mb-4">  
                     <div class="card-body px-0 pt-0 pb-2">
-                        <div class="container py-5 col-5">   
+                        <div class="container py-5 col-6">   
                             <form action="{{ route('filedata.store')}}" method="post" >
                                 @csrf
                                 @if (Session::has('message'))
                                     <p>{{ Session::get('messsage')}}</p>
                                 @endif
                                 <div>
-                                    <h3>Crear un Nuevo Registro</h3>
+                                    <h3>Editar Registro</h3>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>Nombre de la Pintura:</label>
                                             <input class="form-control" type="text" id="pintura" name="pintura" value={{ $filedatum->pintura }}>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>Modelo:</label>
                                             <input class="form-control" type="text" id="modelo" name="modelo" value={{ $filedatum->modelo }}>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>Certificado:</label>
                                             <input class="form-control" type="text" id="certificado" name="certificado" value={{ $filedatum->certificado }}>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-3">
                                         <div class="form-group">
-                                            <label class="form-control-label" for=>Numero:</label>
+                                            <label class="form-control-label" for=>Numero de certificado:</label>
                                             <input class="form-control" type="text" id="numero" name="numero" value={{ $filedatum->numero }}>
                                         </div>
                                     </div>
@@ -79,30 +77,74 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-2">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>15 minutos:</label>
                                             <input class="form-control" type="text" id="m15" name="m15" value={{ $filedatum->m15 }}>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-2">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>30 minutos:</label>
                                             <input class="form-control" type="text" id="m30" name="m30" value={{ $filedatum->m30 }}>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-2">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>60 minutos:</label>
                                             <input class="form-control" type="text" id="m60" name="m60" value={{ $filedatum->m60 }}>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-2">
                                         <div class="form-group">
                                             <label class="form-control-label" for=>90 minutos:</label>
                                             <input class="form-control" type="text" id="m90" name="m90" value={{ $filedatum->m90 }}>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>120 minutos:</label>
+                                            <input class="form-control" type="text" id="m120" name="m120" value={{ $filedatum->m120 }}>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>Pilar 4 Caras:</label>
+                                            <input class="form-control" type="text" id="p4c" name="p4c" value={{ $filedatum->p4c }}>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>Viga 4 Caras:</label>
+                                            <input class="form-control" type="text" id="v4c" name="v4c" value={{ $filedatum->v4c }}>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>viga 3 Caras:</label>
+                                            <input class="form-control" type="text" id="v3c" name="v3c" value={{ $filedatum->v3c }}>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>abierta:</label>
+                                            <input class="form-control" type="text" id="abierta" name="abierta" value={{ $filedatum->abierta }}>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>Rectangular:</label>
+                                            <input class="form-control" type="text" id="rectangular" name="rectangular" value={{ $filedatum->rectangular }}>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>Circular:</label>
+                                            <input class="form-control" type="text" id="circular" name="circular" value={{ $filedatum->circular }}>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +172,6 @@
             </div>
         </div>
     </div>
-    @include('layouts.footers.footer')
 @endsection
 
 

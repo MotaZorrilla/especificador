@@ -18,7 +18,14 @@ class FiledataImport implements ToModel
             'm15'           => $row[5],
             'm30'           => $row[6],
             'm60'           => $row[7],
-            'm90'           => $row[8],  
+            'm90'           => $row[8],
+            'm120'          => $row[9], 
+            'p4c'           => $row[10],
+            'v4c'           => $row[11],
+            'v3c'           => $row[12],
+            'abierta'       => $row[13],
+            'rectangular'   => $row[14],
+            'circular'      => $row[15]
         ]);
     }
 }

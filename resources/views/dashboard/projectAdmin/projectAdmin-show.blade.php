@@ -84,6 +84,8 @@
                                                         <td class="text-center">{{ $filedatum->m60 }}</td>
                                                     @elseif ($projectAdmin->resistencia == 90)
                                                         <td class="text-center">{{ $filedatum->m90 }}</td>
+                                                    @elseif ($projectAdmin->resistencia == 120)
+                                                        <td class="text-center">{{ $filedatum->m120 }}</td>
                                                     @endif
                                                     <td class="text-center"><input type="checkbox" name="seleccionados[]" value="{{ $filedatum->id }}" checked=""></td>
                                                 </tr>
@@ -132,5 +134,4 @@
             </div>
         </div>
     </div>
-    @include('layouts.footers.footer')
 @endsection

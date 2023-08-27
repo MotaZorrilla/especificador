@@ -19,5 +19,12 @@ class Filedata extends Model
         'm30'        ,
         'm60'        ,
         'm90'        ,  
+        'm120'       , 
+        'p4c'        ,
+        'v4c'        ,
+        'v3c'        ,
+        'abierta'    ,
+        'rectangular',
+        'circular'
     ];
 }
