@@ -6,17 +6,17 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="card-header pb-0">
+                    <div class="card-header pb-3">
                         <h5 class="mb-1">
                             {{ auth()->user()->firstname ?? 'Firstname' }} {{ auth()->user()->lastname ?? 'Lastname' }}
                         </h5>
-                        <p class="mb-0 font-weight-bold text-sm">
+                        <p class="mb-4 font-weight-bold text-sm">
                             {{ auth()->user()->email ?? 'email' }}
                         </p>
                     </div>
-                    <div class="avatar avatar-xl position-relative">
+                    {{-- <div class="avatar avatar-xl position-relative">
                         <img src="/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -109,6 +109,5 @@
                 </div>
             </div>
         </div>
-        @include('layouts.footers.footer')
     </div>
 @endsection

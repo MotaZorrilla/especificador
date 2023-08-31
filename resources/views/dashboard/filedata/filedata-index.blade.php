@@ -2,6 +2,13 @@
 
 @section('css')
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <style>
+        .resaltado {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+
 @endsection
 
 @section('content')
@@ -84,8 +91,8 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0"> 
+                        <div class="table-responsive p-0" >
+                            <table class="table align-items-center mb-0" style="overflow-x: auto;  table-layout: auto;"> 
                                 <tbody>
                                     <tr>
                                         <td>
@@ -94,7 +101,7 @@
                                             </div>
                                         </td>
                                         <td class="align-middle text-center col-3">
-                                            <div class="ms-md-auto pe-md-3 d-flex align-items-center ">
+                                            <div class="ms-md-auto pe-md-3 d-flex align-items-center mx-2">
                                                 <div class="input-group">
                                                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                                                     <input type="text" class="form-control" id= "search" placeholder="Buscar...">
@@ -107,8 +114,8 @@
                         </div>
                     </div>
                     <div class="card-body px-3 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table  class="table table-striped " id="project">
+                        <div class="table-responsive p-0" >
+                            <table  class="table table-striped " style="overflow-x: auto; table-layout: auto;" id="project">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
@@ -274,9 +281,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 
     <script>
-        var file = ['10000', '20000', 'hector'];
-        $('#search').autocomplete({
-            source: file
+        // Datos de ejemplo para la búsqueda
+        var filedata = {!! json_encode($filedata) !!};
+
+        // Función para realizar la filtración
+        function filtrarTabla() {
+            var valorBuscado = $('#search').val().toLowerCase();
+            var filas = $('#project tbody tr');
+
+            filas.each(function () {
+                var fila = $(this);
+                var textoFila = fila.text().toLowerCase();
+
+                if (textoFila.includes(valorBuscado)) {
+                    fila.show();
+                } else {
+                    fila.hide();
+                }
+            });
+        }
+
+        // Llamar a la función de filtrado cuando se cambie el valor del campo de búsqueda
+        $('#search').on('input', function () {
+            filtrarTabla();
         });
+
+        // Inicialmente, mostrar todos los registros
+        filtrarTabla();
     </script>
 @endsection

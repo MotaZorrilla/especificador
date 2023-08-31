@@ -60,6 +60,7 @@ class ProjectAdminController extends Controller
         $filedata = [];
         
         // Obtener datos comunes
+        $masividad  = $projectAdmin->masividad;
         $dato_H     = $projectAdmin->altura;
         $dato_B1    = $projectAdmin->base1;
         $dato_B2    = $projectAdmin->base2;
@@ -69,12 +70,6 @@ class ProjectAdminController extends Controller
         $dato_r     = $projectAdmin->radio;
         $dato_C     = $projectAdmin->plieque;
         $dato_D     = $projectAdmin->diametro;
-
-       // Calcular masividad para cada perfil y exposición utilizando switch
-        $masividad = 0;
-        $dato_A = 0;
-        $dato_P = 0;
-
         
         // Función para calcular la masividad para el Perfil H sin Radio Viga 3 caras
         function MasividadHSR_V3C($dato_H, $dato_B1, $dato_B2,  $dato_e1, $dato_e2, $dato_t, $dato_r)
@@ -255,84 +250,91 @@ class ProjectAdminController extends Controller
             return ceil(1000 * $dato_P / $dato_A);
         }
 
-        if ( $projectAdmin->exposicion == 'Viga 3 Caras') {
-            switch ($projectAdmin->forma) {
-                case 'HSR':
-                    $masividad = MasividadHSR_V3C($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t, $dato_r);
-                    break;
-                case 'HCR':
-                    $masividad = MasividadHCR_V3C($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t, $dato_r);
-                    break;
-                case 'R':
-                    $masividad = MasividadRectangular_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
-                    break;
-                case 'Circular':
-                    $masividad = MasividadCircular_V3C($dato_D, $dato_e1);
-                    break;
-                case 'C':
-                    $masividad = MasividadC_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
-                    break;
-                case 'IC':
-                    $masividad = MasividadIC_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
-                    break;
-                case 'CA': 
-                    $masividad = MasividadCA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
-                    break;
-                case 'ICA': 
-                    $masividad = MasividadICA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
-                    break;
-                case 'OCA': 
-                    $masividad = MasividadOCA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
-                    break;
-                case 'L': 
-                    $masividad = MasividadL_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
-                    break;
-                case 'Z': 
-                    $masividad = MasividadZ_V3C($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e1, $dato_r);
-                    break;
-            }
-        }   else {  
-            switch ($projectAdmin->forma) {
-                case 'HSR':
-                    $masividad = MasividadHSR($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t);
-                    break;
-                case 'HCR':
-                    $masividad = MasividadHCR($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t, $dato_r);
-                    break;
-                case 'R':
-                    $masividad = MasividadRectangular($dato_H, $dato_B1, $dato_e1, $dato_r);
-                    break;
-                case 'Circular':
-                    $masividad = MasividadCircular($dato_D, $dato_e1);
-                    break;
-                case 'C':
-                    $masividad = MasividadC($dato_H, $dato_B1, $dato_e1, $dato_r);
-                    break;
-                case 'IC':
-                    $masividad = MasividadIC($dato_H, $dato_B1, $dato_e1, $dato_r);
-                    break;
-                case 'CA':
-                    $masividad = MasividadCA($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
-                    break;
-                case 'ICA':
-                    $masividad = MasividadICA($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
-                    break;
-                case 'OCA':
-                    $masividad = MasividadOCA($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
-                    break;
-                case 'L':
-                    $masividad = MasividadL($dato_H, $dato_B1, $dato_e1, $dato_r);
-                    break;
-                case 'Z':
-                    $masividad = MasividadZ($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e1, $dato_r);
-                    break;
+        if ( !$masividad){
+            // Calcular masividad para cada perfil y exposición utilizando switch
+            $dato_A = 0;
+            $dato_P = 0;
+
+            if ( $projectAdmin->exposicion == 'Viga 3 Caras') {
+                switch ($projectAdmin->forma) {
+                    case 'HSR':
+                        $masividad = MasividadHSR_V3C($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t, $dato_r);
+                        break;
+                    case 'HCR':
+                        $masividad = MasividadHCR_V3C($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t, $dato_r);
+                        break;
+                    case 'R':
+                        $masividad = MasividadRectangular_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        break;
+                    case 'Circular':
+                        $masividad = MasividadCircular_V3C($dato_D, $dato_e1);
+                        break;
+                    case 'C':
+                        $masividad = MasividadC_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        break;
+                    case 'IC':
+                        $masividad = MasividadIC_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        break;
+                    case 'CA': 
+                        $masividad = MasividadCA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        break;
+                    case 'ICA': 
+                        $masividad = MasividadICA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        break;
+                    case 'OCA': 
+                        $masividad = MasividadOCA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        break;
+                    case 'L': 
+                        $masividad = MasividadL_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        break;
+                    case 'Z': 
+                        $masividad = MasividadZ_V3C($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e1, $dato_r);
+                        break;
                 }
-        }  
-
-        // Asegurarse de que la masividad sea positiva
-        $masividad = max($masividad, 0);
-
-        $projectAdmin->masividad = $masividad;
+            }   else {  
+                switch ($projectAdmin->forma) {
+                    case 'HSR':
+                        $masividad = MasividadHSR($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t);
+                        break;
+                    case 'HCR':
+                        $masividad = MasividadHCR($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t, $dato_r);
+                        break;
+                    case 'R':
+                        $masividad = MasividadRectangular($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        break;
+                    case 'Circular':
+                        $masividad = MasividadCircular($dato_D, $dato_e1);
+                        break;
+                    case 'C':
+                        $masividad = MasividadC($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        break;
+                    case 'IC':
+                        $masividad = MasividadIC($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        break;
+                    case 'CA':
+                        $masividad = MasividadCA($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        break;
+                    case 'ICA':
+                        $masividad = MasividadICA($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        break;
+                    case 'OCA':
+                        $masividad = MasividadOCA($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        break;
+                    case 'L':
+                        $masividad = MasividadL($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        break;
+                    case 'Z':
+                        $masividad = MasividadZ($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e1, $dato_r);
+                        break;
+                    }
+            }  
+            // Asegurarse de que la masividad sea positiva
+            $masividad = max($masividad, 0);
+            $projectAdmin->masividad = $masividad;
+            
+        } else { 
+            $projectAdmin->masividad = ceil($masividad);
+        }
         $projectAdmin->save();
 
         // cargar los datos de la tabla $filedata
@@ -396,7 +398,7 @@ class ProjectAdminController extends Controller
 
         $projectAdmin->save();
 
-        $filedata = Filedata::where('masividad', $projectAdmin->masividad)
+        $filedata = Filedata::where('masividad', ceil($projectAdmin->masividad))
                             ->get();
         
         // Redirige al usuario a la página de edición del proyecto

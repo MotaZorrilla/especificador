@@ -53,7 +53,7 @@
                 <main class="main-content border-radius-lg pb-6">
                     @yield('content')
                 </main>
-            @include('components.fixed-plugin')
+            {{-- @include('components.fixed-plugin') --}}
         <!--endif-->
     @endauth
 
@@ -81,7 +81,7 @@
     @endauth
   
 
-    @stack('js');
+    @stack('js')
 </body>
 
 </html>
