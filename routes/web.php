@@ -66,6 +66,8 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::resource('filedata',  		 FiledataController::class);
 	Route::post('filedataImport', 		[FiledataController::class, 	'import'])	->name('filedata.Import');
 	Route::get('filedataExport', 		[FiledataController::class, 	'export'])	->name('filedata.Export');
+	Route::post('filedataOrder', 		[FiledataController::class, 	'order'])	->name('filedata.Order');
+	Route::post('filedataReset', 		[FiledataController::class, 	'reset'])	->name('filedata.Reset');
 	
 	//Route::get('projectDataTable',	[projectController::class, 'datatable'])	->name('projectDataTable');*/
 	//Route::post('/dark-mode/toggle', 	[DashboardController::class, 'darkmode'])	->name('darkmode');

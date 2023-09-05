@@ -110,4 +110,23 @@ class FiledataController extends Controller
     {
         return Excel::download(new FiledataExport,'Registros_de_Pinturas.xlsx');   
     }
+
+    public function order()
+    {
+        // Obtener los registros ordenados por 'pintura' de manera ascendente y sin duplicados.
+        $filedata = Filedata::orderBy('pintura', 'asc')->distinct('pintura')->paginate();
+
+        return view('dashboard.filedata.filedata-index', compact('filedata')); 
+    }
+
+
+    public function reset()
+    {
+        Filedata::truncate();
+
+        $filedata = Filedata::paginate();
+            
+        return view('dashboard.filedata.filedata-index', compact('filedata')); 
+    }
+
 }

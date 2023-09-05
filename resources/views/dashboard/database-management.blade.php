@@ -50,6 +50,21 @@
                                             <a class="badge badge bg-gradient-info" href="{{route('fileExport')}}">Exportar</a>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <a href=#><img src="/img/icons/borrar-archivo.png" class="avatar avatar-sm me-3"></a>
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">Barrar base de Datos</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle text-right ">
+                                            <a class="badge badge bg-danger-info" href=# >Borrar BD</a>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

@@ -1,4 +1,4 @@
-<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-radius-xl my-3 fixed-start ms-4 border border-primary border-2"
+<aside class="sidenav bg-white navbar navbar-vertical  navbar-expand-xs border-radius-xl my-3 fixed-start ms-4 border border-primary border-2"
     id="sidenav-main">
     <div class="sidenav-header">
         <a class="navbar-brand m-0" href="{{ route('home') }}" >
@@ -59,6 +59,11 @@
                 {{-- <a class="nav-link {{ Route::currentRouteName() == 'virtual-reality' ? 'active' : '' }}" href="{{ route('virtual-reality') }}"> --}}
             </li>
         </ul>
-        @include('layouts.footers.footer')  
+          
     </div> 
+    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+        @include('layouts.footers.footer')
+    </div>
 </aside>
+
+

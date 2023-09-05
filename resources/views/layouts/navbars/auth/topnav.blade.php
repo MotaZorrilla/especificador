@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl mt-3 mx-3 bg-primary" id="navbarBlur"
+<nav class="navbar navbar-main navbar-expand-sm px-0 mx-4 shadow-none border-radius-xl mt-3 mx-3 bg-primary" id="navbarBlur"
         data-scroll="false">
     <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
@@ -7,7 +7,7 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 justify-content-end " id="navbar">
             <ul class="navbar-nav  justify-content-end">
-                <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                <li class="nav-item  ps-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                         <div class="sidenav-toggler-inner">
                             <i class="sidenav-toggler-line bg-white"></i>
@@ -37,3 +37,5 @@
     </div>
 </nav>
 <!-- End Navbar -->
+
+
