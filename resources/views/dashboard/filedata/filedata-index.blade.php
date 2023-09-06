@@ -38,9 +38,6 @@
                                         <td class="align-middle text-center">
                                             <form action="{{ route('filedata.Import')}}" method="post" enctype="multipart/form-data">
                                                 @csrf
-                                                @if (Session::has('message'))
-                                                <p>{{ Session::get('messsage')}}</p>
-                                                @endif
                                                 <button type="submit" class="btn bg-gradient-success m-1">Importar</button>
                                                 <input type="file" name="filedata" accept=".xlsx">
                                             </form>
@@ -113,7 +110,6 @@
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrarBase">
                                                 Borrar BD
                                             </button>
-                                            {{-- <button type="button" class="btn btn-danger" onclick="confirmBorrar()">Borrar BD</button> --}}
 
                                             <!-- Modal -->
                                             <div class="modal fade" id="borrarBase" tabindex="-1" aria-labelledby="borrarBaseLabel" aria-hidden="true">
@@ -128,7 +124,8 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-info" data-bs-dismiss="modal">Cancelar</button>
-                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="form" data-bs-target="#borrarForm" id="confirmarBorrar">
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-toggle="form" data-bs-target="#borrarForm" id="confirmarBorrar" 
+                                                            onclick="event.preventDefault(); document.getElementById('borrarForm').submit();">
                                                                 Borrar BD
                                                             </button>
                                                             <form id="borrarForm" action="{{ route('filedata.Reset') }}" method="POST" >
@@ -151,17 +148,17 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0" >
+                        <div class="table-responsive p-0 col-8 mx-auto" >
                             <table class="table align-items-center mb-0" style="overflow-x: auto;  table-layout: auto;"> 
-                                <tbody>
-                                    <tr>
+                                <tbody >
+                                    <tr >
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <h6>Registros de Pinturas Intumescentes</h6>
                                             </div>
                                         </td>
-                                        <td class="align-middle text-center col-3">
-                                            <div class="ms-md-auto pe-md-3 d-flex align-items-center mx-2">
+                                        <td class="align-middle text-center col-3 ">
+                                            <div class="ms-md-auto pe-md-3 d-flex align-items-center mx-5">
                                                 <div class="input-group">
                                                     <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
                                                     <input type="text" class="form-control" id= "search" placeholder="Buscar...">
@@ -173,145 +170,46 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card-body px-3 pt-0 pb-2">
+                    <div class="card-body px-3 pt-0 pb-2 col-6 align-middle mx-auto ">
                         <div class="table-responsive p-0" >
                             <table  class="table table-striped " style="overflow-x: auto; table-layout: auto;" id="project">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            ID
+                                        
+                                        <th class="text-uppercase text-secondary col-2 font-weight-bolder mx-auto  opacity-7 ps-2">
+                                            Posición 
+                                        </th>    
+                                        <th
+                                            class="text-uppercase text-secondary font-weight-bolder text-left opacity-7 ps-2">
+                                            Marca de Pintura
                                         </th>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Pintura 
-                                        </th>                                        
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Modelo
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Certificado
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Numero
-                                        </th> 
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Masividad
-                                        </th> 
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            15m
-                                        </th> 
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            30m
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            60m
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            90m
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            120m
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Pilar 4C
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Viga 4C
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Viga 3C
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Abierta
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Rectangular
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Circular
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                            Actualizado
-                                        </th>
-                                        <th
+                                        {{-- <th
                                             class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                             Acción
-                                        </th>  
+                                        </th>   --}}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($filedata as $filedatum)
+                                    @if ($filedata->count() === 0)
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="alert alert-warning">
+                                                    No hay datos disponibles.
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @foreach ($filedata as $filedatum => $brand)
                                     <tr>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->id }}</p>
+                                        
+                                        <td class="align-middle mx-auto ">
+                                            <p class="font-weight-bold mb-0">{{ $filedatum+1 }}</p>
                                         </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->pintura }}</p>
+                                        
+                                        <td class="align-middle">
+                                            <p class="font-weight-bold mb-0">{{ $brand }}</p>
                                         </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->modelo }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->certificado }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->numero }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->masividad }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->m15 }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->m30 }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->m60 }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->m90 }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->m120 }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->p4c }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->v4c }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->v3c }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->abierta }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->rectangular }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->circular }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $filedatum->updated_at ? $filedatum->updated_at->diffForHumans() : '' }}</p>
-                                        </td>
-                                        <td class="align-middle ">                                           
+                                        {{-- <td class="align-middle text-center">                                           
                                             <div class="d-flex ">
                                                 <form action="{{ route('filedata.show', $filedatum) }}" method="get" >
                                                     <button type="submit" class="btn bg-gradient-info m-1">Ver Registro</button>
@@ -322,12 +220,11 @@
                                                     <button type="submit" class="btn bg-gradient-danger m-1">Eliminar</button>
                                                 </form>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $filedata->links() }}
                         </div>
                     </div>
                 </div>
@@ -370,15 +267,6 @@
         // Inicialmente, mostrar todos los registros
         filtrarTabla();
     </script>
-
-    <script>
-        document.getElementById('confirmarBorrar').addEventListener('click', function () {
-            // Realiza la acción de borrado aquí, como enviar el formulario.
-            document.getElementById('borrarForm').submit();
-        });
-
-    </script>
-    
     
 
 @endsection

@@ -67,6 +67,7 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::post('filedataImport', 		[FiledataController::class, 	'import'])	->name('filedata.Import');
 	Route::get('filedataExport', 		[FiledataController::class, 	'export'])	->name('filedata.Export');
 	Route::post('filedataOrder', 		[FiledataController::class, 	'order'])	->name('filedata.Order');
+	Route::post('filedataOrderList',	[FiledataController::class, 	'orderList'])->name('filedata.OrderList');
 	Route::post('filedataReset', 		[FiledataController::class, 	'reset'])	->name('filedata.Reset');
 	
 	//Route::get('projectDataTable',	[projectController::class, 'datatable'])	->name('projectDataTable');*/

@@ -108,7 +108,6 @@
             </div>
         </div>
     </div>
-    @include('layouts.footers.footer')
 @endsection
 
 @section('js')
