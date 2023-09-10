@@ -14,6 +14,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectAdminController;
 use App\Http\Controllers\FiledataController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,12 +57,15 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::get('pdf/{pdf}', 			[PdfController::class,			'create'])	->name('pdf');
 	Route::get('/report', 				[PdfController::class,			'show'])	->name('report');
 	Route::get('/profile', 				[DashboardController::class, 	'profile'])	->name('profile'); 
-	Route::get('/users', 				[DashboardController::class, 	'users'])	->name('users');
+	// Route::get('/users', 				[DashboardController::class, 	'users'])	->name('users');
 	Route::get('database', 				[DashboardController::class, 	'database'])->name('database');
 	Route::get('/balance', 				[DashboardController::class, 	'balance'])	->name('balance');
 
 	Route::resource('project',  	 	 ProjectController::class);
 	Route::get('project/{project}/pdf',	[ProjectController::class,		'pdf'])		->name('project.pdf');
+
+	Route::resource('users',  		  	 UserController::class);	
+	Route::get('users/buscar', 			[UserController::class,			'buscar'])	->name('users.buscar');		
 
 	Route::resource('filedata',  		 FiledataController::class);
 	Route::post('filedataImport', 		[FiledataController::class, 	'import'])	->name('filedata.Import');

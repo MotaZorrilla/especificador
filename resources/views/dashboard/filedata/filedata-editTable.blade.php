@@ -35,9 +35,9 @@
                                         <tbody>
                                             @foreach ($filedata as $index => $brand)
                                             <tr>
-                                                <th class="col-2 text-center">
+                                                <th class="col-3 text-center">
                                                     <div class="row g-1 text-center ">
-                                                        <div class="col-6">
+                                                        <div class="col-10">
                                                             <input class="form-control text-center" type="number" step="1" name="orden[]" value="{{ $index + 1 }}" min="1"/>
                                                         </div>
                                                     </div>

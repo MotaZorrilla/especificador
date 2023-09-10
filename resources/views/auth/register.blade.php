@@ -56,11 +56,11 @@
                             <form method="POST" action="{{ route('register.perform') }}">
                                 @csrf
                                 <div class="flex flex-col mb-3">
-                                    <input type="text" name="username" class="form-control" placeholder="Usuario" aria-label="Name" value="{{ old('username') }}" >
+                                    <input type="text" name="username" class="form-control" placeholder="Usuario" aria-label="Name"  >
                                     @error('username') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>
                                 <div class="flex flex-col mb-3">
-                                    <input type="email" name="email" class="form-control" placeholder="Correo" aria-label="Email" value="{{ old('email') }}" >
+                                    <input type="email" name="email" class="form-control" placeholder="Correo" aria-label="Email" >
                                     @error('email') <p class='text-danger text-xs pt-1'> {{ $message }} </p> @enderror
                                 </div>
                                 <div class="flex flex-col mb-3">

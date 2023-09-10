@@ -190,8 +190,6 @@ class FiledataController extends Controller
         $filedata = Filedata::orderBy('id', 'asc')
                     ->distinct('pintura')
                     ->pluck('pintura');
-        
-                    dump($filedata);
 
         return view('dashboard.filedata.filedata-index', compact('filedata')); 
     }

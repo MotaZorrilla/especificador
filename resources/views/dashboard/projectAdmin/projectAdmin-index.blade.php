@@ -75,7 +75,7 @@
                                         <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">{{ $project->updated_at ? $project->updated_at->diffForHumans() : '' }}</p>
                                         </td>
-                                        <td class="align-middle ">                                           
+                                        <td width="10px" class="align-middle" >                                           
                                             <div class="d-flex ">
                                                 <form action="{{ route('projectAdmin.show', $project) }}" method="get" >
                                                     <button type="submit" class="btn bg-gradient-info m-1">Ver Proyecto</button>
@@ -97,6 +97,5 @@
                 </div>
             </div>
         </div>
-        @include('layouts.footers.footer')
     </div>
 @endsection

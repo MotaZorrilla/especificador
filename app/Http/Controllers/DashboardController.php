@@ -15,12 +15,12 @@ class DashboardController extends Controller
         return view('dashboard.user-profile');
     }
     
-    public function users()
-    {   
-        $users = User::paginate();
+    // public function users()
+    // {   
+    //     $users = User::paginate();
         
-        return view('dashboard.user-management', compact('users')); 
-    }
+    //     return view('dashboard.user-management', compact('users')); 
+    // }
 
     public function database()
     {   

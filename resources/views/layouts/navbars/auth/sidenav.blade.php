@@ -28,7 +28,7 @@
                 <a class="nav-link {{  str_contains(request()->url(), 'projectAdmin') == true ? 'active' : '' }}" href="{{ route('projectAdmin.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-credit-card text-warning text-sm opacity-10"></i>
+                        <i class="fa fa-file-text-o text-warning text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Proyectos Administrador</span>
                 </a>
@@ -43,9 +43,9 @@
                 </a> --}}
             </li>  
             <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'users') == true ? 'active' : '' }}" href="{{ route('users') }}">
+                <a class="nav-link {{ str_contains(request()->url(), 'users') == true ? 'active' : '' }}" href="{{ route('users.index') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-warning text-sm opacity-10"></i>
+                        <i class="fa fa-users text-warning text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Usuarios</span>
                 </a>
