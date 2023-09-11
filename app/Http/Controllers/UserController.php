@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -14,9 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate();
+        // $users = User::paginate();
         
-        return view('dashboard.users.user-index', compact('users')); 
+        return view('dashboard.users.user-index'); 
     }
 
     /**
@@ -57,9 +58,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(User $user)
+    {   
+        $roles = Role::all();
+        return view('dashboard.users.user-edit', compact('user','roles'));
     }
 
     /**
@@ -84,23 +86,5 @@ class UserController extends Controller
     {
         //
     }
-
-    public function buscar(Request $request)
-    {
-        $keyword = $request->input('keyword');
-
-        $users = User::where('username', 'like', '%'. $keyword . '%')
-                    ->orWhere('firstname', 'like', '%'. $keyword . '%')
-                    ->orWhere('lastname', 'like', '%'. $keyword . '%')
-                    ->orWhere('email', 'like', '%'. $keyword . '%')
-                    ->paginate(10);
-
-        // Renderizar la vista parcial con las filas de la tabla
-        $view = view('dashboard.users.user-table', compact('users'))->render();
-
-        return response()->json(['html' => $view]);
-    }
-
-
 
 }

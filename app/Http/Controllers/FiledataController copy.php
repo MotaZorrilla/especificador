@@ -12,8 +12,12 @@ class FiledataController extends Controller
 {
     // Display a listing of the resource.
     public function index()
-    {        
-        return view('dashboard.filedata.filedata-index'); 
+    {
+        $filedata = Filedata::orderBy('id', 'asc')
+                    ->distinct('pintura')
+                    ->pluck('pintura');
+        
+        return view('dashboard.filedata.filedata-index', compact('filedata')); 
     }
 
     // Show the form for creating a new resource.

@@ -56,17 +56,17 @@
                 <div class="card">
                     <div class="card-body py-5">
                         <div class="row">
-                            <a href="{{ route('users') }}">
+                            <a href="{{ route('users.index') }}">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <a href="{{ route('users') }}">
+                                    <a href="{{ route('users.index') }}">
                                     <p class="text-sm mb-0  font-weight-bold">Usuarios</p>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <a href="{{ route('users') }}">
+                                    <a href="{{ route('users.index') }}">
                                     <i class="ni ni-bullet-list-67 text-lg opacity-10" aria-hidden="true"></i>
                                     </a>
                                 </div>
