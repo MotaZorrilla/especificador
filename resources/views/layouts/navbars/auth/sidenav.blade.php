@@ -12,8 +12,8 @@
         </div>
         <div class="offcanvas-body d-flex flex-column h-100 justify-content-between mb-1">
             <div class="container-fluid py-1 px-3 d-flex flex-column  h-100">
-                <div class="row navbar h-100 ">
-                    <ul class="navbar-nav align-self-start   w-100">
+                <div class="navbar h-100 ">
+                    <ul class="navbar-nav align-self-start w-100">
                         <li class="nav-item mt-1 mb-2 d-flex align-items-center w-auto">
                             <div class="ps-4">
                                 <h6 class="ms-2 text-uppercase text-center font-weight-bolder opacity-6 mb-0">
@@ -46,9 +46,11 @@
                             </a>
                         </li>
                     </ul>
+                    <div class="d-flex  flex-column align-self-end h-auto ">
+                        <hr class="horizontal dark mt-3 mb-3">
+                        @include('layouts.footers.footer')
+                    </div>
                 </div>
-                <hr class="horizontal dark mt-3 mb-2">
-                @include('layouts.footers.footer')
             </div>
         </div>
     </div>
