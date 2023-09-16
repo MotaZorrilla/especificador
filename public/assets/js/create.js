@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 forma_Circular.style.display = 'block'
                 r_forma_Circular.checked = true;
                 
-                imgPerfil.src = `/../assets/img/Cortes/4_caras/circular.png`;
+                imgPerfil.src = `/../assets/img/Cortes/4_caras/Circular.png`;
 
                 d_D.style.display = 'block';
                 d_e1.style.display = 'block';

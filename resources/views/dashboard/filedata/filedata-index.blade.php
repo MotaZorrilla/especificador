@@ -2,13 +2,6 @@
 
 @section('css')
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
-    <style>
-        .resaltado {
-            background-color: yellow;
-            font-weight: bold;
-        }
-    </style>
-
 @endsection
 
 @section('content')

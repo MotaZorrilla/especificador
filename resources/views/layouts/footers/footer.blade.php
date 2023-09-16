@@ -1,14 +1,10 @@
-<footer class="navbar mx-4 border border-radius-xl border-primary rounded" style="z-index: 1; position: fixed; bottom: 25px; left:10px; text-align: right; background-color: whitesmoke;">
-    <p> Made with <i class="fa fa-heart"></i> <br>
-    <a href="https://neobranding.cl" class="font-weight-bold" target="_blank">Neobranding</a>
-    {{-- &amp; , --}}
-     &copy; 
-    <script>
-        document.write(new Date().getFullYear())
-    </script>
-    </p>
+<footer class="mx-3 text-center " >
+    <div class=" shadow-none" >
+        <p class="text-sm mb-2 mt-0"> Version 1.9.11 with <i class="fa fa-heart"></i></p>
+    </div>
+    <a href="https://neobranding.cl" target="_blank" class="btn btn-dark mb-0">Neobranding &copy;
+        <script>
+            document.write(new Date().getFullYear())
+        </script>
+    </a>
 </footer>
-
-
-
-

@@ -1,40 +1,32 @@
 <!-- Navbar -->
-<nav class="navbar navbar-main navbar-expand-sm px-0 mx-4 shadow-none border-radius-xl mt-3 mx-3 bg-primary" id="navbarBlur" data-scroll="false">
-    <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-            <h6 class="font-weight-bolder text-white mb-0">{{ $title }}</h6>
-        </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 justify-content-end " id="navbar">
-            <ul class="navbar-nav  justify-content-end">
-                <li class="nav-item  ps-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
-                        <div class="sidenav-toggler-inner">
-                            <i class="sidenav-toggler-line bg-white"></i>
-                            <i class="sidenav-toggler-line bg-white"></i>
-                            <i class="sidenav-toggler-line bg-white"></i>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item px-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-white p-0">
-                        <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-                    </a>
-                </li>
-                <li class="nav-item d-flex align-items-center">
-                    <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
-                        @csrf
-                        <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            class="nav-link text-white font-weight-bold px-0">
-                            <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none">Log out</span>
-                        </a>
-                    </form>
+<nav class="navbar navbar-dark navbar-expand-lg shadow-sm border-radius-lg mt-3 mx-3 bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand m-0 p-0 bg-white border-radius-lg" href="{{ route('home') }}" id="offcanvasSidebarLabel">
+            <img src="{{ asset('assets/img/logoEntumescenteB.png') }}" class="navbar-brand-img" alt="main_logo"
+                style="max-width: 200px; max-height: 100px;">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <h5 class="font-weight-bolder text-white ms-6 mb-0">{{ $title }}</h5>
                 </li>
             </ul>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+            <button class=" btn border  my-auto  ml-auto me-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasSidebar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon ml-auto"></span>
+            </button>
+            <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
+                @csrf
+                <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                    class="nav-link text-white font-weight-bold px-0">
+                    <i class="fa fa-user me-sm-1"></i>
+                    <span class="d-sm-inline d-none">Log out</span>
+                </a>
+            </form>
         </div>
     </div>
 </nav>
 <!-- End Navbar -->
-
-

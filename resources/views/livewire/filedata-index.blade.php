@@ -1,7 +1,7 @@
 <div>
     <div class="container-fluid py-4">
-        <div class="row">
-            <div class="row">
+        <div class="row mx-auto">
+            <div class="row mx-auto">
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
@@ -142,7 +142,7 @@
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
-                                                <h6>Usuarios Registrados</h6>
+                                                <h6>Registrado de Pinturas</h6>
 
                                             </div>
                                         </td>
