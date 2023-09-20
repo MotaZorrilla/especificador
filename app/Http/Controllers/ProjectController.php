@@ -12,9 +12,7 @@ class ProjectController extends Controller
     // Display a listing of the resource.
     public function index()
     {      
-        $projects = Project::orderBy('id','desc')->paginate();
-
-        return view('dashboard.project.project-index', compact('projects'));
+        return view('dashboard.project.project-index');
     }
 
     //Show the form for creating a new resource.

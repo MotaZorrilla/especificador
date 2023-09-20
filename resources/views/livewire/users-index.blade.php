@@ -35,34 +35,22 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0 col-8 mx-auto">
-                            <table class="table align-items-center mb-0" style="overflow-x: auto;  table-layout: auto;">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <h6>Usuarios Registrados</h6>
-
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-center col-6 ">
-                                            <div class="ms-md-auto pe-md-3 d-flex align-items-center ">
-                                                <div class="input-group">
-                                                    <span class="input-group-text text-body"><i class="fas fa-search"
-                                                            aria-hidden="true"></i></span>
-                                                    <input wire:model.live="search" class="form-control" id="search"
-                                                        placeholder="Buscar...">
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="card-header px-auto pt-3 pb-2">
+                        <div class="d-flex d-inline ">
+                            <div class="col-6">
+                                <h6>Usuarios Registrados</h6>
+                            </div>
+                            <div class="input-group ">
+                                <span class="input-group-text text-body">
+                                    <i class="fas fa-search"></i></span>
+                                <input wire:model.live="search" class="form-control" id="search"
+                                    placeholder="Buscar...">
+                            </div>
                         </div>
                     </div>
-                    <div id="search-results" class="card-body px-3 pt-0 pb-2">
-                        @if ($users->count())
+
+                    @if ($users->count())
+                        <div class="card-body px-3 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table table-striped " id="usersTable">
                                     <thead>
@@ -196,19 +184,17 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div>
+                                <div class="card-footer pb-0">
                                     {{ $users->links() }}
                                 </div>
                             </div>
-                        @else
-                            <div>
-                                <div class="alert alert-warning text-white">
-                                    No hay datos que coincidan.
-                                </div>
-                            </div>
-                        @endif
+                        </div>
+                    @else
+                        <div class="alert alert-warning text-white mx-3">
+                            No hay datos que coincidan.
+                        </div>
+                    @endif
 
-                    </div>
                 </div>
             </div>
         </div>

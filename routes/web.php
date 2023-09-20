@@ -14,6 +14,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectAdminController;
 use App\Http\Controllers\FiledataController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -64,8 +66,9 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::resource('project',  	 	 ProjectController::class);
 	Route::get('project/{project}/pdf',	[ProjectController::class,		'pdf'])		->name('project.pdf');
 
-	Route::resource('users',  		  	 UserController::class);	
-	Route::get('users/buscar', 			[UserController::class,			'buscar'])	->name('users.buscar');		
+	Route::resource('users',  		  	 UserController::class);
+	Route::resource('plan',  		  	 PlanController::class);
+	Route::resource('role',  		  	 RoleController::class);	
 
 	Route::resource('filedata',  		 FiledataController::class);
 	Route::post('filedataImport', 		[FiledataController::class, 	'import'])	->name('filedata.Import');

@@ -11,11 +11,6 @@ use App\Models\Project;
  */
 class ProjectFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     protected $model = Project::class;
 
     public function definition()

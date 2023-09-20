@@ -28,21 +28,40 @@
                             </a>
                         </li>
                         <li class="nav-item mt-3 d-flex align-items-center">
-                            <a class="nav-link {{ str_contains(request()->url(), 'projectAdmin') == true ? 'text-primary' : '' }} "
-                                href="{{ route('projectAdmin.index') }}">
-                                <i class="ni ni-credit-card text-warning me-2"></i> Proyectos Administrador
-                            </a>
-                        </li>
-                        <li class="nav-item mt-3 d-flex align-items-center">
                             <a class="nav-link {{ str_contains(request()->url(), 'users') == true ? 'text-primary' : '' }} "
                                 href="{{ route('users.index') }}">
                                 <i class="fas fa-users text-warning me-2"></i> Usuarios
                             </a>
                         </li>
                         <li class="nav-item mt-3 d-flex align-items-center">
+                            <a class="nav-link {{ str_contains(request()->url(), 'projectAdmin') == true ? 'text-primary' : '' }} "
+                                href="{{ route('projectAdmin.index') }}">
+                                <i class="ni ni-credit-card text-warning me-2"></i>  Administrador de Proyectos
+                            </a>
+                        </li>
+                        <li class="nav-item mt-3 d-flex align-items-center">
+                            <a class="nav-link {{ str_contains(request()->url(), 'project') == true 
+                            && str_contains(request()->url(), 'projectAdmin') == false ? 'text-primary' : '' }} "
+                                href="{{ route('project.index') }}">
+                                <i class="ni ni-collection text-warning me-2"></i> Mis Proyectos
+                            </a>
+                        </li>
+                        <li class="nav-item mt-3 d-flex align-items-center">
                             <a class="nav-link {{ str_contains(request()->url(), 'filedata') == true ? 'text-primary' : '' }} "
                                 href="{{ route('filedata.index') }}">
-                                <i class="ni ni-collection text-warning me-2"></i> Data
+                                <i class="fab fa-fw fa-buffer text-warning me-2"></i> Data
+                            </a>
+                        </li>
+                        <li class="nav-item mt-3 d-flex align-items-center">
+                            <a class="nav-link {{ str_contains(request()->url(), 'Roles') == true ? 'text-primary' : '' }} "
+                                href="{{ route('role.index') }}">
+                                <i class="fas fa-fw fa-clipboard text-warning me-2"></i> Roles
+                            </a>
+                        </li>
+                        <li class="nav-item mt-3 d-flex align-items-center">
+                            <a class="nav-link {{ str_contains(request()->url(), 'Planes') == true ? 'text-primary' : '' }} "
+                                href="{{ route('plan.index') }}">
+                                <i class="fas fa-fw fa-file text-warning me-2"></i> Planes
                             </a>
                         </li>
                     </ul>

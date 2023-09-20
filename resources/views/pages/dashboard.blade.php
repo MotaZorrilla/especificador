@@ -1,108 +1,188 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Bienvenido al Panel del Especificador de Pintura Intumescente'])
+    @include('layouts.navbars.auth.topnav', [
+        'title' => 'Bienvenido al Panel del Especificador de Pintura Intumescente',
+    ])
     <div class="container-fluid py-4">
         <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card shadow-sm">
                     <div class="card-body py-5">
                         <div class="row">
                             <a href="{{ route('profile') }}">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <a href="{{ route('profile') }}">
-                                    <p class="text-sm mb-0  font-weight-bold">Mi Perfil</p>
-                                    </a>
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <a href="{{ route('profile') }}">
+                                            <p class="text-sm mb-0  font-weight-bold">Mi Perfil</p>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <a href="{{ route('profile') }}">
-                                    <i class="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
-                                    </a>
+                                <div class="col-4 text-end">
+                                    <div
+                                        class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                        <a href="{{ route('profile') }}">
+                                            <i class="fas fa-user text-lg opacity-10" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body py-5">
-                        <div class="row">
-                            <a href="{{ route('projectAdmin.index') }}">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <a href="{{ route('projectAdmin.index') }}">
-                                    <p class="text-sm mb-0  font-weight-bold">Proyectos de Administrador</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <a href="{{ route('projectAdmin.index') }}">
-                                    <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card shadow-sm">
                     <div class="card-body py-5">
                         <div class="row">
                             <a href="{{ route('users.index') }}">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <a href="{{ route('users.index') }}">
-                                    <p class="text-sm mb-0  font-weight-bold">Usuarios</p>
-                                    </a>
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <a href="{{ route('users.index') }}">
+                                            <p class="text-sm mb-0  font-weight-bold">Usuarios</p>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <a href="{{ route('users.index') }}">
-                                    <i class="ni ni-bullet-list-67 text-lg opacity-10" aria-hidden="true"></i>
-                                    </a>
+                                <div class="col-4 text-end">
+                                    <div
+                                        class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                        <a href="{{ route('users.index') }}">
+                                            <i class="fas fa-users text-lg opacity-10" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body py-5">
+                        <div class="row">
+                            <a href="{{ route('projectAdmin.index') }}">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <a href="{{ route('projectAdmin.index') }}">
+                                            <p class="text-sm mb-0  font-weight-bold">Administrador de Proyectos</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div
+                                        class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                        <a href="{{ route('projectAdmin.index') }}">
+                                            <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body py-5">
+                        <div class="row">
+                            <a href="{{ route('users.index') }}">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <a href="{{ route('project.index') }}">
+                                            <p class="text-sm mb-0  font-weight-bold">Mis Proyectos</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div
+                                        class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                        <a href="{{ route('project.index') }}">
+                                            <i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card shadow-sm">
                     <div class="card-body py-5">
                         <div class="row">
                             <a href="{{ route('filedata.index') }}">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <a href="{{ route('filedata.index') }}">
-                                    <p class="text-sm mb-0  font-weight-bold">Data</p>
-                                    </a>
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <a href="{{ route('filedata.index') }}">
+                                            <p class="text-sm mb-0  font-weight-bold">Data</p>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <a href="{{ route('filedata.index') }}">
-                                    <i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i>
-                                    </a>
+                                <div class="col-4 text-end">
+                                    <div
+                                        class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                        <a href="{{ route('filedata.index') }}">
+                                            <i class="fab fa-fw fa-buffer text-lg opacity-10" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body py-5">
+                        <div class="row">
+                            <a href="{{ route('users.index') }}">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <a href="{{ route('role.index') }}"> 
+                                            <p class="text-sm mb-0  font-weight-bold">Roles</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div
+                                        class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                        <a href="{{ route('role.index') }}">
+                                            <i class="fas fa-fw fa-clipboard text-lg opacity-10" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body py-5">
+                        <div class="row">
+                            <a href="{{ route('users.index') }}">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <a href="{{ route('plan.index') }}">
+                                            <p class="text-sm mb-0  font-weight-bold">Planes</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div
+                                        class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                                        <a href="{{ route('plan.index') }}">
+                                            <i class="fas fa-fw fa-file text-lg opacity-10" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
+
     </div>
 @endsection
 

@@ -6,7 +6,5 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Administrador de Base de Datos'])
-    <div>
-        @livewire('filedata-index')
-    </div>
+    @livewire('filedata-index')
 @endsection

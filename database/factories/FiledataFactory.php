@@ -11,11 +11,6 @@ use App\Models\Filedata;
  */
 class FiledataFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     protected $model = Filedata::class;
 
     public function definition()

@@ -35,10 +35,7 @@
                         <div class="container py-5 col-5">   
                             <form action="{{ route('updateProjectAdmin', $projectAdmin) }}" method="post" >
                                 @csrf
-                                @method('put')
-                                @if (Session::has('message'))
-                                    <p>{{ Session::get('messsage')}}</p>
-                                @endif               
+                                @method('put')            
                                 <div>
                                     <h3>Editar Proyecto: {{ $projectAdmin->nombre }}</h3>
                                 </div>
@@ -101,6 +98,7 @@
                                             <button type="submit" class="btn bg-gradient-success m-1">Volver</button>
                                         </form> 
                                     </div>
+                                    
                                 </div>
                         </div>
                     </div>
