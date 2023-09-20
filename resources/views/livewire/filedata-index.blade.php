@@ -34,7 +34,7 @@
                                     <div class="d-flex px-2 py-1">
                                         <div>
                                             <a href="{{ route('filedata.Export') }}"><img src="/img/icons/export.png"
-                                                    class="avatar avatar-sm me-3"></a>
+                                                    class="avatar avatar-sm me-3 "></a>
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">Exportar Tablas</h6>
@@ -173,6 +173,7 @@
             </div>
         </div>
         @if ($filedata->count())
+        @include('components.alert')
             <div class="card-body px-3 pt-0 pb-2">
                 <div class="table-responsive p-0">
                     <table class="table table-striped " id="usersTable">
@@ -378,19 +379,23 @@
                                             {{ $filedatum->masividad }}</p>
                                     </td>
                                     <td class="align-middle text-sm">
-                                        <p class="text-sm font-weight-bold mb-0">{{ substr($filedatum->m15, 0,5) }}</p>
+                                        <p class="text-sm font-weight-bold mb-0">{{ substr($filedatum->m15, 0, 5) }}
+                                        </p>
                                     </td>
                                     <td class="align-middle text-sm">
-                                        <p class="text-sm font-weight-bold mb-0">{{ substr($filedatum->m30, 0,5) }}</p>
+                                        <p class="text-sm font-weight-bold mb-0">{{ substr($filedatum->m30, 0, 5) }}
+                                        </p>
                                     </td>
                                     <td class="align-middle text-sm">
-                                        <p class="text-sm font-weight-bold mb-0">{{ substr($filedatum->m60, 0,5) }}</p>
+                                        <p class="text-sm font-weight-bold mb-0">{{ substr($filedatum->m60, 0, 5) }}
+                                        </p>
                                     </td>
                                     <td class="align-middle text-sm">
-                                        <p class="text-sm font-weight-bold mb-0">{{ substr($filedatum->m90, 0,5) }}</p>
+                                        <p class="text-sm font-weight-bold mb-0">{{ substr($filedatum->m90, 0, 5) }}
+                                        </p>
                                     </td>
                                     <td class="align-middle text-sm">
-                                        <p class="text-sm font-weight-bold mb-0">{{ substr($filedatum->m120, 0,5) }}
+                                        <p class="text-sm font-weight-bold mb-0">{{ substr($filedatum->m120, 0, 5) }}
                                         </p>
                                     </td>
                                     <td class="align-middle text-sm">
@@ -420,7 +425,18 @@
                                                 <button type="submit"
                                                     class="btn bg-gradient-info m-1">Editar</button>
                                             </form>
-                                            <button type="button" class="btn bg-gradient-danger m-1">Borrar</button>
+                                            <button type="button" class="btn bg-gradient-danger m-1"
+                                                    data-bs-toggle="modal" data-bs-target="#modal">
+                                                    Eliminar
+                                                </button>
+                                                @include('components.modal', [
+                                                    'title' => 'Confirmar Borrado de registro Pintura',
+                                                    'body' => '¿Estás seguro de que deseas borrar la pintura?',
+                                                    'button' => 'Borrar',
+                                                    'form' => 'borrarPintura',
+                                                    'route' => 'filedata.destroy',
+                                                    'id' => $filedatum
+                                                ])
 
                                         </div>
                                     </td>
@@ -441,5 +457,4 @@
         @endif
 
     </div>
-</div>
 </div>

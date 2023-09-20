@@ -10,16 +10,14 @@
                         <tbody>
                             <tr>
                                 <td class="d-flex align-items-center">
-                                        <div class="align-items-center">
-                                            <a href="{{ route('plan.create') }}"><img src="/img/icons/export.png"
-                                                    class="avatar avatar-sm me-3"></a>
-                                        </div>
-                                        <div class="align-items-center">
-                                            <h6 class="text-sm">Agregar Nuevo Plan</h6>
-                                        </div>
+                                    <div class="align-items-center">
+                                        <a href="{{ route('plan.create') }}"><img src="/img/icons/crear.png"
+                                                class="avatar avatar-sm me-3">Agregar Nuevo Plan</a>
+                                    </div>
                                 </td>
                                 <td class="align-items-center " width="10px">
-                                    <a class="btn bg-gradient-info " href="{{ route('plan.create') }}">Agragar Nuevo Plan</a>
+                                    <a class="btn bg-gradient-info " href="{{ route('plan.create') }}">Agragar Nuevo
+                                        Plan</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -132,17 +130,28 @@
                                         </td>
                                         <td width="10px" class="align-middle">
                                             <div class="d-flex ">
-                                                <form action="{{ route('plan.edit', $plan) }}"
-                                                    method="get">
-                                                    <button type="submit" class="btn bg-gradient-info m-1">Editar </button>
+                                                <form action="{{ route('plan.edit', $plan) }}" method="get">
+                                                    <button type="submit" class="btn bg-gradient-info m-1">Editar
+                                                    </button>
                                                 </form>
-                                                <form action="{{ route('plan.destroy', $plan) }}"
-                                                    method="post">
+                                                <button type="button" class="btn bg-gradient-danger m-1"
+                                                    data-bs-toggle="modal" data-bs-target="#modal">
+                                                    Eliminar
+                                                </button>
+                                                @include('components.modal', [
+                                                    'title'     => 'Confirmar Borrado del Plan',
+                                                    'body'      => '¿Estás seguro de que deseas borrar el plan?',
+                                                    'button'    => 'Borrar BD',
+                                                    'form'      => 'borrarPlan',
+                                                    'route'     => 'plan.destroy',
+                                                    'id'        => $plan
+                                                ])
+                                                {{-- <form action="{{ route('plan.destroy', $plan) }}" method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit"
                                                         class="btn bg-gradient-danger m-1">Eliminar</button>
-                                                </form>
+                                                </form> --}}
                                             </div>
                                         </td>
                                     </tr>

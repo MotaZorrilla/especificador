@@ -40,11 +40,19 @@
                     <form action="{{ route('plan.index') }}" method="get">
                         <button type="submit" class="btn bg-gradient-info ms-3">Volver</button>
                     </form>
-                    <form action="{{ route('plan.destroy', $plan) }}" method="post">
-                        @csrf
-                        @method('delete')
-                        <button type="submit" class="btn bg-gradient-danger ms-3 ">Eliminar</button>
-                    </form>
+                    <button type="button" class="btn bg-gradient-danger  ms-3" data-bs-toggle="modal"
+                        data-bs-target="#modal">
+                        Eliminar
+                    </button>
+                    @include('components.modal', [
+                        'title' => 'Confirmar Borrado del Plan',
+                        'body' => '¿Estás seguro de que deseas borrar el plan?',
+                        'button' => 'Borrar Plan',
+                        'form' => 'borrarPlan',
+                        'route' => 'plan.destroy',
+                        'id' => $plan,
+                        'method' => "@method('delete')",
+                    ])
                 </div>
             </div>
         </div>

@@ -371,7 +371,7 @@ class ProjectAdminController extends Controller
     {
         $project->delete();
 
-        return redirect()->route('projectAdmin.index');
+        return redirect()->route('projectAdmin.index')->with('success', 'El proyecto se eliminó con éxito');
     }
 
     public function pdf(Project $projectAdmin)

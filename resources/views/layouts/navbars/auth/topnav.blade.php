@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-dark navbar-expand-lg shadow-sm border-radius-lg mt-3 mx-3 bg-primary">
+<nav class="navbar navbar-dark navbar-expand-lg shadow-sm border-radius-lg mt-3 mx-3 bg-gradient-danger">
     <div class="container-fluid">
         <a class="navbar-brand m-0 p-0 bg-white border-radius-lg" href="{{ route('home') }}" id="offcanvasSidebarLabel">
             <img src="{{ asset('assets/img/logoEntumescenteB.png') }}" class="navbar-brand-img" alt="main_logo"

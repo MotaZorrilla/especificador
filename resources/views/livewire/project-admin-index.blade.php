@@ -33,6 +33,7 @@
             </div>
         </div>
         <div class="card mb-4 border shadow">
+            @include('components.alert')
             <div class="card-header px-auto pt-3 ">
                 <div class="d-flex d-inline ">
                     <div class="col-6">
@@ -125,13 +126,18 @@
                                                     <button type="submit" class="btn bg-gradient-info m-1">Ver
                                                         Proyecto</button>
                                                 </form>
-                                                <form action="{{ route('projectAdmin.destroy', $project) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit"
-                                                        class="btn bg-gradient-danger m-1">Eliminar</button>
-                                                </form>
+                                                <button type="button" class="btn bg-gradient-danger m-1"
+                                                    data-bs-toggle="modal" data-bs-target="#modal">
+                                                    Eliminar
+                                                </button>
+                                                @include('components.modal', [
+                                                    'title'     => 'Confirmar Borrado del Proyecto',
+                                                    'body'      => '¿Estás seguro de que deseas borrar el proyecto?',
+                                                    'button'    => 'Borrar',
+                                                    'form'      => 'borrarProyecto',
+                                                    'route'     => 'projectAdmin.destroy',
+                                                    'id'        => $project
+                                                ])
                                             </div>
                                         </td>
                                     </tr>

@@ -92,7 +92,7 @@ class FiledataController extends Controller
     {
         $filedatum->delete();
 
-        return redirect()->route('filedata.index');
+        return redirect()->route('filedata.index')->with('success', 'El registro se eliminó con éxito');
     }
 
     public function import(Request $request)
@@ -101,7 +101,7 @@ class FiledataController extends Controller
 
         Excel::import(new FiledataImport, $filedata);
         
-        return back();
+        return redirect()->route('filedata.index');
     }
 
     public function export()
