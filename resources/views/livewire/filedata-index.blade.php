@@ -117,8 +117,10 @@
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body text-left">
-                                                    <p>¿Estás seguro de que deseas borrar todos los
-                                                        registros <br>de la Base de datos?</p>
+                                                    <div class="content">
+                                                        <p>¿Estás seguro de que deseas borrar todos <br> los
+                                                            registros de la Base de datos?</p>
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-info"
@@ -173,7 +175,7 @@
             </div>
         </div>
         @if ($filedata->count())
-        @include('components.alert')
+            @include('components.alert')
             <div class="card-body px-3 pt-0 pb-2">
                 <div class="table-responsive p-0">
                     <table class="table table-striped " id="usersTable">
@@ -421,23 +423,50 @@
                                     </td>
                                     <td width="10px" class="align-middle ">
                                         <div class="d-flex ">
-                                            <form action="{{ route('filedata.edit', $filedata) }}" method="get">
+                                            <form action="{{ route('filedata.edit', $filedatum) }}" method="get">
                                                 <button type="submit"
                                                     class="btn bg-gradient-info m-1">Editar</button>
                                             </form>
+                                            <form id="borrarFiledata{{ $filedatum->id }}"
+                                                action="{{ route('filedata.destroy', $filedatum) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                            </form>
                                             <button type="button" class="btn bg-gradient-danger m-1"
-                                                    data-bs-toggle="modal" data-bs-target="#modal">
-                                                    Eliminar
-                                                </button>
-                                                @include('components.modal', [
-                                                    'title' => 'Confirmar Borrado de registro Pintura',
-                                                    'body' => '¿Estás seguro de que deseas borrar la pintura?',
-                                                    'button' => 'Borrar',
-                                                    'form' => 'borrarPintura',
-                                                    'route' => 'filedata.destroy',
-                                                    'id' => $filedatum
-                                                ])
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalFiledata{{ $filedatum->id }}">
+                                                Eliminar
+                                            </button>
 
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="modalFiledata{{ $filedatum->id }}"
+                                                tabindex="-1" aria-labelledby="borrarBaseLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header bg-gradient-danger ">
+                                                            <h1 class="modal-title fs-5 text-white" id="ModalLabel">
+                                                                Confirmar Borrado de Base de Datos</h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body text-left">
+                                                            <p>¿Estás seguro de que deseas borrar
+                                                                {{ $filedatum->pintura }}?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-info"
+                                                                data-bs-dismiss="modal">Cancelar</button>
+                                                            <button type="button" class="btn btn-danger"
+                                                                data-bs-dismiss="modal" data-bs-toggle="modal"
+                                                                data-bs-target="#borrarFiledata{{ $filedatum->id }}"
+                                                                id="confirmarBorrar"
+                                                                onclick="event.preventDefault(); document.getElementById('borrarFiledata{{ $filedatum->id }}').submit();">
+                                                                Borrar
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>

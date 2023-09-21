@@ -367,9 +367,9 @@ class ProjectAdminController extends Controller
     }
 
     //Remove the specified resource from storage.
-    public function destroy(Project $project)
+    public function destroy(Project $projectAdmin)
     {
-        $project->delete();
+        $projectAdmin->delete();
 
         return redirect()->route('projectAdmin.index')->with('success', 'El proyecto se eliminó con éxito');
     }

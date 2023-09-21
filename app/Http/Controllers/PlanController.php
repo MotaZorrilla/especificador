@@ -21,6 +21,7 @@ class PlanController extends Controller
     {
         $request->validate([
             'name'      =>  'required|unique:plans',
+            'perfiles'  =>  'required',
             'price'     =>  'required' 
         ]);
 
@@ -44,6 +45,7 @@ class PlanController extends Controller
     {
         $request->validate([
             'name'      =>  "required|unique:plans,name,$plan->id",
+            'perfiles'  =>  'required',
             'price'     =>  'required' 
         ]);
 

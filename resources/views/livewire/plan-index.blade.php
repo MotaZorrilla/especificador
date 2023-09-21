@@ -10,9 +10,9 @@
                         <tbody>
                             <tr>
                                 <td class="d-flex align-items-center">
-                                    <div class="align-items-center">
+                                    <div class="align-items-center fw-bold">
                                         <a href="{{ route('plan.create') }}"><img src="/img/icons/crear.png"
-                                                class="avatar avatar-sm me-3">Agregar Nuevo Plan</a>
+                                                class="avatar avatar-sm me-3 ">Agregar Nuevo Plan</a>
                                     </div>
                                 </td>
                                 <td class="align-items-center " width="10px">
@@ -30,7 +30,7 @@
             <div class="card-header px-auto pt-3 ">
                 <div class="d-flex d-inline ">
                     <div class="col-6">
-                        <h6>Proyectos Creados</h6>
+                        <h6>Planes Creados</h6>
                     </div>
                     <div class="input-group ">
                         <span class="input-group-text text-body">
@@ -85,6 +85,19 @@
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
+                                        wire:click="order('perfiles')">
+                                        Nº de perfiles
+                                        @if ($sort == 'perfiles')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-up float-right"> </i>
+                                            @else
+                                                <i class="fas fa-sort-down float-right"> </i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort float-right"> </i>
+                                        @endif
+                                    </th>
+                                    <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
                                         wire:click="order('price')">
                                         Precio
                                         @if ($sort == 'price')
@@ -121,6 +134,9 @@
                                                 {{ substr($plan->description, 0, 50) }}...</p>
                                         </td>
                                         <td class="align-middle text-sm ">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $plan->perfiles }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">{{ $plan->price }}</p>
                                         </td>
                                         <td class="align-middle text-sm ">
@@ -134,24 +150,16 @@
                                                     <button type="submit" class="btn bg-gradient-info m-1">Editar
                                                     </button>
                                                 </form>
-                                                <button type="button" class="btn bg-gradient-danger m-1"
-                                                    data-bs-toggle="modal" data-bs-target="#modal">
-                                                    Eliminar
-                                                </button>
-                                                @include('components.modal', [
-                                                    'title'     => 'Confirmar Borrado del Plan',
-                                                    'body'      => '¿Estás seguro de que deseas borrar el plan?',
-                                                    'button'    => 'Borrar BD',
-                                                    'form'      => 'borrarPlan',
-                                                    'route'     => 'plan.destroy',
-                                                    'id'        => $plan
-                                                ])
-                                                {{-- <form action="{{ route('plan.destroy', $plan) }}" method="post">
+                                                <input type="button" class="btn bg-gradient-danger m-1"
+                                                    value="Eliminar"
+                                                    onclick="if(confirm('¿Confirma eliminar {{ $plan->name }}?')) {
+                                                        document.getElementById('borrarPlan{{ $plan->id }}').submit();
+                                                    }" />
+                                                <form id="borrarPlan{{ $plan->id }}"
+                                                    action="{{ route('plan.destroy', $plan) }}" method="POST">
                                                     @csrf
                                                     @method('delete')
-                                                    <button type="submit"
-                                                        class="btn bg-gradient-danger m-1">Eliminar</button>
-                                                </form> --}}
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>

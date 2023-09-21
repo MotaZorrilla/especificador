@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
             'lastname'  => 'Izaguirre',
             'email'     => 'admin@pinturaintumescente.cl',
             'password'  => 'Rodrigo'
-        ])->assignRole('Admin');
+        ])->assignRole('Administrador');
 
         User::factory(20)->create();
     }

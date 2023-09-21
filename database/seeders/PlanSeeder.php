@@ -13,6 +13,7 @@ class PlanSeeder extends Seeder
         Plan::create([
             'name' => 'Plan Básico',
             'description' => 'Este es el plan básico de nuestra aplicación.',
+            'perfiles' => 5,
             'price' => 9.99,
         ]);
 
@@ -20,6 +21,7 @@ class PlanSeeder extends Seeder
         Plan::create([
             'name' => 'Plan Premium',
             'description' => 'Este es el plan premium de nuestra aplicación.',
+            'perfiles' => 50,
             'price' => 19.99,
         ]);
 

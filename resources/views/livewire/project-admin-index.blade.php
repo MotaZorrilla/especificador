@@ -1,30 +1,23 @@
 <div>
     <div class="container-fluid py-4">
         <div class="card mb-4 border shadow">
-            <div class="card-header pb-0">
+            <div class="card-header pb-0 pr-3">
                 <h6>Proyectos</h6>
             </div>
-            <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive p-0">
-                    <table class="table align-items-center mb-0">
+            <div class="card-body pt-0 pb-2 ">
+                <div class="table-responsive ">
+                    <table class="table align-items-center  ">
                         <tbody>
                             <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                        <div>
-                                            <a href="{{ route('projectAdmin.create') }}"><img src="/img/icons/export.png"
-                                                    class="avatar avatar-sm me-3"></a>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">Crear Nuevo Proyecto</h6>
-                                        </div>
+                                <td class="d-flex align-items-center">
+                                    <div class="align-items-center fw-bold">
+                                        <a href="{{ route('projectAdmin.create') }}"><img src="/img/icons/crear.png"
+                                                class="avatar avatar-sm me-3 ">Agregar Nuevo Proyecto</a>
                                     </div>
                                 </td>
-                                <td class="align-middle text-right ">
-                                    <form action="{{ route('projectAdmin.create') }}" method="get">
-
-                                        <button type="submit" class="btn bg-gradient-info m-1">Crear</button>
-                                    </form>
+                                <td class="align-items-center " width="10px">
+                                    <a class="btn bg-gradient-info " href="{{ route('projectAdmin.create') }}">Agragar
+                                        Nuevo Proyecto</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -126,18 +119,27 @@
                                                     <button type="submit" class="btn bg-gradient-info m-1">Ver
                                                         Proyecto</button>
                                                 </form>
-                                                <button type="button" class="btn bg-gradient-danger m-1"
-                                                    data-bs-toggle="modal" data-bs-target="#modal">
-                                                    Eliminar
-                                                </button>
-                                                @include('components.modal', [
-                                                    'title'     => 'Confirmar Borrado del Proyecto',
-                                                    'body'      => '¿Estás seguro de que deseas borrar el proyecto?',
-                                                    'button'    => 'Borrar',
-                                                    'form'      => 'borrarProyecto',
-                                                    'route'     => 'projectAdmin.destroy',
-                                                    'id'        => $project
-                                                ])
+                                                <input type="button" class="btn bg-gradient-danger m-1"
+                                                    value="Eliminar" onclick="confirmAndDelete({{ $project->id }});"
+                                                    id="eliminarBtn{{ $project->id }}" />
+
+                                                <form id="borrarProject{{ $project->id }}"
+                                                    action="{{ route('projectAdmin.destroy', $project) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                </form>
+                                                {{-- <input type="button" class="btn bg-gradient-danger m-1"
+                                                    value="Eliminar"
+                                                    onclick="if(confirm('¿Confirma eliminar {{ $project->nombre }}?')) {
+                                                        document.getElementById('borrarProject{{ $project->id }}').submit();
+                                                    }" />
+                                                <form id="borrarProject{{ $project->id }}"
+                                                    action="{{ route('projectAdmin.destroy', $project) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                </form> --}}
                                             </div>
                                         </td>
                                     </tr>
@@ -156,4 +158,33 @@
             @endif
         </div>
     </div>
+
+    @section('js')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+            function confirmAndDelete(projectId) {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡No podrás revertir esto!",
+                    icon: 'question',
+                    showCancelButton: true,
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Sí, eliminarlo'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Si se confirma, enviar el formulario
+                        document.getElementById(`borrarProject${projectId}`).submit();
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Tu proyecto ha sido eliminado.',
+                            'success'
+                        )
+                    }
+                });
+            }
+        </script>
+    @endsection
+
 </div>

@@ -43,8 +43,8 @@
                                     <h3>{{ $projectAdmin->nombre }}</h3>
                                 </div>
                                 <div class="form-group">
-                                    <label for="project_data" class="form-control-label">Descripción:</label>
-                                    <p>{{ $projectAdmin->descripcion }}</p> 
+                                    <label class="form-control-label" for=>Descripción:</label>
+                                    {!! $projectAdmin->descripcion !!}
                                 </div>
                                 <div class="form-group">
                                     <label for="mass" class="form-control-label">Tipo Perfil:</label>
@@ -134,4 +134,29 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+
+    {{-- <script>
+        ClassicEditor
+            .create(document.querySelector('#descripcion'))
+            .then(editor => {
+                // Activa el modo de solo lectura
+                editor.enableReadOnlyMode( 'feature-id' );
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script> --}}
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#observaciones'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+
 @endsection

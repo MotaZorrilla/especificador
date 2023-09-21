@@ -89,7 +89,7 @@ class FiledataController extends Controller
 
     //Remove the specified resource from storage.
     public function destroy(Filedata $filedatum)
-    {
+    {   
         $filedatum->delete();
 
         return redirect()->route('filedata.index')->with('success', 'El registro se eliminó con éxito');

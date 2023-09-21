@@ -16,13 +16,18 @@
                             <input class="form-control" type="text" id="name" name="name"
                                 placeholder="Escribe el nombre del nuevo plan" required>
                             @error('name')
-                                <span class="text-danger">{{ $message }}</span>
+                                <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-control-label" for="description">Descripción:</label>
                             <textarea class="form-control" type="text" id="description" name="description"
                                 placeholder="Escribe la descripción de tu plan"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="perfiles">Cantidad de Perfiles:</label>
+                            <input class="form-control" type="number" id="perfiles" name="perfiles"
+                                placeholder="Escribe el precio de tu Proyecto" step="1" required>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label" for="price">Precio:</label>

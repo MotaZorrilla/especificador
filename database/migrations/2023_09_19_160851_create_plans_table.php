@@ -12,9 +12,9 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable(); // Agrega ->nullable();
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('perfiles')->nullable(); 
             $table->decimal('price', 8, 2);
-            // Agrega más columnas según tus necesidades.
             $table->timestamps();
         });
     }
