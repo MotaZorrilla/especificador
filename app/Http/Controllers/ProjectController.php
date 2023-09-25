@@ -9,6 +9,11 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:project');
+    }
+
     // Display a listing of the resource.
     public function index()
     {      

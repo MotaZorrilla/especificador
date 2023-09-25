@@ -6,7 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class UsersIndex extends Component
+class UserIndex extends Component
 {   
     use WithPagination;
 
@@ -30,7 +30,7 @@ class UsersIndex extends Component
                     ->orderby(  $this->sort, $this->direction)
                     ->paginate(9);
 
-        return view('livewire.users-index', compact('users'));
+        return view('livewire.user-index', compact('users'));
     }
 
     public function order($sort)

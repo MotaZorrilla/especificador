@@ -1,27 +1,34 @@
 <div>
     <div class="container-fluid py-4">
-        <div class="card mb-4 border shadow">
-            <div class="card-header pb-0 pr-3">
-                <h6>Planes</h6>
-            </div>
-            <div class="card-body pt-0 pb-2 ">
-                <div class="table-responsive ">
-                    <table class="table align-items-center  ">
-                        <tbody>
-                            <tr>
-                                <td class="d-flex align-items-center">
-                                    <div class="align-items-center fw-bold">
-                                        <a href="{{ route('plan.create') }}"><img src="/img/icons/crear.png"
-                                                class="avatar avatar-sm me-3 ">Agregar Nuevo Plan</a>
-                                    </div>
-                                </td>
-                                <td class="align-items-center " width="10px">
-                                    <a class="btn bg-gradient-info " href="{{ route('plan.create') }}">Agragar Nuevo
-                                        Plan</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h6>Administrar Usuarios</h6>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    {{-- <a href="{{route('filedataExcel')}}"><img src="/img/icons/export.png" class="avatar avatar-sm me-3"></a> --}}
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">Exportar lista de Usuarios a Excel</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle text-right ">
+                                            {{-- <a class="badge badge-sm bg-gradient-info" href="{{route('fileExcel')}}">Exportar</a> --}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,7 +37,7 @@
             <div class="card-header px-auto pt-3 ">
                 <div class="d-flex d-inline ">
                     <div class="col-6">
-                        <h6>Planes Creados</h6>
+                        <h6>Usuarios Registrados</h6>
                     </div>
                     <div class="input-group ">
                         <span class="input-group-text text-body">
@@ -39,10 +46,11 @@
                     </div>
                 </div>
             </div>
-            @if ($plans->count())
+
+            @if ($users->count())
                 <div class="card-body px-3 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table class="table table-striped ">
+                        <table class="table table-striped " id="usersTable">
                             <thead>
                                 <tr>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -59,9 +67,9 @@
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('name')">
-                                        Nombre del Plan
-                                        @if ($sort == 'name')
+                                        wire:click="order('username')">
+                                        Usuario
+                                        @if ($sort == 'username')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -72,9 +80,9 @@
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('description')">
-                                        Descripción
-                                        @if ($sort == 'description')
+                                        wire:click="order('firstname')">
+                                        Nombre
+                                        @if ($sort == 'firstname')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -85,9 +93,9 @@
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('perfiles')">
-                                        Nº de perfiles
-                                        @if ($sort == 'perfiles')
+                                        wire:click="order('lastname')">
+                                        Apellido
+                                        @if ($sort == 'lastname')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -98,9 +106,22 @@
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('price')">
-                                        Precio
-                                        @if ($sort == 'price')
+                                        wire:click="order('email')">
+                                        Email
+                                        @if ($sort == 'email')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-up float-right"> </i>
+                                            @else
+                                                <i class="fas fa-sort-down float-right"> </i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort float-right"> </i>
+                                        @endif
+                                    </th>
+                                    <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
+                                        wire:click="order('role')">
+                                        Tipo
+                                        @if ($sort == 'role')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -111,8 +132,8 @@
                                         @endif
                                     </th>
                                     <th
-                                        class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
-                                        Actualizado
+                                        class=" text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                        Registrado
                                     </th>
                                     <th
                                         class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
@@ -121,73 +142,77 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($plans as $plan)
+                                @foreach ($users as $user)
                                     <tr>
-                                        <td class="align-middle text-sm ">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $plan->id }}</p>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $user->id }}</p>
                                         </td>
-                                        <td class="align-middle text-sm ">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $plan->name }}</p>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $user->username }}</p>
                                         </td>
-                                        <td class="align-middle text-sm ">
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $user->firstname }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $user->lastname }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $user->email }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $user->tipo }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
                                             <p class="text-sm font-weight-bold mb-0">
-                                                {{ substr($plan->description, 0, 50) }}...</p>
-                                        </td>
-                                        <td class="align-middle text-sm ">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $plan->perfiles }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm ">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $plan->price }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm ">
-                                            <p class="text-sm font-weight-bold mb-0">
-                                                {{ $plan->updated_at ? $plan->updated_at->diffForHumans() : '' }}
+                                                {{ $user->updated_at ? $user->updated_at->diffForHumans() : '' }}
                                             </p>
                                         </td>
-                                        <td width="10px" class="align-middle">
+                                        <td width="10px" class="align-middle ">
                                             <div class="d-flex ">
-                                                <form action="{{ route('plan.edit', $plan) }}" method="get">
-                                                    <button type="submit" class="btn bg-gradient-info m-1">Editar
-                                                    </button>
+                                                <form action="{{ route('user.edit', $user) }}" method="get">
+                                                    <button type="submit"
+                                                        class="btn bg-gradient-info m-1">Editar</button>
                                                 </form>
-                                                <form id="borrarPlan{{ $plan->id }}"
-                                                    action="{{ route('plan.destroy', $plan) }}" method="POST">
+                                                <form id="borrarUser{{ $user->id }}"
+                                                    action="{{ route('user.destroy', $user) }}" method="POST">
                                                     @csrf
                                                     @method('delete')
                                                 </form>
                                                 <button type="button" class="btn bg-gradient-danger m-1"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#modalPlan{{ $plan->id }}">
+                                                    data-bs-target="#modalPlan{{ $user->id }}">
                                                     Eliminar
                                                 </button>
-    
+
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="modalPlan{{ $plan->id }}" tabindex="-1" >
+                                                <div class="modal fade" id="modalPlan{{ $user->id }}"
+                                                    tabindex="-1">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header bg-gradient-danger ">
-                                                                <h1 class="modal-title fs-5 text-white" >
+                                                                <h1 class="modal-title fs-5 text-white">
                                                                     Confirmar Borrado de Plan</h1>
                                                                 <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" ></button>
+                                                                    data-bs-dismiss="modal"></button>
                                                             </div>
                                                             <div class="modal-body text-center">
                                                                 <p>¿Estás seguro de que deseas eliminar
-                                                                    {{ $plan->name }}?</p>
+                                                                    {{ $user->username }}?</p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-info"
                                                                     data-bs-dismiss="modal">Cancelar</button>
                                                                 <button type="button" class="btn btn-danger"
                                                                     data-bs-dismiss="modal" data-bs-toggle="modal"
-                                                                    data-bs-target="#borrarPlan{{ $plan->id }}"
-                                                                    onclick="event.preventDefault(); document.getElementById('borrarPlan{{ $plan->id }}').submit();">
+                                                                    data-bs-target="#borrarUser{{ $user->id }}"
+                                                                    onclick="event.preventDefault(); document.getElementById('borrarUser{{ $user->id }}').submit();">
                                                                     Eliminar
                                                                 </button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </td>
                                     </tr>
@@ -195,7 +220,7 @@
                             </tbody>
                         </table>
                         <div class="card-footer pb-0">
-                            {{ $plans->links() }}
+                            {{ $users->links() }}
                         </div>
                     </div>
                 </div>
@@ -204,6 +229,7 @@
                     No hay datos que coincidan.
                 </div>
             @endif
+
         </div>
     </div>
 </div>

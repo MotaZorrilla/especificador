@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
     @include('layouts.navbars.auth.topnav', ['title' => 'Editar Plan'])
+    
     <div class="container-fluid py-4">
         <div class="card border shadow">
             <div class="card-body px-0 pt-0 pb-2">
@@ -23,8 +25,12 @@
                         </div>
                         <div class="form-group">
                             <label class="form-control-label" for="description">Descripción:</label>
-                            <textarea class="form-control" type="text" id="description" name="description" placeholder="{{ $plan->description }}"
-                                value="{{ $plan->description }}"></textarea>
+                            <textarea class="form-control" type="text" id="description" name="description" >{{ $plan->description }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="perfiles">Perfiles:</label>
+                            <input class="form-control" type="number" id="perfiles" name="perfiles"
+                                value="{{ $plan->perfiles }}" step="1" required>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label" for="price">Precio:</label>
@@ -40,19 +46,44 @@
                     <form action="{{ route('plan.index') }}" method="get">
                         <button type="submit" class="btn bg-gradient-info ms-3">Volver</button>
                     </form>
-                    <button type="button" class="btn bg-gradient-danger  ms-3" data-bs-toggle="modal"
-                        data-bs-target="#modal">
+                    <form id="borrarPlan{{ $plan->id }}"
+                        action="{{ route('plan.destroy', $plan) }}" method="POST">
+                        @csrf
+                        @method('delete')
+                    </form>
+                    <button type="button" class="btn bg-gradient-danger ms-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalPlan{{ $plan->id }}">
                         Eliminar
                     </button>
-                    @include('components.modal', [
-                        'title' => 'Confirmar Borrado del Plan',
-                        'body' => '¿Estás seguro de que deseas borrar el plan?',
-                        'button' => 'Borrar Plan',
-                        'form' => 'borrarPlan',
-                        'route' => 'plan.destroy',
-                        'id' => $plan,
-                        'method' => "@method('delete')",
-                    ])
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalPlan{{ $plan->id }}" tabindex="-1" >
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-gradient-danger ">
+                                    <h1 class="modal-title fs-5 text-white" >
+                                        Confirmar Borrado de Plan</h1>
+                                    <button type="button" class="btn-close"
+                                        data-bs-dismiss="modal" ></button>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>¿Estás seguro de que deseas eliminar
+                                        {{ $plan->name }}?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-info"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-danger"
+                                        data-bs-dismiss="modal" data-bs-toggle="modal"
+                                        data-bs-target="#borrarPlan{{ $plan->id }}"
+                                        onclick="event.preventDefault(); document.getElementById('borrarPlan{{ $plan->id }}').submit();">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -20,32 +20,20 @@ class RoleSeeder extends Seeder
 		$role2 = Role::create(['name' => 'Cliente']);
         $role3 = Role::create(['name' => 'Ejecutivo']);
 
-        Permission::create(['name' => 'users'])                ->syncRoles([$role1, $role3]);
+        Permission::create(['name'          => 'user',
+                            'description'   => 'Ver el listado de Usuarios'])               ->syncRoles([$role1, $role3]);
+        Permission::create(['name'          => 'profile',
+                            'description'   => 'Ver su propio perfil '])                    ->syncRoles([$role1, $role2, $role3]);
+        Permission::create(['name'          => 'filedata',
+                            'description'   => 'Ver la base de datos de Pinturas'])         ->syncRoles([$role1, $role3]);
+        Permission::create(['name'          => 'project',
+                            'description'   => 'Ver el listado de tus proyectos'])          ->syncRoles([$role1, $role2, $role3]);        
+        Permission::create(['name'          => 'projectAdmin',
+                            'description'   => 'Ver el listado de todos los proyectos '])   ->syncRoles([$role1, $role3]);
+        Permission::create(['name'          => 'plan',
+                            'description'   => 'Ver el listado de planes'])                 ->syncRoles([$role1, $role2, $role3]);
+        Permission::create(['name'          => 'role',
+                            'description'   => 'Ver el listado de Roles'])                  ->syncRoles([$role1, $role3]);
 
-        Permission::create(['name' => 'filedata.index'])       ->syncRoles([$role1, $role3]);
-        Permission::create(['name' => 'filedata.create'])      ->syncRoles([$role1, $role3]);
-        Permission::create(['name' => 'filedata.edit'])        ->syncRoles([$role1, $role3]);
-        Permission::create(['name' => 'filedata.destroy'])     ->syncRoles([$role1, $role3]);
-        Permission::create(['name' => 'filedata.Import'])      ->syncRoles([$role1, $role3]);
-        Permission::create(['name' => 'filedata.Export'])      ->syncRoles([$role1, $role3]);
-        Permission::create(['name' => 'filedata.Order'])       ->syncRoles([$role1, $role3]);
-        Permission::create(['name' => 'filedata.OrderList'])   ->syncRoles([$role1, $role3]);
-        Permission::create(['name' => 'filedata.Reset'])       ->syncRoles([$role1, $role3]);
-        
-        Permission::create(['name' => 'projectAdmin.index'])   ->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name' => 'projectAdmin.create'])  ->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name' => 'projectAdmin.edit'])    ->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name' => 'projectAdmin.destroy']) ->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name' => 'updateProjectAdmin'])   ->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name' => 'projectAdmin.pdf'])     ->syncRoles([$role1, $role2, $role3]);
-
-        Permission::create(['name' => 'project.index'])         ->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name' => 'project.create'])        ->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name' => 'project.edit'])          ->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name' => 'project.destroy'])       ->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name' => 'updateProject'])         ->syncRoles([$role1, $role2, $role3]);
-        Permission::create(['name' => 'project.pdf'])           ->syncRoles([$role1, $role2, $role3]);
-        
-        
     }
 }

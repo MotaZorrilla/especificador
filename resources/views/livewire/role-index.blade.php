@@ -101,18 +101,44 @@
                                                     <button type="submit" class="btn bg-gradient-info m-1">Editar
                                                     </button>
                                                 </form>
+                                                <form id="borrarRole{{ $role->id }}"
+                                                    action="{{ route('role.destroy', $role) }}" method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                </form>
                                                 <button type="button" class="btn bg-gradient-danger m-1"
-                                                    data-bs-toggle="modal" data-bs-target="#modal">
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modalPlan{{ $role->id }}">
                                                     Eliminar
                                                 </button>
-                                                @include('components.modal', [
-                                                    'title'     => 'Confirmar Borrado del Rol',
-                                                    'body'      => '¿Estás seguro de que deseas borrar el rol?',
-                                                    'button'    => 'Borrar',
-                                                    'form'      => 'borrarRole',
-                                                    'route'     => 'role.destroy',
-                                                    'id'        => $role
-                                                ])
+    
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="modalPlan{{ $role->id }}" tabindex="-1" >
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-gradient-danger ">
+                                                                <h1 class="modal-title fs-5 text-white" >
+                                                                    Confirmar Borrado del Rol</h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" ></button>
+                                                            </div>
+                                                            <div class="modal-body text-center">
+                                                                <p>¿Estás seguro de que deseas eliminar
+                                                                    {{ $role->name }}?</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-info"
+                                                                    data-bs-dismiss="modal">Cancelar</button>
+                                                                <button type="button" class="btn btn-danger"
+                                                                    data-bs-dismiss="modal" data-bs-toggle="modal"
+                                                                    data-bs-target="#borrarRole{{ $role->id }}"
+                                                                    onclick="event.preventDefault(); document.getElementById('borrarRole{{ $role->id }}').submit();">
+                                                                    Eliminar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>

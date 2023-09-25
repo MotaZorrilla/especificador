@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PlanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:plan');
+    }
+
     public function index()
     {
         return view('dashboard.plan.plan-index');

@@ -66,7 +66,7 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::resource('project',  	 	 ProjectController::class);
 	Route::get('project/{project}/pdf',	[ProjectController::class,		'pdf'])		->name('project.pdf');
 
-	Route::resource('users',  		  	 UserController::class);
+	Route::resource('user',  		  	 UserController::class);
 	Route::resource('plan',  		  	 PlanController::class);
 	Route::resource('role',  		  	 RoleController::class);	
 

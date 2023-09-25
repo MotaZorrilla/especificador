@@ -10,6 +10,11 @@ use App\Exports\FiledataExport;
 
 class FiledataController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:filedata');
+    }
+
     // Display a listing of the resource.
     public function index()
     {        

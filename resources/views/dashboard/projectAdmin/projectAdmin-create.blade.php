@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', [
-        'title' => 'Administrador de Proyectos | Administradores | Crear'
+        'title' => 'Crear Proyectos | Administradores '
     ])
     <div class="container-fluid py-4">
         <div class="card border shadow">
@@ -108,7 +108,6 @@
                                             <label class="form-check-label" for="perfil_cc">Cerrado
                                                 Circular</label>
                                         </div>
-
                                     </div>
                                     {{-- resistencia   --}}
                                     <div style="display: inline-block; vertical-align: top;" class="col-4">

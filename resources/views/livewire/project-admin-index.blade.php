@@ -119,27 +119,46 @@
                                                     <button type="submit" class="btn bg-gradient-info m-1">Ver
                                                         Proyecto</button>
                                                 </form>
-                                                <input type="button" class="btn bg-gradient-danger m-1"
-                                                    value="Eliminar" onclick="confirmAndDelete({{ $project->id }});"
-                                                    id="eliminarBtn{{ $project->id }}" />
-
                                                 <form id="borrarProject{{ $project->id }}"
                                                     action="{{ route('projectAdmin.destroy', $project) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('delete')
                                                 </form>
-                                                {{-- <input type="button" class="btn bg-gradient-danger m-1"
-                                                    value="Eliminar"
-                                                    onclick="if(confirm('¿Confirma eliminar {{ $project->nombre }}?')) {
-                                                        document.getElementById('borrarProject{{ $project->id }}').submit();
-                                                    }" />
-                                                <form id="borrarProject{{ $project->id }}"
-                                                    action="{{ route('projectAdmin.destroy', $project) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                </form> --}}
+                                                <button type="button" class="btn bg-gradient-danger m-1"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modalProject{{ $project->id }}">
+                                                    Eliminar
+                                                </button>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="modalProject{{ $project->id }}"
+                                                    tabindex="-1">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-gradient-danger ">
+                                                                <h1 class="modal-title fs-5 text-white">
+                                                                    Confirmar Borrado del Proyecto</h1>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal"></button>
+                                                            </div>
+                                                            <div class="modal-body text-center">
+                                                                <p>¿Estás seguro de que deseas eliminar
+                                                                    {{ $project->nombre }}?</p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-info"
+                                                                    data-bs-dismiss="modal">Cancelar</button>
+                                                                <button type="button" class="btn btn-danger"
+                                                                    data-bs-dismiss="modal" data-bs-toggle="modal"
+                                                                    data-bs-target="#borrarProject{{ $project->id }}"
+                                                                    onclick="event.preventDefault(); document.getElementById('borrarProject{{ $project->id }}').submit();">
+                                                                    Eliminar
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -158,33 +177,4 @@
             @endif
         </div>
     </div>
-
-    @section('js')
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-        <script>
-            function confirmAndDelete(projectId) {
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: "¡No podrás revertir esto!",
-                    icon: 'question',
-                    showCancelButton: true,
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonColor: '#d33',
-                    confirmButtonText: 'Sí, eliminarlo'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Si se confirma, enviar el formulario
-                        document.getElementById(`borrarProject${projectId}`).submit();
-                        Swal.fire(
-                            '¡Eliminado!',
-                            'Tu proyecto ha sido eliminado.',
-                            'success'
-                        )
-                    }
-                });
-            }
-        </script>
-    @endsection
-
 </div>

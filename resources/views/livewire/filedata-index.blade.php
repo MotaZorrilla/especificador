@@ -148,6 +148,7 @@
         </div>
     </div>
     <div class="card mb-4 mx-3 shadow border">
+        @include('components.alert')
         <div class="card-header px-0 pt-0 pb-2">
             <div class="table-responsive p-0 col-8 mx-auto">
                 <table class="table align-items-center mb-0" style="overflow-x: auto;  table-layout: auto;">
@@ -175,7 +176,6 @@
             </div>
         </div>
         @if ($filedata->count())
-            @include('components.alert')
             <div class="card-body px-3 pt-0 pb-2">
                 <div class="table-responsive p-0">
                     <table class="table table-striped " id="usersTable">
@@ -439,19 +439,18 @@
                                             </button>
 
                                             <!-- Modal -->
-                                            <div class="modal fade" id="modalFiledata{{ $filedatum->id }}"
-                                                tabindex="-1" aria-labelledby="borrarBaseLabel" aria-hidden="true">
+                                            <div class="modal fade" id="modalFiledata{{ $filedatum->id }}" tabindex="-1">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header bg-gradient-danger ">
-                                                            <h1 class="modal-title fs-5 text-white" id="ModalLabel">
-                                                                Confirmar Borrado de Base de Datos</h1>
+                                                            <h1 class="modal-title fs-5 text-white">
+                                                                Confirmar Borrado de Registro</h1>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body text-left">
-                                                            <p>¿Estás seguro de que deseas borrar
-                                                                {{ $filedatum->pintura }}?</p>
+                                                        <div class="modal-body text-center">
+                                                            <p>¿Estás seguro de que deseas eliminar <br>
+                                                                {{ $filedatum->pintura }} masividad: {{ $filedatum->masividad }}?</p>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-info"
@@ -459,7 +458,6 @@
                                                             <button type="button" class="btn btn-danger"
                                                                 data-bs-dismiss="modal" data-bs-toggle="modal"
                                                                 data-bs-target="#borrarFiledata{{ $filedatum->id }}"
-                                                                id="confirmarBorrar"
                                                                 onclick="event.preventDefault(); document.getElementById('borrarFiledata{{ $filedatum->id }}').submit();">
                                                                 Borrar
                                                             </button>

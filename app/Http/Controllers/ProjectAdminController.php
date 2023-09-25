@@ -10,6 +10,11 @@ use Psy\Readline\Hoa\Console;
 
 class ProjectAdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:projectAdmin');
+    }
+
     // Display a listing of the resource.
     public function index()
     {   

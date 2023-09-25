@@ -22,7 +22,9 @@ class ProjectAdminIndex extends Component
     }
 
     public function render()
-    {
+    { 
+        // $user=auth()->user()->username;
+
         $projects = Project::where(  'nombre'  , 'LIKE', '%'. $this->search . '%')
                         ->orWhere(  'descripcion' , 'LIKE', '%'. $this->search . '%')
                         ->orderby(  $this->sort, $this->direction)
