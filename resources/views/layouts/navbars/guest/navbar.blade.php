@@ -18,14 +18,19 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navigation">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            @if(Route::currentRouteName() != 'register')
+                            {{-- @if(Route::currentRouteName() != 'register')
                                 <li class="nav-item">
                                     <a href="{{ route('register') }}"   class="btn btn-sm mb-0 me-1 btn-primary">Registrarse</a>
                                 </li>
-                            @endif
+                            @endif --}}
                             @if(Route::currentRouteName() != 'login')
                                 <li class="nav-item">
                                     <a href="{{ route('login') }}"      class="btn btn-sm mb-0 me-1 btn-primary">Iniciar Sesión</a>
+                                </li>
+                            @endif
+                            @if(Route::currentRouteName() == 'login')
+                                <li class="nav-item">
+                                    <a href='https://pinturaintumescente.cl/site' class="btn btn-sm mb-0 me-1 btn-primary">Visita el Sitio Web</a>
                                 </li>
                             @endif
                         </ul>

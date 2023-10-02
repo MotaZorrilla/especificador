@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
@@ -17,6 +16,7 @@ use App\Http\Controllers\FiledataController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +32,7 @@ use App\Http\Controllers\UserController;
 	Route::get('/google-auth/redirect', [LoginController::class, 		'redirect'])->middleware('guest')->name('login');
 	Route::get('/google-auth/callback', [LoginController::class, 		'callback'])->middleware('guest')->name('login');
 
-	Route::get('/', 					function () {return 	redirect('/dashboard');});
+	Route::get('/', 					function () {return 			redirect('https://pinturaintumescente.cl/site');});
 
 	Route::get('/register', 			[RegisterController::class, 	'create'])	->middleware('guest')->name('register');
 	Route::post('/register', 			[RegisterController::class, 	'store'])	->middleware('guest')->name('register.perform');
@@ -43,10 +43,9 @@ use App\Http\Controllers\UserController;
 	Route::get('/change-password', 		[ChangePassword::class, 		'show'])	->middleware('guest')->name('change-password');
 	Route::post('/change-password', 	[ChangePassword::class, 		'update'])	->middleware('guest')->name('change.perform');
 				
-
 Route::group(['middleware'=>'auth'], function () {
 
-	Route::get('/dashboard', 			[HomeController::class, 		'index'])	->name('home');
+	Route::get('/dashboard', 			[DashboardController::class, 	'index'])	->name('home');
 
 	Route::get('profile/{id}', 			[UserProfileController::class, 	'show'])	->name('profile');
 	Route::post('/profile', 			[UserProfileController::class, 	'update'])	->name('profile.update');

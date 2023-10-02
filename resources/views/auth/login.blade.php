@@ -69,16 +69,17 @@
                                     </div>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                    <p class="mb-1 text-sm mx-auto">
+                                    <p class="mb-1 text-sm mx-auto pb-5">
                                         ¿Olvidaste tu contraseña? presiona <a href="{{ route('reset-password') }}" class="text-primary text-gradient font-weight-bold">aquí</a>
                                     </p>
                                 </div>
-                                <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                                {{-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-sm mx-auto">
                                         ¿No tienes una cuenta?
                                         <a href="{{ route('register') }}" class="text-primary text-gradient font-weight-bold">Registrate</a>
                                     </p>
-                                </div>
+                                </div> --}}
+                                @include('layouts.footers.footer')
                             </div>
                         </div>
                         <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
@@ -94,5 +95,4 @@
             </div>
         </section>
     </main>
-    @include('layouts.footers.footer')
 @endsection

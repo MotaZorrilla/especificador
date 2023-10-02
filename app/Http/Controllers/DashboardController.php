@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Cookie;
 
 class DashboardController extends Controller
 {
+    public function index() {
+        return view('dashboard.dashboard');
+    }
+
     public function profile()
     {   
         return view('dashboard.user-profile');
