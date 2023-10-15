@@ -12,7 +12,7 @@ class Plan extends Model
     protected $fillable = [
         'name'          ,
         'description'   ,
-        'perfiles'      ,
+        'profile_count'      ,
         'price'
     ];
 }

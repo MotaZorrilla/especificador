@@ -118,18 +118,13 @@
                                             <i class="fas fa-sort float-right"> </i>
                                         @endif
                                     </th>
-                                    <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('role')">
+                                    <th
+                                        class=" text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                         Tipo
-                                        @if ($sort == 'role')
-                                            @if ($direction == 'asc')
-                                                <i class="fas fa-sort-up float-right"> </i>
-                                            @else
-                                                <i class="fas fa-sort-down float-right"> </i>
-                                            @endif
-                                        @else
-                                            <i class="fas fa-sort float-right"> </i>
-                                        @endif
+                                    </th>
+                                    <th
+                                        class=" text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                        Nº Perfiles
                                     </th>
                                     <th
                                         class=" text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
@@ -160,7 +155,10 @@
                                             <p class="text-sm font-weight-bold mb-0">{{ $user->email }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $user->tipo }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $user->userType }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $user->profile_count }}</p>
                                         </td>
                                         <td class="align-middle text-sm">
                                             <p class="text-sm font-weight-bold mb-0">

@@ -25,7 +25,7 @@ class PlanIndex extends Component
     {
         $plans = Plan::where(  'name'  , 'LIKE', '%'. $this->search . '%')
                         ->orWhere(  'description' , 'LIKE', '%'. $this->search . '%')
-                        ->orWhere(  'perfiles' , 'LIKE', '%'. $this->search . '%')
+                        ->orWhere(  'profile_count' , 'LIKE', '%'. $this->search . '%')
                         ->orWhere(  'price' , 'LIKE', '%'. $this->search . '%')
                         ->orderby(  $this->sort, $this->direction)
                         ->paginate(9);   

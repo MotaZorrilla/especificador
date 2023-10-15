@@ -10,28 +10,49 @@
                         @csrf
                         @method('put')
                         <div>
-                            <h3>Editar Opciones de {{ $user->username }}</h3>
+                            <h3>Editar Opciones del Usuario: <br> "{{ $user->username }}"</h3>
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label" for="role">Rol:</label>
-                            <select class="form-select" id="role" name="role">
-                                <option selected>Selecciona un Rol</option>
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                @endforeach
-                            </select>
+                            <div class="mt-2">
+                                <label class="form-control-label" for="role">Rol Actual:</label>
+                                <input type="text" class="form-control"
+                                    value="{{ $user->roles->first()->name ?? 'No Asignado' }}" readonly>
+
+                                <label class="form-control-label" for="new_role">Nuevo Rol:</label>
+                                <select class="form-select" id="new_role" name="new_role" required>
+                                    <option value="">Asignar un Nuevo Rol al Usuario</option>
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mt-3">
+                                <label class="form-control-label" for="profile_count">Numero de Perfiles Actuales
+                                    Disponibles:</label>
+                                <input type="text" class="form-control" value="{{ $user->profile_count ?? 'No Asignado' }}"
+                                    readonly>
+                                <label class="form-control-label" for="new_plan">Asigna un Nuevo Plan de Perfiles:</label>
+                                <select class="form-select mb-3" id="new_plan" name="new_plan" required>
+                                    <option value="">Asignar un Nuevo Plan al Usuario</option>
+                                    @foreach ($plans as $plan)
+                                        <option value="{{ $plan->id }}">{{ $plan->name }}: {{ $plan->profile_count }} perfiles</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </form>
-                    <div class="d-flex ">
-                        <div>
-                            <button type="submit" class="btn bg-gradient-success"
-                                onclick="event.preventDefault(); document.getElementById('formUser').submit();">
+                        <div class="d-flex ">
+                            <div>
+                                <button type="submit" class="btn bg-gradient-success">
+                                {{-- onclick="event.preventDefault(); document.getElementById('formUser').submit();"> --}}
                                 Actualizar</button>
-                        </div>
+                            </div>
+                        </form>
                         <form action="{{ route('user.index') }}" method="get">
                             <button type="submit" class="btn bg-gradient-info ms-3">Volver</button>
                         </form>
-                        <form id="borrarUser{{ $user->id }}" action="{{ route('user.destroy', $user) }}" method="POST">
+                        <form id="borrarUser{{ $user->id }}" action="{{ route('user.destroy', $user) }}"
+                            method="POST">
                             @csrf
                             @method('delete')
                         </form>

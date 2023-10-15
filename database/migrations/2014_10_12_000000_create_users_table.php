@@ -27,16 +27,12 @@ return new class extends Migration
             $table->string('country')               ->nullable();
             $table->string('phone')                 ->nullable();
             $table->text('about')                   ->nullable();
+            $table->unsignedBigInteger('profile_count')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('users');

@@ -25,9 +25,9 @@ class PlanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'      =>  'required|unique:plans',
-            'perfiles'  =>  'required',
-            'price'     =>  'required' 
+            'name'              =>  'required|unique:plans',
+            'profile_count'     =>  'required',
+            'price'             =>  'required' 
         ]);
 
         $plan = Plan::create( $request->all());
@@ -47,11 +47,11 @@ class PlanController extends Controller
     }
 
     public function update(Request $request, Plan $plan)
-    {
+    {   
         $request->validate([
-            'name'      =>  "required|unique:plans,name,$plan->id",
-            'perfiles'  =>  'required',
-            'price'     =>  'required' 
+            'name'              =>  "required|unique:plans,name,$plan->id",
+            'profile_count'     =>  'required',
+            'price'             =>  'required' 
         ]);
 
         $plan->update($request->all());

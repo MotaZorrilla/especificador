@@ -85,9 +85,9 @@
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('perfiles')">
+                                        wire:click="order('profile_count')">
                                         Nº de perfiles
-                                        @if ($sort == 'perfiles')
+                                        @if ($sort == 'profile_count')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -134,7 +134,7 @@
                                                 {{ substr($plan->description, 0, 50) }}...</p>
                                         </td>
                                         <td class="align-middle text-sm ">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $plan->perfiles }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $plan->profile_count }}</p>
                                         </td>
                                         <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">{{ $plan->price }}</p>

@@ -87,7 +87,7 @@
                                 style="background-image: url('{{ asset('assets/img/login.jpg') }}');  background-size: 100% auto; position: relative;">
                                 <span class="mask bg-gradient-primary opacity-2"></span>
                                 <h4 class="mt-5 text-white font-weight-bolder position-relative">"Especificador de Pintura Intumescente"</h4>
-                                <p class="text-white position-relative">Calcula de forma rapida y eficaz tu pintura instumescente</p>
+                                <p class="text-white position-relative">Calcula de forma rápida y eficaz tu pintura instumescente</p>
                             </div>
                         </div>
                     </div>

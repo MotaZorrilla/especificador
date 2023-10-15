@@ -30,6 +30,12 @@ class UserIndex extends Component
                     ->orderby(  $this->sort, $this->direction)
                     ->paginate(9);
 
+        // Obtener información adicional para cada usuario
+        $users->each(function ($user) {
+            // Obtener el tipo de usuario según el rol asignado
+            $user->userType = $user->roles->first()->name ?? 'N/A';
+        });
+
         return view('livewire.user-index', compact('users'));
     }
 

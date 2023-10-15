@@ -28,9 +28,9 @@
                             <textarea class="form-control" type="text" id="description" name="description" >{{ $plan->description }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label" for="perfiles">Perfiles:</label>
-                            <input class="form-control" type="number" id="perfiles" name="perfiles"
-                                value="{{ $plan->perfiles }}" step="1" required>
+                            <label class="form-control-label" for="profile_count">Numero de Perfiles:</label>
+                            <input class="form-control" type="number" id="profile_count" name="profile_count"
+                                value="{{ $plan->profile_count }}" step="1" required>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label" for="price">Precio:</label>

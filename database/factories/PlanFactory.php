@@ -15,6 +15,7 @@ class PlanFactory extends Factory
         return [
             'name'          => fake()->name(),
             'description'   => Str::random(10),
+            'profile_count' => fake()->randomNumber(2),
             'price'         => fake()->randomNumber(4)
         ];
     } 
