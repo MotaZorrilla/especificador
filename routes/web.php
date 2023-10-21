@@ -57,7 +57,7 @@ Route::group(['middleware'=>'auth'], function () {
 	
 	Route::get('pdf/{pdf}', 			[PdfController::class,			'create'])	->name('pdf');
 	Route::get('/report', 				[PdfController::class,			'show'])	->name('report');
-	Route::get('/profile', 				[DashboardController::class, 	'profile'])	->name('profile'); 
+	Route::get('/userProfile', 				[DashboardController::class, 	'profile'])	->name('userProfile'); 
 	// Route::get('/users', 				[DashboardController::class, 	'users'])	->name('users');
 	Route::get('database', 				[DashboardController::class, 	'database'])->name('database');
 	Route::get('/balance', 				[DashboardController::class, 	'balance'])	->name('balance');
@@ -82,6 +82,9 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::resource('projectAdmin',  	 				 ProjectAdminController::class);
 	Route::put('projectAdmin/{projectAdmin}/update',	[ProjectAdminController::class,		'updateProjectAdmin'])		->name('updateProjectAdmin');
 	Route::get('projectAdmin/{projectAdmin}/pdf',		[ProjectAdminController::class,		'pdf'])						->name('projectAdmin.pdf');
+	Route::get('projectAdminProfile',					[ProjectAdminController::class,		'profile'])					->name('projectAdminProfile');
+
+	Route::resource('profile',  	 				 	 ProfileController::class);
 	
-	Route::get('/{page}', 								[PageController::class, 		'index'])	->name('page');
+	Route::get('/{page}', 								[PageController::class, 			'index'])	->name('page');
 });

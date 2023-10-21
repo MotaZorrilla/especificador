@@ -244,6 +244,7 @@ document.addEventListener("DOMContentLoaded", function() {
         radio.addEventListener('click', toggleFormMasividad);
     });
 
-
+    
     
 });
+

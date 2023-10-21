@@ -6,18 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');  
+            $table->foreignId('user_id')                    ->constrained(); 
+            $table->unsignedBigInteger('user_project_counter');
+            $table->string('project');  
+            $table->string('description')                   ->nullable();
+            $table->string('observations')                  ->nullable();    
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        Schema::create('profiles', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('project_id')                 ->constrained(); 
+            $table->unsignedBigInteger('project_profile_counter');
+            $table->string('nombre');
             $table->string('descripcion')                   ->nullable();
-            $table->string('exposicion')                   ->nullable();
+            $table->string('exposicion')                    ->nullable();
             $table->string('perfil')                        ->nullable();
             $table->string('forma')                         ->nullable();
             $table->unsignedDecimal('masividad',    5, 2)   ->nullable();
@@ -32,17 +40,14 @@ return new class extends Migration
             $table->unsignedDecimal('plieque',      5, 2)   ->nullable();
             $table->unsignedDecimal('diametro',     5, 2)   ->nullable();
             $table->string('observaciones')                 ->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('projects');
+        Schema::dropIfExists('profiles');
     }
 };

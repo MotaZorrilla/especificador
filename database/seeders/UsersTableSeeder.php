@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         User::create([
@@ -21,9 +16,10 @@ class UsersTableSeeder extends Seeder
             'firstname' => 'Rodrigo',
             'lastname'  => 'Izaguirre',
             'email'     => 'admin@pinturaintumescente.cl',
-            'password'  => 'Rodrigo'
+            'password'  => 'Rodrigo',
+            'profile_count' => 99
         ])->assignRole('Administrador');
 
-        User::factory(20)->create();
+        User::factory(10)->create();
     }
 }

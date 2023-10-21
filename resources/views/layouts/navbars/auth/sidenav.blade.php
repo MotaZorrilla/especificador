@@ -24,7 +24,7 @@
                         @can('profile')
                             <li class="nav-item mt-3 d-flex align-items-center">
                                 <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'text-primary' : '' }} "
-                                    href="{{ route('profile') }}">
+                                    href="{{ route('userProfile') }}">
                                     <i class="fas fa-user text-warning me-2"></i> Mi Perfil
                                 </a>
                             </li>

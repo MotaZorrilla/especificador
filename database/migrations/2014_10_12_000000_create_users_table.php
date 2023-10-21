@@ -29,6 +29,7 @@ return new class extends Migration
             $table->text('about')                   ->nullable();
             $table->unsignedBigInteger('profile_count')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

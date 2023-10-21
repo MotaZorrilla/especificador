@@ -36,6 +36,7 @@ class UserIndex extends Component
             $user->userType = $user->roles->first()->name ?? 'N/A';
         });
 
+
         return view('livewire.user-index', compact('users'));
     }
 

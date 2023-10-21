@@ -11,10 +11,10 @@
                     <div class="card shadow-sm">
                         <div class="card-body py-5">
                             <div class="row">
-                                <a href="{{ route('profile') }}">
+                                <a href="{{ route('userProfile') }}">
                                     <div class="col-8">
                                         <div class="numbers">
-                                            <a href="{{ route('profile') }}">
+                                            <a href="{{ route('userProfile') }}">
                                                 <p class="text-sm mb-0  font-weight-bold">Mi Perfil</p>
                                             </a>
                                         </div>
@@ -22,7 +22,7 @@
                                     <div class="col-4 text-end">
                                         <div
                                             class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                            <a href="{{ route('profile') }}">
+                                            <a href="{{ route('userProfile') }}">
                                                 <i class="fas fa-user text-lg opacity-10" aria-hidden="true"></i>
                                             </a>
                                         </div>

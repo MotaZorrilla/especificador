@@ -15,6 +15,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('profile_count')->nullable(); 
             $table->decimal('price', 8, 2);
+            $table->softDeletes();
             $table->timestamps();
         });
 
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('plan_id');
+            $table->softDeletes();
             $table->timestamps();
 
             // Claves foráneas

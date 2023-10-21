@@ -24,13 +24,24 @@ class ProjectAdminController extends Controller
     //Show the form for creating a new resource.
     public function create()
     {
-        return view('dashboard.projectAdmin.projectAdmin-create');
+        $user = auth()->user();
+        
+        return view('dashboard.projectAdmin.projectAdmin-create', compact('user'));
     }
 
     // Store a newly created resource in storage.
     public function store(Request $request)
     {
         $project = new Project();
+
+        // Asociar el proyecto al usuario actual
+        $project->user()->associate(auth()->user());
+        $project->user_project_counter = Project::where('user_id', auth()->user())->max('user_project_counter') + 1;
+        $project->project       = $request->project;
+        $project->description   = $request->description;
+        $project->save();
+        // Redirigir a la página de proyectos con un mensaje de éxito
+        return redirect()->route('projectAdmin.index')->with('success', '¡Proyecto creado con éxito!');
 
         $project->nombre        = $request->nombre;
         $project->descripcion   = $request->descripcion;
@@ -53,6 +64,9 @@ class ProjectAdminController extends Controller
         
         $project->observaciones = $request->observaciones;       
         $project->save();
+        // Redirigir a la página de proyectos con un mensaje de éxito
+        return redirect()->route('projectAdmin.index')->with('success', '¡Proyecto creado con éxito!');
+
 
         return redirect()->route('projectAdmin.show', $project );
     }
@@ -408,5 +422,12 @@ class ProjectAdminController extends Controller
         return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin','filedata'));
     }
 
+    public function profile()
+    {
+        $user = auth()->user();
 
+        $projects = project::all();
+
+        return view('dashboard.projectAdmin.projectAdminProfile-create', compact('user','projects'));
+    }
 }

@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Administrador de Proyectos'])
+    @include('layouts.navbars.auth.topnav', [
+        'title' => 'Crear Perfil | Administradores ',
+    ])
     <div class="container-fluid py-4">
         <div class="card border shadow">
             <div class="card-body px-0 pt-0 pb-2">
@@ -379,4 +381,3 @@
             });
     </script>
 @endsection
-

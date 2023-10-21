@@ -16,14 +16,16 @@ class ProjectController extends Controller
 
     // Display a listing of the resource.
     public function index()
-    {      
+    {
         return view('dashboard.project.project-index');
     }
 
     //Show the form for creating a new resource.
     public function create()
     {
-        return view('dashboard.project.project-create');
+        $user = auth()->user();
+
+        return view('dashboard.project.project-create', compact('user'));
     }
 
     // Store a newly created resource in storage.
@@ -39,7 +41,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return redirect()->route('project.show', $project );
+        return redirect()->route('project.show', $project);
     }
 
     //Display the specified resource.
@@ -77,13 +79,13 @@ class ProjectController extends Controller
     }
 
     public function pdf(Project $project)
-    {   
-        
-        $filedata = Filedata::where('masividad', $project->masividad )
-        //  ->where('m90', '!=', 'Fuera de rango')
-        // ->latest('id')
-        // ->take(4)
-        ->get();
+    {
+
+        $filedata = Filedata::where('masividad', $project->masividad)
+            //  ->where('m90', '!=', 'Fuera de rango')
+            // ->latest('id')
+            // ->take(4)
+            ->get();
 
         // return view('dashboard.project.project-pdf', compact('project', 'filedata'));
         $pdf   = PDF::loadView('dashboard.project.project-pdf', compact('project', 'filedata'));

@@ -9,16 +9,48 @@
                     <table class="table align-items-center  ">
                         <tbody>
                             <tr>
-                                <td class="d-flex align-items-center">
-                                    <div class="align-items-center fw-bold">
-                                        <a href="{{ route('project.create') }}"><img src="/img/icons/crear.png"
+                                <td>
+                                    <div class="d-flex px-2 py-1 fw-bold">
+                                        <div>
+                                            <a href="{{ route('projectAdmin.create') }}"><img src="/img/icons/crear.png"
                                                 class="avatar avatar-sm me-3 ">Agregar Nuevo Proyecto</a>
+                                        </div>
                                     </div>
                                 </td>
-                                <td class="align-items-center " width="10px">
-                                    <a class="btn bg-gradient-info " href="{{ route('project.create') }}">Agragar
-                                        Nuevo Proyecto</a>
+                                <td class="align-middle text-center ">
+                                    <form action="{{ route('projectAdmin.create') }}" method="get">
+                                        <button style="width: 200px;" type="submit"
+                                            class="btn bg-gradient-info m-1 ms-auto">Agragar Nuevo Proyecto</button>
+                                    </form>
                                 </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1 fw-bold">
+                                        <div>
+                                            <a href="{{ route('projectAdminProfile') }}"><img src="/img/icons/crear.png"
+                                                class="avatar avatar-sm me-3 ">Agregar Nuevo Perfil</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center ">
+                                    <form action="{{ route('projectAdminProfile') }}" method="get">
+                                        <button style="width: 200px;" type="submit"
+                                            class="btn bg-gradient-info m-1 ms-auto">Agregar Nuevo Perfil</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                @if ($user->profile_count > 0)
+                                    <div class="alert alert-info text-white">
+                                        Tienes {{ $user->profile_count }} Perfiles Disponibles para tus Proyectos.
+                                    </div>
+                                    <!-- Aquí puedes mostrar información adicional sobre los perfiles -->
+                                @else
+                                    <div class="alert alert-warning text-white">
+                                        No tienes perfiles disponibles. Debes agregar nuevos antes de crear el proyecto.
+                                    </div>
+                                @endif
                             </tr>
                         </tbody>
                     </table>
@@ -30,7 +62,7 @@
             <div class="card-header px-auto pt-3 ">
                 <div class="d-flex d-inline ">
                     <div class="col-6">
-                        <h6>Mis Proyectos </h6>
+                        <h6>Proyectos Creados</h6>
                     </div>
                     <div class="input-group ">
                         <span class="input-group-text text-body">
@@ -46,9 +78,9 @@
                             <thead>
                                 <tr>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('id')">
+                                        wire:click="order('projects.id')">
                                         ID
-                                        @if ($sort == 'id')
+                                        @if ($sort == 'projects.id')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -59,9 +91,22 @@
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('nombre')">
+                                        wire:click="order('users.username')">
+                                        Usuario
+                                        @if ($sort == 'users.username')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-up float-right"> </i>
+                                            @else
+                                                <i class="fas fa-sort-down float-right"> </i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort float-right"> </i>
+                                        @endif
+                                    </th>
+                                    <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
+                                        wire:click="order('projects.project')">
                                         Nombre del Proyecto
-                                        @if ($sort == 'nombre')
+                                        @if ($sort == 'projects.project')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -72,9 +117,9 @@
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('descripcion')">
+                                        wire:click="order('projects.description')">
                                         Descripción
-                                        @if ($sort == 'descripcion')
+                                        @if ($sort == 'projects.description')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -101,11 +146,14 @@
                                             <p class="text-sm font-weight-bold mb-0">{{ $project->id }}</p>
                                         </td>
                                         <td class="align-middle text-sm ">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $project->nombre }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $project->username }}</p>
+                                        </td>
+                                        <td class="align-middle text-sm ">
+                                            <p class="text-sm font-weight-bold mb-0">{{ $project->project }}</p>
                                         </td>
                                         <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">
-                                                {{ substr($project->descripcion, 0, 50) }}...</p>
+                                                {{ substr($project->description, 0, 50) }}...</p>
                                         </td>
                                         <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">
@@ -114,13 +162,13 @@
                                         </td>
                                         <td width="10px" class="align-middle">
                                             <div class="d-flex ">
-                                                <form action="{{ route('project.show', $project) }}"
+                                                <form action="{{ route('projectAdmin.show', $project) }}"
                                                     method="get">
                                                     <button type="submit" class="btn bg-gradient-info m-1">Ver
                                                         Proyecto</button>
                                                 </form>
                                                 <form id="borrarProject{{ $project->id }}"
-                                                    action="{{ route('project.destroy', $project) }}"
+                                                    action="{{ route('projectAdmin.destroy', $project) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('delete')
