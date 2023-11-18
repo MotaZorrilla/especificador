@@ -12,6 +12,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\DashboardController; 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectAdminController;
+use App\Http\Controllers\ProjectProfileController;
 use App\Http\Controllers\FiledataController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RoleController;
@@ -57,7 +58,7 @@ Route::group(['middleware'=>'auth'], function () {
 	
 	Route::get('pdf/{pdf}', 			[PdfController::class,			'create'])	->name('pdf');
 	Route::get('/report', 				[PdfController::class,			'show'])	->name('report');
-	Route::get('/userProfile', 				[DashboardController::class, 	'profile'])	->name('userProfile'); 
+	Route::get('/userProfile', 			[DashboardController::class, 	'profile'])	->name('userProfile'); 
 	// Route::get('/users', 				[DashboardController::class, 	'users'])	->name('users');
 	Route::get('database', 				[DashboardController::class, 	'database'])->name('database');
 	Route::get('/balance', 				[DashboardController::class, 	'balance'])	->name('balance');
@@ -84,7 +85,7 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::get('projectAdmin/{projectAdmin}/pdf',		[ProjectAdminController::class,		'pdf'])						->name('projectAdmin.pdf');
 	Route::get('projectAdminProfile',					[ProjectAdminController::class,		'profile'])					->name('projectAdminProfile');
 
-	Route::resource('profile',  	 				 	 ProfileController::class);
+	Route::resource('projectProfile',  	 				 ProjectProfileController::class);
 	
 	Route::get('/{page}', 								[PageController::class, 			'index'])	->name('page');
 });

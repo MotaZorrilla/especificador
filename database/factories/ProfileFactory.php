@@ -17,7 +17,7 @@ class ProfileFactory extends Factory
     {
         return [
             'project_id'    => fake()->randomDigitNotNull(),         
-            'project_profile_counter'=> fake()->randomDigitNotNull(),         
+            // 'project_profile_counter'=> fake()->randomDigitNotNull(),         
             'nombre'        => fake()->name(),
             'descripcion'   => fake()->text(),
             'perfil'        => fake()->text(10), 
@@ -34,6 +34,7 @@ class ProfileFactory extends Factory
             'plieque'       => fake()->randomNumber(2), 
             'diametro'      => fake()->randomNumber(2), 
             'observaciones' => fake()->text(),
+            'incluir'       => fake()->boolean(),
         ];
     }
 }

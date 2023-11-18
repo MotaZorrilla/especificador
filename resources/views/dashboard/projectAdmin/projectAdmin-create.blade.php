@@ -55,7 +55,7 @@
                         <div>
                             <button id="buttonsProject1" type="button" class="btn bg-gradient-success m-1"
                                 style="width: 170px;" data-bs-toggle="modal" data-bs-target="#modalAddProject">
-                                Crar Proyecto
+                                Crear Proyecto
                             </button>
                         </div>
                         <div>

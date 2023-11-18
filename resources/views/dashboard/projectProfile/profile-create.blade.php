@@ -19,7 +19,7 @@
                         </div>
                     @endif
 
-                    <form id="profileForm" action="{{ route('projectAdmin.store') }}" method="post">
+                    <form id="profileForm" action="{{ route('projectProfile.store') }}" method="post">
                         @csrf
                         @if (Session::has('message'))
                             <p>{{ Session::get('message') }}</p>
@@ -31,8 +31,8 @@
 
                         {{-- Asosiar a Un proyecto --}}
                         <div class="mt-3">
-                            <label class="form-control-label" for="new_plan">Proyecto al que Pertenece el Perfil:</label>
-                            <select class="form-select mb-3" id="new_plan" name="new_plan" required>
+                            <label class="form-control-label" for="project">Proyecto al que Pertenece el Perfil:</label>
+                            <select class="form-select mb-3" id="project" name="project" required>
                                 <option value="">Proyectos del Usuario</option>
                                 @foreach ($projects as $project)
                                     <option value="{{ $project->id }}">{{ $project->project }}</option>
@@ -343,20 +343,15 @@
                                         <p>¡Los datos de su perfil <br>
                                             No se podrán modificar una vez guardados! <br>
                                             {{ $user->username }} <br>
-                                            ¿Deseas Crear un Nuevo Perfil?</p>
+                                            ¿Deseas Guardar?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-info" data-bs-dismiss="modal"
+                                        <button type="button" class="btn bg-gradient-success" data-bs-dismiss="modal"
                                             data-bs-toggle="modal" data-bs-target="#profileForm"
                                             onclick="event.preventDefault(); document.getElementById('profileForm').submit();">
-                                            No, Solo Guardar
+                                            Guardar
                                         </button>
-                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                                            data-bs-toggle="modal" data-bs-target="#profileForm"
-                                            onclick="event.preventDefault(); document.getElementById('profileForm').submit();">
-                                            Si, Crear Nuevo
-                                        </button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                        <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">
                                             Cancelar
                                         </button>
                                     </div>

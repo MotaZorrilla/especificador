@@ -32,6 +32,7 @@ class Profile extends Model
         'plieque',
         'diametro',
         'observaciones',
+        'incluir'
     ];
 
     // Relación con el modelo Project (muchos perfiles pertenecen a un proyecto)

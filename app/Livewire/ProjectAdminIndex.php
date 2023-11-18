@@ -24,8 +24,9 @@ class ProjectAdminIndex extends Component
     public function render()
     {
         $projects = Project::join('users', 'projects.user_id', '=', 'users.id')
-            ->select('projects.id', 'users.id as user_id', 'users.username', 'projects.project', 'projects.description')
+            ->select('projects.id', 'users.id as user_id', 'users.username', 'projects.project', 'projects.description', 'projects.updated_at')
             ->where('users.username', 'LIKE', '%' . $this->search . '%')
+            ->orWhere('projects.id', 'LIKE', '%' . $this->search . '%')
             ->orWhere('projects.project', 'LIKE', '%' . $this->search . '%')
             ->orWhere('projects.description', 'LIKE', '%' . $this->search . '%')
             ->orderBy($this->sort, $this->direction)

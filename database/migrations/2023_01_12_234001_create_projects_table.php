@@ -22,7 +22,7 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')                 ->constrained(); 
-            $table->unsignedBigInteger('project_profile_counter');
+            // $table->unsignedBigInteger('project_profile_counter');
             $table->string('nombre');
             $table->string('descripcion')                   ->nullable();
             $table->string('exposicion')                    ->nullable();
@@ -40,6 +40,7 @@ return new class extends Migration
             $table->unsignedDecimal('plieque',      5, 2)   ->nullable();
             $table->unsignedDecimal('diametro',     5, 2)   ->nullable();
             $table->string('observaciones')                 ->nullable();
+            $table->boolean('incluir')                      ->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

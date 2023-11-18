@@ -2,7 +2,7 @@
     <div class="container-fluid py-4">
         <div class="card mb-4 border shadow">
             <div class="card-header pb-0 pr-3">
-                <h6>Proyectos</h6>
+                <h6>Perfiles</h6>
             </div>
             <div class="card-body pt-0 pb-2 ">
                 <div class="table-responsive ">
@@ -12,25 +12,8 @@
                                 <td>
                                     <div class="d-flex px-2 py-1 fw-bold">
                                         <div>
-                                            <a href="{{ route('projectAdmin.create') }}"><img src="/img/icons/crear.png"
-                                                    class="avatar avatar-sm me-3 ">Agregar Nuevo Proyecto</a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center ">
-                                    <form action="{{ route('projectAdmin.create') }}" method="get">
-                                        <button style="width: 200px;" type="submit"
-                                            class="btn bg-gradient-info m-1 ms-auto">Agragar Nuevo Proyecto</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1 fw-bold">
-                                        <div>
-                                            <a href="{{ route('projectProfile.create') }}"><img
-                                                    src="/img/icons/crear.png" class="avatar avatar-sm me-3 ">Agregar
-                                                Nuevo Perfil</a>
+                                            <a href="{{ route('projectProfile.create') }}"><img src="/img/icons/crear.png"
+                                                    class="avatar avatar-sm me-3 ">Agregar Nuevo Perfil</a>
                                         </div>
                                     </div>
                                 </td>
@@ -38,6 +21,40 @@
                                     <form action="{{ route('projectProfile.create') }}" method="get">
                                         <button style="width: 200px;" type="submit"
                                             class="btn bg-gradient-info m-1 ms-auto">Agregar Nuevo Perfil</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1 fw-bold">
+                                        <div>
+                                            <a href="{{ route('projectAdminProfile') }}"><img
+                                                    src="/img/icons/import.png"
+                                                    class="avatar avatar-sm me-3 ">Observaciones</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center ">
+                                    <form action="{{ route('projectAdminProfile') }}" method="get">
+                                        <button style="width: 200px;" type="submit"
+                                            class="btn bg-gradient-success m-1 ms-auto">Observaciones</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex px-2 py-1 fw-bold">
+                                        <div>
+                                            <a href="{{ route('projectAdminProfile') }}"><img
+                                                    src="/img/icons/export.png" class="avatar avatar-sm me-3 ">Exportar
+                                                Informe a PDF</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center ">
+                                    <form action="{{ route('projectAdminProfile') }}" method="get">
+                                        <button style="width: 200px;" type="submit"
+                                            class="btn bg-gradient-primary m-1 ms-auto">Generar PDF</button>
                                     </form>
                                 </td>
                             </tr>
@@ -63,7 +80,9 @@
             <div class="card-header px-auto pt-3 ">
                 <div class="d-flex d-inline ">
                     <div class="col-6">
-                        <h6>Proyectos Creados</h6>
+                        <!-- Mostrar el nombre del proyecto -->
+                        <h6>Perfiles del Proyecto:
+                            {{ $profiles->first() ? $profiles->first()->project : 'Sin perfiles' }}</h6>
                     </div>
                     <div class="input-group ">
                         <span class="input-group-text text-body">
@@ -72,16 +91,16 @@
                     </div>
                 </div>
             </div>
-            @if ($projects->count())
+            @if ($profiles->count())
                 <div class="card-body px-3 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <table class="table table-striped ">
                             <thead>
                                 <tr>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('projects.id')">
+                                        wire:click="order('profiles.id')">
                                         ID
-                                        @if ($sort == 'projects.id')
+                                        @if ($sort == 'profiles.id')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -92,9 +111,9 @@
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('users.username')">
-                                        Usuario
-                                        @if ($sort == 'users.username')
+                                        wire:click="order('profiles.nombre')">
+                                        Perfil
+                                        @if ($sort == 'profiles.nombre')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -105,9 +124,9 @@
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('projects.project')">
-                                        Nombre del Proyecto
-                                        @if ($sort == 'projects.project')
+                                        wire:click="order('profiles.descripcion')">
+                                        descripción
+                                        @if ($sort == 'profiles.descripcion')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -119,7 +138,7 @@
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
                                         wire:click="order('projects.description')">
-                                        Descripción
+                                        Incluir
                                         @if ($sort == 'projects.description')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
@@ -131,10 +150,9 @@
                                         @endif
                                     </th>
                                     <th
-                                        class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('projects.updated_at')">
+                                        class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
                                         Actualizado
-                                        @if ($sort == 'projects.updated_at')
+                                        @if ($sort == 'profiles.updated_at')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"></i>
                                             @else
@@ -151,48 +169,49 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($projects as $project)
+                                @foreach ($profiles as $profile)
                                     <tr>
                                         <td class="align-middle text-sm ">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $project->id }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $profile->id }}</p>
                                         </td>
                                         <td class="align-middle text-sm ">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $project->username }}</p>
-                                        </td>
-                                        <td class="align-middle text-sm ">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $project->project }}</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{ $profile->nombre }}</p>
                                         </td>
                                         <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">
-                                                {{ substr($project->description, 0, 50) }}...
+                                                {{ substr($profile->descripcion, 0, 10) }} ...
                                             </p>
                                         </td>
+                                        <td class="align-middle">
+                                            <input type="checkbox" @if ($profile->incluir) checked @endif
+                                                wire:click="included('{{ $profile->id }}')"> 
+                                        </td>
                                         <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">
-                                                {{ $project->updated_at ? $project->updated_at->diffForHumans() : '' }}
+                                                {{ $profile->updated_at ? $profile->updated_at->diffForHumans() : '' }}
                                             </p>
                                         </td>
                                         <td width="10px" class="align-middle">
                                             <div class="d-flex ">
-                                                <form action="{{ route('projectAdmin.show', $project) }}"
+                                                <form action="{{ route('projectAdmin.show', $profile) }}"
                                                     method="get">
-                                                    <button type="submit" class="btn bg-gradient-info m-1">
-                                                        Ver Proyecto</button>
+                                                    <button type="submit" class="btn bg-gradient-info m-1">Ver
+                                                        Perfil</button>
                                                 </form>
-                                                <form id="borrarProject{{ $project->id }}"
-                                                    action="{{ route('projectAdmin.destroy', $project) }}"
+                                                <form id="borrarProject{{ $profile->id }}"
+                                                    action="{{ route('projectAdmin.destroy', $profile) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('delete')
                                                 </form>
                                                 <button type="button" class="btn bg-gradient-danger m-1"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#modalProject{{ $project->id }}">
+                                                    data-bs-target="#modalProject{{ $profile->id }}">
                                                     Eliminar
                                                 </button>
 
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="modalProject{{ $project->id }}"
+                                                <div class="modal fade" id="modalProject{{ $profile->id }}"
                                                     tabindex="-1">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
@@ -204,15 +223,15 @@
                                                             </div>
                                                             <div class="modal-body text-center">
                                                                 <p>¿Estás seguro de que deseas eliminar
-                                                                    {{ $project->nombre }}?</p>
+                                                                    {{ $profile->nombre }}?</p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-info"
                                                                     data-bs-dismiss="modal">Cancelar</button>
                                                                 <button type="button" class="btn btn-danger"
                                                                     data-bs-dismiss="modal" data-bs-toggle="modal"
-                                                                    data-bs-target="#borrarProject{{ $project->id }}"
-                                                                    onclick="event.preventDefault(); document.getElementById('borrarProject{{ $project->id }}').submit();">
+                                                                    data-bs-target="#borrarProject{{ $profile->id }}"
+                                                                    onclick="event.preventDefault(); document.getElementById('borrarProject{{ $profile->id }}').submit();">
                                                                     Eliminar
                                                                 </button>
                                                             </div>
@@ -226,7 +245,7 @@
                             </tbody>
                         </table>
                         <div class="card-footer pb-0">
-                            {{ $projects->links() }}
+                            {{ $profiles->links() }}
                         </div>
                     </div>
                 </div>
