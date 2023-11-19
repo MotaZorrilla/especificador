@@ -2,7 +2,7 @@
     <div class="container-fluid py-4">
         <div class="card mb-4 border shadow">
             <div class="card-header pb-0 pr-3">
-                <h6>Perfiles</h6>
+                <h6>Proyecto: {{ $project['project'] }}</h6>
             </div>
             <div class="card-body pt-0 pb-2 ">
                 <div class="table-responsive ">
@@ -28,18 +28,52 @@
                                 <td>
                                     <div class="d-flex px-2 py-1 fw-bold">
                                         <div>
-                                            <a href="{{ route('projectAdminProfile') }}"><img
-                                                    src="/img/icons/import.png"
-                                                    class="avatar avatar-sm me-3 ">Observaciones</a>
+                                            <a href="#" data-bs-toggle="modal"
+                                                data-bs-target="#modalProjectObservations">
+                                                <img src="/img/icons/import.png" class="avatar avatar-sm me-3">
+                                                Agregar Observaciones
+                                            </a>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="align-middle text-center ">
-                                    <form action="{{ route('projectAdminProfile') }}" method="get">
-                                        <button style="width: 200px;" type="submit"
-                                            class="btn bg-gradient-success m-1 ms-auto">Observaciones</button>
-                                    </form>
+                                <td class="align-middle text-center">
+                                    <button type="button" style="width: 200px;"
+                                        class="btn bg-gradient-success m-1 ms-auto" data-bs-toggle="modal"
+                                        data-bs-target="#modalProjectObservations">
+                                        Observaciones
+                                    </button>
                                 </td>
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalProjectObservations" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-gradient-danger">
+                                                <h1 class="modal-title fs-5 text-white">
+                                                    Agregar Observaciones al Proyecto
+                                                </h1>
+                                                <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <!-- Tu formulario para agregar observaciones aquí -->
+                                                <form >
+                                                    <textarea rows="8" class="form-control" wire:model.defer="observations" placeholder="Escribe aqui las observaciones para el Proyecto {{ $project['project'] }}"></textarea>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <!-- Agregar el botón para enviar el formulario de observaciones -->
+                                                <button  type="submit" class="btn bg-gradient-success"
+                                                    data-bs-dismiss="modal"
+                                                    wire:click="addObservations()">
+                                                    Guardar Observación
+                                                </button>
+                                                <button type="button" class="btn bg-gradient-danger"
+                                                    data-bs-dismiss="modal" onclick=" location.reload(true);">
+                                                    Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </tr>
                             <tr>
                                 <td>
@@ -82,7 +116,8 @@
                     <div class="col-6">
                         <!-- Mostrar el nombre del proyecto -->
                         <h6>Perfiles del Proyecto:
-                            {{ $profiles->first() ? $profiles->first()->project : 'Sin perfiles' }}</h6>
+                            {{ $project['project'] }}
+                        </h6>
                     </div>
                     <div class="input-group ">
                         <span class="input-group-text text-body">
@@ -137,9 +172,9 @@
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('projects.description')">
+                                        wire:click="order('projects.incluir')">
                                         Incluir
-                                        @if ($sort == 'projects.description')
+                                        @if ($sort == 'projects.incluir')
                                             @if ($direction == 'asc')
                                                 <i class="fas fa-sort-up float-right"> </i>
                                             @else
@@ -184,7 +219,7 @@
                                         </td>
                                         <td class="align-middle">
                                             <input type="checkbox" @if ($profile->incluir) checked @endif
-                                                wire:click="included('{{ $profile->id }}')"> 
+                                                wire:click="included('{{ $profile->id }}')">
                                         </td>
                                         <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">
@@ -195,8 +230,8 @@
                                             <div class="d-flex ">
                                                 <form action="{{ route('projectAdmin.show', $profile) }}"
                                                     method="get">
-                                                    <button type="submit" class="btn bg-gradient-info m-1">Ver
-                                                        Perfil</button>
+                                                    <button type="submit" class="btn bg-gradient-info m-1">
+                                                        Ver Perfil</button>
                                                 </form>
                                                 <form id="borrarProject{{ $profile->id }}"
                                                     action="{{ route('projectAdmin.destroy', $profile) }}"

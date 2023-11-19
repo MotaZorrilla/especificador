@@ -2,9 +2,9 @@
 
 @section('content')
 
-    @include('layouts.navbars.auth.topnav', ['title' => 'Administrador de Perfiles'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Visor de Proyectos'])
 
-    @livewire('project-profile-index', ['project' => $project])
+    @livewire('project-profile-index', ['projectId' => $project])
 
 @endsection
 

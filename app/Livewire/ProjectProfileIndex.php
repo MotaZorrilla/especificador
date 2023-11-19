@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Profile;
+use App\Models\Project;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,14 +14,15 @@ class ProjectProfileIndex extends Component
     public $search;
     public $sort = 'profiles.id';
     public $direction = 'asc';
-    public $project;
+    public $projectId;
+    public $observations;
 
 
     protected $paginationTheme = "bootstrap";
 
-    public function mount($project)
+    public function mount($projectId)
     {
-        $this->project = $project;
+        $this->projectId = $projectId;
     }
 
     public function updatingSearch()
@@ -36,14 +38,16 @@ class ProjectProfileIndex extends Component
             ->select(
                 'users.id as user_id',
                 'users.username',
+                'projects.id as projects_id',
                 'projects.project',
+                'projects.observations',
                 'profiles.id',
                 'profiles.nombre',
                 'profiles.descripcion',
                 'profiles.incluir',
                 'profiles.updated_at'
             )
-            ->where('project_id', $this->project)
+            ->where('project_id', $this->projectId)
             ->where(function ($query) {
                 $query->where('nombre', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('descripcion', 'LIKE', '%' . $this->search . '%')
@@ -54,7 +58,12 @@ class ProjectProfileIndex extends Component
 
         $user = auth()->user();
 
-        return view('livewire.project-profile-index', compact('profiles', 'user'));
+        $project['project'] = Project::where('id', $this->projectId)->value('project');
+        $project['id'] =  $this->projectId;
+
+        $this->observations =  $profiles->isNotEmpty() ? $profiles->first()->observations : null;
+
+        return view('livewire.project-profile-index', compact('profiles', 'user', 'project'));
     }
 
 
@@ -70,6 +79,22 @@ class ProjectProfileIndex extends Component
             $this->sort = $sort;
         }
     }
+
+
+    public function addObservations()
+    {
+        $project = Project::find($this->projectId);
+
+        if ($project) {
+            $project->update([
+                'observations' => $this->observations,
+            ]);
+        }
+
+        // Limpiar el campo de observación después de guardar
+        $this->observations = '';
+    }
+
 
     public function included($profileId)
     {
