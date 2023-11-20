@@ -50,7 +50,7 @@
                         {{-- descripcion del perfil --}}
                         <div class="form-group">
                             <label class="form-control-label" for="descripcion">Descripción del Perfil:</label>
-                            <textarea class="form-control" type="text" id="descripcion" name="descripcion" rows="10"
+                            <textarea class="form-control" type="text" id="descripcion" name="descripcion" rows="5"
                                 placeholder="Escribe la descripción de tu Perfil"></textarea>
                         </div>
 
@@ -312,19 +312,24 @@
                             </div>
                         </div>
 
+                        <button  type="submit" id="btnGuardarProfile" class="btn btn-info justify-content-center"
+                            style="display: none;">
+                            Guardar Perfil
+                        </button>
+
                     </form>
 
                     {{-- botones --}}
                     <div class="d-flex mt-3">
                         <div>
-                            <button type="button" class="btn bg-gradient-success m-1" style="width: 200px;"
+                            <button id="buttonsProfile1" type="button" class="btn bg-gradient-success m-1" style="width: 200px;"
                                 data-bs-toggle="modal" data-bs-target="#modalAddProfile">
-                                Guardar
+                                Crear Perfil
                             </button>
                         </div>
                         <div>
                             <form action="{{ route('projectAdmin.index') }}" method="get">
-                                <button type="submit" class="btn bg-gradient-danger m-1" style="width: 200px;">
+                                <button id="buttonsProfile2" type="submit" class="btn bg-gradient-danger m-1" style="width: 200px;">
                                     Volver, Sin Guardar
                                 </button>
                             </form>
@@ -336,20 +341,27 @@
                                 <div class="modal-content">
                                     <div class="modal-header bg-gradient-success ">
                                         <h1 class="modal-title fs-5 text-white">
-                                            Su Perfil Será Guardado</h1>
+                                            Su Perfil Será Creado</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body text-center">
                                         <p>¡Los datos de su perfil <br>
                                             No se podrán modificar una vez guardados! <br>
                                             {{ $user->username }} <br>
-                                            ¿Deseas Guardar?</p>
+                                            ¿Deseas Crear el Nuevo Perfil?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn bg-gradient-success" data-bs-dismiss="modal"
+                                        {{-- <button type="button" class="btn bg-gradient-success" data-bs-dismiss="modal"
                                             data-bs-toggle="modal" data-bs-target="#profileForm"
                                             onclick="event.preventDefault(); document.getElementById('profileForm').submit();">
                                             Guardar
+                                        </button> --}}
+                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                                            data-bs-toggle="modal"
+                                            onclick="document.getElementById('btnGuardarProfile').style.display = 'block';
+                                            document.getElementById('buttonsProfile1').style.display = 'none';
+                                            document.getElementById('buttonsProfile2').style.display = 'none';">
+                                            Si, Crear Perfil
                                         </button>
                                         <button type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal">
                                             Cancelar
@@ -367,12 +379,12 @@
 
 @section('js')
     <script src="/../assets/js/create.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#descripcion'))
             .catch(error => {
                 console.error(error);
             });
-    </script>
+    </script> --}}
 @endsection

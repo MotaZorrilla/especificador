@@ -43,9 +43,9 @@
                                 placeholder="Escribe la descripción de tu Proyecto"></textarea>
                         </div>
 
-                        <button  type="submit" id="btnGuardar" class="btn btn-info justify-content-center"
+                        <button  type="submit" id="btnGuardarProject" class="btn btn-info justify-content-center"
                             style="display: none;">
-                            Guardar
+                            Guardar Proyecto
                         </button>
 
                     </form>
@@ -90,7 +90,7 @@
                                         </button> --}}
                                         <button type="button" class="btn btn-success" data-bs-dismiss="modal"
                                             data-bs-toggle="modal"
-                                            onclick="document.getElementById('btnGuardar').style.display = 'block';
+                                            onclick="document.getElementById('btnGuardarProject').style.display = 'block';
                                             document.getElementById('buttonsProject1').style.display = 'none';
                                             document.getElementById('buttonsProject2').style.display = 'none';">
                                             Si, Crear Proyecto

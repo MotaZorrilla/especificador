@@ -8,21 +8,11 @@ use Illuminate\Http\Request;
 
 class ProjectProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('dashboard.projectProfile.profile-index');
+        return view('dashboard.projectAdmin.projectAdmin-index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $user = auth()->user();
@@ -64,38 +54,19 @@ class ProjectProfileController extends Controller
         $profile->observaciones = $request->observaciones;
         $profile->save();
 
-        // Redirigir a la página de proyectos con un mensaje de éxito
-        // Mostrar la vista de projectProfile.index con el parámetro 'project'
-    return view('dashboard.projectProfile.profile-index', ['project' => $profile->project_id])
-        ->with('success', '¡Perfil creado con éxito!');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Profile $profile)
-    {
-        return view('dashboard.projectProfile.profile-index', compact('profile'));
-        // }
-        //     //Display the specified resource.
-        // public function show(Project $projectAdmin)
-        // {   
         $filedata = [];
 
         // Obtener datos comunes
-        $masividad  = $projectAdmin->masividad;
-        $dato_H     = $projectAdmin->altura;
-        $dato_B1    = $projectAdmin->base1;
-        $dato_B2    = $projectAdmin->base2;
-        $dato_e1    = $projectAdmin->espesor1;
-        $dato_e2    = $projectAdmin->espesor2;
-        $dato_t     = $projectAdmin->espesort;
-        $dato_r     = $projectAdmin->radio;
-        $dato_C     = $projectAdmin->plieque;
-        $dato_D     = $projectAdmin->diametro;
+        $masividad  = $profile->masividad;
+        $dato_H     = $profile->altura;
+        $dato_B1    = $profile->base1;
+        $dato_B2    = $profile->base2;
+        $dato_e1    = $profile->espesor1;
+        $dato_e2    = $profile->espesor2;
+        $dato_t     = $profile->espesort;
+        $dato_r     = $profile->radio;
+        $dato_C     = $profile->plieque;
+        $dato_D     = $profile->diametro;
 
         // Función para calcular la masividad para el Perfil H sin Radio Viga 3 caras
         function MasividadHSR_V3C($dato_H, $dato_B1, $dato_B2,  $dato_e1, $dato_e2, $dato_t, $dato_r)
@@ -281,8 +252,8 @@ class ProjectProfileController extends Controller
             $dato_A = 0;
             $dato_P = 0;
 
-            if ($projectAdmin->exposicion == 'Viga 3 Caras') {
-                switch ($projectAdmin->forma) {
+            if ($profile->exposicion == 'Viga 3 Caras') {
+                switch ($profile->forma) {
                     case 'HSR':
                         $masividad = MasividadHSR_V3C($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t, $dato_r);
                         break;
@@ -318,7 +289,7 @@ class ProjectProfileController extends Controller
                         break;
                 }
             } else {
-                switch ($projectAdmin->forma) {
+                switch ($profile->forma) {
                     case 'HSR':
                         $masividad = MasividadHSR($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t);
                         break;
@@ -356,11 +327,26 @@ class ProjectProfileController extends Controller
             }
             // Asegurarse de que la masividad sea positiva
             $masividad = max($masividad, 0);
-            $projectAdmin->masividad = $masividad;
+            $profile->masividad = $masividad;
         } else {
-            $projectAdmin->masividad = ceil($masividad);
+            $profile->masividad = ceil($masividad);
         }
-        $projectAdmin->save();
+        $profile->save();
+
+        // Redirigir a la página de proyectos con un mensaje de éxito
+        // Mostrar la vista de projectProfile.index con el parámetro 'project'
+        return view('dashboard.projectProfile.profile-index', ['project' => $profile->project_id])
+        ->with('success', '¡Perfil creado con éxito!');
+    }
+
+    public function show($profile)
+    {
+        return view('dashboard.projectProfile.profile-index', compact('profile'));
+        // }
+        //     //Display the specified resource.
+        // public function show(Project $projectAdmin)
+        // {   
+        
 
         // cargar los datos de la tabla $filedata
         $filedata = Filedata::where('masividad', $projectAdmin->masividad)->get();
@@ -391,14 +377,13 @@ class ProjectProfileController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy($profileId)
     {
-        //
+        $profile = Profile::find($profileId);
+
+        $profile->delete();
+
+        return view('dashboard.projectProfile.profile-index',  ['project' => $profile->project_id])
+             ->with('success', 'El perfil se eliminó con éxito');
     }
 }

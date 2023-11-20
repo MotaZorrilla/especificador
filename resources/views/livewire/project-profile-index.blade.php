@@ -56,15 +56,15 @@
                                             </div>
                                             <div class="modal-body text-center">
                                                 <!-- Tu formulario para agregar observaciones aquí -->
-                                                <form >
-                                                    <textarea rows="8" class="form-control" wire:model.defer="observations" placeholder="Escribe aqui las observaciones para el Proyecto {{ $project['project'] }}"></textarea>
+                                                <form>
+                                                    <textarea rows="8" class="form-control" wire:model.defer="observations"
+                                                        placeholder="Escribe aqui las observaciones para el Proyecto {{ $project['project'] }}"></textarea>
                                                 </form>
                                             </div>
                                             <div class="modal-footer">
                                                 <!-- Agregar el botón para enviar el formulario de observaciones -->
-                                                <button  type="submit" class="btn bg-gradient-success"
-                                                    data-bs-dismiss="modal"
-                                                    wire:click="addObservations()">
+                                                <button type="submit" class="btn bg-gradient-success"
+                                                    data-bs-dismiss="modal" wire:click="addObservations()">
                                                     Guardar Observación
                                                 </button>
                                                 <button type="button" class="btn bg-gradient-danger"
@@ -228,36 +228,36 @@
                                         </td>
                                         <td width="10px" class="align-middle">
                                             <div class="d-flex ">
-                                                <form action="{{ route('projectAdmin.show', $profile) }}"
+                                                <form action="{{ route('projectProfile.show', $profile) }}"
                                                     method="get">
                                                     <button type="submit" class="btn bg-gradient-info m-1">
                                                         Ver Perfil</button>
                                                 </form>
-                                                <form id="borrarProject{{ $profile->id }}"
-                                                    action="{{ route('projectAdmin.destroy', $profile) }}"
+                                                <form id="borrarProfile{{ $profile->id }}"
+                                                    action="{{ route('projectProfile.destroy', $profile) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('delete')
                                                 </form>
-                                                <button type="button" class="btn bg-gradient-danger m-1"
+                                                <button type="submit" class="btn bg-gradient-danger m-1"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#modalProject{{ $profile->id }}">
+                                                    data-bs-target="#modalProfile{{ $profile->id }}">
                                                     Eliminar
                                                 </button>
 
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="modalProject{{ $profile->id }}"
+                                                <div class="modal fade" id="modalProfile{{ $profile->id }}"
                                                     tabindex="-1">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header bg-gradient-danger ">
                                                                 <h1 class="modal-title fs-5 text-white">
-                                                                    Confirmar Borrado del Proyecto</h1>
+                                                                    Confirmar Borrado del Perfil</h1>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal"></button>
                                                             </div>
                                                             <div class="modal-body text-center">
-                                                                <p>¿Estás seguro de que deseas eliminar
+                                                                <p>¿Estás seguro de que deseas eliminar <br>
                                                                     {{ $profile->nombre }}?</p>
                                                             </div>
                                                             <div class="modal-footer">
@@ -265,9 +265,9 @@
                                                                     data-bs-dismiss="modal">Cancelar</button>
                                                                 <button type="button" class="btn btn-danger"
                                                                     data-bs-dismiss="modal" data-bs-toggle="modal"
-                                                                    data-bs-target="#borrarProject{{ $profile->id }}"
-                                                                    onclick="event.preventDefault(); document.getElementById('borrarProject{{ $profile->id }}').submit();">
-                                                                    Eliminar
+                                                                    data-bs-target="#borrarProfile{{ $profile->id }}"
+                                                                    onclick="event.preventDefault(); document.getElementById('borrarProfile{{ $profile->id }}').submit();">
+                                                                    Eliminar Perfil
                                                                 </button>
                                                             </div>
                                                         </div>

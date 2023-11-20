@@ -66,9 +66,6 @@ class ProjectAdminController extends Controller
         $project->save();
         // Redirigir a la página de proyectos con un mensaje de éxito
         return redirect()->route('projectAdmin.index')->with('success', '¡Proyecto creado con éxito!');
-
-
-        return redirect()->route('projectAdmin.show', $project );
     }
 
     //Display the specified resource.
