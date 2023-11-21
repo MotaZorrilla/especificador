@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Filedata;
 use App\Models\Profile;
 use App\Models\Project;
+use App\Models\Result;
 use Illuminate\Http\Request;
 
 class ProjectProfileController extends Controller
@@ -336,46 +338,67 @@ class ProjectProfileController extends Controller
         // Redirigir a la página de proyectos con un mensaje de éxito
         // Mostrar la vista de projectProfile.index con el parámetro 'project'
         return view('dashboard.projectProfile.profile-index', ['project' => $profile->project_id])
-        ->with('success', '¡Perfil creado con éxito!');
+            ->with('success', '¡Perfil creado con éxito!');
     }
 
-    public function show($profile)
+    public function show($profileId)
     {
-        return view('dashboard.projectProfile.profile-index', compact('profile'));
-        // }
-        //     //Display the specified resource.
-        // public function show(Project $projectAdmin)
-        // {   
-        
+        // return view('dashboard.projectProfile.profile-index', compact('profile'));
 
-        // cargar los datos de la tabla $filedata
-        $filedata = Filedata::where('masividad', $projectAdmin->masividad)->get();
+        $profile    = Profile::find($profileId);
+        $masividad  = (int)$profile->masividad;
+        $filedata    = Filedata::where('masividad', $masividad)->get();
 
-        return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin', 'filedata'));
+        return view('dashboard.projectProfile.profile-show', compact('profile', 'filedata'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, $profileId)
     {
-        //
+        $profile = Profile::find($profileId);
+        $profile->observaciones = $request->observaciones;
+        $profile->save();
+
+        // Obtener el resultado asociado al perfil
+        $result = Result::where('profile_id', $profileId)->first();
+
+        // Si no hay un resultado, crear uno nuevo
+        if (!$result) {
+            $result = new Result();
+            $result->profile_id = $profileId;
+        }
+
+        // Actualizar los valores del resultado
+        // Mover este bloque fuera de la condición if
+        $result->save(); // Guardar el resultado antes de actualizar los registros
+
+        // Obtener el array de registros del request
+        $registros = $request->input('registros', []); // Ajusta el nombre según la estructura de tu formulario
+
+        // Limpiar registros existentes
+        $result->registros()->delete();
+
+        foreach ($registros as $registro) {
+            $result->registros()->create([
+                'pintura'       => $registro['pintura'],
+                'modelo'        => $registro['modelo'],
+                'certificado'   => $registro['certificado'],
+                'numero'        => $registro['numero'],
+                'minimo'        => $registro['minimo'],
+                'incluir'       => $registro['incluir'],
+            ]);
+        }
+
+        // Resto de la lógica...
+
+        return view('dashboard.projectProfile.profile-show', compact('profile', 'filedata'));
     }
+
+
 
     public function destroy($profileId)
     {
@@ -384,6 +407,6 @@ class ProjectProfileController extends Controller
         $profile->delete();
 
         return view('dashboard.projectProfile.profile-index',  ['project' => $profile->project_id])
-             ->with('success', 'El perfil se eliminó con éxito');
+            ->with('success', 'El perfil se eliminó con éxito');
     }
 }

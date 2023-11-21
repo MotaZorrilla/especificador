@@ -5,7 +5,7 @@
         'title' => 'Bienvenido al Panel del Especificador de Pintura Intumescente',
     ])
     <div class="container-fluid py-4">
-        <div class="row">
+        <div class="row ">
             @can('profile')
                 <div class="col-xl-3 col-sm-6 mb-4">
                     <div class="card shadow-sm">

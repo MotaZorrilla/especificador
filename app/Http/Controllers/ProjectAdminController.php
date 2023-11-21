@@ -40,30 +40,7 @@ class ProjectAdminController extends Controller
         $project->project       = $request->project;
         $project->description   = $request->description;
         $project->save();
-        // Redirigir a la página de proyectos con un mensaje de éxito
-        return redirect()->route('projectAdmin.index')->with('success', '¡Proyecto creado con éxito!');
 
-        $project->nombre        = $request->nombre;
-        $project->descripcion   = $request->descripcion;
-        $project->exposicion    = $request->exposicion;
-        $project->perfil        = $request->perfil;
-        $project->forma         = $request->forma;
-        
-        $project->masividad     = $request->masividad;
-        $project->resistencia   = $request->resistencia;
-        
-        $project->altura        = ($request->dato_H); 
-        $project->base1         = ($request->dato_B1);
-        $project->base2         = ($request->dato_B2);
-        $project->espesor1      = ($request->dato_e1);
-        $project->espesor2      = ($request->dato_e2);
-        $project->espesort      = ($request->dato_t);
-        $project->radio         = ($request->dato_r);
-        $project->plieque       = ($request->dato_C);
-        $project->diametro      = ($request->dato_D);
-        
-        $project->observaciones = $request->observaciones;       
-        $project->save();
         // Redirigir a la página de proyectos con un mensaje de éxito
         return redirect()->route('projectAdmin.index')->with('success', '¡Proyecto creado con éxito!');
     }

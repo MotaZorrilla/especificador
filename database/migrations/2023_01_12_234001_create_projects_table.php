@@ -44,11 +44,25 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        Schema::create('results', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('profile_id')                 ->constrained(); 
+            $table->string('pintura')                       ->nullable();
+            $table->string('modelo')                        ->nullable();
+            $table->string('certificado')                   ->nullable();
+            $table->string('numero')                        ->nullable();
+            $table->string('minimo')                        ->nullable();
+            $table->boolean('incluir')                      ->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
     }
 
     public function down()
     {
         Schema::dropIfExists('projects');
         Schema::dropIfExists('profiles');
+        Schema::dropIfExists('results');
     }
 };

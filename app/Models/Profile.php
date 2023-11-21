@@ -40,4 +40,9 @@ class Profile extends Model
     {
         return $this->belongsTo(Project::class);
     }
+    
+    public function result()
+    {
+        return $this->hasOne(Result::class);
+    }
 }
