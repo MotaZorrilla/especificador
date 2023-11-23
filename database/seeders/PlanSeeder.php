@@ -26,7 +26,7 @@ class PlanSeeder extends Seeder
         ]);
 
         // Utiliza la factoría para crear cinco modelos adicionales
-        Plan::factory(5)->create();
+        // Plan::factory(5)->create();
     }
 }
 

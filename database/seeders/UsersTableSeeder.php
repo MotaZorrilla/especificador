@@ -20,6 +20,6 @@ class UsersTableSeeder extends Seeder
             'profile_count' => 99
         ])->assignRole('Administrador');
 
-        User::factory(10)->create();
+        // User::factory(10)->create();
     }
 }
