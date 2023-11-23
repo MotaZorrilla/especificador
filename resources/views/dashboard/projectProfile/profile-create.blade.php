@@ -77,7 +77,7 @@
                             <div class="form-group">
                                 <label for="masividad" class="form-control-label">Masividad:</label>
                                 <input class="form-control" type="number" id="masividad" name="masividad"
-                                    placeholder="Escribe la masividad de tu Perfil">
+                                    placeholder="Escribe la masividad de tu Perfil ">
                             </div>
 
                         </div>

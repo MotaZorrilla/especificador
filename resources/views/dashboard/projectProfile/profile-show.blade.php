@@ -49,14 +49,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="mass" class="form-control-label">Masividad:</label>
-                                    <p>{{ number_format($profile->masividad, 0) }}</p>
+                                    <p>{{ number_format($profile->masividad, 0) }} m<sup>-1</sup></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="mass" class="form-control-label">Resistencia al Fuego:</label>
-                                    <p>{{ number_format($profile->resistencia, 0) }}</p>
+                                    <p>{{ number_format($profile->resistencia, 0) }} minutos</p>
                                 </div>
                                 <div>
-                                    @if ($filedata->count())
+                                    @if ($results->count())
                                         <table class="table align-items-center mb-4 table-striped" cellpadding="10">
                                             <thead>
                                                 <tr>
@@ -68,28 +68,20 @@
                                                     <th>Incluir</th>
                                             </thead>
                                             <tbody>
-                                                @foreach ($filedata as $filedatum)
+                                                @foreach ($results as $result)
                                                     <tr>
-                                                        <td>{{ $filedatum->pintura }}</td>
-                                                        <td>{{ $filedatum->modelo }}</td>
-                                                        <td class="text-center">{{ $filedatum->certificado }}</td>
-                                                        <td class="text-center">{{ $filedatum->numero }}</td>
-                                                        @if ($profile->resistencia == 15)
-                                                            <td class="text-center">{{ $filedatum->m15 }}</td>
-                                                        @elseif ($profile->resistencia == 30)
-                                                            <td class="text-center">{{ $filedatum->m30 }}</td>
-                                                        @elseif ($profile->resistencia == 60)
-                                                            <td class="text-center">{{ $filedatum->m60 }}</td>
-                                                        @elseif ($profile->resistencia == 90)
-                                                            <td class="text-center">{{ $filedatum->m90 }}</td>
-                                                        @elseif ($profile->resistencia == 120)
-                                                            <td class="text-center">{{ $filedatum->m120 }}</td>
-                                                        @endif
-                                                        <td class="text-center"><input type="checkbox"
-                                                                name="seleccionados[]" value="{{ $filedatum->id }}"></td>
+                                                        <td class="text-center">{{ $result->pintura }}</td>
+                                                        <td class="text-center">{{ $result->modelo }}</td>
+                                                        <td class="text-center">{{ $result->certificado }}</td>
+                                                        <td class="text-center">{{ $result->numero }}</td>
+                                                        <td class="text-center">{{ $result->minimo }}</td>
+                                                        <td class="text-center">
+                                                            <input type="checkbox" name="selectedPaints[]" value="{{ $result->id }}" {{ $result->incluir ? 'checked' : '' }}>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
+                                            
                                         </table>
                                     @else
                                         <div class="alert alert-warning text-white mx-3">
@@ -100,40 +92,39 @@
                                 <div class="form-group">
                                     <div class="mb-4">
                                         <label class="form-control-label" for="observaciones">Observaciones:</label>
-                                        <textarea rows="8" class="form-control" id="observaciones" name="observaciones"
-                                            @if (empty($profile->observaciones)) 
-                                                placeholder="Escribe las observaciones de tu Proyecto"></textarea>
+                                        <textarea rows="8" class="form-control" id="observaciones"
+                                            name="observaciones"
+                                            @if (empty($profile->observaciones)) placeholder="Escribe las observaciones de tu Proyecto"></textarea>
                                             @else
-                                            >{{ $profile->observaciones }} 
-                                            @endif
-                                        </textarea>
-                                    </div>
-                                    <div class="d-flex ">
-                                        <div>
-                                            <button type="submit" class="btn bg-gradient-info m-1">Actualizar</button>
+                                            >{{ $profile->observaciones }} @endif
+                                            </textarea>
+                                            </div>
+                                            <div class="d-flex ">
+                                                <div>
+                                                    <button type="submit" class="btn bg-gradient-info m-1">Actualizar</button>
+                                                </div>
+                                                <div class="d-flex ">
+                                                    <form action="{{ route('projectProfile.edit', $profile) }}" method="get" >
+                                                        <button type="submit" class="btn bg-gradient-success m-1">Editar</button>
+                                                    </form>
+                                                    <form action="{{ route('projectAdmin.destroy', $profile) }}" method="post" >
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn bg-gradient-danger m-1">Eliminar</button>
+                                                    </form>
+                                                    <form action="{{ route('projectAdmin.index') }}" method="get" >
+                                                        <button type="submit" class="btn bg-gradient-success m-1">Volver</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            </form>
                                         </div>
-                                        <div class="d-flex ">
-                                            <form action="{{ route('projectProfile.edit', $profile) }}" method="get" >
-                                                <button type="submit" class="btn bg-gradient-success m-1">Editar</button>
-                                            </form>
-                                            <form action="{{ route('projectAdmin.destroy', $profile) }}" method="post" >
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" class="btn bg-gradient-danger m-1">Eliminar</button>
-                                            </form>
-                                            <form action="{{ route('projectAdmin.index') }}" method="get" >
-                                                <button type="submit" class="btn bg-gradient-success m-1">Volver</button>
-                                            </form>
-                                        </div>
                                     </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 @endsection
 
 @section('js')
@@ -150,7 +141,7 @@
                 console.error(error);
             });
     </script> --}}
-                                                        {{-- <script>
+                                                                {{-- <script>
         ClassicEditor
             .create(document.querySelector('#observaciones'))
             .catch(error => {

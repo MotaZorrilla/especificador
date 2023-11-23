@@ -6,6 +6,7 @@ use App\Models\Filedata;
 use App\Models\Profile;
 use App\Models\Project;
 use App\Models\Result;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProjectProfileController extends Controller
@@ -335,6 +336,9 @@ class ProjectProfileController extends Controller
         }
         $profile->save();
 
+        $user = auth()->user();
+        $user->profile_count--;
+
         // Redirigir a la página de proyectos con un mensaje de éxito
         // Mostrar la vista de projectProfile.index con el parámetro 'project'
         return view('dashboard.projectProfile.profile-index', ['project' => $profile->project_id])
@@ -343,13 +347,15 @@ class ProjectProfileController extends Controller
 
     public function show($profileId)
     {
-        // return view('dashboard.projectProfile.profile-index', compact('profile'));
-
         $profile    = Profile::find($profileId);
-        $masividad  = (int)$profile->masividad;
-        $filedata    = Filedata::where('masividad', $masividad)->get();
+        $results    = Result::where('profile_id', '$profileId')->get();
 
-        return view('dashboard.projectProfile.profile-show', compact('profile', 'filedata'));
+        if ($results->isEmpty()) {
+            $this->Resultados($profile);
+            $results = Result::where('profile_id', $profileId)->get();
+        }
+
+        return view('dashboard.projectProfile.profile-show', compact('profile', 'results'));
     }
 
     public function edit($id)
@@ -363,42 +369,22 @@ class ProjectProfileController extends Controller
         $profile->observaciones = $request->observaciones;
         $profile->save();
 
-        // Obtener el resultado asociado al perfil
-        $result = Result::where('profile_id', $profileId)->first();
+        // Verificar si se seleccionaron pinturas para incluir en la tabla de resultados
+        if ($request->has('selectedPaints')) {
+            // Obtener las pinturas seleccionadas
+            $selectedPaints = $request->input('selectedPaints');
 
-        // Si no hay un resultado, crear uno nuevo
-        if (!$result) {
-            $result = new Result();
-            $result->profile_id = $profileId;
+            // Obtener el resultado asociado al perfil y actualizar la propiedad "incluir"
+            foreach ($selectedPaints as $resultId) {
+                Result::where('id', $resultId)->update(['incluir' => true]);
+            }
         }
 
-        // Actualizar los valores del resultado
-        // Mover este bloque fuera de la condición if
-        $result->save(); // Guardar el resultado antes de actualizar los registros
+        // Recuperar todos los resultados después de la actualización
+        $results = Result::where('profile_id', $profileId)->get();
 
-        // Obtener el array de registros del request
-        $registros = $request->input('registros', []); // Ajusta el nombre según la estructura de tu formulario
-
-        // Limpiar registros existentes
-        $result->registros()->delete();
-
-        foreach ($registros as $registro) {
-            $result->registros()->create([
-                'pintura'       => $registro['pintura'],
-                'modelo'        => $registro['modelo'],
-                'certificado'   => $registro['certificado'],
-                'numero'        => $registro['numero'],
-                'minimo'        => $registro['minimo'],
-                'incluir'       => $registro['incluir'],
-            ]);
-        }
-
-        // Resto de la lógica...
-
-        return view('dashboard.projectProfile.profile-show', compact('profile', 'filedata'));
+        return view('dashboard.projectProfile.profile-show', compact('profile', 'results'));
     }
-
-
 
     public function destroy($profileId)
     {
@@ -408,5 +394,52 @@ class ProjectProfileController extends Controller
 
         return view('dashboard.projectProfile.profile-index',  ['project' => $profile->project_id])
             ->with('success', 'El perfil se eliminó con éxito');
+    }
+
+
+    private function Resultados($profile)
+    {
+        $masividad  = (int)$profile->masividad;
+        $filedata   = Filedata::where('masividad', $masividad)->get();
+
+        foreach ($filedata as $filedatum) {
+            // Verificar si ya existe un resultado para esta pintura y perfil
+            $existingResult = Result::where('profile_id', $profile->id)
+                ->where('pintura', $filedatum->pintura)
+                ->where('modelo', $filedatum->modelo)
+                ->where('certificado', $filedatum->certificado)
+                ->where('numero', $filedatum->numero)
+                ->first();
+    
+            if (!$existingResult) {
+                // Crear el nuevo resultado solo si no existe
+                $result                 = new Result();
+                $result->profile_id     = $profile->id;
+                $result->pintura        = $filedatum->pintura;
+                $result->modelo         = $filedatum->modelo;
+                $result->certificado    = $filedatum->certificado;
+                $result->numero         = $filedatum->numero;
+                $result->minimo         = $this->getMinimo($profile, $filedatum);
+                $result->save();
+            }
+        }
+    }
+
+    private function getMinimo($profile, $filedatum)
+    {
+        switch ($profile->resistencia) {
+            case 15:
+                return $filedatum->m15;
+            case 30:
+                return $filedatum->m30;
+            case 60:
+                return $filedatum->m60;
+            case 90:
+                return $filedatum->m90;
+            case 120:
+                return $filedatum->m120;
+            default:
+                return null;
+        }
     }
 }
