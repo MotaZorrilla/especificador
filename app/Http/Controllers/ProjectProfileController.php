@@ -369,15 +369,31 @@ class ProjectProfileController extends Controller
         $profile->observaciones = $request->observaciones;
         $profile->save();
 
+        // // Verificar si se seleccionaron pinturas para incluir en la tabla de resultados
+        // if ($request->has('selectedPaints')) {
+        //     // Obtener las pinturas seleccionadas
+        //     $selectedPaints = $request->input('selectedPaints');
+
+        //     // Obtener el resultado asociado al perfil y actualizar la propiedad "incluir"
+        //     foreach ($selectedPaints as $resultId) {
+        //         Result::where('id', $resultId)->update(['incluir' => true]);
+        //     }
+        // }
         // Verificar si se seleccionaron pinturas para incluir en la tabla de resultados
         if ($request->has('selectedPaints')) {
             // Obtener las pinturas seleccionadas
             $selectedPaints = $request->input('selectedPaints');
 
-            // Obtener el resultado asociado al perfil y actualizar la propiedad "incluir"
-            foreach ($selectedPaints as $resultId) {
-                Result::where('id', $resultId)->update(['incluir' => true]);
-            }
+            // Actualizar la propiedad "incluir" de las pinturas seleccionadas
+            Result::whereIn('id', $selectedPaints)->update(['incluir' => true]);
+
+            // Desmarcar la propiedad "incluir" de las pinturas no seleccionadas
+            Result::where('profile_id', $profileId)
+                ->whereNotIn('id', $selectedPaints)
+                ->update(['incluir' => false]);
+        } else {
+            // Si no se seleccionaron pinturas, desmarcar todas las pinturas asociadas al perfil
+            Result::where('profile_id', $profileId)->update(['incluir' => false]);
         }
 
         // Recuperar todos los resultados después de la actualización
@@ -410,7 +426,7 @@ class ProjectProfileController extends Controller
                 ->where('certificado', $filedatum->certificado)
                 ->where('numero', $filedatum->numero)
                 ->first();
-    
+
             if (!$existingResult) {
                 // Crear el nuevo resultado solo si no existe
                 $result                 = new Result();

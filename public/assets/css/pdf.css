@@ -1,0 +1,156 @@
+@page {
+    margin: 30px 60px ; /* Ajusta según sea necesario */
+}
+
+.header {
+    background-color: #f2f2f2;
+    padding: 10px;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1; /* Ajusta según sea necesario */
+    border: #fb6340 solid 3px;
+}
+
+body {
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: small;
+    line-height: 1.1;
+    margin-top: 90px;
+    margin-bottom: 60px;
+    border: #fb6340 solid 3px;
+}
+
+h2 {
+    margin: 0 0 10px 0;
+    color: #fb6340;
+}
+
+h3 {
+    margin: 20px 0 10px 0;
+    color: #fb6340;
+}
+
+p, li {
+    margin: 0 0 0 10px ;
+    color: grey;
+}
+
+.logo-info img {
+    max-height: 80px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.project-info {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    text-align: right;
+}
+
+.user table {
+    width: 100%;
+}
+
+.user table td {
+    padding: 8px;
+    color: grey;
+}
+
+.user table td:first-child {
+    width: 30%; /* Ajusta el ancho de la primera columna según tus preferencias */
+}
+
+ .user p {
+    margin-bottom: 20px;
+    color: grey;
+}
+
+.important-notes {
+    page-break-before: always;
+}
+
+.cabeceraTabla {
+    width: 100%;
+}
+
+main {
+    margin: 20px;
+}
+
+.user, .project, .profiles, .paint-recommendation, .important-notes {
+    margin-bottom: 20px;
+}
+
+.profiles {
+    page-break-before: always;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    color: gray;
+}
+
+.table th {
+    background-color: #fb6340;
+    color: whitesmoke;
+}
+
+.important-notes ul {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.important-notes li {
+    margin-bottom: 5px;
+}
+
+.footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+    height: 30px;
+    position: fixed;
+    top: 94%;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ajusta según sea necesario */
+    border: #fb6340 solid 3px;
+}
+
+.footer img {
+    max-height: 20px; /* Reduje el tamaño del logo, ajusta según sea necesario */
+    position: absolute;
+    top: 50%;
+    left: 50%; /* Centra horizontalmente el logo */
+    transform: translate(-50%, -50%);
+}
+
+.footer a {
+    color: #fb6340; /* Color naranja */
+    text-decoration: none; /* Elimina la decoración del enlace */
+    position: absolute;
+    top: 50%;
+    left: 40px; /* Ajusta el margen izquierdo según sea necesario */
+    transform: translateY(-50%);
+}
+
+.footer p {
+    position: absolute;
+    top: 50%;
+    right: 50px;
+    transform: translateY(-50%);
+    text-align: right;
+}
+

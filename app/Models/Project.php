@@ -14,8 +14,8 @@ class Project extends Model
     // Campos que pueden ser llenados con asignación masiva
     protected $fillable = [
         'user_id',
-        'user_project_counter',       
-        'project', 
+        'user_project_counter',
+        'project',
         'description',
         'observations',
     ];
@@ -23,5 +23,10 @@ class Project extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function profiles()
+    {
+        return $this->hasMany(Profile::class);
     }
 }

@@ -80,7 +80,7 @@ class ProjectController extends Controller
 
     public function pdf(Project $project)
     {
-
+        dd($project);
         $filedata = Filedata::where('masividad', $project->masividad)
             //  ->where('m90', '!=', 'Fuera de rango')
             // ->latest('id')
@@ -88,6 +88,7 @@ class ProjectController extends Controller
             ->get();
 
         // return view('dashboard.project.project-pdf', compact('project', 'filedata'));
+        
         $pdf   = PDF::loadView('dashboard.project.project-pdf', compact('project', 'filedata'));
 
         return $pdf->download('Especificador de pintura.pdf');

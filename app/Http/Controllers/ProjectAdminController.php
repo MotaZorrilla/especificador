@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Profile;
+use App\Models\Result;
 use App\Models\Filedata;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Psy\Readline\Hoa\Console;
@@ -17,7 +19,7 @@ class ProjectAdminController extends Controller
 
     // Display a listing of the resource.
     public function index()
-    {   
+    {
         return view('dashboard.projectAdmin.projectAdmin-index');
     }
 
@@ -25,7 +27,7 @@ class ProjectAdminController extends Controller
     public function create()
     {
         $user = auth()->user();
-        
+
         return view('dashboard.projectAdmin.projectAdmin-create', compact('user'));
     }
 
@@ -47,10 +49,10 @@ class ProjectAdminController extends Controller
 
     //Display the specified resource.
     public function show($project)
-    {   
+    {
         return view('dashboard.projectProfile.profile-index', compact('project'));
     }
-   
+
 
     //Show the form for editing the specified resource.
     public function edit(Project $projectAdmin)
@@ -70,9 +72,9 @@ class ProjectAdminController extends Controller
         $projectAdmin->save();
 
         $filedata = Filedata::where('masividad', $projectAdmin->masividad)
-                            ->get();
+            ->get();
 
-        return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin','filedata'));
+        return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin', 'filedata'));
     }
 
     //Remove the specified resource from storage.
@@ -84,18 +86,43 @@ class ProjectAdminController extends Controller
     }
 
     public function pdf(Project $projectAdmin)
-    {   
-        
-        $filedata = Filedata::where('masividad', $projectAdmin->masividad )
-        //  ->where('m90', '!=', 'Fuera de rango')
-        // ->latest('id')
-        // ->take(4)
-        ->get();
+    {
+        // Cargar relaciones adicionales
+        $projectAdmin->load('user', 'profiles.result');
 
-        // return view('dashboard.project.project-pdf', compact('project', 'filedata'));
-        $pdf   = PDF::loadView('dashboard.projectAdmin.projectAdmin-pdf', compact('projectAdmin', 'filedata'));
+        // Obtener información del proyecto y del usuario
+        $project = [
+            'project' => $projectAdmin,
+            'user' => $projectAdmin->user,
+        ];
 
-        return $pdf->download('Especificador de pintura Administrador.pdf');
+        // Obtener perfiles con sus resultados
+        $profiles = $projectAdmin->profiles->filter(function ($profile) {
+            return $profile->incluir;
+        });
+
+        // Obtener los IDs de los perfiles con la propiedad 'incluir' activada
+        $profileIds = $profiles->pluck('id')->toArray();
+
+        // Cargar resultados solo para los perfiles que tienen la propiedad 'incluir' activada
+        $results = Result::whereIn('profile_id', $profileIds)
+            ->where('incluir', true)
+            ->get();
+
+        $date = date('d-m-Y');
+
+        $pdf = PDF::loadView('dashboard.projectAdmin.projectAdmin-pdf', compact('project', 'profiles', 'results', 'date'));
+
+        $pdf->setPaper('letter');
+
+        // Usa stream para mostrar el PDF en el navegador
+        $response = $pdf->stream();
+
+        // Agrega el encabezado necesario para la descarga
+        $response->header('Content-Type', 'application/pdf');
+        $response->header('Content-Disposition', 'inline; filename=Especificador de Pintura Intumescente.pdf');
+
+        return $response;
     }
 
     public function updateProjectAdmin(Request $request, Project $projectAdmin)
@@ -106,10 +133,10 @@ class ProjectAdminController extends Controller
         $projectAdmin->save();
 
         $filedata = Filedata::where('masividad', ceil($projectAdmin->masividad))
-                            ->get();
-        
+            ->get();
+
         // Redirige al usuario a la página de edición del proyecto
-        return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin','filedata'));
+        return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin', 'filedata'));
     }
 
     // public function profile()
