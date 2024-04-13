@@ -72,7 +72,7 @@ class ProjectProfileController extends Controller
         $dato_D     = $profile->diametro;
 
         // Función para calcular la masividad para el Perfil H sin Radio Viga 3 caras
-        function MasividadHSR_V3C($dato_H, $dato_B1, $dato_B2,  $dato_e1, $dato_e2, $dato_t, $dato_r)
+        function MasividadHSR_V3C($dato_H, $dato_B1, $dato_B2,  $dato_e1, $dato_e2, $dato_t)
         {
             $dato_A = $dato_B1 * $dato_e1 + $dato_B2 * $dato_e2 + $dato_H * $dato_t - $dato_t * $dato_e1 - $dato_t * $dato_e2;
             $dato_P = 2 * $dato_H + $dato_B1 + 2 * $dato_B2 - 2 * $dato_t;
@@ -88,7 +88,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil Rectangular Viga 3 caras
-        function MasividadRectangular_V3C($dato_H, $dato_B, $dato_e, $dato_r)
+        function MasividadRectangular_V3C($dato_H, $dato_B, $dato_e)
         {
             $dato_A = 2 * $dato_e * ($dato_B + $dato_H - 8 * $dato_e) + 3 * pi() * ($dato_e * $dato_e);
             $dato_P = $dato_B + 2 * $dato_H - 12 * $dato_e + 4 * pi() * $dato_e;
@@ -104,7 +104,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil C Viga 3 Caras
-        function MasividadC_V3C($dato_H, $dato_B, $dato_e, $dato_r)
+        function MasividadC_V3C($dato_H, $dato_B, $dato_e)
         {
             $dato_A = 2 * $dato_B * $dato_e + $dato_H * $dato_e - 8 * ($dato_e * $dato_e) + 3 / 2 * pi() * ($dato_e * $dato_e);
             $dato_P = 3 * $dato_B + 2 * $dato_H - 12 * $dato_e + 3 * pi() * $dato_e;
@@ -112,7 +112,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil IC Viga 3 Caras
-        function MasividadIC_V3C($dato_H, $dato_B, $dato_e, $dato_r)
+        function MasividadIC_V3C($dato_H, $dato_B, $dato_e)
         {
             $dato_A = 4 * $dato_B * $dato_e + 2 * $dato_H * $dato_e - 16 * ($dato_e * $dato_e) + 3 * pi() * ($dato_e * $dato_e);
             $dato_P = 6 * $dato_B + 2 * $dato_H - 16 * $dato_e + 4 * pi() * $dato_e;
@@ -120,7 +120,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil CA Viga 3 Caras
-        function MasividadCA_V3C($dato_H, $dato_B, $dato_C, $dato_e, $dato_r)
+        function MasividadCA_V3C($dato_H, $dato_B, $dato_C, $dato_e)
         {
             $dato_A = 2 * $dato_C * $dato_e + 2 * $dato_B * $dato_e + $dato_H * $dato_e - 16 * ($dato_e * $dato_e) + 3 * pi() * ($dato_e * $dato_e);
             $dato_P = 4 * $dato_C + 3 * $dato_B + 2 * $dato_H + 6 * pi() * $dato_e - 26 * $dato_e;
@@ -128,7 +128,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil ICA Viga 3 Caras
-        function MasividadICA_V3C($dato_H, $dato_B, $dato_C, $dato_e, $dato_r)
+        function MasividadICA_V3C($dato_H, $dato_B, $dato_C, $dato_e)
         {
             $dato_A = 4 * $dato_C * $dato_e + 4 * $dato_B * $dato_e + 2 * $dato_H * $dato_e - 32 * ($dato_e * $dato_e) + 6 * pi() * ($dato_e * $dato_e);
             $dato_P = 8 * $dato_C + 6 * $dato_B + 2 * $dato_H - 44 * $dato_e + 10 * pi() * $dato_e;
@@ -136,7 +136,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil OCA Viga 3 Caras
-        function MasividadOCA_V3C($dato_H, $dato_B, $dato_C, $dato_e, $dato_r)
+        function MasividadOCA_V3C($dato_H, $dato_B, $dato_C, $dato_e)
         {
             $dato_A = 4 * $dato_C * $dato_e + 4 * $dato_B * $dato_e + 2 * $dato_H * $dato_e - 32 * ($dato_e * $dato_e) + 6 * pi() * ($dato_e * $dato_e);
             $dato_P = 2 * $dato_B + 2 * $dato_H - 16 * $dato_e + 6 * pi() * $dato_e;
@@ -144,7 +144,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil L Viga 3 Caras
-        function MasividadL_V3C($dato_H, $dato_B, $dato_e, $dato_r)
+        function MasividadL_V3C($dato_H, $dato_B, $dato_e)
         {
             $dato_A = $dato_H * $dato_e + $dato_B * $dato_e - 4 * ($dato_e * $dato_e) + 3 / 4 * pi() * ($dato_e * $dato_e);
             $dato_P = 2 * $dato_H + $dato_B - 4 * $dato_e + 6 * pi() * $dato_e;
@@ -152,7 +152,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil Z Viga 3 Caras
-        function MasividadZ_V3C($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e, $dato_r)
+        function MasividadZ_V3C($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e)
         {
             $tanValue = tan(22.5 * pi() / 180);
             $dato_A = ($dato_H + 2) * $dato_e + 2 * $dato_C * $dato_e + $dato_B1 * $dato_e + $dato_B2 * $dato_e + 9 / 4 * pi() * ($dato_e * $dato_e) - 8 * ($dato_e * $dato_e) * $tanValue - 8 * ($dato_e * $dato_e);
@@ -178,7 +178,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil Rectangular Pilar y Viga 4 Caras
-        function MasividadRectangular($dato_H, $dato_B, $dato_e, $dato_r)
+        function MasividadRectangular($dato_H, $dato_B, $dato_e)
         {
             $dato_A = 2 * $dato_B * $dato_e + 2 * $dato_H * $dato_e - 16 * $dato_e * $dato_e + 3 * pi() * ($dato_e * $dato_e);
             $dato_P = 2 * $dato_B + 2 * $dato_H - 16 * $dato_e + 4 * pi() * $dato_e;
@@ -194,7 +194,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil C Pilar y Viga 4 Caras
-        function MasividadC($dato_H, $dato_B, $dato_e, $dato_r)
+        function MasividadC($dato_H, $dato_B, $dato_e)
         {
             $dato_A = 2 * $dato_B * $dato_e + $dato_H * $dato_e - 8 * ($dato_e * $dato_e) + 3 / 2 * pi() * ($dato_e * $dato_e);
             $dato_P = 4 * $dato_B + 2 * $dato_H - 14 * $dato_e + 3 * pi() * $dato_e;
@@ -202,7 +202,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil IC Pilar y Viga 4 Caras
-        function MasividadIC($dato_H, $dato_B, $dato_e, $dato_r)
+        function MasividadIC($dato_H, $dato_B, $dato_e)
         {
             $dato_A = 4 * $dato_B * $dato_e + 2 * $dato_H * $dato_e + 3 * pi() * ($dato_e * $dato_e) - 16 * ($dato_e * $dato_e);
             $dato_P = 8 * $dato_B + 2 * $dato_H - 20 * $dato_e + 6 * pi() * $dato_e;
@@ -210,7 +210,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil CA Pilar y Viga 4 Caras
-        function MasividadCA($dato_H, $dato_B, $dato_C, $dato_e, $dato_r)
+        function MasividadCA($dato_H, $dato_B, $dato_C, $dato_e)
         {
             $dato_A = 2 * $dato_C * $dato_e + 2 * $dato_B * $dato_e + $dato_H * $dato_e - 16 * ($dato_e * $dato_e) + 3 * pi() * ($dato_e * $dato_e);
             $dato_P = 4 * $dato_C + 4 * $dato_B + 2 * $dato_H + 6 * pi() * $dato_e - 30 * $dato_e;
@@ -218,7 +218,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil ICA Pilar y Viga 4 Caras
-        function MasividadICA($dato_H, $dato_B, $dato_C, $dato_e, $dato_r)
+        function MasividadICA($dato_H, $dato_B, $dato_C, $dato_e)
         {
             $dato_A = 4 * $dato_C * $dato_e + 4 * $dato_B * $dato_e + 2 * $dato_H * $dato_e - 32 * ($dato_e * $dato_e) + 6 * pi() * ($dato_e * $dato_e);
             $dato_P = 8 * $dato_C + 8 * $dato_B + 2 * $dato_H - 52 * $dato_e + 12 * pi() * $dato_e;
@@ -226,7 +226,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil OCA Pilar y Viga 4 Caras
-        function MasividadOCA($dato_H, $dato_B, $dato_C, $dato_e, $dato_r)
+        function MasividadOCA($dato_H, $dato_B, $dato_C, $dato_e)
         {
             $dato_A = 4 * $dato_C * $dato_e + 4 * $dato_B * $dato_e + 2 * $dato_H * $dato_e - 32 * ($dato_e * $dato_e) + 6 * pi() * ($dato_e * $dato_e);
             $dato_P = 4 * $dato_B + 2 * $dato_H - 24 * $dato_e + 8 * pi() * $dato_e;
@@ -234,7 +234,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil L Pilar y Viga 4 Caras
-        function MasividadL($dato_H, $dato_B, $dato_e, $dato_r)
+        function MasividadL($dato_H, $dato_B, $dato_e)
         {
             $dato_A = $dato_H * $dato_e + $dato_B * $dato_e - 4 * ($dato_e * $dato_e) + 3 / 4 * pi() * ($dato_e * $dato_e);
             $dato_P = 2 * $dato_H + 2 * $dato_B - 6 * $dato_e + 3 / 2 * pi() * $dato_e;
@@ -242,7 +242,7 @@ class ProjectProfileController extends Controller
         }
 
         // Función para calcular la masividad para el Perfil Z Pilar y Viga 4 Caras
-        function MasividadZ($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e, $dato_r)
+        function MasividadZ($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e)
         {
             $tanValue = tan(22.5 * pi() / 180);
             $dato_A = ($dato_H + 2) * $dato_e + 2 * $dato_C * $dato_e + $dato_B1 * $dato_e + $dato_B2 * $dato_e + 9 / 4 * pi() * ($dato_e * $dato_e) - 8 * ($dato_e * $dato_e) * $tanValue - 8 * ($dato_e * $dato_e);
@@ -258,37 +258,37 @@ class ProjectProfileController extends Controller
             if ($profile->exposicion == 'Viga 3 Caras') {
                 switch ($profile->forma) {
                     case 'HSR':
-                        $masividad = MasividadHSR_V3C($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t, $dato_r);
+                        $masividad = MasividadHSR_V3C($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t);
                         break;
                     case 'HCR':
                         $masividad = MasividadHCR_V3C($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t, $dato_r);
                         break;
                     case 'R':
-                        $masividad = MasividadRectangular_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        $masividad = MasividadRectangular_V3C($dato_H, $dato_B1, $dato_e1);
                         break;
                     case 'Circular':
                         $masividad = MasividadCircular_V3C($dato_D, $dato_e1);
                         break;
                     case 'C':
-                        $masividad = MasividadC_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        $masividad = MasividadC_V3C($dato_H, $dato_B1, $dato_e1);
                         break;
                     case 'IC':
-                        $masividad = MasividadIC_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        $masividad = MasividadIC_V3C($dato_H, $dato_B1, $dato_e1);
                         break;
                     case 'CA':
-                        $masividad = MasividadCA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        $masividad = MasividadCA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1);
                         break;
                     case 'ICA':
-                        $masividad = MasividadICA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        $masividad = MasividadICA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1);
                         break;
                     case 'OCA':
-                        $masividad = MasividadOCA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        $masividad = MasividadOCA_V3C($dato_H, $dato_B1, $dato_C, $dato_e1);
                         break;
                     case 'L':
-                        $masividad = MasividadL_V3C($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        $masividad = MasividadL_V3C($dato_H, $dato_B1, $dato_e1);
                         break;
                     case 'Z':
-                        $masividad = MasividadZ_V3C($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e1, $dato_r);
+                        $masividad = MasividadZ_V3C($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e1);
                         break;
                 }
             } else {
@@ -300,31 +300,31 @@ class ProjectProfileController extends Controller
                         $masividad = MasividadHCR($dato_H, $dato_B1, $dato_B2, $dato_e1, $dato_e2, $dato_t, $dato_r);
                         break;
                     case 'R':
-                        $masividad = MasividadRectangular($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        $masividad = MasividadRectangular($dato_H, $dato_B1, $dato_e1);
                         break;
                     case 'Circular':
                         $masividad = MasividadCircular($dato_D, $dato_e1);
                         break;
                     case 'C':
-                        $masividad = MasividadC($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        $masividad = MasividadC($dato_H, $dato_B1, $dato_e1);
                         break;
                     case 'IC':
-                        $masividad = MasividadIC($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        $masividad = MasividadIC($dato_H, $dato_B1, $dato_e1);
                         break;
                     case 'CA':
-                        $masividad = MasividadCA($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        $masividad = MasividadCA($dato_H, $dato_B1, $dato_C, $dato_e1);
                         break;
                     case 'ICA':
-                        $masividad = MasividadICA($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        $masividad = MasividadICA($dato_H, $dato_B1, $dato_C, $dato_e1);
                         break;
                     case 'OCA':
-                        $masividad = MasividadOCA($dato_H, $dato_B1, $dato_C, $dato_e1, $dato_r);
+                        $masividad = MasividadOCA($dato_H, $dato_B1, $dato_C, $dato_e1);
                         break;
                     case 'L':
-                        $masividad = MasividadL($dato_H, $dato_B1, $dato_e1, $dato_r);
+                        $masividad = MasividadL($dato_H, $dato_B1, $dato_e1);
                         break;
                     case 'Z':
-                        $masividad = MasividadZ($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e1, $dato_r);
+                        $masividad = MasividadZ($dato_H, $dato_B1, $dato_B2, $dato_C, $dato_e1);
                         break;
                 }
             }
@@ -443,19 +443,41 @@ class ProjectProfileController extends Controller
 
     private function getMinimo($profile, $filedatum)
     {
-        switch ($profile->resistencia) {
-            case 15:
-                return $filedatum->m15;
-            case 30:
-                return $filedatum->m30;
-            case 60:
-                return $filedatum->m60;
-            case 90:
-                return $filedatum->m90;
-            case 120:
-                return $filedatum->m120;
-            default:
-                return null;
+        // Verificar la exposición, perfil y forma
+        $exposicion = $profile->exposicion;
+        $perfil = $profile->perfil;
+
+        // Verificar si la exposición es válida
+        if (
+            $exposicion == 'Pilar 4 caras' && $filedatum->p4c == 'si' ||
+            $exposicion == 'Viga 4 caras'  && $filedatum->v4c == 'si' ||
+            $exposicion == 'Viga 3 caras'  && $filedatum->v3c == 'si'
+        ) {
+            // Verificar si el perfil es válido
+            if (
+                $perfil == 'Perfil Abierto'             && $filedatum->abierta     == 'si' ||
+                $perfil == 'Perfil Cerrado Rectangular' && $filedatum->rectangular == 'si' ||
+                $perfil == 'Perfil Cerrado Circular'    && $filedatum->circular    == 'si'
+            ) {
+                // Devolver el valor mínimo correspondiente a la resistencia
+                switch ($profile->resistencia) {
+                    case 15:
+                        return $filedatum->m15;
+                    case 30:
+                        return $filedatum->m30;
+                    case 60:
+                        return $filedatum->m60;
+                    case 90:
+                        return $filedatum->m90;
+                    case 120:
+                        return $filedatum->m120;
+                    default:
+                        return null;
+                }
+            }
         }
+
+        // Si no se cumplen las condiciones, devolver null
+        return null;
     }
 }

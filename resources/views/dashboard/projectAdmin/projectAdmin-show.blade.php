@@ -65,7 +65,7 @@
                                                 <th>Pintura</th>
                                                 <th>Modelo</th>
                                                 <th>Certificado</th>
-                                                <th>Numero</th>
+                                                <th>Número de<br>Certificado</th>
                                                 <th>Espesor mínimo<br> recomendado</th>
                                                 <th>Incluir</th>
                                         </thead>

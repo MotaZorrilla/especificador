@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Obtenemos los radio seleccionados
         const exposicion = document.querySelector('input[name="exposicion"]:checked').value;
         const perfil     = document.querySelector('input[name="perfil"]:checked').value;
-        let forma      = document.querySelector('input[name="forma"]:checked').value;
+        const forma      = document.querySelector('input[name="forma"]:checked').value;
         
         const etiquetas = document.querySelectorAll('#forma_perfil .form-check'); 
         const datos = document.querySelectorAll('#form_datos .form-group'); 
@@ -102,33 +102,28 @@ document.addEventListener("DOMContentLoaded", function() {
                         d_H .style.display = "block";
                         d_B1.style.display = "block";
                         d_e1.style.display = "block";
-                        d_r .style.display = "block";
                         break;
                     case "IC":
                         d_H .style.display = "block";
                         d_B1.style.display = "block";
                         d_e1.style.display = "block";
-                        d_r .style.display = "block";
                         break;
                     case "CA":
                         d_H .style.display = "block";
                         d_B1.style.display = "block";
                         d_C .style.display = "block";
                         d_e1.style.display = "block";
-                        d_r .style.display = "block";
                         break;
                     case "ICA":
                         d_H .style.display = "block";
                         d_B1.style.display = "block";
                         d_C .style.display = "block";
                         d_e1.style.display = "block";
-                        d_r .style.display = "block";
                         break;
                     case "L":
                         d_H .style.display = "block";
                         d_B1.style.display = "block";
                         d_e1.style.display = "block";
-                        d_r .style.display = "block";
                         break;
                     case "Z":
                         d_H .style.display = "block";
@@ -136,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         d_B2.style.display = "block";
                         d_C .style.display = "block";
                         d_e1.style.display = "block";
-                        d_r .style.display = "block";
                         break;
                 
                 }
@@ -166,27 +160,23 @@ document.addEventListener("DOMContentLoaded", function() {
                         imgPerfil.src = `/../assets/img/Cortes/3_caras/R.png`,
                         d_H .style.display = "block",
                         d_B1.style.display = "block",
-                        d_e1.style.display = "block",
-                        d_r .style.display = "block") : (
+                        d_e1.style.display = "block") : (
                         imgPerfil.src = `/../assets/img/Cortes/3_caras/OCA.png`,
                         d_H .style.display = "block",
                         d_B1.style.display = "block",
                         d_C .style.display = "block",
-                        d_e1.style.display = "block",
-                        d_r .style.display = "block") 
+                        d_e1.style.display = "block") 
                     ) : (
                     r_forma_R.checked == true ? (
                         imgPerfil.src = `/../assets/img/Cortes/4_caras/R.png`,
                         d_H .style.display = "block",
                         d_B1.style.display = "block",
-                        d_e1.style.display = "block",
-                        d_r .style.display = "block") : (
+                        d_e1.style.display = "block") : (
                         imgPerfil.src = `/../assets/img/Cortes/4_caras/OCA.png`,
                         d_H .style.display = "block",
                         d_B1.style.display = "block",
                         d_C .style.display = "block",
-                        d_e1.style.display = "block",
-                        d_r .style.display = "block") 
+                        d_e1.style.display = "block") 
                     );
 
                 break;
