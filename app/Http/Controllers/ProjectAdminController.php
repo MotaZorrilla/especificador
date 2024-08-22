@@ -95,7 +95,8 @@ class ProjectAdminController extends Controller
             return $profile->incluir;
         });
 
-        $date = date('d-m-Y');
+        date_default_timezone_set('America/Santiago');
+        $date = date('d-m-Y H:i');
 
         $project = $projectAdmin;
 
