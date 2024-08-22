@@ -5,32 +5,59 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\models\User;
 use App\Models\File;
+use App\Models\Filedata;
+use App\Models\Plan;
+use App\Models\Project;
+use App\Models\Profile;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Auth;
 
 
 class DashboardController extends Controller
 {
-    public function index() {
-        return view('dashboard.dashboard');
+    public function index()
+    {
+        $user = Auth::user();
+
+        // Obtener todos los proyectos del usuario
+        $userProjects = $user->projects;
+
+        // Contar todos los perfiles asociados a los proyectos del usuario
+        $userProfilesCount = 0;
+
+        foreach ($userProjects as $project) {
+            $userProfilesCount += $project->profiles()->count();
+        }
+
+        $totals = [
+            'user' => $user,
+            'users' => User::count(),
+            'data' => Filedata::count(),
+            'plans' => Plan::count(),
+            'projects' => Project::count(),
+            'profiles' => Profile::count(),
+            'roles' => Role::count(),
+            'user_projects' => $userProjects->count(),
+            'user_profiles' => $userProfilesCount,
+        ];
+
+        return view('dashboard.dashboard', compact('totals'));
     }
 
-    public function profile()
-    {   
-        return view('dashboard.user-profile');
-    }
-    
+
     // public function users()
     // {   
     //     $users = User::paginate();
-        
+
     //     return view('dashboard.user-management', compact('users')); 
     // }
 
     public function database()
-    {   
+    {
         $files = File::paginate();
-        
-        return view('dashboard.database-management', compact('files')); 
+
+        return view('dashboard.database-management', compact('files'));
     }
     /*public function darkmode(Request $request)
     {   

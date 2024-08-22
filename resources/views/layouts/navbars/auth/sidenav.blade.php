@@ -25,7 +25,7 @@
                             <li class="nav-item mt-3 d-flex align-items-center">
                                 <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'text-primary' : '' }} "
                                     href="{{ route('userProfile') }}">
-                                    <i class="fas fa-user text-warning me-2"></i> Mi Perfil
+                                    <i class="ni ni-single-02 text-warning me-2"></i> Mi Perfil
                                 </a>
                             </li>
                         @endcan
@@ -33,7 +33,7 @@
                             <li class="nav-item mt-3 d-flex align-items-center">
                                 <a class="nav-link {{ str_contains(request()->url(), 'user') == true ? 'text-primary' : '' }} "
                                     href="{{ route('user.index') }}">
-                                    <i class="fas fa-users text-warning me-2"></i> Usuarios
+                                    <i class="ni ni-badge text-warning me-2"></i> Usuarios
                                 </a>
                             </li>
                         @endcan
@@ -41,7 +41,7 @@
                             <li class="nav-item mt-3 d-flex align-items-center">
                                 <a class="nav-link {{ str_contains(request()->url(), 'projectAdmin') == true ? 'text-primary' : '' }} "
                                     href="{{ route('projectAdmin.index') }}">
-                                    <i class="ni ni-credit-card text-warning me-2"></i> Administrador de Proyectos
+                                    <i class="ni ni-laptop text-warning me-2"></i> Administrador de Proyectos
                                 </a>
                             </li>
                         @endcan
@@ -59,7 +59,7 @@
                             <li class="nav-item mt-3 d-flex align-items-center">
                                 <a class="nav-link {{ str_contains(request()->url(), 'filedata') == true ? 'text-primary' : '' }} "
                                     href="{{ route('filedata.index') }}">
-                                    <i class="fab fa-fw fa-buffer text-warning me-2"></i> Data
+                                    <i class="ni ni-single-copy-04 text-warning me-2"></i> Data
                                 </a>
                             </li>
                         @endcan
@@ -67,7 +67,7 @@
                             <li class="nav-item mt-3 d-flex align-items-center">
                                 <a class="nav-link {{ str_contains(request()->url(), 'Roles') == true ? 'text-primary' : '' }} "
                                     href="{{ route('role.index') }}">
-                                    <i class="fas fa-fw fa-clipboard text-warning me-2"></i> Roles
+                                    <i class="ni ni-bullet-list-67 text-warning me-2"></i> Roles
                                 </a>
                             </li>
                         @endcan
@@ -75,7 +75,7 @@
                             <li class="nav-item mt-3 d-flex align-items-center">
                                 <a class="nav-link {{ str_contains(request()->url(), 'Planes') == true ? 'text-primary' : '' }} "
                                     href="{{ route('plan.index') }}">
-                                    <i class="fas fa-fw fa-file text-warning me-2"></i> Planes
+                                    <i class="ni ni-money-coins text-warning me-2"></i> Planes
                                 </a>
                             </li>
                         @endcan

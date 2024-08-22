@@ -4,18 +4,18 @@
     @include('layouts.navbars.auth.topnav', [
         'title' => 'Bienvenido al Panel del Especificador de Pintura Intumescente',
     ])
-    <div class="container-fluid py-4">
-        <div class="row ">
+    <div class="container-fluid d-flex py-4">
+        <div class="row justify-content-center" style="max-width: 1200px; margin: auto;">
             @can('profile')
-                <div class="col-xl-3 col-sm-6 mb-4">
-                    <div class="card shadow-sm">
+                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                    <div class="card shadow flex-fill">
                         <div class="card-body py-5">
                             <div class="row">
                                 <a href="{{ route('userProfile') }}">
                                     <div class="col-8">
                                         <div class="numbers">
                                             <a href="{{ route('userProfile') }}">
-                                                <p class="text-sm mb-0  font-weight-bold">Mi Perfil</p>
+                                                <h3 class="text mb-0  font-weight-bold">Mi Perfil</h3>
                                             </a>
                                         </div>
                                     </div>
@@ -23,7 +23,7 @@
                                         <div
                                             class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
                                             <a href="{{ route('userProfile') }}">
-                                                <i class="fas fa-user text-lg opacity-10" aria-hidden="true"></i>
+                                                <i class="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -34,15 +34,16 @@
                 </div>
             @endcan
             @can('user')
-                <div class="col-xl-3 col-sm-6 mb-4">
-                    <div class="card shadow-sm">
+                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                    <div class="card shadow flex-fill">
                         <div class="card-body py-5">
                             <div class="row">
                                 <a href="{{ route('user.index') }}">
                                     <div class="col-8">
                                         <div class="numbers">
                                             <a href="{{ route('user.index') }}">
-                                                <p class="text-sm mb-0  font-weight-bold">Usuarios</p>
+                                                <H3 class="text mb-0  font-weight-bold">Usuarios</h3>
+                                                <p class="text mb-0  font-weight-bold">Total Usuarios: {{ $totals['users'] }}</p>
                                             </a>
                                         </div>
                                     </div>
@@ -50,7 +51,7 @@
                                         <div
                                             class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
                                             <a href="{{ route('user.index') }}">
-                                                <i class="fas fa-users text-lg opacity-10" aria-hidden="true"></i>
+                                                <i class="ni ni-badge text-lg opacity-10" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -61,15 +62,17 @@
                 </div>
             @endcan
             @can('projectAdmin')
-                <div class="col-xl-3 col-sm-6 mb-4">
-                    <div class="card shadow-sm">
+                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                    <div class="card shadow flex-fill">
                         <div class="card-body py-5">
                             <div class="row">
                                 <a href="{{ route('projectAdmin.index') }}">
                                     <div class="col-8">
                                         <div class="numbers">
                                             <a href="{{ route('projectAdmin.index') }}">
-                                                <p class="text-sm mb-0  font-weight-bold">Administrador de Proyectos</p>
+                                                <h3 class="text mb-0  font-weight-bold">Administrador de Proyectos</h3>
+                                                <p class="text mb-0 ">Proyectos Totales: {{ $totals['projects'] }}</p>
+                                                <p class="text mb-0">Perfiles Totales: {{ $totals['profiles'] }}</p>
                                             </a>
                                         </div>
                                     </div>
@@ -77,7 +80,7 @@
                                         <div
                                             class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
                                             <a href="{{ route('projectAdmin.index') }}">
-                                                <i class="ni ni-credit-card text-lg opacity-10" aria-hidden="true"></i>
+                                                <i class="ni ni-laptop text-lg opacity-10" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -88,15 +91,17 @@
                 </div>
             @endcan
             @can('project')
-                <div class="col-xl-3 col-sm-6 mb-4">
-                    <div class="card shadow-sm">
+                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                    <div class="card shadow flex-fill">
                         <div class="card-body py-5">
                             <div class="row">
                                 <a href="{{ route('project.index') }}">
                                     <div class="col-8">
                                         <div class="numbers">
                                             <a href="{{ route('project.index') }}">
-                                                <p class="text-sm mb-0  font-weight-bold">Mis Proyectos</p>
+                                                <h3 class="text mb-0  font-weight-bold">Mis Proyectos</h3>
+                                                <p class="text mb-0">Proyectos Totales: {{ $totals['user_projects'] }}</p>
+                                                <p class="text mb-0">Perfiles Totales: {{ $totals['user_profiles'] }}</p>
                                             </a>
                                         </div>
                                     </div>
@@ -115,15 +120,16 @@
                 </div>
             @endcan
             @can('filedata')
-                <div class="col-xl-3 col-sm-6 mb-4">
-                    <div class="card shadow-sm">
+                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                    <div class="card shadow flex-fill">
                         <div class="card-body py-5">
                             <div class="row">
                                 <a href="{{ route('filedata.index') }}">
                                     <div class="col-8">
                                         <div class="numbers">
                                             <a href="{{ route('filedata.index') }}">
-                                                <p class="text-sm mb-0  font-weight-bold">Data</p>
+                                                <h3 class="text mb-0  font-weight-bold">Data</h3>
+                                                <p class="text mb-0">Registos Totales de Pinturas: {{ $totals['data'] }}</p>
                                             </a>
                                         </div>
                                     </div>
@@ -131,7 +137,7 @@
                                         <div
                                             class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
                                             <a href="{{ route('filedata.index') }}">
-                                                <i class="fab fa-fw fa-buffer text-lg opacity-10" aria-hidden="true"></i>
+                                                <i class="ni ni-single-copy-04 text-lg opacity-10" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -142,15 +148,16 @@
                 </div>
             @endcan
             @can('role')
-                <div class="col-xl-3 col-sm-6 mb-4">
-                    <div class="card shadow-sm">
+                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                    <div class="card shadow flex-fill">
                         <div class="card-body py-5">
                             <div class="row">
                                 <a href="{{ route('role.index') }}">
                                     <div class="col-8">
                                         <div class="numbers">
                                             <a href="{{ route('role.index') }}">
-                                                <p class="text-sm mb-0  font-weight-bold">Roles</p>
+                                                <h3 class="text mb-0  font-weight-bold">Roles</h3>
+                                                <p class="text mb-0">Roles Totales: {{ $totals['roles'] }}</p>
                                             </a>
                                         </div>
                                     </div>
@@ -158,7 +165,7 @@
                                         <div
                                             class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
                                             <a href="{{ route('role.index') }}">
-                                                <i class="fas fa-fw fa-clipboard text-lg opacity-10" aria-hidden="true"></i>
+                                                <i class="ni ni-bullet-list-67 text-lg opacity-10" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -169,15 +176,16 @@
                 </div>
             @endcan
             @can('plan')
-                <div class="col-xl-3 col-sm-6 mb-4">
-                    <div class="card shadow-sm">
+                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                    <div class="card shadow flex-fill">
                         <div class="card-body py-5">
                             <div class="row">
                                 <a href="{{ route('plan.index') }}">
                                     <div class="col-8">
                                         <div class="numbers">
                                             <a href="{{ route('plan.index') }}">
-                                                <p class="text-sm mb-0  font-weight-bold">Planes</p>
+                                                <h3 class="text mb-0  font-weight-bold">Planes</h3>
+                                                <p class="text mb-0">Planes Totales: {{ $totals['plans'] }}</p>
                                             </a>
                                         </div>
                                     </div>
@@ -185,7 +193,7 @@
                                         <div
                                             class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
                                             <a href="{{ route('plan.index') }}">
-                                                <i class="fas fa-fw fa-file text-lg opacity-10" aria-hidden="true"></i>
+                                                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </div>
