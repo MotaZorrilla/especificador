@@ -13,8 +13,8 @@ return new class extends Migration
             $table->foreignId('user_id')                    ->constrained(); 
             $table->unsignedBigInteger('user_project_counter');
             $table->string('project');  
-            $table->string('description')                   ->nullable();
-            $table->string('observations')                  ->nullable();    
+            $table->string('description',1000)               ->nullable();
+            $table->string('observations',1000)              ->nullable();    
             $table->softDeletes();
             $table->timestamps();
         });
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignId('project_id')                 ->constrained(); 
             // $table->unsignedBigInteger('project_profile_counter');
             $table->string('nombre');
-            $table->string('descripcion')                   ->nullable();
+            $table->string('descripcion',1000)              ->nullable();
             $table->string('exposicion')                    ->nullable();
             $table->string('perfil')                        ->nullable();
             $table->string('forma')                         ->nullable();
@@ -39,7 +39,7 @@ return new class extends Migration
             $table->unsignedDecimal('radio',        5, 2)   ->nullable();
             $table->unsignedDecimal('plieque',      5, 2)   ->nullable();
             $table->unsignedDecimal('diametro',     5, 2)   ->nullable();
-            $table->string('observaciones')                 ->nullable();
+            $table->string('observaciones', 1000)           ->nullable();
             $table->boolean('incluir')                      ->nullable();
             $table->softDeletes();
             $table->timestamps();

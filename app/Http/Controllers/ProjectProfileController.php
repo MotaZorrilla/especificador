@@ -336,8 +336,10 @@ class ProjectProfileController extends Controller
         }
         $profile->save();
 
-        $user = auth()->user();
-        $user->profile_count--;
+        if ($user = auth()->user()) {
+            $user->profile_count--;
+            $user->save();
+        }
 
         // Redirigir a la página de proyectos con un mensaje de éxito
         // Mostrar la vista de projectProfile.index con el parámetro 'project'
@@ -347,16 +349,23 @@ class ProjectProfileController extends Controller
 
     public function show($profileId)
     {
-        $profile    = Profile::find($profileId);
-        $results    = Result::where('profile_id', '$profileId')->get();
+        // Cargar el perfil con su proyecto y resultados relacionados
+        $profile = Profile::with(['project', 'results'])->findOrFail($profileId);
 
-        if ($results->isEmpty()) {
+        // Verificar si existen resultados asociados
+        if ($profile->results->isEmpty()) {
+            // Generar resultados si no existen
             $this->Resultados($profile);
-            $results = Result::where('profile_id', $profileId)->get();
+
+            // Recargar los resultados después de la generación
+            $profile->load('results');
         }
 
-        return view('dashboard.projectProfile.profile-show', compact('profile', 'results'));
+        $successMessage = '';
+
+        return view('dashboard.projectProfile.profile-show', compact('profile', 'successMessage'));
     }
+
 
     public function edit($id)
     {
@@ -399,7 +408,10 @@ class ProjectProfileController extends Controller
         // Recuperar todos los resultados después de la actualización
         $results = Result::where('profile_id', $profileId)->get();
 
-        return view('dashboard.projectProfile.profile-show', compact('profile', 'results'));
+        $successMessage = 'El perfil se actualizó con éxito';
+
+        // Devolver la vista con el mensaje
+        return view('dashboard.projectProfile.profile-show', compact('profile', 'results', 'successMessage'));
     }
 
     public function destroy($profileId)
@@ -412,32 +424,20 @@ class ProjectProfileController extends Controller
             ->with('success', 'El perfil se eliminó con éxito');
     }
 
-
     private function Resultados($profile)
     {
         $masividad  = (int)$profile->masividad;
         $filedata   = Filedata::where('masividad', $masividad)->get();
 
         foreach ($filedata as $filedatum) {
-            // Verificar si ya existe un resultado para esta pintura y perfil
-            $existingResult = Result::where('profile_id', $profile->id)
-                ->where('pintura', $filedatum->pintura)
-                ->where('modelo', $filedatum->modelo)
-                ->where('certificado', $filedatum->certificado)
-                ->where('numero', $filedatum->numero)
-                ->first();
-
-            if (!$existingResult) {
-                // Crear el nuevo resultado solo si no existe
-                $result                 = new Result();
-                $result->profile_id     = $profile->id;
-                $result->pintura        = $filedatum->pintura;
-                $result->modelo         = $filedatum->modelo;
-                $result->certificado    = $filedatum->certificado;
-                $result->numero         = $filedatum->numero;
-                $result->minimo         = $this->getMinimo($profile, $filedatum);
-                $result->save();
-            }
+            $result                 = new Result();
+            $result->profile_id     = $profile->id;
+            $result->pintura        = $filedatum->pintura;
+            $result->modelo         = $filedatum->modelo;
+            $result->certificado    = $filedatum->certificado;
+            $result->numero         = $filedatum->numero;
+            $result->minimo         = $this->getMinimo($profile, $filedatum);
+            $result->save();
         }
     }
 
@@ -449,15 +449,15 @@ class ProjectProfileController extends Controller
 
         // Verificar si la exposición es válida
         if (
-            $exposicion == 'Pilar 4 caras' && $filedatum->p4c == 'si' ||
-            $exposicion == 'Viga 4 caras'  && $filedatum->v4c == 'si' ||
-            $exposicion == 'Viga 3 caras'  && $filedatum->v3c == 'si'
+            $exposicion == 'Pilar 4 Caras' && ($filedatum->p4c == 'si' || $filedatum->p4c == 'Si') ||
+            $exposicion == 'Viga 4 Caras'  && ($filedatum->v4c == 'si' || $filedatum->v4c == 'Si') ||
+            $exposicion == 'Viga 3 Caras'  && ($filedatum->v3c == 'si' || $filedatum->v3c == 'Si')
         ) {
             // Verificar si el perfil es válido
             if (
-                $perfil == 'Perfil Abierto'             && $filedatum->abierta     == 'si' ||
-                $perfil == 'Perfil Cerrado Rectangular' && $filedatum->rectangular == 'si' ||
-                $perfil == 'Perfil Cerrado Circular'    && $filedatum->circular    == 'si'
+                $perfil == 'Perfil Abierto'             && ($filedatum->abierta     == 'si' || $filedatum->abierta     == 'Si') ||
+                $perfil == 'Perfil Cerrado Rectangular' && ($filedatum->rectangular == 'si' || $filedatum->rectangular == 'Si') ||
+                $perfil == 'Perfil Cerrado Circular'    && ($filedatum->circular    == 'si' || $filedatum->circular    == 'Si')
             ) {
                 // Devolver el valor mínimo correspondiente a la resistencia
                 switch ($profile->resistencia) {
@@ -476,7 +476,6 @@ class ProjectProfileController extends Controller
                 }
             }
         }
-
         // Si no se cumplen las condiciones, devolver null
         return null;
     }

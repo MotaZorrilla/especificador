@@ -239,7 +239,7 @@
                                             <input class="form-check-input" type="radio" value="L" id="r_forma_L"
                                                 name="forma">
                                             <label class="form-check-label" id="l_forma_L" for="forma_L">L ó
-                                                Angulo</label>
+                                                Ángulo</label>
                                         </div>
                                         <div id="forma_Z" class="form-check">
                                             <input class="form-check-input" type="radio" value="Z" id="r_forma_Z"

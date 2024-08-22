@@ -41,8 +41,8 @@ class Profile extends Model
         return $this->belongsTo(Project::class);
     }
     
-    public function result()
+    public function results()
     {
-        return $this->hasOne(Result::class);
+        return $this->hasMany(Result::class);
     }
 }

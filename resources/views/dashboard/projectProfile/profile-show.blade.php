@@ -7,6 +7,8 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-4">
+                        <h3>Proyecto: "{{ $profile['project']->project }}"</h3>
+                        <p>"{{ $profile['project']->description }}"</p>
                         <h3>Perfil: "{{ $profile->nombre }}"</h3>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -31,6 +33,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
+                    <div class="px-4 pt-4">
+                        @if ($successMessage)
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <p class="text-white mb-0">{{ $successMessage }}</p>
+                            </div>
+                        @endif
+                    </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="container py-5 col-5">
                             <form action="{{ route('projectProfile.update', $profile) }}" method="post">
@@ -39,26 +48,68 @@
                                 @if (Session::has('message'))
                                     <p>{{ Session::get('messsage') }}</p>
                                 @endif
-                                <div class="form-group">
-                                    <label class="form-control-label" for=>Descripción:</label>
-                                    <p>{{ $profile->descripcion }}</p>
+
+
+                                <div class="row mb-5">
+                                    <div class="col-6 ">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>Descripción:</label>
+                                            <p>{{ $profile->descripcion }}</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-control-label" for=>Exposión:</label>
+                                            <p>{{ $profile->exposicion }}</p>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="mass" class="form-control-label">Tipo Perfil:</label>
+                                            @php
+                                                $formasCompletas = [
+                                                    'C' => 'con forma tipo "C"',
+                                                    'CA' => 'con forma tipo "CA"',
+                                                    'Circular' => '',
+                                                    'HCR' => 'con forma tipo "H" con Radio',
+                                                    'HSR' => 'con forma tipo "H" sin Radio',
+                                                    'IC' => 'con forma tipo "IC"',
+                                                    'ICA' => 'con forma tipo "ICA"',
+                                                    'L' => 'con forma tipo "L" ó Ángulo',
+                                                    'OCA' => 'Cerrada tipo "OCA"',
+                                                    'R' => '',
+                                                    'Z' => 'con forma tipo "Z"',
+                                                ];
+                                                $formaCompleta = $formasCompletas[$profile->forma];
+                                            @endphp
+                                            <p>{{ $profile->perfil }} {{ $formaCompleta }}</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mass" class="form-control-label">Masividad:</label>
+                                            <p>{{ number_format($profile->masividad, 0) }} m<sup>-1</sup></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mass" class="form-control-label">Resistencia al Fuego:</label>
+                                            <p>{{ number_format($profile->resistencia, 0) }} minutos</p>
+                                        </div>
+                                    </div>
+                                    {{-- imagen del perfil --}}
+                                    <div style="display: inline-block; vertical-align: top; " class="col-6">
+                                        <label class="form-control-label">Visualización del Perfil:</label>
+                                        <div>
+                                            @if ($profile->exposicion == 'Viga 3 Caras')
+                                                <img id="imgPerfil"
+                                                    src="../assets/img/Cortes/3_caras/{{ $profile->forma }}.png"
+                                                    style="max-width: 100%">
+                                            @else
+                                                <img id="imgPerfil"
+                                                    src="../assets/img/Cortes/4_caras/{{ $profile->forma }}.png"
+                                                    style="max-width: 100%">
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="mass" class="form-control-label">Tipo Perfil:</label>
-                                    <p>{{ $profile->perfil }} {{ $profile->forma ? "con $profile->forma" : '' }}</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="mass" class="form-control-label">Masividad:</label>
-                                    <p>{{ number_format($profile->masividad, 0) }} m<sup>-1</sup></p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="mass" class="form-control-label">Resistencia al Fuego:</label>
-                                    <p>{{ number_format($profile->resistencia, 0) }} minutos</p>
-                                </div>
+
                                 <div>
-                                    @if ($results->count())
+                                    @if ($profile->results->where('minimo', true)->isNotEmpty())
                                         <table class="table align-items-center mb-4 table-striped" cellpadding="10">
-                                            <thead>
+                                            <thead id="cabecera_pitura">
                                                 <tr>
                                                     <th>Pintura</th>
                                                     <th>Modelo</th>
@@ -66,9 +117,10 @@
                                                     <th>Número de<br>Certificado</th>
                                                     <th>Espesor mínimo<br> recomendado</th>
                                                     <th>Incluir</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($results as $result)
+                                                @foreach ($profile->results->where('minimo', true) as $result)
                                                     <tr>
                                                         <td class="text-center">{{ $result->pintura }}</td>
                                                         <td class="text-center">{{ $result->modelo }}</td>
@@ -76,18 +128,20 @@
                                                         <td class="text-center">{{ $result->numero }}</td>
                                                         <td class="text-center">{{ $result->minimo }}</td>
                                                         <td class="text-center">
-                                                            <input type="checkbox" name="selectedPaints[]" value="{{ $result->id }}" {{ $result->incluir ? 'checked' : '' }}>
+                                                            <input type="checkbox" name="selectedPaints[]"
+                                                                value="{{ $result->id }}"
+                                                                {{ $result->incluir ? 'checked' : '' }}>
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
-                                            
                                         </table>
                                     @else
                                         <div class="alert alert-warning text-white mx-3">
-                                            No hay pinturas que cumplan con lo especificado.
+                                            No hay pinturas que cumplan con la masividad especificada.
                                         </div>
                                     @endif
+
                                 </div>
                                 <div class="form-group">
                                     <div class="mb-4">
@@ -98,54 +152,34 @@
                                             @else
                                             >{{ $profile->observaciones }} @endif
                                             </textarea>
-                                            </div>
-                                            <div class="d-flex ">
-                                                <div>
-                                                    <button type="submit" class="btn bg-gradient-info m-1">Actualizar</button>
-                                                </div>
-                                                <div class="d-flex ">
-                                                    <form action="{{ route('projectProfile.edit', $profile) }}" method="get" >
-                                                        <button type="submit" class="btn bg-gradient-success m-1">Editar</button>
-                                                    </form>
-                                                    <form action="{{ route('projectAdmin.destroy', $profile) }}" method="post" >
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn bg-gradient-danger m-1">Eliminar</button>
-                                                    </form>
-                                                    <form action="{{ route('projectAdmin.index') }}" method="get" >
-                                                        <button type="submit" class="btn bg-gradient-success m-1">Volver</button>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                    </div>
+                                    <div class="d-flex ">
+                                        <div>
+                                            <button type="submit" class="btn bg-gradient-info m-1">Actualizar</button>
+                                        </div>
+                                        <div class="d-flex ">
+                                            <form action="{{ route('projectProfile.edit', $profile) }}" method="get" >
+                                                <button type="submit" class="btn bg-gradient-success m-1">Editar</button>
+                                            </form>
+                                            <form action="{{ route('projectAdmin.destroy', $profile) }}" method="post" >
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="btn bg-gradient-danger m-1">Eliminar</button>
+                                            </form>
+                                            <form action="{{ route('projectAdmin.index') }}" method="get" >
+                                                <button type="submit" class="btn bg-gradient-success m-1">Volver</button>
                                             </form>
                                         </div>
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 @endsection
 
 @section('js')
-    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
-
-    {{-- <script>
-        ClassicEditor
-            .create(document.querySelector('#descripcion'))
-            .then(editor => {
-                // Activa el modo de solo lectura
-                editor.enableReadOnlyMode( 'feature-id' );
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script> --}}
-                                                                {{-- <script>
-        ClassicEditor
-            .create(document.querySelector('#observaciones'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script> --}}
 @endsection

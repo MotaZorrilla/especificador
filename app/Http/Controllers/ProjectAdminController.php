@@ -88,30 +88,18 @@ class ProjectAdminController extends Controller
     public function pdf(Project $projectAdmin)
     {
         // Cargar relaciones adicionales
-        $projectAdmin->load('user', 'profiles.result');
-
-        // Obtener información del proyecto y del usuario
-        $project = [
-            'project' => $projectAdmin,
-            'user' => $projectAdmin->user,
-        ];
+        $projectAdmin->load('user', 'profiles.results');
 
         // Obtener perfiles con sus resultados
         $profiles = $projectAdmin->profiles->filter(function ($profile) {
             return $profile->incluir;
         });
 
-        // Obtener los IDs de los perfiles con la propiedad 'incluir' activada
-        $profileIds = $profiles->pluck('id')->toArray();
-
-        // Cargar resultados solo para los perfiles que tienen la propiedad 'incluir' activada
-        $results = Result::whereIn('profile_id', $profileIds)
-            ->where('incluir', true)
-            ->get();
-
         $date = date('d-m-Y');
 
-        $pdf = PDF::loadView('dashboard.projectAdmin.projectAdmin-pdf', compact('project', 'profiles', 'results', 'date'));
+        $project = $projectAdmin;
+
+        $pdf = PDF::loadView('dashboard.projectAdmin.projectAdmin-pdf', compact('project', 'profiles', 'date'));
 
         $pdf->setPaper('letter');
 
