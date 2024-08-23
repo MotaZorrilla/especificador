@@ -5,7 +5,18 @@
         'title' => 'Bienvenido al Panel del Especificador de Pintura Intumescente',
     ])
     <style>
+        .card-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .card {
+            max-width: 400px;
+            min-width: 300px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
             transition: all 0.3s ease;
         }
 
@@ -14,11 +25,12 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
     </style>
-    <div class="container-fluid d-flex py-4">
-        <div class="row justify-content-center" style="max-width: 1200px; margin: auto;">
 
-            <div class="col-xl-4 col-sm-6 mb-4 d-flex">
-                <div class="card shadow flex-fill bg-gradient-info" bg-gradient-info">
+    <div class="container-fluid d-flex py-4 mx-auto">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center card-container mx-auto">
+
+            <div class="mb-4 d-flex">
+                <div class="card shadow flex-fill bg-gradient-info">
                     <div class="card-body py-5">
                         <div class="row">
                             <a href="{{ route('userProfile') }}">
@@ -42,7 +54,7 @@
                 </div>
             </div>
             @can('user')
-                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                <div class="mb-4 d-flex">
                     <div class="card shadow flex-fill bg-gradient-info"">
                         <div class="card-body py-5">
                             <div class="row">
@@ -71,7 +83,7 @@
                 </div>
             @endcan
             @can('projectAdmin')
-                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                <div class="mb-4 d-flex">
                     <div class="card shadow flex-fill bg-gradient-info"">
                         <div class="card-body py-5">
                             <div class="row">
@@ -100,7 +112,7 @@
                 </div>
             @endcan
             @can('project')
-                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                <div class="mb-4 d-flex">
                     <div class="card shadow flex-fill bg-gradient-info"">
                         <div class="card-body py-5">
                             <div class="row">
@@ -130,7 +142,7 @@
                 </div>
             @endcan
             @can('filedata')
-                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                <div class="mb-4 d-flex">
                     <div class="card shadow flex-fill bg-gradient-info"">
                         <div class="card-body py-5">
                             <div class="row">
@@ -159,7 +171,7 @@
                 </div>
             @endcan
             @can('role')
-                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                <div class="mb-4 d-flex">
                     <div class="card shadow flex-fill bg-gradient-info"">
                         <div class="card-body py-5">
                             <div class="row">
@@ -187,7 +199,7 @@
                 </div>
             @endcan
             @can('plan')
-                <div class="col-xl-4 col-sm-6 mb-4 d-flex">
+                <div class="mb-4 d-flex">
                     <div class="card shadow flex-fill bg-gradient-info"">
                         <div class="card-body py-5">
                             <div class="row">

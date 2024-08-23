@@ -30,7 +30,7 @@ class DashboardController extends Controller
             $userProfilesCount += $project->profiles()->count();
         }
         $totals = [
-            'user' => $user->firstname,
+            'user' => $user->username,
             'users' => User::count(),
             'data' => Filedata::count(),
             'plans' => Plan::count(),

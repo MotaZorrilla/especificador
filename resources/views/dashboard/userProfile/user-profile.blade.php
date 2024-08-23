@@ -13,10 +13,10 @@
                 <div class="col-auto my-auto">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            {{ $user->firstname }} {{ $user->lastname }}
+                            {{ $user->username }}
                         </h5>
                         <p class="mb-0 font-weight-bold text-sm">
-                            Registrado como: {{ $role }}
+                            Registrado como: {{ $roleName}}
                         </p>
                     </div>
                 </div>
@@ -53,7 +53,19 @@
     <div class="container-fluid mx-auto py-4" style="max-width: 1200px;">
         <div class="row">
             <div class="card">
-                <form role="form" method="POST" action={{ route('profile.update') }} enctype="multipart/form-data">
+                <div class="px-4 pt-4">
+                    @if ($message = session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <p class="text-white mb-0">{{ session()->get('success') }}</p>
+                        </div>
+                    @endif
+                    @if ($message = session()->has('error'))
+                        <div class="alert alert-danger" role="alert">
+                            <p class="text-white mb-0">{{ session()->get('error') }}</p>
+                        </div>
+                    @endif
+                </div>
+                <form role="form" method="POST" action={{ route('userProfile.update') }} enctype="multipart/form-data">
                     @csrf
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center">
@@ -90,7 +102,7 @@
                             </div>
                         </div>
                         <hr class="horizontal dark">
-                        <p class="text-uppercase text-sm">Information de Contacto</p>
+                        <p class="text-uppercase text-sm">Datos de Contacto</p>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">

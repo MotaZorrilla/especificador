@@ -38,7 +38,7 @@
     @endguest
     @auth
         <div class="position-absolute w-100 min-height-300 top-0"
-            style="background-image: url("{{ asset('assets/img/profile-layout-header.jpg') }}"); background-position-y: 50%;">
+            style="background-position-y: 50%; background-image: url("{{ asset('assets/img/profile-layout-header.jpg') }}">
             <span class="mask bg-primary opacity-3"></span>
         </div>
         @include('layouts.navbars.auth.sidenav')

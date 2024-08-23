@@ -26,6 +26,7 @@ class User extends Authenticatable
         'country',
         'postal',
         'about',
+        'phone',
         'profile_count'
     ];
 

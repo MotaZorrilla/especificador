@@ -13,7 +13,12 @@
             </ul>
         </div>
         <div class="d-flex align-items-center justify-content-between">
-            <button class=" btn border  my-auto  ml-auto me-2" type="button" data-bs-toggle="offcanvas"
+            <h6 class="text-white me-2 mb-0">Claro / Oscuro</h6>
+            <div class="form-check form-switch ps-0 ms-auto my-auto me-2">
+                <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
+            </div>
+            @include('components.fixed-plugin')
+            <button class="btn border my-auto ml-auto me-2" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasSidebar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon ml-auto"></span>
             </button>

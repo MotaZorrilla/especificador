@@ -21,14 +21,12 @@
                             </div>
                         </li>
                         <hr class="horizontal dark mt-0">
-                        @can('profile')
-                            <li class="nav-item mt-3 d-flex align-items-center">
-                                <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'text-primary' : '' }} "
-                                    href="{{ route('userProfile') }}">
-                                    <i class="ni ni-single-02 text-warning me-2"></i> Mi Perfil
-                                </a>
-                            </li>
-                        @endcan
+                        <li class="nav-item mt-3 d-flex align-items-center">
+                            <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'text-primary' : '' }} "
+                                href="{{ route('userProfile') }}">
+                                <i class="ni ni-single-02 text-warning me-2"></i> Mi Perfil
+                            </a>
+                        </li>
                         @can('user')
                             <li class="nav-item mt-3 d-flex align-items-center">
                                 <a class="nav-link {{ str_contains(request()->url(), 'user') == true ? 'text-primary' : '' }} "

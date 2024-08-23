@@ -79,12 +79,6 @@
                             'Z' => 'con forma tipo "Z"',
                         ];
                         $formaCompleta = $formasCompletas[$profile->forma];
-                    @endphp
-                    <p>{{ $profile->perfil }} {{ $formaCompleta }}</p>
-                    <h3>Resistencia al fuego: </h3>
-                    <p> {{ number_format($profile->resistencia, 0) ?? 'N/A' }} minutos</p>
-                    <h3>Medidas:</h3>
-                    @php
                         $properties = collect([
                             'altura' => 'Altura',
                             'base1' => 'Base 1',
@@ -99,8 +93,16 @@
                         $profileProperties = $properties->filter(function ($label, $property) use ($profile) {
                             return isset($profile->$property);
                         });
+                        // Verificamos si debe mostrarse la coletilla de forma completa
+                        $mostrarFormaCompleta = !(
+                            $profile->perfil == 'Perfil Abierto' && $profileProperties->isEmpty()
+                        );
+                        $formaCompleta = $mostrarFormaCompleta ? $formasCompletas[$profile->forma] : '';
                     @endphp
-
+                    <p>{{ $profile->perfil }} {{ $formaCompleta }}</p>
+                    <h3>Resistencia al fuego: </h3>
+                    <p> {{ number_format($profile->resistencia, 0) ?? 'N/A' }} minutos</p>
+                    <h3>Medidas:</h3>
                     @if ($profileProperties->isEmpty())
                         <p>No se proporcionaron medidas.</p>
                     @else
@@ -120,12 +122,14 @@
                 </div>
                 {{-- imagen del perfil --}}
                 <div class="profile-image">
-                    @if ($profile->exposicion == 'Viga 3 Caras')
-                        <img id="imgPerfil" src="./assets/img/Cortes/3_caras/{{ $profile->forma }}.png"
-                            style="max-width: 100%">
-                    @else
-                        <img id="imgPerfil" src="./assets/img/Cortes/4_caras/{{ $profile->forma }}.png"
-                            style="max-width: 100%">
+                    @if (!($profile->perfil == 'Perfil Abierto' && $profileProperties->isEmpty()))
+                        @if ($profile->exposicion == 'Viga 3 Caras')
+                            <img id="imgPerfil" src="./assets/img/Cortes/3_caras/{{ $profile->forma }}.png"
+                                style="max-width: 100%">
+                        @else
+                            <img id="imgPerfil" src="./assets/img/Cortes/4_caras/{{ $profile->forma }}.png"
+                                style="max-width: 100%">
+                        @endif
                     @endif
                 </div>
             </div>
