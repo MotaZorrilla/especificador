@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use App\models\User;
 
 class UserProfileController extends Controller
@@ -34,5 +35,14 @@ class UserProfileController extends Controller
             'about'     => $request->get('about')
         ]);
         return back()->with('succes', 'Perfil Actualizado');
+    }
+
+    
+    public function profile()
+    {
+        $user = Auth::user();
+        $role = $user->roles->first()->name;
+
+        return view("pages.profile-static",compact('user','role'));
     }
 }

@@ -29,9 +29,8 @@ class DashboardController extends Controller
         foreach ($userProjects as $project) {
             $userProfilesCount += $project->profiles()->count();
         }
-
         $totals = [
-            'user' => $user,
+            'user' => $user->firstname,
             'users' => User::count(),
             'data' => Filedata::count(),
             'plans' => Plan::count(),
@@ -44,14 +43,6 @@ class DashboardController extends Controller
 
         return view('dashboard.dashboard', compact('totals'));
     }
-
-
-    // public function users()
-    // {   
-    //     $users = User::paginate();
-
-    //     return view('dashboard.user-management', compact('users')); 
-    // }
 
     public function database()
     {

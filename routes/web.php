@@ -49,9 +49,9 @@ Route::group(['middleware'=>'auth'], function () {
 
 	Route::get('/dashboard', 			[DashboardController::class, 	'index'])	->name('home');
 
-	Route::get('profile/{id}', 			[UserProfileController::class, 	'show'])	->name('profile');
+	Route::get('profile/{id}', 			[UserProfileController::class, 	'show'])	->name('profile.show');
 	Route::post('/profile', 			[UserProfileController::class, 	'update'])	->name('profile.update');
-	Route::get('/profile-static', 		[PageController::class, 		'profile'])	->name('profile-static'); 
+	Route::get('/userProfile',			[UserProfileController::class,	'profile'])	->name('userProfile'); 
 	Route::get('/sign-in-static', 		[PageController::class, 		'signin'])	->name('sign-in-static');
 	Route::get('/sign-up-static', 		[PageController::class, 		'signup'])	->name('sign-up-static'); 
 
@@ -59,7 +59,7 @@ Route::group(['middleware'=>'auth'], function () {
 	
 	Route::get('pdf/{pdf}', 			[PdfController::class,			'create'])	->name('pdf');
 	Route::get('/report', 				[PdfController::class,			'show'])	->name('report');
-	Route::get('/userProfile', 			[DashboardController::class, 	'profile'])	->name('userProfile'); 
+	//Route::get('/userProfile', 			[DashboardController::class, 	'profile'])	->name('userProfile'); 
 	// Route::get('/users', 				[DashboardController::class, 	'users'])	->name('users');
 	Route::get('database', 				[DashboardController::class, 	'database'])->name('database');
 	Route::get('/balance', 				[DashboardController::class, 	'balance'])	->name('balance');

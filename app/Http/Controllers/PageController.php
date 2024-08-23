@@ -20,12 +20,9 @@ class PageController extends Controller
 
         return abort(404);
     }
-/*
-    public function profile()
-    {
-        return view("pages.profile-static");
-    }
 
+    
+/*
     public function signin()
     {
         return view("pages.sign-in-static");
