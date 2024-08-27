@@ -44,6 +44,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 	Route::post('/reset-password', 		[ResetPassword::class, 			'send'])	->middleware('guest')->name('reset.perform');
 	Route::get('/change-password', 		[ChangePassword::class, 		'show'])	->middleware('guest')->name('change-password');
 	Route::post('/change-password', 	[ChangePassword::class, 		'update'])	->middleware('guest')->name('change.perform');
+	Route::post('/darkmode', 			[DashboardController::class, 	'darkmode'])->name('darkmode');
 				
 Route::group(['middleware'=>'auth'], function () {
 

@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="navbar navbar-dark navbar-expand-lg shadow-sm border-radius-lg mt-3 mx-3 bg-gradient-danger">
+<nav class="navbar navbar-expand-lg shadow-sm border-radius-lg mt-3 mx-3  {{ $mode === 'dark' ? 'dark-version' : 'bg-gradient-danger' }}">
     <div class="container-fluid">
         <a class="navbar-brand m-0 p-0 bg-white border-radius-lg" href="{{ route('home') }}" id="offcanvasSidebarLabel">
             <img src="{{ asset('assets/img/logoEntumescenteB.png') }}" class="navbar-brand-img" alt="main_logo"
@@ -13,24 +13,32 @@
             </ul>
         </div>
         <div class="d-flex align-items-center justify-content-between">
-            <h6 class="text-white me-2 mb-0">Claro / Oscuro</h6>
-            <div class="form-check form-switch ps-0 ms-auto my-auto me-2">
-                <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
+            <div class="d-flex align-items-center justify-content-between border border-radius-md my-auto ml-auto px-2 me-2 ">
+                <p class="nav-link text-white font-weight-bold px-0 text-white me-2 mb-0 d-sm-inline d-none">Claro / Oscuro</p>
+                <form action="{{ route('darkmode') }}" method="POST">
+                    @csrf
+                    <div class="form-check form-switch ps-0 ms-auto my-auto me-2">
+                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" name="mode"
+                            onchange="this.form.submit()" {{ $mode === 'dark' ? 'checked' : '' }}>
+                    </div>
+                </form>
             </div>
-            @include('components.fixed-plugin')
             <button class="btn border my-auto ml-auto me-2" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasSidebar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon ml-auto"></span>
+                <span class="ni ni-align-left-2 ml-auto text-white"></span>
             </button>
-            <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
-                @csrf
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                    class="nav-link text-white font-weight-bold px-0">
-                    <i class="fa fa-user me-sm-1"></i>
-                    <span class="d-sm-inline d-none">Log out</span>
-                </a>
-            </form>
+            
+            <div class="d-flex align-items-center justify-content-between border border-radius-md my-auto ml-auto px-2 me-2">
+                <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
+                    @csrf
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        class="nav-link text-white font-weight-bold px-0">
+                        <i class="ni ni-user-run me-sm-1"></i>
+                        <span class="d-sm-inline d-none">Log out</span>
+                    </a>
+                </form>
+            </div>
         </div>
     </div>
 </nav>

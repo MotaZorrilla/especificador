@@ -50,20 +50,18 @@ class DashboardController extends Controller
 
         return view('dashboard.database-management', compact('files'));
     }
-    /*public function darkmode(Request $request)
-    {   
-       
+    
+    public function darkmode(Request $request)
+    {
+        $mode = $request->input('mode') === 'on' ? 'dark' : 'light';
 
-        $mode = $request->input('mode');
-        if (!$mode) {
-            $mode = Cookie::get('mode', 'light');
-        }
-
+        // Almacenar el modo en la sesión
         $request->session()->put('mode', $mode);
 
-        Cookie::queue(Cookie::make('mode', $mode, 60));
+        // Almacenar el modo en la cookie por 60 minutos
+        Cookie::queue(Cookie::make('mode', $mode, 180));
 
-        return view('example', ['mode' => $mode]);
+        // Redirigir a la página anterior para aplicar el cambio
+        return redirect()->back();
     }
-        */
 }

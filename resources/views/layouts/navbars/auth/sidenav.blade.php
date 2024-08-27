@@ -1,5 +1,5 @@
 <aside>
-    <div class="offcanvas offcanvas-start border-2 fade border-radius-xl my-3 mx-3 border border-primary"
+    <div class="offcanvas offcanvas-start border-2 fade border-radius-xl my-3 mx-3 border border-primary {{ $mode === 'dark' ? 'dark-version' : '' }}"
         style="max-width: 350px; transition-duration: 0.9s;" tabindex="-1" id="offcanvasSidebar"
         aria-labelledby="offcanvasSidebarLabel">
         <div class="offcanvas-header px-3 shadow-sm">

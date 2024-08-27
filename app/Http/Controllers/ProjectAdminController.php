@@ -87,32 +87,33 @@ class ProjectAdminController extends Controller
 
     public function pdf(Project $projectAdmin)
     {
-        // Cargar relaciones adicionales
-        $projectAdmin->load('user', 'profiles.results');
+        // Load additional relationships
+        $project = $projectAdmin->load('user', 'profiles.results');
 
-        // Obtener perfiles con sus resultados
+        // Filter profiles based on the 'incluir' attribute
         $profiles = $projectAdmin->profiles->filter(function ($profile) {
             return $profile->incluir;
         });
 
+        // Set the timezone to America/Santiago
         date_default_timezone_set('America/Santiago');
         $date = date('d-m-Y H:i');
 
-        $project = $projectAdmin;
-
+        // Load the view with necessary variables
         $pdf = PDF::loadView('dashboard.projectAdmin.projectAdmin-pdf', compact('project', 'profiles', 'date'));
 
         $pdf->setPaper('letter');
 
-        // Usa stream para mostrar el PDF en el navegador
+        // Stream the PDF to the browser
         $response = $pdf->stream();
 
-        // Agrega el encabezado necesario para la descarga
+        // Set headers for the PDF response
         $response->header('Content-Type', 'application/pdf');
         $response->header('Content-Disposition', 'inline; filename=Especificador de Pintura Intumescente.pdf');
 
         return $response;
     }
+
 
     public function updateProjectAdmin(Request $request, Project $projectAdmin)
     {
@@ -127,13 +128,4 @@ class ProjectAdminController extends Controller
         // Redirige al usuario a la página de edición del proyecto
         return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin', 'filedata'));
     }
-
-    // public function profile()
-    // {
-    //     $user = auth()->user();
-
-    //     $projects = project::all();
-
-    //     return view('dashboard.projectAdmin.projectAdminProfile-create', compact('user','projects'));
-    // }
 }

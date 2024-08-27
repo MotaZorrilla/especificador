@@ -32,20 +32,18 @@
     @livewireStyles
 </head>
 
-<body class="{{ $class ?? '' }}">
+<body class="{{ $mode === 'dark' ? 'dark-version' : '' }}">
     @guest
         @yield('content')
     @endguest
     @auth
-        <div class="position-absolute w-100 min-height-300 top-0"
-            style="background-position-y: 50%; background-image: url("{{ asset('assets/img/profile-layout-header.jpg') }}">
-            <span class="mask bg-primary opacity-3"></span>
+        <div class="position-absolute w-100 min-height-300 top-0 mask bg-primary opacity-3"
+            style="background-position-y: 50%; background-image: url('{{ asset('assets/img/signup-cover.jpg') }}'); background-position: top;">
         </div>
         @include('layouts.navbars.auth.sidenav')
         <main class="main-content border-radius-lg pb-6">
             @yield('content')
         </main>
-        {{-- @include('components.fixed-plugin') --}}
     @endauth
     <!--   Core JS Files   -->
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
