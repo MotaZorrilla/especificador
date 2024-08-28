@@ -78,16 +78,15 @@ Route::group(['middleware'=>'auth'], function () {
 	Route::post('filedataOrder', 		[FiledataController::class, 	'order'])	->name('filedata.Order');
 	Route::post('filedataOrderList',	[FiledataController::class, 	'orderList'])->name('filedata.OrderList');
 	Route::post('filedataReset', 		[FiledataController::class, 	'reset'])	->name('filedata.Reset');
-	
-	//Route::get('projectDataTable',	[projectController::class, 'datatable'])	->name('projectDataTable');*/
-	//Route::post('/dark-mode/toggle', 	[DashboardController::class, 'darkmode'])	->name('darkmode');
 
 	Route::resource('projectAdmin',  	 				 ProjectAdminController::class);
 	Route::put('projectAdmin/{projectAdmin}/update',	[ProjectAdminController::class,		'updateProjectAdmin'])		->name('updateProjectAdmin');
-	Route::get('projectAdmin/{projectAdmin}/pdf',		[ProjectAdminController::class,		'pdf'])						->name('projectAdmin.pdf');
+	Route::put('project/{project}/update',				[ProjectController::class,			'updateProject'])			->name('updateProject');
 	Route::get('projectAdminProfile',					[ProjectAdminController::class,		'profile'])					->name('projectAdminProfile');
-
-	Route::resource('projectProfile',  	 				 ProjectProfileController::class);
 	
+	Route::get('project/{project}/pdf',					[PdfController::class,				'pdf'])						->name('project.pdf');
+	//Route::get('projectAdmin/{projectAdmin}/pdf',		[ProjectAdminController::class,		'pdf'])						->name('projectAdmin.pdf');
+	
+	Route::resource('projectProfile',  	 				 ProjectProfileController::class);
 	//Route::get('/{page}', 								[PageController::class, 			'index'])	->name('page');
 });

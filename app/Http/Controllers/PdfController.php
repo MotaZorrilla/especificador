@@ -8,42 +8,33 @@ use App\Models\Filedata;
 use App\Models\Project;
 
 class PdfController extends Controller
-{   
-    //imprimir pdf
-    public function create($id)
-    
-    {   
-       
-        $project = Project::where('id', $id)->get();
-        return $project;
-        $filedata = Filedata::where('id', $project->id)->get();
-        // $filedata = Filedata::where('masividad', $project->masividad )
-        // ->where('m90', '!=', 'fuera de rango')
-        // ->latest('id')
-        // ->take(4)
-        // ->get();
-        return $filedata;
-	
-	return view('pages.pdf', compact('project', 'filedata'));
+{
+    public function pdf(Project $project)
+    {
+        // Load additional relationships
+        $project->load('user', 'profiles.results');
 
-        if (!$project) {
-            return response()->json(['error' => 'No se ha encontrado la instancia de Project.'], 404);
-        }
-        
-        dd($project);
-        
-        
-        return $project;
+        // Filter profiles based on the 'incluir' attribute
+        $profiles = $project->profiles->filter(function ($profile) {
+            return $profile->incluir;
+        });
 
-        return view('pages.pdf', compact('project', 'filedata'));
-        // $filedata = Filedata::where('masividad', $request)->get();   
-        // return view('pages.pdf', compact('filedata'));
-        // $filedata = Filedata::where('masividad', )->get();  
-        // return redirect()->route('page.pdf', $filedata );
+        // Set the timezone to America/Santiago
+        date_default_timezone_set('America/Santiago');
+        $date = date('d-m-Y H:i');
 
-        // $pdf   = PDF::loadView('pages.pdf', compact('filedata')); 
+        // Load the view with necessary variables
+        $pdf = PDF::loadView('dashboard.projectAdmin.projectAdmin-pdf', compact('project', 'profiles', 'date'));
 
-        // return $pdf->download('pages.pdf');
-    return view("pages.pdf");
+        $pdf->setPaper('letter');
+
+        // Stream the PDF to the browser
+        $response = $pdf->stream();
+
+        // Set headers for the PDF response
+        $response->header('Content-Type', 'application/pdf');
+        $response->header('Content-Disposition', 'inline; filename=Especificador de Pintura Intumescente.pdf');
+
+        return $response;
     }
 }

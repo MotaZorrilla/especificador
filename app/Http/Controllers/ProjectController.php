@@ -33,21 +33,21 @@ class ProjectController extends Controller
     {
         $project = new Project();
 
-        $project->nombre        = $request->nombre;
-        $project->descripcion   = $request->descripcion;
-        $project->perfil        = $request->perfil;
-        $project->masividad     = $request->masividad;
-        $project->resistencia   = $request->resistencia;
-
+        // Asociar el proyecto al usuario actual
+        $project->user()->associate(auth()->user());
+        $project->user_project_counter = Project::where('user_id', auth()->user())->max('user_project_counter') + 1;
+        $project->project       = $request->project;
+        $project->description   = $request->description;
         $project->save();
 
-        return redirect()->route('project.show', $project);
+        // Redirigir a la página de proyectos con un mensaje de éxito
+        return redirect()->route('project.index')->with('success', '¡Proyecto creado con éxito!');
     }
 
     //Display the specified resource.
-    public function show(Project $project)
+    public function show($project)
     {
-        return view('dashboard.project.project-show', compact('project'));
+        return view('dashboard.projectProfile.profile-index', compact('project'));
     }
 
     //Show the form for editing the specified resource.
@@ -59,15 +59,15 @@ class ProjectController extends Controller
     //Update the specified resource in storage.
     public function update(Request $request, Project $project)
     {
-        $project->nombre        = $request->nombre;
-        $project->descripcion   = $request->descripcion;
-        $project->perfil        = $request->perfil;
-        $project->masividad     = $request->masividad;
-        $project->resistencia   = $request->resistencia;
+        $project->observaciones = $request->observaciones;
 
         $project->save();
 
-        return view('dashboard.project.project-show', compact('project'));
+        $filedata = Filedata::where('masividad', ceil($project->masividad))
+            ->get();
+
+        // Redirige al usuario a la página de edición del proyecto
+        return view('dashboard.projectAdmin.projectAdmin-show', compact('project', 'filedata'));
     }
 
     //Remove the specified resource from storage.
@@ -75,22 +75,6 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        return redirect()->route('project.index');
-    }
-
-    public function pdf(Project $project)
-    {
-        dd($project);
-        $filedata = Filedata::where('masividad', $project->masividad)
-            //  ->where('m90', '!=', 'Fuera de rango')
-            // ->latest('id')
-            // ->take(4)
-            ->get();
-
-        // return view('dashboard.project.project-pdf', compact('project', 'filedata'));
-        
-        $pdf   = PDF::loadView('dashboard.project.project-pdf', compact('project', 'filedata'));
-
-        return $pdf->download('Especificador de pintura.pdf');
+        return redirect()->route('project.index')->with('success', 'El proyecto se eliminó con éxito');
     }
 }

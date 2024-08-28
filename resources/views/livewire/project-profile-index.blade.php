@@ -79,14 +79,14 @@
                                 <td>
                                     <div class="d-flex px-2 py-1 fw-bold">
                                         <div>
-                                            <a href="{{ route('projectAdmin.pdf', $project['id']) }}">
+                                            <a href="{{ route('project.pdf', $project['id']) }}">
                                                 <img src="/img/icons/export.png" class="avatar avatar-sm me-3 ">
                                                     Exportar Informe a PDF</a>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="align-middle text-center ">
-                                    <form action="{{ route('projectAdmin.pdf', $project['id']) }}" method="get">
+                                    <form action="{{ route('project.pdf', $project['id']) }}" method="get">
                                         <button style="width: 200px;" type="submit"
                                             class="btn bg-gradient-primary m-1 ms-auto">Generar PDF</button>
                                     </form>
@@ -257,8 +257,8 @@
                                                                     data-bs-dismiss="modal"></button>
                                                             </div>
                                                             <div class="modal-body text-center">
-                                                                <p>¿Estás seguro de que deseas eliminar <br>
-                                                                    {{ $profile->nombre }}?</p>
+                                                                <p><span style="color: #000; ">¿Estás seguro de que deseas eliminar <br>
+                                                                    {{ $profile->nombre }}? </span></p>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-info"

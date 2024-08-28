@@ -22,14 +22,15 @@
                         </li>
                         <hr class="horizontal dark mt-0">
                         <li class="nav-item mt-3 d-flex align-items-center">
-                            <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'text-primary' : '' }} "
+                            <a class="nav-link {{ Route::currentRouteName() == 'userProfile' ? 'text-primary' : '' }} "
                                 href="{{ route('userProfile') }}">
                                 <i class="ni ni-single-02 text-warning me-2"></i> Mi Perfil
                             </a>
                         </li>
                         @can('user')
                             <li class="nav-item mt-3 d-flex align-items-center">
-                                <a class="nav-link {{ str_contains(request()->url(), 'user') == true ? 'text-primary' : '' }} "
+                                <a class="nav-link {{ str_contains(request()->url(), 'user') == true && str_contains(request()->url(), 'userProfile') == false
+                                ? 'text-primary' : '' }} "
                                     href="{{ route('user.index') }}">
                                     <i class="ni ni-badge text-warning me-2"></i> Usuarios
                                 </a>
@@ -63,7 +64,7 @@
                         @endcan
                         @can('role')
                             <li class="nav-item mt-3 d-flex align-items-center">
-                                <a class="nav-link {{ str_contains(request()->url(), 'Roles') == true ? 'text-primary' : '' }} "
+                                <a class="nav-link {{ str_contains(request()->url(), 'role') == true ? 'text-primary' : '' }} "
                                     href="{{ route('role.index') }}">
                                     <i class="ni ni-bullet-list-67 text-warning me-2"></i> Roles
                                 </a>
@@ -71,7 +72,7 @@
                         @endcan
                         @can('plan')
                             <li class="nav-item mt-3 d-flex align-items-center">
-                                <a class="nav-link {{ str_contains(request()->url(), 'Planes') == true ? 'text-primary' : '' }} "
+                                <a class="nav-link {{ str_contains(request()->url(), 'plan') == true ? 'text-primary' : '' }} "
                                     href="{{ route('plan.index') }}">
                                     <i class="ni ni-money-coins text-warning me-2"></i> Planes
                                 </a>

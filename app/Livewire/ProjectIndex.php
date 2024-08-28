@@ -26,7 +26,7 @@ class ProjectIndex extends Component
         $user = auth()->user();
 
         $projects = Project::join('users', 'projects.user_id', '=', 'users.id')
-            ->select('projects.id', 'users.id as user_id', 'users.username', 'projects.project', 'projects.description')
+            ->select('projects.id', 'users.id as user_id', 'users.username', 'projects.project', 'projects.description', 'projects.updated_at')
             ->where('users.username', '=', $user->username)
             ->where(function ($query) {
                 $query->where('projects.project', 'LIKE', '%' . $this->search . '%')

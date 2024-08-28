@@ -7,6 +7,8 @@ use App\Models\Profile;
 use App\Models\Project;
 use App\Models\Result;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 
 class ProjectProfileController extends Controller
@@ -20,7 +22,10 @@ class ProjectProfileController extends Controller
     {
         $user = auth()->user();
 
-        $projects = project::all();
+        // Verificar el rol del usuario
+        $projects = $user->hasRole('Cliente')
+            ? $user->projects
+            : Project::all();
 
         return view('dashboard.projectProfile.profile-create', compact('user', 'projects'));
     }

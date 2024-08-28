@@ -6,7 +6,7 @@
                     <div class="card-header pb-0">
                         <h6>Administrar Usuarios</h6>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
+                    {{-- <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <tbody>
@@ -14,7 +14,7 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    {{-- <a href="{{route('filedataExcel')}}"><img src="/img/icons/export.png" class="avatar avatar-sm me-3"></a> --}}
+                                                    {{-- <a href="{{route('filedataExcel')}}"><img src="/img/icons/export.png" class="avatar avatar-sm me-3"></a> --}
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">Exportar lista de Usuarios a Excel</h6>
@@ -22,13 +22,13 @@
                                             </div>
                                         </td>
                                         <td class="align-middle text-right ">
-                                            {{-- <a class="badge badge-sm bg-gradient-info" href="{{route('fileExcel')}}">Exportar</a> --}}
+                                            {{-- <a class="badge badge-sm bg-gradient-info" href="{{route('fileExcel')}}">Exportar</a> --}
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

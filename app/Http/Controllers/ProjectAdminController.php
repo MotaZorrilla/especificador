@@ -85,47 +85,5 @@ class ProjectAdminController extends Controller
         return redirect()->route('projectAdmin.index')->with('success', 'El proyecto se eliminó con éxito');
     }
 
-    public function pdf(Project $projectAdmin)
-    {
-        // Load additional relationships
-        $project = $projectAdmin->load('user', 'profiles.results');
-
-        // Filter profiles based on the 'incluir' attribute
-        $profiles = $projectAdmin->profiles->filter(function ($profile) {
-            return $profile->incluir;
-        });
-
-        // Set the timezone to America/Santiago
-        date_default_timezone_set('America/Santiago');
-        $date = date('d-m-Y H:i');
-
-        // Load the view with necessary variables
-        $pdf = PDF::loadView('dashboard.projectAdmin.projectAdmin-pdf', compact('project', 'profiles', 'date'));
-
-        $pdf->setPaper('letter');
-
-        // Stream the PDF to the browser
-        $response = $pdf->stream();
-
-        // Set headers for the PDF response
-        $response->header('Content-Type', 'application/pdf');
-        $response->header('Content-Disposition', 'inline; filename=Especificador de Pintura Intumescente.pdf');
-
-        return $response;
-    }
-
-
-    public function updateProjectAdmin(Request $request, Project $projectAdmin)
-    {
-        // Actualiza los datos del proyecto
-        $projectAdmin->observaciones = $request->observaciones;
-
-        $projectAdmin->save();
-
-        $filedata = Filedata::where('masividad', ceil($projectAdmin->masividad))
-            ->get();
-
-        // Redirige al usuario a la página de edición del proyecto
-        return view('dashboard.projectAdmin.projectAdmin-show', compact('projectAdmin', 'filedata'));
-    }
+    
 }
