@@ -12,7 +12,7 @@
                                 <td>
                                     <div class="d-flex px-2 py-1 fw-bold">
                                         <div>
-                                            <a href="{{ route('projectProfile.create') }}"><img src="/img/icons/crear.png"
+                                            <a href="{{ route('projectProfile.create') }}"><img src="{{ asset('/img/icons/crear.png') }}"
                                                     class="avatar avatar-sm me-3 ">Agregar Nuevo Perfil</a>
                                         </div>
                                     </div>
@@ -30,7 +30,7 @@
                                         <div>
                                             <a href="#" data-bs-toggle="modal"
                                                 data-bs-target="#modalProjectObservations">
-                                                <img src="/img/icons/import.png" class="avatar avatar-sm me-3">
+                                                <img src="{{ asset('/img/icons/import.png') }}" class="avatar avatar-sm me-3">
                                                 Agregar Observaciones
                                             </a>
                                         </div>
@@ -80,7 +80,7 @@
                                     <div class="d-flex px-2 py-1 fw-bold">
                                         <div>
                                             <a href="{{ route('project.pdf', $project['id']) }}">
-                                                <img src="/img/icons/export.png" class="avatar avatar-sm me-3 ">
+                                                <img src="{{ asset('/img/icons/export.png') }}" class="avatar avatar-sm me-3 ">
                                                     Exportar Informe a PDF</a>
                                         </div>
                                     </div>

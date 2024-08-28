@@ -11,7 +11,7 @@
                             <tr>
                                 <td class="d-flex align-items-center">
                                     <div class="align-items-center fw-bold">
-                                        <a href="{{ route('plan.create') }}"><img src="/img/icons/crear.png"
+                                        <a href="{{ route('plan.create') }}"><img src="{{ asset('/img/icons/crear.png') }}"
                                                 class="avatar avatar-sm me-3 ">Agregar Nuevo Plan</a>
                                     </div>
                                 </td>

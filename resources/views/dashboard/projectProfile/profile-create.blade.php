@@ -378,13 +378,5 @@
 @endsection
 
 @section('js')
-    <script src="/../assets/js/create.js"></script>
-    {{-- <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#descripcion'))
-            .catch(error => {
-                console.error(error);
-            });
-    </script> --}}
+    <script src="{{ asset('/assets/js/create.js') }}"></script>
 @endsection

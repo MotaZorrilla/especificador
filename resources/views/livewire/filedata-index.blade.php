@@ -12,7 +12,7 @@
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div>
-                                            <img src="/img/icons/import.png" class="avatar avatar-sm me-3">
+                                            <img src="{{ asset('/img/icons/import.png') }}" class="avatar avatar-sm me-3">
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">Importar Tablas</h6>
@@ -33,7 +33,7 @@
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div>
-                                            <a href="{{ route('filedata.Export') }}"><img src="/img/icons/export.png"
+                                            <a href="{{ route('filedata.Export') }}"><img src="{{ asset('/img/icons/export.png') }}"
                                                     class="avatar avatar-sm me-3 "></a>
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
@@ -52,7 +52,7 @@
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div>
-                                            <a href="{{ route('filedata.create') }}"><img src="/img/icons/crear.png"
+                                            <a href="{{ route('filedata.create') }}"><img src="{{ asset('/img/icons/crear.png') }}"
                                                     class="avatar avatar-sm me-3"></a>
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
@@ -71,7 +71,7 @@
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div>
-                                            <a href=#><img src="/img/icons/ordenar.png"
+                                            <a href=#><img src="{{ asset('/img/icons/ordenar.png') }}"
                                                     class="avatar avatar-sm me-3"></a>
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
@@ -91,7 +91,7 @@
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div>
-                                            <a href=#><img src="/img/icons/borrar-archivo.png"
+                                            <a href=#><img ssrc="{{ asset('/img/icons/borrar-archivo.png') }}"
                                                     class="avatar avatar-sm me-3"></a>
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">

@@ -12,7 +12,7 @@
                                 <td>
                                     <div class="d-flex px-2 py-1 fw-bold">
                                         <div>
-                                            <a href="{{ route('project.create') }}"><img src="/img/icons/crear.png"
+                                            <a href="{{ route('project.create') }}"><img src="{{ asset('/img/icons/crear.png') }}"
                                                     class="avatar avatar-sm me-3 ">Agregar Nuevo Proyecto</a>
                                         </div>
                                     </div>
@@ -29,7 +29,7 @@
                                     <div class="d-flex px-2 py-1 fw-bold">
                                         <div>
                                             <a href="{{ route('projectProfile.create') }}"><img
-                                                    src="/img/icons/crear.png" class="avatar avatar-sm me-3 ">Agregar
+                                                    src="{{ asset('/img/icons/crear.png') }}" class="avatar avatar-sm me-3 ">Agregar
                                                 Nuevo Perfil</a>
                                         </div>
                                     </div>

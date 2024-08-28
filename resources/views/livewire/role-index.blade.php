@@ -11,7 +11,7 @@
                             <tr>
                                 <td class="d-flex align-items-center">
                                     <div class="align-items-center">
-                                        <a href="{{ route('role.create') }}"><img src="/img/icons/crear.png"
+                                        <a href="{{ route('role.create') }}"><img src="{{ asset('/img/icons/crear.png') }}"
                                                 class="avatar avatar-sm me-3">Agregar Nuevo Rol</a>
                                     </div>
                                 </td>
