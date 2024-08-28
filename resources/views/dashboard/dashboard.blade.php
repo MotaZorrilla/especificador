@@ -28,8 +28,7 @@
 
     <div class="container-fluid d-flex py-4 mx-auto">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center card-container mx-auto">
-
-            <div class="mb-4 d-flex">
+            <div class="mb-4 d-flex mx-auto">
                 <div class="card shadow flex-fill bg-gradient-info">
                     <div class="card-body py-5">
                         <div class="row">
