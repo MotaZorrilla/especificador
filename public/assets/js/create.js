@@ -169,6 +169,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 for (const etiqueta of etiquetas) {
                     etiqueta.style.display = 'none';
                 }
+                for (const img of imagenesPerfil) {
+                    img.style.display = 'none';
+                }
                 const forma_R = document.getElementById('forma_R');
                 const forma_OCA = document.getElementById('forma_OCA');
                 const r_forma_R = document.getElementById('r_forma_R');
@@ -209,6 +212,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 //apagamos las etiquetas
                 for (const etiqueta of etiquetas) {
                     etiqueta.style.display = 'none';
+                }
+                for (const img of imagenesPerfil) {
+                    img.style.display = 'none';
                 }
                 const forma_Circular = document.getElementById('forma_Circular');
                 const r_forma_Circular = document.getElementById('r_forma_Circular');
