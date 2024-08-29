@@ -91,7 +91,7 @@
                                 <td>
                                     <div class="d-flex px-2 py-1">
                                         <div>
-                                            <a href=#><img ssrc="{{ asset('/img/icons/borrar-archivo.png') }}"
+                                            <a href=#><img src="{{ asset('/img/icons/borrar-archivo.png') }}"
                                                     class="avatar avatar-sm me-3"></a>
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">

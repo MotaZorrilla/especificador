@@ -7,7 +7,7 @@
     <div class="container-fluid py-4">
         <div class="card border shadow">
             <div class="card-body px-0 pt-0 pb-2">
-                <div class="container py-5 col-6">
+                <div class="container-sm py-5 ">
                     @if ($user->profile_count > 0)
                         <div class="alert alert-info text-white f-bold">
                             Tienes {{ $user->profile_count }} Perfiles Disponibles.
@@ -251,8 +251,29 @@
                                     {{-- imagen del perfil --}}
                                     <div style="display: inline-block; vertical-align: top; " class="col-5">
                                         <label class="form-control-label">Visualización del Perfil:</label>
-                                        <div>
-                                            <img id="imgPerfil" src="" style="max-width: 100% ">
+                                        <div style="max-width: 100%;">
+                                            <img id="imgPerfil3Circular" src="{{ asset('assets/img/Cortes/3_caras/Circular.png') }}">
+                                            <img id="imgPerfil3C"        src="{{ asset('assets/img/Cortes/3_caras/C.png') }}">
+                                            <img id="imgPerfil3CA"       src="{{ asset('assets/img/Cortes/3_caras/CA.png') }}">
+                                            <img id="imgPerfil3HCR"      src="{{ asset('assets/img/Cortes/3_caras/HCR.png') }}">
+                                            <img id="imgPerfil3HSR"      src="{{ asset('assets/img/Cortes/3_caras/HSR.png') }}">
+                                            <img id="imgPerfil3IC"       src="{{ asset('assets/img/Cortes/3_caras/IC.png') }}">
+                                            <img id="imgPerfil3ICA"      src="{{ asset('assets/img/Cortes/3_caras/ICA.png') }}">
+                                            <img id="imgPerfil3L"        src="{{ asset('assets/img/Cortes/3_caras/L.png') }}">
+                                            <img id="imgPerfil3OCA"      src="{{ asset('assets/img/Cortes/3_caras/OCA.png') }}">
+                                            <img id="imgPerfil3R"        src="{{ asset('assets/img/Cortes/3_caras/R.png') }}">
+                                            <img id="imgPerfil3Z"        src="{{ asset('assets/img/Cortes/3_caras/Z.png') }}">
+                                            <img id="imgPerfil4Circular" src="{{ asset('assets/img/Cortes/4_caras/Circular.png') }}">
+                                            <img id="imgPerfil4C"        src="{{ asset('assets/img/Cortes/4_caras/C.png') }}">
+                                            <img id="imgPerfil4CA"       src="{{ asset('assets/img/Cortes/4_caras/CA.png') }}">
+                                            <img id="imgPerfil4HCR"      src="{{ asset('assets/img/Cortes/4_caras/HCR.png') }}">
+                                            <img id="imgPerfil4HSR"      src="{{ asset('assets/img/Cortes/4_caras/HSR.png') }}">
+                                            <img id="imgPerfil4IC"       src="{{ asset('assets/img/Cortes/4_caras/IC.png') }}">
+                                            <img id="imgPerfil4ICA"      src="{{ asset('assets/img/Cortes/4_caras/ICA.png') }}">
+                                            <img id="imgPerfil4L"        src="{{ asset('assets/img/Cortes/4_caras/L.png') }}">
+                                            <img id="imgPerfil4OCA"      src="{{ asset('assets/img/Cortes/4_caras/OCA.png') }}">
+                                            <img id="imgPerfil4R"        src="{{ asset('assets/img/Cortes/4_caras/R.png') }}">
+                                            <img id="imgPerfil4Z"        src="{{ asset('assets/img/Cortes/4_caras/Z.png') }}">
                                         </div>
                                     </div>
 

@@ -43,7 +43,7 @@
                                 placeholder="Escribe la descripción de tu Proyecto"></textarea>
                         </div>
 
-                        <button  type="submit" id="btnGuardarProject" class="btn btn-info justify-content-center"
+                        <button type="submit" id="btnGuardarProject" class="btn btn-info justify-content-center"
                             style="display: none;">
                             Guardar Proyecto
                         </button>
@@ -110,7 +110,7 @@
 @endsection
 
 @section('js')
-    <script src="/../assets/js/create.js"></script>
+    <script src="{{ asset('/assets/js/create.js') }}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
