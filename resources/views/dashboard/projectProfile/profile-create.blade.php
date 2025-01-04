@@ -289,7 +289,7 @@
                                         <div class="form-group" id="d_B1">
                                             <label class="form-control-label" for="dato_B1">Base:</label>
                                             <input class="form-control" type="number" step="0.01" id="dato_B1"
-                                                name="dato_B1" placeholder="B1 (mm)">
+                                                name="dato_B1" placeholder="B (mm)">
                                         </div>
                                         <div class="form-group" id="d_B2">
                                             <label class="form-control-label" for="dato_b2">Base 2:</label>
@@ -297,7 +297,7 @@
                                                 name="dato_B2" placeholder="B2 (mm)">
                                         </div>
                                         <div class="form-group" id="d_C">
-                                            <label class="form-control-label" for="dato_C">Pieque:</label>
+                                            <label class="form-control-label" for="dato_C">Pliegue:</label>
                                             <input class="form-control" type="number" step="0.01" id="dato_C"
                                                 name="dato_C" placeholder="C (mm)">
                                         </div>

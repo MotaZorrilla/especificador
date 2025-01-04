@@ -117,9 +117,16 @@ class FiledataController extends Controller
     public function order()
     {
         // Obtener los nombres de las pinturas sin repetir registros por pintura.
-         $filedata = Filedata::orderBy('id', 'asc')
+        /* $filedata = Filedata::orderBy('id', 'asc')
                     ->distinct('pintura')
-                    ->pluck('pintura');
+                    ->pluck('pintura');*/
+        // Obtener todas las marcas de pintura en su orden natural.
+        $filedata = Filedata::select('pintura')->get();
+
+        // Filtrar valores únicos mientras se preserva el orden de aparición.
+        $filedata = $filedata->pluck('pintura')
+                    ->unique()
+                    ->values();
 
         return view('dashboard.filedata.filedata-editTable', compact('filedata')); 
     }
@@ -191,7 +198,8 @@ class FiledataController extends Controller
         $filedata = Filedata::orderBy('id', 'asc')
                     ->distinct('pintura')
                     ->pluck('pintura');
-
+                    // Capturamos el tiempo de fin
+        
         return view('dashboard.filedata.filedata-index', compact('filedata')); 
     }
     

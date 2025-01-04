@@ -131,42 +131,54 @@
                                             @endif
                                         </div>
                                         <div>
-                                            @if ($profile->results->where('minimo', true)->isNotEmpty())
-                                                <table class="table align-items-center mb-4 table-striped" cellpadding="10">
-                                                    <thead id="cabecera_pitura">
-                                                        <tr>
-                                                            <th>Pintura</th>
-                                                            <th>Modelo</th>
-                                                            <th>Certificado</th>
-                                                            <th>Número de<br>Certificado</th>
-                                                            <th>Espesor mínimo<br> recomendado</th>
-                                                            <th>Incluir</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($profile->results->where('minimo', true) as $result)
+                                            <table class="table align-items-center mb-4 table-striped" cellpadding="10"> 
+                                                <thead id="cabecera_pitura">
+                                                    <tr>
+                                                        <th>Pintura</th>
+                                                        <th>Modelo</th>
+                                                        <th>Certificado</th>
+                                                        <th>Número de Certificado</th>
+                                                        <th>Espesor mínimo recomendado</th>
+                                                        <th>Incluir</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach($profile->results as $resultado)
+                                                        @if(is_null($resultado->minimo))
+                                                            <!-- Pintura sin masividad asociada -->
                                                             <tr>
-                                                                <td class="text-center">{{ $result->pintura }}</td>
-                                                                <td class="text-center">{{ $result->modelo }}</td>
-                                                                <td class="text-center">{{ $result->certificado }}</td>
-                                                                <td class="text-center">{{ $result->numero }}</td>
-                                                                <td class="text-center">{{ $result->minimo }}</td>
-                                                                <td class="text-center">
-                                                                    <input type="checkbox" name="selectedPaints[]"
-                                                                        value="{{ $result->id }}"
-                                                                        {{ $result->incluir ? 'checked' : '' }}>
+                                                                <td>{{ $resultado->pintura }}</td>
+                                                                <td>{{ $resultado->modelo }}</td>
+                                                                <td>{{ $resultado->certificado }}</td>
+                                                                <td>{{ $resultado->numero }}</td>
+                                                                <td><strong>Masividad <em>"NO"</em> Asociada</strong>  </td>
+                                                                <td>
+                                                                    <input type="checkbox" 
+                                                                           name="selectedPaints[]" 
+                                                                           value="{{ $resultado->id }}" 
+                                                                           {{ $resultado->incluir ? 'checked' : '' }}>
                                                                 </td>
                                                             </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            @else
-                                                <div class="alert alert-warning text-white mx-3">
-                                                    No hay pinturas que cumplan con la masividad especificada.
-                                                </div>
-                                            @endif
-
-                                        </div>
+                                                        @else
+                                                            <!-- Pintura con masividad asociada -->
+                                                            <tr>
+                                                                <td>{{ $resultado->pintura }}</td>
+                                                                <td>{{ $resultado->modelo }}</td>
+                                                                <td>{{ $resultado->certificado }}</td>
+                                                                <td>{{ $resultado->numero }}</td>
+                                                                <td>{{ $resultado->minimo }}</td>
+                                                                <td>
+                                                                    <input type="checkbox" 
+                                                                           name="selectedPaints[]" 
+                                                                           value="{{ $resultado->id }}" 
+                                                                           {{ $resultado->incluir ? 'checked' : '' }}>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>                                        
                                         <div class="form-group">
                                             <div class="mb-4">
                                                 <label class="form-control-label" for="observaciones">Observaciones:</label>
