@@ -139,7 +139,12 @@
                                                         <th>Certificado</th>
                                                         <th>Número de Certificado</th>
                                                         <th>Espesor mínimo recomendado</th>
-                                                        <th>Incluir</th>
+                                                        <th>Incluir Todos
+                                                            <label class="form-check-label">
+                                                                <input type="checkbox"  
+                                                                       id="masterCheckbox">
+                                                            </label>
+                                                        </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -151,9 +156,10 @@
                                                                 <td>{{ $resultado->modelo }}</td>
                                                                 <td>{{ $resultado->certificado }}</td>
                                                                 <td>{{ $resultado->numero }}</td>
-                                                                <td><strong>Masividad <em>"NO"</em> Asociada</strong>  </td>
-                                                                <td>
+                                                                <td>Fuera De Rango </td>
+                                                                <td class="text-center">
                                                                     <input type="checkbox" 
+                                                                           class="checkbox-incluir" 
                                                                            name="selectedPaints[]" 
                                                                            value="{{ $resultado->id }}" 
                                                                            {{ $resultado->incluir ? 'checked' : '' }}>
@@ -167,8 +173,9 @@
                                                                 <td>{{ $resultado->certificado }}</td>
                                                                 <td>{{ $resultado->numero }}</td>
                                                                 <td>{{ $resultado->minimo }}</td>
-                                                                <td>
+                                                                <td class="text-center">
                                                                     <input type="checkbox" 
+                                                                           class="checkbox-incluir" 
                                                                            name="selectedPaints[]" 
                                                                            value="{{ $resultado->id }}" 
                                                                            {{ $resultado->incluir ? 'checked' : '' }}>
@@ -220,4 +227,39 @@
 @endsection
 
 @section('js')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const masterCheckbox = document.getElementById('masterCheckbox');
+    const checkboxes = document.querySelectorAll('.checkbox-incluir');
+
+    // Función para actualizar el checkbox maestro
+    function updateMasterCheckbox() {
+        const total = checkboxes.length;
+        const checked = [...checkboxes].filter(checkbox => checkbox.checked).length;
+
+        masterCheckbox.indeterminate = checked > 0 && checked < total;
+        masterCheckbox.checked = checked === total && total > 0;
+    }
+
+    // Evento para el checkbox maestro
+    masterCheckbox.addEventListener('change', function() {
+        const shouldCheck = this.checked || this.indeterminate;
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = shouldCheck;
+        });
+        
+        this.checked = shouldCheck;
+        this.indeterminate = false;
+    });
+
+    // Eventos para checkboxes individuales
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateMasterCheckbox);
+    });
+
+    // Estado inicial
+    updateMasterCheckbox();
+});
+</script>
 @endsection

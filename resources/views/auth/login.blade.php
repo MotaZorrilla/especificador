@@ -46,7 +46,7 @@
                                         <p class="mb-0">Ingresa con tu cuenta gmail</p>
                                     </div>
                                     <div class=" px-1 card-footer text-center col-3 mx-auto">
-                                        <a class="btn btn-outline-light w-100" href="/google-auth/redirect">
+                                        <a class="btn btn-outline-light w-100" href="{{ route('redirect') }}">
                                             <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <g transform="translate(3.000000, 2.000000)" fill-rule="nonzero">

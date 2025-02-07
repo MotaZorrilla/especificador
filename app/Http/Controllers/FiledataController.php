@@ -116,92 +116,46 @@ class FiledataController extends Controller
 
     public function order()
     {
-        // Obtener los nombres de las pinturas sin repetir registros por pintura.
-        /* $filedata = Filedata::orderBy('id', 'asc')
-                    ->distinct('pintura')
-                    ->pluck('pintura');*/
-        // Obtener todas las marcas de pintura en su orden natural.
-        $filedata = Filedata::select('pintura')->get();
+        // Obtener la lista única de pinturas en orden de aparición.
+        $pinturas = Filedata::select('pintura')
+            ->orderBy('orden', 'asc')
+            ->pluck('pintura')
+            ->unique()
+            ->values();
 
-        // Filtrar valores únicos mientras se preserva el orden de aparición.
-        $filedata = $filedata->pluck('pintura')
-                    ->unique()
-                    ->values();
+        // Recorrer cada pintura única y asignar un número correlativo.
+        foreach ($pinturas as $key => $pintura) {
+        // El orden será la posición + 1 (para que empiece en 1).
+        $orden = $key + 1;
 
-        return view('dashboard.filedata.filedata-editTable', compact('filedata')); 
+        // Actualizar todos los registros con el nombre de pintura actual.
+        Filedata::where('pintura', $pintura)->update(['orden' => $orden]);
+        }
+
+        return view('dashboard.filedata.filedata-editTable', compact('pinturas')); 
     }
 
     public function orderList(Request $request)
     {
-        // Validar la solicitud y obtener los datos del formulario
+        // Validar la solicitud: se espera un arreglo 'orden' con claves (marca de pintura) y valores (nuevo orden)
         $request->validate([
             'orden' => 'required|array',
         ]);
-    
-        // Obtener el nuevo orden desde la solicitud
-        $orden = $request->input('orden');
 
-        // Obtener los nombres de las pinturas sin repetir registros por pintura.
-        $marcasPinturas = Filedata::orderBy('id', 'asc')
-                        ->distinct('pintura')
-                        ->pluck('pintura')
-                        ->toArray(); // Convertir a un array para poder reordenarlo        
+        // Obtener el arreglo de nuevos órdenes
+        // Ejemplo: ['Pintura A' => 1, 'Pintura B' => 2, 'Pintura C' => 3, ...]
+        $nuevosOrdenes = $request->input('orden');
 
-        // Crear un array asociativo que mapea el orden actual de las pinturas
-        $ordenActual = array_flip($marcasPinturas);
-        foreach ($ordenActual as &$ordenItem){
-            $ordenItem+=1;
+        // Actualizar el campo 'orden' de cada registro que tenga la marca de pintura correspondiente
+        foreach ($nuevosOrdenes as $pintura => $orden) {
+            // Se puede incluir una validación adicional para asegurarse que $orden es un número válido (por ejemplo, >=1)
+            Filedata::where('pintura', $pintura)->update(['orden' => $orden]);
         }
 
-        // Reorganizar el array de nombres de pinturas según el nuevo orden
-        $marcasPinturasOrdenadas = [];
-        foreach ($orden as $index => $ordenItem) {
-            $marcaPintura = array_search($ordenItem, $ordenActual);
-            $marcasPinturasOrdenadas[$index] = $marcaPintura;
-        }
-        // $marcasPinturasOrdenadas ahora contiene los nombres de las pinturas ordenados según el nuevo orden
-            
-        // Obtener todas la tabla
-        $filedata = Filedata::all(); // tabla de base de datos
-        Filedata::truncate();
-    
-        // Actualizar el orden de las marcas de pintura en función del nuevo orden
-        foreach ( $marcasPinturasOrdenadas as $pintura ) {
-            // Obtener la marca de pintura correspondiente desde la colección de $marcasPintura
-            $modelos = $filedata->where('pintura', $pintura );
-
-            foreach ( $modelos as $request){
-
-            $filedatum = new Filedata();
-
-            $filedatum->pintura      = $request->pintura;
-            $filedatum->modelo       = $request->modelo;
-            $filedatum->certificado  = $request->certificado;
-            $filedatum->numero       = $request->numero;
-            $filedatum->masividad    = $request->masividad;
-            $filedatum->m15          = $request->m15;
-            $filedatum->m30          = $request->m30;
-            $filedatum->m60          = $request->m60;
-            $filedatum->m90          = $request->m90;
-            $filedatum->m120         = $request->m120;
-            $filedatum->p4c          = $request->p4c;
-            $filedatum->v4c          = $request->v4c;
-            $filedatum->v3c          = $request->v3c;
-            $filedatum->abierta      = $request->abierta;
-            $filedatum->rectangular  = $request->rectangular;
-            $filedatum->circular     = $request->circular;
-
-            $filedatum->save();
-            }
-        }
-        
-        $filedata = Filedata::orderBy('id', 'asc')
-                    ->distinct('pintura')
-                    ->pluck('pintura');
-                    // Capturamos el tiempo de fin
-        
-        return view('dashboard.filedata.filedata-index', compact('filedata')); 
+        // Redirigir o retornar la vista con un mensaje de éxito
+        return redirect()->route('filedata.index')->with('mensaje', 'El orden se ha actualizado correctamente.');
     }
+
     
     public function reset()
     {

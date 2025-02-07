@@ -1,107 +1,80 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Ordenar Base de Datos Por Marca de Pintura'])
     <div class="container-fluid py-4">
-
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="container py-5 col-4">
                             <h3>Ordenar por marca de pinturas</h3>
-                            <div>
-                                <form id="orderForm" action="{{ route('filedata.OrderList') }}" method="POST">
-                                    @csrf
-                                    <table class="table table-striped  ">
-                                        <thead class="text-right">
+                            <!-- Formulario para ordenar -->
+                            <form id="orderForm" action="{{ route('filedata.OrderList') }}" method="POST">
+                                @csrf
+                                <table class="table table-striped">
+                                    <thead class="text-right">
+                                        <tr>
+                                            <th class="col-2 text-center">Posición</th>
+                                            <th>Marca de pintura</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($pinturas as $index => $brand)
                                             <tr>
-                                                <th class="col-2 text-center">
-                                                    <div class="row g-1 col-2    ">
-                                                        <div class="col-2">
-                                                            Posición
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <th>
-                                                    <div class="row g-1 ">
-                                                        <div class="col-auto">
-                                                            Marca de pintura
-                                                        </div>
-                                                    </div>
-                                                </th>
+                                                <td class="text-center">
+                                                    <input class="form-control text-center" type="number"
+                                                           step="1" name="orden[{{ $brand }}]" 
+                                                           value="{{ $index + 1 }}" min="1" required />
+                                                </td>
+                                                <td>
+                                                    <label class="col-form-label">{{ $brand }}</label>
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($filedata as $index => $brand)
-                                                <tr>
-                                                    <th class="col-3 text-center">
-                                                        <div class="row g-1 text-center ">
-                                                            <div class="col-10">
-                                                                <input class="form-control text-center" type="number"
-                                                                    step="1" name="orden[]"
-                                                                    value="{{ $index + 1 }}" min="1" />
-                                                            </div>
-                                                        </div>
-                                                    </th>
-                                                    <td>
-                                                        <div class="row g-1 align-items-center ">
-                                                            <div class="col-auto">
-                                                                <label class="col-form-label">{{ $brand }}</label>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </form>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <div class="m-3">
-                                    <form action="{{ route('filedata.index') }}" method="get">
-                                        <button type="submit" class="btn bg-gradient-info ">Cancelar</button>
-                                    </form>
-                                </div>
-                                <div class="ms-3 my-0">
-                                    <button type="button" class="btn btn-danger" data-bs-target="#orderForm"
-                                        id="confirmOrder" onclick="validateAndSubmitForm()">
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="d-flex justify-content-between mt-3">
+                                    <a href="{{ route('filedata.index') }}" class="btn bg-gradient-info">Cancelar</a>
+                                    <button type="submit" class="btn btn-danger" onclick="return validateAndSubmitForm();">
                                         Ordenar BD
                                     </button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('js')
     <script>
+        // Definimos el total de pinturas usando la variable de Blade.
+        const totalPinturas = {{ count($pinturas) }};
+
         function validateAndSubmitForm() {
-            // Obtener todos los campos de entrada con nombre 'orden[]'
-            const ordenInputs = document.querySelectorAll('input[name="orden[]"]');
+            const inputs = document.querySelectorAll('input[name^="orden"]');
             let isValid = true;
-            let seenValues = new Set(); // Usamos un Set para almacenar valores únicos
+            let seenValues = new Set();
 
-            // Verificar si al menos uno de los campos es menor que 1 o se repite
-            for (const input of ordenInputs) {
+            inputs.forEach(input => {
                 const value = parseInt(input.value);
-
-                if (value < 1 || seenValues.has(value)) {
+                // Validar que el valor sea al menos 1, no se repita y no sea mayor que totalPinturas.
+                if (value < 1 || seenValues.has(value) || value > totalPinturas) {
                     isValid = false;
-                    break;
                 }
+                seenValues.add(value);
+            });
 
-                seenValues.add(value); // Agregar el valor al conjunto
+            if (!isValid) {
+                alert(`Verifica que cada posición sea un número entero positivo, único y no mayor a ${totalPinturas}, que es el total de pinturas disponibles`);
+                return false;
             }
-
-            if (isValid) {
-                // Si todos los campos son válidos, enviar el formulario
-                document.getElementById('orderForm').submit();
-            } else {
-                // Mostrar un mensaje de error o tomar otra acción apropiada
-                alert('Por favor, asegúrese de que todos los campos sean al menos 1 y no se repitan.');
-            }
+            return true;
         }
     </script>
 @endsection
+

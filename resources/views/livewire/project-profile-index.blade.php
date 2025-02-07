@@ -137,12 +137,12 @@
                                         ID
                                         @if ($sort == 'profiles.id')
                                             @if ($direction == 'asc')
-                                                <i class="fas fa-sort-up float-right"> </i>
+                                                <i class="bi bi-caret-up-fill "> </i>
                                             @else
-                                                <i class="fas fa-sort-down float-right"> </i>
+                                                <i class="bi bi-caret-down-fill "> </i>
                                             @endif
                                         @else
-                                            <i class="fas fa-sort float-right"> </i>
+                                            <i class="bi bi-list "> </i>
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -150,12 +150,12 @@
                                         Perfil
                                         @if ($sort == 'profiles.nombre')
                                             @if ($direction == 'asc')
-                                                <i class="fas fa-sort-up float-right"> </i>
+                                                <i class="bi bi-caret-up-fill"> </i>
                                             @else
-                                                <i class="fas fa-sort-down float-right"> </i>
+                                                <i class="bi bi-caret-down-fill "> </i>
                                             @endif
                                         @else
-                                            <i class="fas fa-sort float-right"> </i>
+                                            <i class="bi bi-list "> </i>
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -163,38 +163,39 @@
                                         descripción
                                         @if ($sort == 'profiles.descripcion')
                                             @if ($direction == 'asc')
-                                                <i class="fas fa-sort-up float-right"> </i>
+                                                <i class="bi bi-caret-up-fill"> </i>
                                             @else
-                                                <i class="fas fa-sort-down float-right"> </i>
+                                                <i class="bi bi-caret-down-fill "> </i>
                                             @endif
                                         @else
-                                            <i class="fas fa-sort float-right"> </i>
+                                            <i class="bi bi-list "> </i>
                                         @endif
                                     </th>
                                     <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
-                                        wire:click="order('projects.incluir')">
+                                        wire:click="order('profiles.incluir')">
                                         Incluir
-                                        @if ($sort == 'projects.incluir')
+                                        @if ($sort == 'profiles.incluir')
                                             @if ($direction == 'asc')
-                                                <i class="fas fa-sort-up float-right"> </i>
+                                                <i class="bi bi-caret-up-fill"> </i>
                                             @else
-                                                <i class="fas fa-sort-down float-right"> </i>
+                                                <i class="bi bi-caret-down-fill "> </i>
                                             @endif
                                         @else
-                                            <i class="fas fa-sort float-right"> </i>
+                                            <i class="bi bi-list "> </i>
                                         @endif
                                     </th>
                                     <th
-                                        class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2">
+                                        class="text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
+                                        wire:click="order('profiles.updated_at')">
                                         Actualizado
                                         @if ($sort == 'profiles.updated_at')
                                             @if ($direction == 'asc')
-                                                <i class="fas fa-sort-up float-right"></i>
+                                                <i class="bi bi-caret-up-fill"></i>
                                             @else
-                                                <i class="fas fa-sort-down float-right"></i>
+                                                <i class="bi bi-caret-down-fill "></i>
                                             @endif
                                         @else
-                                            <i class="fas fa-sort float-right"></i>
+                                            <i class="bi bi-list "></i>
                                         @endif
                                     </th>
                                     <th
@@ -205,7 +206,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($profiles as $profile)
-                                    <tr>
+                                    <tr wire:key="profile-{{ $profile->id }}">
                                         <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">{{ $profile->id }}</p>
                                         </td>
@@ -218,8 +219,11 @@
                                             </p>
                                         </td>
                                         <td class="align-middle">
-                                            <input type="checkbox" @if ($profile->incluir) checked @endif
-                                                wire:click="included('{{ $profile->id }}')">
+                                            <input type="checkbox" 
+                                                wire:click="included('{{ $profile->id }}')"
+                                                @if ($profile->incluir) 
+                                                    checked 
+                                                @endif>
                                         </td>
                                         <td class="align-middle text-sm ">
                                             <p class="text-sm font-weight-bold mb-0">

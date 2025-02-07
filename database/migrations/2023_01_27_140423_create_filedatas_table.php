@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('abierta')       ->nullable();
             $table->string('rectangular')   ->nullable();
             $table->string('circular')      ->nullable();
+            $table->integer('orden')        ->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

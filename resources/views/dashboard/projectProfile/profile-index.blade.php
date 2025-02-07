@@ -7,4 +7,3 @@
     @livewire('project-profile-index', ['projectId' => $project])
 
 @endsection
-

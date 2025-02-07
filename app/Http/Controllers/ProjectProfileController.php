@@ -257,7 +257,7 @@ class ProjectProfileController extends Controller
         $masividad = (int)$profile->masividad;
 
         // Obtenemos todos los datos de Filedata
-        $filedata = Filedata::all();
+        $filedata = Filedata::orderBy('orden', 'asc')->get();
 
         // Arrays para rastrear pinturas con y sin masividad
         $pinturasSinMasividad = [];

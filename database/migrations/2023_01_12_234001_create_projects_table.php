@@ -40,7 +40,7 @@ return new class extends Migration
             $table->unsignedDecimal('plieque',      5, 2)   ->nullable();
             $table->unsignedDecimal('diametro',     5, 2)   ->nullable();
             $table->string('observaciones', 1000)           ->nullable();
-            $table->boolean('incluir')                      ->nullable();
+            $table->boolean('incluir')                      ->default(false);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -53,7 +53,7 @@ return new class extends Migration
             $table->string('certificado')                   ->nullable();
             $table->string('numero')                        ->nullable();
             $table->string('minimo')                        ->nullable();
-            $table->boolean('incluir')                      ->nullable();
+            $table->boolean('incluir')                      ->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -30,8 +30,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-	Route::get('/google-auth/redirect', [LoginController::class, 		'redirect'])->middleware('guest')->name('login');
-	Route::get('/google-auth/callback', [LoginController::class, 		'callback'])->middleware('guest')->name('login');
+	Route::get('/google-auth/redirect', [LoginController::class, 		'redirect'])->middleware('guest')->name('redirect');
+	Route::get('/google-auth/callback', [LoginController::class, 		'callback'])->middleware('guest')->name('callback');
 
 	Route::get('/', 					function () {return 			redirect('https://pinturaintumescente.cl/site');});
 	// Route::get('/', 					[DashboardController::class, 	'index'])	->name('home');

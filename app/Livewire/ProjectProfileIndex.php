@@ -51,7 +51,8 @@ class ProjectProfileIndex extends Component
             ->where(function ($query) {
                 $query->where('nombre', 'LIKE', '%' . $this->search . '%')
                     ->orWhere('descripcion', 'LIKE', '%' . $this->search . '%')
-                    ->orWhere('profiles.id', 'LIKE', '%' . $this->search . '%');
+                    ->orWhere('profiles.id', 'LIKE', '%' . $this->search . '%')
+                    ->orWhere('incluir', 'LIKE', '%' . $this->search . '%');
             })
             ->orderBy($this->sort, $this->direction)
             ->paginate(10);
@@ -87,7 +88,7 @@ class ProjectProfileIndex extends Component
 
         if ($project) {
             $project->update([
-                'observations' => $this->observations,
+                'observations' => $this->observations, 
             ]);
         }
 

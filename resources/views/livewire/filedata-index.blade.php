@@ -20,12 +20,16 @@
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <form action="{{ route('filedata.Import') }}" method="post"
-                                        enctype="multipart/form-data">
+                                    <form action="{{ route('filedata.Import') }}" method="post" enctype="multipart/form-data" id="importForm">
                                         @csrf
-                                        <button style="width: 150px;" type="submit"
-                                            class="btn bg-gradient-success m-1">Importar</button>
-                                        <input type="file" name="filedata" accept=".xlsx">
+                                        <button 
+                                            style="width: 150px;" 
+                                            type="submit" 
+                                            class="btn bg-gradient-success m-1"
+                                            id="btnImportar" >
+                                            Importar
+                                        </button>
+                                        <input type="file" name="filedata" accept=".xlsx" required>
                                     </form>
                                 </td>
                             </tr>
@@ -186,12 +190,12 @@
                                     ID
                                     @if ($sort == 'id')
                                         @if ($direction == 'asc')
-                                            <i class="fas fa-sort-up float-right"> </i>
+                                            <i class="bi bi-caret-up-fill "></i>
                                         @else
-                                            <i class="fas fa-sort-down float-right"> </i>
+                                            <i class="bi bi-caret-down-fill "></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort float-right"> </i>
+                                        <i class="bi bi-list "></i>
                                     @endif
                                 </th>
                                 <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -199,12 +203,12 @@
                                     Pintura
                                     @if ($sort == 'pintura')
                                         @if ($direction == 'asc')
-                                            <i class="fas fa-sort-up float-right"> </i>
+                                            <i class="bi bi-caret-up-fill "></i>
                                         @else
-                                            <i class="fas fa-sort-down float-right"> </i>
+                                            <i class="bi bi-caret-down-fill "></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort float-right"> </i>
+                                        <i class="bi bi-list "></i>
                                     @endif
                                 </th>
                                 <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -212,12 +216,12 @@
                                     Modelo
                                     @if ($sort == 'modelo')
                                         @if ($direction == 'asc')
-                                            <i class="fas fa-sort-up float-right"> </i>
+                                            <i class="bi bi-caret-up-fill "></i>
                                         @else
-                                            <i class="fas fa-sort-down float-right"> </i>
+                                            <i class="bi bi-caret-down-fill "></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort float-right"> </i>
+                                        <i class="bi bi-list "></i>
                                     @endif
                                 </th>
                                 <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -225,12 +229,12 @@
                                     Certificado
                                     @if ($sort == 'certificado')
                                         @if ($direction == 'asc')
-                                            <i class="fas fa-sort-up float-right"> </i>
+                                            <i class="bi bi-caret-up-fill "></i>
                                         @else
-                                            <i class="fas fa-sort-down float-right"> </i>
+                                            <i class="bi bi-caret-down-fill "></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort float-right"> </i>
+                                        <i class="bi bi-list "></i>
                                     @endif
                                 </th>
                                 <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -238,12 +242,12 @@
                                     Numero
                                     @if ($sort == 'numero')
                                         @if ($direction == 'asc')
-                                            <i class="fas fa-sort-up float-right"> </i>
+                                            <i class="bi bi-caret-up-fill "></i>
                                         @else
-                                            <i class="fas fa-sort-down float-right"> </i>
+                                            <i class="bi bi-caret-down-fill "></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort float-right"> </i>
+                                        <i class="bi bi-list "></i>
                                     @endif
                                 </th>
                                 <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -251,12 +255,12 @@
                                     Mas
                                     @if ($sort == 'masividad')
                                         @if ($direction == 'asc')
-                                            <i class="fas fa-sort-up float-right"> </i>
+                                            <i class="bi bi-caret-up-fill "></i>
                                         @else
-                                            <i class="fas fa-sort-down float-right"> </i>
+                                            <i class="bi bi-caret-down-fill "></i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort float-right"> </i>
+                                        <i class="bi bi-list "></i>
                                     @endif
                                 </th>
                                 <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -264,12 +268,12 @@
                                     15 M
                                     @if ($sort == 'm15')
                                         @if ($direction == 'asc')
-                                            <i class="fas fa-sort-up float-right"> </i>
+                                            <i class="bi bi-caret-up-fill "> </i>
                                         @else
-                                            <i class="fas fa-sort-down float-right"> </i>
+                                            <i class="bi bi-caret-down-fill "> </i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort float-right"> </i>
+                                        <i class="bi bi-list "> </i>
                                     @endif
                                 </th>
                                 <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -277,12 +281,12 @@
                                     30 M
                                     @if ($sort == 'm30')
                                         @if ($direction == 'asc')
-                                            <i class="fas fa-sort-up float-right"> </i>
+                                            <i class="bi bi-caret-up-fill "> </i>
                                         @else
-                                            <i class="fas fa-sort-down float-right"> </i>
+                                            <i class="bi bi-caret-down-fill "> </i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort float-right"> </i>
+                                        <i class="bi bi-list "> </i>
                                     @endif
                                 </th>
                                 <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -290,12 +294,12 @@
                                     60 M
                                     @if ($sort == 'm60')
                                         @if ($direction == 'asc')
-                                            <i class="fas fa-sort-up float-right"> </i>
+                                            <i class="bi bi-caret-up-fill "> </i>
                                         @else
-                                            <i class="fas fa-sort-down float-right"> </i>
+                                            <i class="bi bi-caret-down-fill "> </i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort float-right"> </i>
+                                        <i class="bi bi-list "> </i>
                                     @endif
                                 </th>
                                 <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -303,12 +307,12 @@
                                     90 M
                                     @if ($sort == 'm90')
                                         @if ($direction == 'asc')
-                                            <i class="fas fa-sort-up float-right"> </i>
+                                            <i class="bi bi-caret-up-fill "> </i>
                                         @else
-                                            <i class="fas fa-sort-down float-right"> </i>
+                                            <i class="bi bi-caret-down-fill "> </i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort float-right"> </i>
+                                        <i class="bi bi-list "> </i>
                                     @endif
                                 </th>
                                 <th class="cursor-pointer text-uppercase text-secondary text-xs font-weight-bolder text-left opacity-7 ps-2"
@@ -316,12 +320,12 @@
                                     120 M
                                     @if ($sort == 'm120')
                                         @if ($direction == 'asc')
-                                            <i class="fas fa-sort-up float-right"> </i>
+                                            <i class="bi bi-caret-up-fill "> </i>
                                         @else
-                                            <i class="fas fa-sort-down float-right"> </i>
+                                            <i class="bi bi-caret-down-fill "> </i>
                                         @endif
                                     @else
-                                        <i class="fas fa-sort float-right"> </i>
+                                        <i class="bi bi-list "> </i>
                                     @endif
                                 </th>
                                 <th
@@ -485,3 +489,23 @@
 
     </div>
 </div>
+
+@section('js')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('importForm');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const btn = document.getElementById('btnImportar');
+                if (btn) {
+                    btn.innerHTML = `
+                        <span class="spinner-border spinner-border-sm" role="status"></span>
+                        Importando...
+                    `;
+                    btn.disabled = true;
+                }
+            });
+        }
+    });
+</script>
+@endsection
