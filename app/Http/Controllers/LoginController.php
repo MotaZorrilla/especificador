@@ -38,21 +38,28 @@ class LoginController extends Controller
             $intended = $request->session()->pull('url.intended');
 
             if ($intended) {
-                $appUrl = rtrim(config('app.url', ''), '/');
-                $appPath = parse_url($appUrl, PHP_URL_PATH) ?: '';
-                $intendedPath = parse_url($intended, PHP_URL_PATH) ?: '/';
+                $path = parse_url($intended, PHP_URL_PATH) ?: '/';
 
-                // If intended path doesn't start with the app prefix (e.g. /especificador), add it
-                if ($appPath && !str_starts_with($intendedPath, $appPath)) {
-                    $intendedPath = $appPath . '/' . ltrim($intendedPath, '/');
+                // Strip repeated /especificador prefixes if present
+                while (str_starts_with($path, '/especificador')) {
+                    $path = substr($path, strlen('/especificador'));
                 }
 
-                // If intended target is root, app root, or login, go to home
-                if (in_array($intendedPath, ['/', $appPath, $appPath . '/', $appPath . '/login'])) {
-                    return redirect()->route('home');
+                $appPath = parse_url(config('app.url'), PHP_URL_PATH);
+                if ($appPath) {
+                    while (str_starts_with($path, $appPath)) {
+                        $path = substr($path, strlen($appPath));
+                    }
                 }
 
-                return redirect()->to($intendedPath);
+                $path = '/' . ltrim($path, '/');
+
+                $qs = parse_url($intended, PHP_URL_QUERY);
+                $query = $qs ? '?' . $qs : '';
+
+                if (!in_array($path, ['/', '/login', '/register', ''])) {
+                    return redirect()->to($path . $query);
+                }
             }
 
             return redirect()->route('home');
