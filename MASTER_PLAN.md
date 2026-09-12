@@ -82,6 +82,14 @@
 - [x] **Soporte de Proxy en Laravel:** Ajuste de `TrustProxies` (`$proxies = '*'`) y configuración de `APP_URL` y `ASSET_URL` a `https://lab.motazorrilla.com/especificador`.
 - [x] **Catálogo Central en Lab Hub:** Incorporación de la tarjeta técnica interactiva de **Especificador · Protección Fuego v2.0** en el dashboard principal (`https://lab.motazorrilla.com/`) con badge *Full Stack v2.0* y actualización a 11 aplicaciones activas.
 
+### 🔄 FASE 9: Sincronización Git y Corrección de Enrutamiento en Sub-Ruta (Completado - 12/09/2026)
+- [x] **Diagnóstico de Rebote de Login:** Identificación de enlaces rígidos `/login`, `/dashboard` y `/register` en `site.blade.php` que navegaban a la raíz del dominio `https://lab.motazorrilla.com/login`, provocando rebote al portal central del laboratorio.
+- [x] **Refactorización de Enlaces a Helpers de Ruta:** Sustitución de todos los `href` absolutos por directivas de Blade dinámicas `{{ route('login') }}`, `{{ route('home') }}` y `{{ route('register') }}`.
+- [x] **Enforzamiento de Raíz en AppServiceProvider:** Integración de `URL::forceRootUrl(config('app.url'))` y `URL::forceScheme('https')` para que Symfony / Laravel inyecte el prefijo `/especificador` en todas las URLs generadas tras el reverse proxy Nginx.
+- [x] **Desacoplamiento de `vendor` en Git:** Remoción de tracking de 16,802 archivos en caché de git index y exclusión formal en `.gitignore`.
+- [x] **Publicación y Empuje a Repositorio Remoto:** Commit estructurado y `git push origin main` a `https://github.com/MotaZorrilla/especificador.git` (commit `53afc3cd` y `dd438206`).
+- [x] **Sincronización Git en Servidor Homelab:** Inicialización de git en `/home/motazorrilla/apps/especificador`, vinculación con `origin/main` y activación de flujo `git pull origin main` idéntico al estándar de BoozLab y RedVecino.
+
 ---
 
 ## 📝 REGISTRO DE DECISIONES DE ARQUITECTURA (ADR)
@@ -91,3 +99,4 @@
 - **ADR-004:** Formalización del Protocolo 4 (Impeccable) para asegurar que cualquier pantalla desarrollada posea calidad de Director de Arte y pase por pruebas automatizadas de UI en Vitest.
 - **ADR-005:** Estandarización de pruebas continuas desacopladas: PHPUnit 11 en backend y Vitest en frontend, con ejecución en sub-segundos para integración continua local.
 - **ADR-006:** Despliegue en sub-ruta mediante Reverse Proxy (`lab-gateway` Nginx) sobre túnel Cloudflare en puerto 8087. Resuelve el direccionamiento de assets en Laravel mediante `TrustProxies` y `ASSET_URL` explícito, permitiendo convivencia de múltiples microservicios y aplicaciones en un único dominio con TLS 1.3 de extremo a extremo.
+- **ADR-007:** Enforzamiento Global de URL Raíz (`URL::forceRootUrl`) y esquema HTTPS en `AppServiceProvider`. Dado que los reverse proxies con `proxy_pass` hacia sub-rutas retiran el prefijo en el socket HTTP interno, forzar la raíz desde `config('app.url')` garantiza que cualquier redirección interna (`redirect()->route(...)`), generación de enlaces en Blade (`route(...)`) y assets de Vite mantengan la ruta del sub-directorio sin colisionar con el host padre.
