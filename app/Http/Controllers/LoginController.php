@@ -35,7 +35,27 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $this->registerActiveDevice($request, Auth::user());
 
-            return redirect()->intended(route('home'));
+            $intended = $request->session()->pull('url.intended');
+
+            if ($intended) {
+                $appUrl = rtrim(config('app.url', ''), '/');
+                $appPath = parse_url($appUrl, PHP_URL_PATH) ?: '';
+                $intendedPath = parse_url($intended, PHP_URL_PATH) ?: '/';
+
+                // If intended path doesn't start with the app prefix (e.g. /especificador), add it
+                if ($appPath && !str_starts_with($intendedPath, $appPath)) {
+                    $intendedPath = $appPath . '/' . ltrim($intendedPath, '/');
+                }
+
+                // If intended target is root, app root, or login, go to home
+                if (in_array($intendedPath, ['/', $appPath, $appPath . '/', $appPath . '/login'])) {
+                    return redirect()->route('home');
+                }
+
+                return redirect()->to($intendedPath);
+            }
+
+            return redirect()->route('home');
         }
 
         return back()->withErrors([

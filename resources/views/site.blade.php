@@ -425,12 +425,24 @@
                         <i class="bi bi-calculator-fill"></i>
                         <span class="d-none d-xl-inline">Simulador</span> en Vivo
                     </button>
-                    <a href="{{ route('login') }}" class="btn btn-outline-dark btn-sm fw-bold px-3 py-2 text-decoration-none rounded-3">
-                        <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
-                    </a>
-                    <a href="{{ route('home') }}" class="btn-fire btn-sm">
-                        <i class="bi bi-speedometer2"></i> Dashboard
-                    </a>
+                    @auth
+                        <a href="{{ route('home') }}" class="btn-fire btn-sm">
+                            <i class="bi bi-speedometer2"></i> Dashboard
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline m-0">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger btn-sm fw-bold px-3 py-2 rounded-3">
+                                <i class="bi bi-box-arrow-right"></i> Salir
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-outline-dark btn-sm fw-bold px-3 py-2 text-decoration-none rounded-3">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar Sesión
+                        </a>
+                        <a href="{{ route('login') }}" class="btn-fire btn-sm">
+                            <i class="bi bi-speedometer2"></i> Dashboard
+                        </a>
+                    @endauth
                 </div>
             </div>
         </div>
@@ -452,9 +464,15 @@
                     </p>
 
                     <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
-                        <a href="{{ route('home') }}" class="btn btn-lg btn-light fw-bold text-danger px-4 py-3 rounded-3 shadow-lg text-decoration-none d-inline-flex align-items-center gap-2">
-                            <i class="bi bi-arrow-right-circle-fill text-danger fs-5"></i> Ingresar al Dashboard
-                        </a>
+                        @auth
+                            <a href="{{ route('home') }}" class="btn btn-lg btn-light fw-bold text-danger px-4 py-3 rounded-3 shadow-lg text-decoration-none d-inline-flex align-items-center gap-2">
+                                <i class="bi bi-speedometer2 text-danger fs-5"></i> Ir al Dashboard
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-lg btn-light fw-bold text-danger px-4 py-3 rounded-3 shadow-lg text-decoration-none d-inline-flex align-items-center gap-2">
+                                <i class="bi bi-box-arrow-in-right text-danger fs-5"></i> Ingresar al Dashboard
+                            </a>
+                        @endauth
                         <button type="button" class="btn btn-warning btn-lg fw-bold text-dark px-4 py-3 rounded-3 shadow-lg d-inline-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalCalculadoraMasividad">
                             <i class="bi bi-calculator-fill fs-5"></i> Abrir Simulador en Vivo
                         </button>
