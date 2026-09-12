@@ -101,6 +101,28 @@
   - Botón de retorno `← Panel Clásico` en el header del Dashboard de React (`SpecificationDashboard.tsx`).
 - [x] **Verificación E2E en Navegador Real con Chrome DevTools MCP:** Validación completa del ciclo: Login -> Dashboard Clásico -> Dashboard React v2.0 -> Retorno a Dashboard Clásico, verificando que la sesión y la barra de navegación permanecen estrictamente contenidas dentro de `https://lab.motazorrilla.com/especificador/`.
 
+### 🎨 FASE 11: Prueba Piloto Impeccable — Reinterpretación Fiel del Dashboard Clásico en React 19 y Conmutador Lado a Lado (Completado - 12/09/2026)
+- [x] **Diagnóstico de Identidad Visual (Protocolo 4 Impeccable):** Se evaluó el prototipo React v2.0 inicial. Si bien cumplía con especificaciones técnicas, carecía de la identidad cromática y visual del software original de Pintura Intumescente. Se identificó la necesidad de abandonar el estilo genérico slate oscuro y rescatar el diálogo visual de la marca: *Fuego* (gradientes coral/naranja `#fb6340` a `#f5365c` en insignias circulares flotantes) y *Acero/Ingeniería* (gradientes cian a azul eléctrico `#1771e6` a `#11cdef` en las tarjetas) con fondo arquitectónico urbano (`signup-cover.jpg`).
+- [x] **Paridad Completa de las 7 Tarjetas Clásicas:** Reconstrucción de `SpecificationDashboard.tsx` en React 19 mapeando exactamente los módulos originales:
+  1. *Mi Perfil* (`/especificador/userProfile`) con saludo personalizado.
+  2. *Usuarios* (`/especificador/user`) con conteo de usuarios activos.
+  3. *Administrador de Proyectos* (`/especificador/projectAdmin`) con totales globales de proyectos y perfiles.
+  4. *Mis Proyectos* (`/especificador/project`) con totales del calculista.
+  5. *Data* (`/especificador/filedata`) con total de registros de pinturas ensayadas.
+  6. *Roles* (`/especificador/role`) con conteo de perfiles de acceso.
+  7. *Planes* (`/especificador/plan`) con información del modelo unificado v2.0 ilimitado.
+- [x] **Conmutador Lado a Lado (Side-by-Side Switcher):** Integración de un control de navegación pill en el topbar `[ 🏛️ Clásico | ⚡ React v2.0 ]` que permite al usuario alternar al instante entre el Dashboard clásico Blade (`/especificador/dashboard`) y la Reinterpretación React 19 (`/especificador/react-dashboard`) para comparar directamente ergonomía, fluidez y estética.
+- [x] **Simulador Rápido de Masividad ($P/A$) & DFT en Modal Elegante:** Desacoplamiento de la calculadora técnica hacia un modal accesible y ligero sin saturar el bento grid de tarjetas, permitiendo calcular al vuelo espesores secos según NCh3040/OGUC para factores $P/A$ de 30 a 350 $m^{-1}$ y clasificaciones F15 a F120.
+- [x] **Barra de Búsqueda y Filtro Reactivo:** Inclusión de un campo de búsqueda instantánea para filtrar dinámicamente las tarjetas en pantalla sin recargas de página.
+- [x] **Alineación de Backend y Seguridad (`routes/web.php`):** Suministro de los conteos reales (`totals`), comprobaciones de permisos canónicas de Spatie (`permissions`) y nombre del dispositivo activo (`active_device`) vía props de Inertia.
+- [x] **Pruebas Automatizadas Rigurosas (Frontend & Backend):**
+  - Vitest: 6/6 pruebas aprobadas en `tests/Frontend/SpecificationDashboard.test.tsx` evaluando renderizado de tarjetas, conmutador de paneles, filtros en tiempo real, permisos condicionales y modal de cálculo accesible (a11y).
+  - PHPUnit: 25/25 pruebas aprobadas (77 aserciones) garantizando seguridad de rutas, autenticación y cálculo técnico.
+- [x] **Despliegue y Verificación E2E en Homelab con Chrome DevTools MCP:**
+  - Compilación de producción con Vite (`npm run build`).
+  - Sincronización git a `origin/main` y despliegue automatizado en `192.168.1.111`.
+  - Captura y validación de pantallas en vivo mediante Chrome DevTools MCP confirmando renderizado impecable y navegación bidireccional perfecta.
+
 ---
 
 ## 📝 REGISTRO DE DECISIONES DE ARQUITECTURA (ADR)
@@ -113,3 +135,4 @@
 - **ADR-007:** Enforzamiento Global de URL Raíz (`URL::forceRootUrl`) y esquema HTTPS en `AppServiceProvider`. Dado que los reverse proxies con `proxy_pass` hacia sub-rutas retiran el prefijo en el socket HTTP interno, forzar la raíz desde `config('app.url')` garantiza que cualquier redirección interna (`redirect()->route(...)`), generación de enlaces en Blade (`route(...)`) y assets de Vite mantengan la ruta del sub-directorio sin colisionar con el host padre.
 - **ADR-008:** Sanitización de Redirecciones Intended en Sub-Rutas Proxy. Los mecanismos nativos de framework para `intended()` asumen entornos de dominio completo. Al operar en sub-directorios reverse-proxied, las redirecciones capturadas antes del login deben ser descompuestas y reensambladas contra el prefijo base del sistema para impedir fugas hacia el gateway padre.
 - **ADR-009:** Normalización de URL Resolver en Inertia para Micro-Frontends en Sub-Rutas. Las aplicaciones SPA/Inertia montadas tras un reverse proxy requieren la vinculación de `Inertia::resolveUrlUsing()` para sincronizar el enrutador virtual del navegador con el path público asignado en el proxy, impidiendo mutaciones de URL no deseadas a través de `window.history`.
+- **ADR-010:** Coexistencia y Transición Fluida de Vistas Blade y React (Dual-Panel Switcher). En procesos de modernización donde la interfaz original posee valor afectivo o ergonomía validada por el usuario, se establece una arquitectura de convivencia dual mediante un conmutador bidireccional en el header. Esto permite al usuario contrastar en tiempo real ambas implementaciones con los mismos datos en vivo, facilitando una adopción progresiva sin fricciones ni pérdidas de identidad de marca.
