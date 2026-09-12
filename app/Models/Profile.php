@@ -15,6 +15,7 @@ class Profile extends Model
 
     // Campos que pueden ser llenados con asignación masiva
     protected $fillable = [
+        'project_id',
         'nombre',
         'descripcion',
         'exposicion',

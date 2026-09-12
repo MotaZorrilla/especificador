@@ -164,10 +164,7 @@ class ProjectProfileController extends Controller
         }
         $profile->save();
 
-        if ($user = auth()->user()) {
-            $user->profile_count--;
-            $user->save();
-        }
+        // En v2.0 el modelo es de Licencia Anual Única con proyectos y perfiles ilimitados
 
         // Redirigir a la página de proyectos con un mensaje de éxito
         // Mostrar la vista de projectProfile.index con el parámetro 'project'

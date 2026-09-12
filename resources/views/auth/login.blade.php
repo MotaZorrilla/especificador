@@ -20,6 +20,11 @@
                                     <p class="mb-0">Escribe tu email y contraseña para ingresar</p>
                                 </div>
                                 <div class="card-body">
+                                    @if ($errors->has('device'))
+                                        <div class="alert alert-warning text-white text-xs mb-3 p-3" role="alert" style="background: linear-gradient(310deg, #ea580c 0%, #dc2626 100%); border: none; border-radius: 10px; line-height: 1.4;">
+                                            <i class="fas fa-shield-alt me-1"></i> <strong>Aviso de Seguridad:</strong> {{ $errors->first('device') }}
+                                        </div>
+                                    @endif
                                     <form role="form" method="POST" action="{{ route('login.perform') }}">
                                         @csrf
                                         @method('post')

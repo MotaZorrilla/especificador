@@ -33,8 +33,13 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 	Route::get('/google-auth/redirect', [LoginController::class, 		'redirect'])->middleware('guest')->name('redirect');
 	Route::get('/google-auth/callback', [LoginController::class, 		'callback'])->middleware('guest')->name('callback');
 
-	Route::get('/', 					function () {return 			redirect('https://pinturaintumescente.cl/site');});
-	// Route::get('/', 					[DashboardController::class, 	'index'])	->name('home');
+	Route::get('/', function () {
+		return view('site');
+	})->name('site');
+
+	Route::get('/site', function () {
+		return view('site');
+	});
 
 	Route::get('/register', 			[RegisterController::class, 	'create'])	->middleware('guest')->name('register');
 	Route::post('/register', 			[RegisterController::class, 	'store'])	->middleware('guest')->name('register.perform');
@@ -46,9 +51,23 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 	Route::post('/change-password', 	[ChangePassword::class, 		'update'])	->middleware('guest')->name('change.perform');
 	Route::post('/darkmode', 			[DashboardController::class, 	'darkmode'])->name('darkmode');
 				
-Route::group(['middleware'=>'auth'], function () {
+Route::group(['middleware' => ['auth', 'single.device']], function () {
 
 	Route::get('/dashboard', 			[DashboardController::class, 	'index'])	->name('home');
+	Route::get('/react-dashboard', function () {
+		return inertia('SpecificationDashboard', [
+			'user' => [
+				'username' => auth()->user()->username ?? 'Usuario',
+				'email' => auth()->user()->email,
+			],
+			'stats' => [
+				'paints_count' => \App\Models\Filedata::count(),
+				'projects_count' => auth()->user()->projects()->count(),
+				'profiles_count' => \App\Models\Profile::whereIn('project_id', auth()->user()->projects()->pluck('id'))->count(),
+				'active_device' => auth()->user()->activeDevice?->device_name ?? 'Dispositivo Autorizado',
+			],
+		]);
+	})->name('react.dashboard');
 
 	Route::get('profile/{id}', 			[UserProfileController::class, 	'show'])	->name('profile.show');
 	Route::post('/profile', 			[UserProfileController::class, 	'update'])	->name('userProfile.update');

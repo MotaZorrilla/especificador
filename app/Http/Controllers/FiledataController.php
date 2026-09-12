@@ -7,6 +7,8 @@ use App\Models\Filedata;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\FiledataImport;
 use App\Exports\FiledataExport;
+use App\Http\Requests\ImportExcelSpecificationRequest;
+use App\Services\SpecificationExcelService;
 
 class FiledataController extends Controller
 {
@@ -100,13 +102,23 @@ class FiledataController extends Controller
         return redirect()->route('filedata.index')->with('success', 'El registro se eliminó con éxito');
     }
 
-    public function import(Request $request)
+    public function import(ImportExcelSpecificationRequest $request, SpecificationExcelService $excelService)
     {
-        $filedata = $request->file('filedata');
+        $file = $request->file('filedata');
+        $result = $excelService->import($file);
 
-        Excel::import(new FiledataImport, $filedata);
-        
-        return redirect()->route('filedata.index');
+        if ($result['success']) {
+            $redirect = redirect()->route('filedata.index')->with('success', $result['message']);
+
+            if ($result['skipped_count'] > 0) {
+                $redirect->with('import_warning', "Atención: {$result['skipped_count']} fila(s) contenían observaciones y no fueron importadas.")
+                         ->with('import_errors', $result['errors']);
+            }
+
+            return $redirect;
+        }
+
+        return redirect()->route('filedata.index')->with('error', $result['message']);
     }
 
     public function export()

@@ -8,6 +8,9 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Models\UserDevice;
+use App\Http\Middleware\SingleDeviceSession;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -30,8 +33,9 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
+            $this->registerActiveDevice($request, Auth::user());
 
-            return redirect()->intended('dashboard');
+            return redirect()->intended(route('home'));
         }
 
         return back()->withErrors([
@@ -41,12 +45,21 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        if (Auth::check()) {
+            $deviceToken = $request->session()->get('device_token');
+            if ($deviceToken) {
+                UserDevice::where('user_id', Auth::id())
+                    ->where('device_token', $deviceToken)
+                    ->update(['is_active' => false]);
+            }
+        }
+
         Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect()->route('login');
     }
 
     public function redirect()
@@ -54,7 +67,7 @@ class LoginController extends Controller
         return 	Socialite::driver('google')->redirect();
     }
 
-    public function callback()
+    public function callback(Request $request)
     {
         $userGoogle = Socialite::driver('google')->stateless()->user(); 
         
@@ -64,13 +77,38 @@ class LoginController extends Controller
         ], [
             'username'      => $userGoogle->name,
             'email'         => $userGoogle->email,
-            /*'google_token' => $userGoogle->token,
-            'google_refresh_token' => $userGoogle->refreshToken,*/
         ]);
     
         Auth::login($user);
+        $this->registerActiveDevice($request, $user);
     
-        return redirect('/dashboard');
+        return redirect()->route('home');
     }
 
+    /**
+     * Registra el dispositivo actual como único activo, revocando cualquier sesión anterior (Seat Kicking)
+     */
+    protected function registerActiveDevice(Request $request, User $user): void
+    {
+        $deviceToken = (string) Str::uuid();
+        $request->session()->put('device_token', $deviceToken);
+
+        // Revocar sesiones activas previas
+        UserDevice::where('user_id', $user->id)
+            ->where('is_active', true)
+            ->update(['is_active' => false]);
+
+        // Registrar nueva sesión
+        UserDevice::create([
+            'user_id' => $user->id,
+            'session_id' => $request->session()->getId(),
+            'device_token' => $deviceToken,
+            'device_name' => SingleDeviceSession::detectDeviceName($request->userAgent()),
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+            'is_active' => true,
+            'last_activity_at' => now(),
+        ]);
+    }
 }
+

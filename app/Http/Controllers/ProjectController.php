@@ -35,7 +35,7 @@ class ProjectController extends Controller
 
         // Asociar el proyecto al usuario actual
         $project->user()->associate(auth()->user());
-        $project->user_project_counter = Project::where('user_id', auth()->user())->max('user_project_counter') + 1;
+        $project->user_project_counter = (Project::where('user_id', auth()->id())->max('user_project_counter') ?? 0) + 1;
         $project->project       = $request->project;
         $project->description   = $request->description;
         $project->save();
