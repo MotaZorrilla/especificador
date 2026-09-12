@@ -33,5 +33,19 @@ class AppServiceProvider extends ServiceProvider
         if (str_starts_with(config('app.url', ''), 'https://')) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
+
+        if (class_exists(\Inertia\Inertia::class)) {
+            \Inertia\Inertia::resolveUrlUsing(function (\Illuminate\Http\Request $request) {
+                $prefix = parse_url(config('app.url', ''), PHP_URL_PATH) ?: '';
+                $url = \Illuminate\Support\Str::start(
+                    \Illuminate\Support\Str::after($request->fullUrl(), $request->getSchemeAndHttpHost()),
+                    '/'
+                );
+                if ($prefix && !str_starts_with($url, $prefix)) {
+                    $url = $prefix . $url;
+                }
+                return $url;
+            });
+        }
     }
 }
