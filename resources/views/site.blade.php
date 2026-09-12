@@ -387,7 +387,7 @@
     <!-- NAVBAR NAVEGACIÓN -->
     <nav class="navbar navbar-expand-lg glass-nav fixed-top py-2 px-3">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center m-0 text-decoration-none" href="index.html">
+            <a class="navbar-brand d-flex align-items-center m-0 text-decoration-none" href="{{ route('site') }}">
                 <div class="navbar-brand-logo me-2">
                     <i class="bi bi-fire"></i>
                 </div>
