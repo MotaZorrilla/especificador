@@ -3,168 +3,179 @@ import { render, screen, fireEvent, within } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import SpecificationDashboard from '@/Pages/SpecificationDashboard';
 
-describe('SpecificationDashboard Component', () => {
+describe('SpecificationDashboard Reinterpreted Component (React 19 v2.0)', () => {
     const mockUser = {
-        username: 'Ing. Carlos Mendoza',
-        email: 'carlos.mendoza@calculo-estructural.cl',
+        username: 'admin',
+        email: 'admin@pinturaintumescente.cl',
+        name: 'Administrador General',
     };
 
-    const mockStats = {
-        paints_count: 384,
-        projects_count: 15,
-        profiles_count: 260,
-        active_device: 'Dell Precision / Windows 11',
+    const mockTotals = {
+        user: 'admin',
+        users: 14,
+        data: 520,
+        plans: 2,
+        projects: 28,
+        profiles: 340,
+        roles: 4,
+        user_projects: 9,
+        user_profiles: 85,
     };
 
-    it('renders main header, v2.0 Enterprise badge and active workstation', () => {
-        render(<SpecificationDashboard user={mockUser} stats={mockStats} />);
+    const mockPermissions = {
+        user: true,
+        projectAdmin: true,
+        project: true,
+        filedata: true,
+        role: true,
+        plan: true,
+    };
 
-        expect(screen.getByText('Especificador de Pintura & Recubrimientos')).toBeInTheDocument();
-        expect(screen.getByText('v2.0 Enterprise')).toBeInTheDocument();
-        expect(screen.getByText('Dell Precision / Windows 11')).toBeInTheDocument();
-        expect(screen.getByText(/NCh3040 \/ OGUC Chile/i)).toBeInTheDocument();
+    it('renders main navbar with branding and side-by-side switcher (Clásico vs React v2.0)', () => {
+        render(
+            <SpecificationDashboard 
+                user={mockUser} 
+                totals={mockTotals} 
+                permissions={mockPermissions} 
+                active_device="Dell Workstation / Windows 11" 
+            />
+        );
+
+        expect(screen.getByText('Bienvenido al Panel del Especificador de Pintura Intumescente')).toBeInTheDocument();
+        expect(screen.getByText(/Reinterpretación React 19 v2.0/i)).toBeInTheDocument();
+        
+        // Switcher links
+        const classicLink = screen.getByRole('link', { name: /Clásico/i });
+        expect(classicLink).toBeInTheDocument();
+        expect(classicLink).toHaveAttribute('href', '/especificador/dashboard');
+        
+        expect(screen.getByText(/React v2.0/i)).toBeInTheDocument();
+        expect(screen.getByText('Dell Workstation / Windows 11')).toBeInTheDocument();
     });
 
-    it('renders all bento grid summary cards with metrics', () => {
-        render(<SpecificationDashboard user={mockUser} stats={mockStats} />);
+    it('renders all 7 signature classic cards with corresponding totals and links', () => {
+        render(
+            <SpecificationDashboard 
+                user={mockUser} 
+                totals={mockTotals} 
+                permissions={mockPermissions} 
+            />
+        );
 
-        // Tarjeta Licencia
-        expect(screen.getByText('Licencia Unificada')).toBeInTheDocument();
-        expect(screen.getByText('Ilimitada')).toBeInTheDocument();
-        expect(screen.getByText(/Sin límite de perfiles/i)).toBeInTheDocument();
-        expect(screen.getByText('Ing. Carlos Mendoza')).toBeInTheDocument();
+        // 1. Mi Perfil
+        expect(screen.getByText('Mi Perfil')).toBeInTheDocument();
+        expect(screen.getByText('Hola admin')).toBeInTheDocument();
 
-        // Tarjeta Base Técnica
-        expect(screen.getByText('Base Técnica')).toBeInTheDocument();
-        expect(screen.getByText('384')).toBeInTheDocument();
+        // 2. Usuarios
+        expect(screen.getByText('Usuarios')).toBeInTheDocument();
+        expect(screen.getByText('Total Usuarios: 14')).toBeInTheDocument();
 
-        // Tarjeta Proyectos Activos
-        expect(screen.getByText('Proyectos Activos')).toBeInTheDocument();
-        expect(screen.getByText('15')).toBeInTheDocument();
-        expect(screen.getByText(/260 perfiles calculados/i)).toBeInTheDocument();
+        // 3. Administrador de Proyectos
+        expect(screen.getByText('Administrador de Proyectos')).toBeInTheDocument();
+        expect(screen.getByText('Proyectos Totales: 28')).toBeInTheDocument();
+        expect(screen.getByText('Perfiles Totales: 340')).toBeInTheDocument();
 
-        // Tarjeta Control Anti-Sharing
-        expect(screen.getByText('Control Anti-Sharing')).toBeInTheDocument();
-        expect(screen.getByText('Sesión Única Activa')).toBeInTheDocument();
+        // 4. Mis Proyectos
+        expect(screen.getByText('Mis Proyectos')).toBeInTheDocument();
+        expect(screen.getByText('Proyectos Totales: 9')).toBeInTheDocument();
+        expect(screen.getByText('Perfiles Totales: 85')).toBeInTheDocument();
+
+        // 5. Data
+        expect(screen.getByText('Data')).toBeInTheDocument();
+        expect(screen.getByText('Registros Totales de Pinturas: 520')).toBeInTheDocument();
+
+        // 6. Roles
+        expect(screen.getByText('Roles')).toBeInTheDocument();
+        expect(screen.getByText('Roles Totales: 4')).toBeInTheDocument();
+
+        // 7. Planes
+        expect(screen.getByText('Planes')).toBeInTheDocument();
+        expect(screen.getByText('Planes Totales: 2')).toBeInTheDocument();
     });
 
-    it('recalculates dry film thickness reactively when masividad slider moves', () => {
-        render(<SpecificationDashboard user={mockUser} stats={mockStats} />);
+    it('filters cards reactively when typing in the search input', () => {
+        render(
+            <SpecificationDashboard 
+                user={mockUser} 
+                totals={mockTotals} 
+                permissions={mockPermissions} 
+            />
+        );
 
-        const resultRegion = screen.getByRole('region', { name: /Resultado de espesor calculado/i });
+        const searchInput = screen.getByPlaceholderText('Filtrar módulos o tarjetas...');
+        fireEvent.change(searchInput, { target: { value: 'Roles' } });
 
-        // Valor inicial: M = 125, F60 -> 125 * 3.45 + 180 = 611 μm
-        expect(within(resultRegion).getByText(/611/)).toBeInTheDocument();
+        expect(screen.getByText('Roles')).toBeInTheDocument();
+        expect(screen.queryByText('Usuarios')).not.toBeInTheDocument();
+        expect(screen.queryByText('Data')).not.toBeInTheDocument();
+        expect(screen.queryByText('Planes')).not.toBeInTheDocument();
 
+        // Clear filter
+        fireEvent.change(searchInput, { target: { value: '' } });
+        expect(screen.getByText('Usuarios')).toBeInTheDocument();
+        expect(screen.getByText('Data')).toBeInTheDocument();
+    });
+
+    it('hides cards when permissions are disabled', () => {
+        const restrictedPermissions = {
+            ...mockPermissions,
+            user: false,
+            role: false,
+            plan: false,
+        };
+
+        render(
+            <SpecificationDashboard 
+                user={mockUser} 
+                totals={mockTotals} 
+                permissions={restrictedPermissions} 
+            />
+        );
+
+        expect(screen.getByText('Mi Perfil')).toBeInTheDocument();
+        expect(screen.getByText('Mis Proyectos')).toBeInTheDocument();
+        expect(screen.queryByText('Usuarios')).not.toBeInTheDocument();
+        expect(screen.queryByText('Roles')).not.toBeInTheDocument();
+        expect(screen.queryByText('Planes')).not.toBeInTheDocument();
+    });
+
+    it('opens and interacts with the quick massivity & DFT calculator modal', () => {
+        render(
+            <SpecificationDashboard 
+                user={mockUser} 
+                totals={mockTotals} 
+                permissions={mockPermissions} 
+            />
+        );
+
+        // Open modal
+        const calcButton = screen.getByTitle('Abrir Calculadora Rápida de Masividad P/A');
+        fireEvent.click(calcButton);
+
+        expect(screen.getByText('Simulador Rápido de Masividad & Espesor')).toBeInTheDocument();
+        expect(screen.getByText(/NCh3040.Of2007 y ordenanza OGUC Chile/i)).toBeInTheDocument();
+
+        // Test slider change
         const slider = screen.getByLabelText(/Factor de Masividad M/i);
         fireEvent.change(slider, { target: { value: '200' } });
 
-        // Nuevo valor: M = 200, F60 -> 200 * 3.45 + 180 = 870 μm
-        expect(screen.getAllByText('200 m²/ton').length).toBeGreaterThanOrEqual(1);
-        expect(within(resultRegion).getByText(/870/)).toBeInTheDocument();
+        // Select F30 rating: 200 * 2.10 + 120 = 540 μm
+        const f30Btn = screen.getByRole('button', { name: 'F30' });
+        fireEvent.click(f30Btn);
+        expect(screen.getByText(/540/)).toBeInTheDocument();
+
+        // Close modal
+        const closeBtn = screen.getByLabelText('Cerrar modal');
+        fireEvent.click(closeBtn);
+        expect(screen.queryByText('Simulador Rápido de Masividad & Espesor')).not.toBeInTheDocument();
     });
 
-    it('allows toggling between NCh3040 and OGUC standards', () => {
-        render(<SpecificationDashboard user={mockUser} stats={mockStats} />);
-
-        const nchButton = screen.getByRole('radio', { name: /NCh3040/i });
-        const ogucButton = screen.getByRole('radio', { name: /OGUC/i });
-
-        expect(nchButton).toHaveAttribute('aria-checked', 'true');
-        expect(ogucButton).toHaveAttribute('aria-checked', 'false');
-
-        fireEvent.click(ogucButton);
-
-        expect(nchButton).toHaveAttribute('aria-checked', 'false');
-        expect(ogucButton).toHaveAttribute('aria-checked', 'true');
-    });
-
-    it('allows selecting different fire ratings and adjusts thickness calculation', () => {
-        render(<SpecificationDashboard user={mockUser} stats={mockStats} />);
-
-        const resultRegion = screen.getByRole('region', { name: /Resultado de espesor calculado/i });
-
-        // Seleccionar F15: 125 * 1.15 + 75 = 219 μm
-        const f15Button = screen.getByRole('button', { name: 'F15' });
-        fireEvent.click(f15Button);
-        expect(f15Button).toHaveAttribute('aria-pressed', 'true');
-        expect(within(resultRegion).getByText(/219/)).toBeInTheDocument();
-
-        // Seleccionar F120: 125 * 6.20 + 350 = 1125 μm
-        const f120Button = screen.getByRole('button', { name: 'F120' });
-        fireEvent.click(f120Button);
-        expect(f120Button).toHaveAttribute('aria-pressed', 'true');
-        expect(within(resultRegion).getByText(/1125/)).toBeInTheDocument();
-    });
-
-    it('displays out of range warning when masividad exceeds maximum certified limits', () => {
-        render(<SpecificationDashboard user={mockUser} stats={mockStats} />);
-
-        // Seleccionar F120 (límite máx M = 190)
-        const f120Button = screen.getByRole('button', { name: 'F120' });
-        fireEvent.click(f120Button);
-
-        // Deslizar masividad a 300
-        const slider = screen.getByLabelText(/Factor de Masividad M/i);
-        fireEvent.change(slider, { target: { value: '300' } });
-
-        expect(screen.getByText('Fuera de Rango Certificado')).toBeInTheDocument();
-    });
-
-    it('handles boundary slider values (minimum 30 and maximum 350)', () => {
-        render(<SpecificationDashboard user={mockUser} stats={mockStats} />);
-
-        const slider = screen.getByLabelText(/Factor de Masividad M/i);
-        const resultRegion = screen.getByRole('region', { name: /Resultado de espesor calculado/i });
-
-        // Min boundary 30: F60 -> 30 * 3.45 + 180 = 284 μm
-        fireEvent.change(slider, { target: { value: '30' } });
-        expect(screen.getAllByText('30 m²/ton').length).toBeGreaterThanOrEqual(1);
-        expect(within(resultRegion).getByText(/284/)).toBeInTheDocument();
-
-        // Max boundary 350: F60 maxM is 280, so 350 exceeds certified range
-        fireEvent.change(slider, { target: { value: '350' } });
-        expect(screen.getAllByText('350 m²/ton').length).toBeGreaterThanOrEqual(1);
-        expect(screen.getByText('Fuera de Rango Certificado')).toBeInTheDocument();
-    });
-
-    it('verifies intermediate fire ratings F30 and F90 calculations', () => {
-        render(<SpecificationDashboard user={mockUser} stats={mockStats} />);
-
-        const resultRegion = screen.getByRole('region', { name: /Resultado de espesor calculado/i });
-
-        // F30: 125 * 2.10 + 120 = 383 μm
-        const f30Button = screen.getByRole('button', { name: 'F30' });
-        fireEvent.click(f30Button);
-        expect(within(resultRegion).getByText(/383/)).toBeInTheDocument();
-
-        // F90: 125 * 4.80 + 260 = 860 μm
-        const f90Button = screen.getByRole('button', { name: 'F90' });
-        fireEvent.click(f90Button);
-        expect(within(resultRegion).getByText(/860/)).toBeInTheDocument();
-    });
-
-    it('gracefully renders fallback values when user and stats props are missing', () => {
+    it('gracefully renders fallback values when props are omitted', () => {
         render(<SpecificationDashboard />);
 
-        expect(screen.getByText('Calculista Autorizado')).toBeInTheDocument();
+        expect(screen.getByText('Mi Perfil')).toBeInTheDocument();
+        expect(screen.getByText('Hola admin')).toBeInTheDocument();
+        expect(screen.getByText('Total Usuarios: 1')).toBeInTheDocument();
         expect(screen.getByText('Estación Windows')).toBeInTheDocument();
-        expect(screen.getByText('320')).toBeInTheDocument(); // default paints
-        expect(screen.getByText('12')).toBeInTheDocument();  // default projects
-        expect(screen.getByText(/148 perfiles calculados/i)).toBeInTheDocument();
-    });
-
-    it('renders the structural profiles verification matrix table with correct values', () => {
-        render(<SpecificationDashboard user={mockUser} stats={mockStats} />);
-
-        expect(screen.getByText('Matriz de Verificación de Perfiles Estructurales Tipo')).toBeInTheDocument();
-        expect(screen.getByText('HEA 200')).toBeInTheDocument();
-        expect(screen.getByText('IPE 300')).toBeInTheDocument();
-        expect(screen.getByText('Tubo Cuadrado 150x150x5')).toBeInTheDocument();
-        expect(screen.getByText('Tubo Circular Ø 219x6.3')).toBeInTheDocument();
-
-        // Verificar que existan badges de conformidad
-        const badges = screen.getAllByText('Conforme');
-        expect(badges.length).toBe(4);
     });
 });

@@ -55,17 +55,39 @@ Route::group(['middleware' => ['auth', 'single.device']], function () {
 
 	Route::get('/dashboard', 			[DashboardController::class, 	'index'])	->name('home');
 	Route::get('/react-dashboard', function () {
+		$user = auth()->user();
+		$userProjects = $user->projects ?? collect();
+		$userProfilesCount = 0;
+		foreach ($userProjects as $project) {
+			$userProfilesCount += $project->profiles()->count();
+		}
+
 		return inertia('SpecificationDashboard', [
 			'user' => [
-				'username' => auth()->user()->username ?? 'Usuario',
-				'email' => auth()->user()->email,
+				'username' => $user->username ?? 'Usuario',
+				'email' => $user->email ?? '',
+				'name' => $user->name ?? 'Usuario',
 			],
-			'stats' => [
-				'paints_count' => \App\Models\Filedata::count(),
-				'projects_count' => auth()->user()->projects()->count(),
-				'profiles_count' => \App\Models\Profile::whereIn('project_id', auth()->user()->projects()->pluck('id'))->count(),
-				'active_device' => auth()->user()->activeDevice?->device_name ?? 'Dispositivo Autorizado',
+			'totals' => [
+				'user' => $user->username ?? 'admin',
+				'users' => \App\Models\User::count(),
+				'data' => \App\Models\Filedata::count(),
+				'plans' => \App\Models\Plan::count(),
+				'projects' => \App\Models\Project::count(),
+				'profiles' => \App\Models\Profile::count(),
+				'roles' => \Spatie\Permission\Models\Role::count(),
+				'user_projects' => $userProjects->count(),
+				'user_profiles' => $userProfilesCount,
 			],
+			'permissions' => [
+				'user' => $user->can('user'),
+				'projectAdmin' => $user->can('projectAdmin'),
+				'project' => $user->can('project'),
+				'filedata' => $user->can('filedata'),
+				'role' => $user->can('role'),
+				'plan' => $user->can('plan'),
+			],
+			'active_device' => $user->activeDevice?->device_name ?? 'Estación Windows',
 		]);
 	})->name('react.dashboard');
 
