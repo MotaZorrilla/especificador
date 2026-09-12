@@ -26,7 +26,21 @@
         }
     </style>
 
-    <div class="container-fluid d-flex py-4 mx-auto">
+    <div class="container-fluid py-4 mx-auto" style="max-width: 1200px;">
+        <div class="alert alert-dark border-0 shadow-lg d-flex flex-column flex-md-row align-items-center justify-content-between p-3 mb-4 rounded-3 text-white" style="background: linear-gradient(135deg, #111424 0%, #1a1f37 100%);">
+            <div class="d-flex align-items-center mb-3 mb-md-0">
+                <div class="p-3 bg-gradient-warning rounded-3 me-3 text-white">
+                    <i class="ni ni-spaceship fs-3"></i>
+                </div>
+                <div>
+                    <h5 class="text-white mb-1 fw-bold">Nuevo Dashboard v2.0 Enterprise (React 19)</h5>
+                    <p class="text-white-50 mb-0 text-sm">Calculadora reactiva en tiempo real de Masividad P/A y Espesor NCh3040/OGUC con Matriz Estructural.</p>
+                </div>
+            </div>
+            <a href="{{ route('react.dashboard') }}" class="btn btn-warning text-dark fw-bold px-4 py-2 mb-0 shadow text-nowrap">
+                Abrir Dashboard v2.0 &rarr;
+            </a>
+        </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 justify-content-center card-container mx-auto">
             <div class="mb-4 d-flex mx-auto">
                 <div class="card shadow flex-fill bg-gradient-info">

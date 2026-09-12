@@ -74,6 +74,12 @@ export default function SpecificationDashboard({ user, stats }: Props) {
                 </div>
 
                 <div className="flex items-center gap-3" role="status" aria-label="Estado del puesto de trabajo">
+                    <a
+                        href="/especificador/dashboard"
+                        className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors"
+                    >
+                        <span>&larr; Panel Clásico</span>
+                    </a>
                     <div className="flex items-center gap-2 bg-slate-800 border border-slate-700/80 rounded-lg px-3 py-1.5 text-xs text-slate-300">
                         <Laptop className="w-4 h-4 text-emerald-400" aria-hidden="true" />
                         <span>Puesto Activo: <strong className="text-white">{stats?.active_device || 'Estación Windows'}</strong></span>

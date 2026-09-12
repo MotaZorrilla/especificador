@@ -22,6 +22,11 @@
                         </li>
                         <hr class="horizontal dark mt-0">
                         <li class="nav-item mt-3 d-flex align-items-center">
+                            <a class="nav-link text-warning fw-bold" href="{{ route('react.dashboard') }}">
+                                <i class="ni ni-spaceship text-warning me-2"></i> Dashboard v2.0 (React)
+                            </a>
+                        </li>
+                        <li class="nav-item mt-3 d-flex align-items-center">
                             <a class="nav-link {{ Route::currentRouteName() == 'userProfile' ? 'text-primary' : '' }} "
                                 href="{{ route('userProfile') }}">
                                 <i class="ni ni-single-02 text-warning me-2"></i> Mi Perfil

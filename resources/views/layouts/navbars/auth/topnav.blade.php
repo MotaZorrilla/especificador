@@ -23,6 +23,9 @@
                     </div>
                 </form>
             </div>
+            <a href="{{ route('react.dashboard') }}" class="btn btn-sm btn-outline-white mb-0 me-2 d-none d-md-inline-flex align-items-center gap-1 text-white border-white">
+                <i class="ni ni-spaceship text-warning"></i> React v2.0
+            </a>
             <button class="btn border my-auto ml-auto me-2" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasSidebar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="ni ni-align-left-2 ml-auto text-white"></span>
