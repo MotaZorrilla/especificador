@@ -4,13 +4,14 @@ namespace App\Services;
 
 use App\Models\Filedata;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SpecificationExcelService
 {
     /**
-     * Procesa la importación de una planilla de pintura intumescente de forma tolerante a fallos.
+     * Procesa la importación de una planilla de pintura intumescente por lotes (chunk 500) y de forma tolerante a fallos.
      *
      * @param UploadedFile|string $file
      * @return array Resumen de la importación (éxitos, omitidos, detalle de errores)
@@ -19,6 +20,8 @@ class SpecificationExcelService
     {
         $importedCount = 0;
         $skippedRows = [];
+        $validPayloads = [];
+        $now = now();
 
         try {
             $sheets = Excel::toCollection(null, $file);
@@ -35,22 +38,17 @@ class SpecificationExcelService
             }
 
             foreach ($rows as $index => $row) {
-                $rowNumber = $index + 1; // Fila visual 1-indexed
-
-                // Convertir la fila a arreglo plano
+                $rowNumber = $index + 1;
                 $rowArray = is_array($row) ? $row : (method_exists($row, 'toArray') ? $row->toArray() : (array) $row);
 
-                // 1. Filtrar filas totalmente vacías
                 if ($this->isEmptyRow($rowArray)) {
                     continue;
                 }
 
-                // 2. Detectar y saltar fila de cabeceras técnicas
                 if ($this->isHeaderRow($rowArray)) {
                     continue;
                 }
 
-                // 3. Validar campo crítico 'pintura'
                 $pintura = isset($rowArray[0]) ? trim((string) $rowArray[0]) : '';
                 if ($pintura === '') {
                     $skippedRows[] = [
@@ -61,36 +59,35 @@ class SpecificationExcelService
                     continue;
                 }
 
-                // 4. Inserción protegida contra errores por celda
-                try {
-                    Filedata::create([
-                        'pintura'     => $pintura,
-                        'modelo'      => $this->cleanValue($rowArray[1] ?? null),
-                        'certificado' => $this->cleanValue($rowArray[2] ?? null),
-                        'numero'      => $this->cleanValue($rowArray[3] ?? null),
-                        'masividad'   => $this->cleanNumeric($rowArray[4] ?? null),
-                        'm15'         => $this->cleanValue($rowArray[5] ?? null),
-                        'm30'         => $this->cleanValue($rowArray[6] ?? null),
-                        'm60'         => $this->cleanValue($rowArray[7] ?? null),
-                        'm90'         => $this->cleanValue($rowArray[8] ?? null),
-                        'm120'        => $this->cleanValue($rowArray[9] ?? null),
-                        'p4c'         => $this->cleanValue($rowArray[10] ?? null),
-                        'v4c'         => $this->cleanValue($rowArray[11] ?? null),
-                        'v3c'         => $this->cleanValue($rowArray[12] ?? null),
-                        'abierta'     => $this->cleanValue($rowArray[13] ?? null),
-                        'rectangular' => $this->cleanValue($rowArray[14] ?? null),
-                        'circular'    => $this->cleanValue($rowArray[15] ?? null),
-                    ]);
+                $validPayloads[] = [
+                    'pintura'     => $pintura,
+                    'modelo'      => $this->cleanValue($rowArray[1] ?? null),
+                    'certificado' => $this->cleanValue($rowArray[2] ?? null),
+                    'numero'      => $this->cleanValue($rowArray[3] ?? null),
+                    'masividad'   => $this->cleanNumeric($rowArray[4] ?? null),
+                    'm15'         => $this->cleanValue($rowArray[5] ?? null),
+                    'm30'         => $this->cleanValue($rowArray[6] ?? null),
+                    'm60'         => $this->cleanValue($rowArray[7] ?? null),
+                    'm90'         => $this->cleanValue($rowArray[8] ?? null),
+                    'm120'        => $this->cleanValue($rowArray[9] ?? null),
+                    'p4c'         => $this->cleanValue($rowArray[10] ?? null),
+                    'v4c'         => $this->cleanValue($rowArray[11] ?? null),
+                    'v3c'         => $this->cleanValue($rowArray[12] ?? null),
+                    'abierta'     => $this->cleanValue($rowArray[13] ?? null),
+                    'rectangular' => $this->cleanValue($rowArray[14] ?? null),
+                    'circular'    => $this->cleanValue($rowArray[15] ?? null),
+                    'created_at'  => $now,
+                    'updated_at'  => $now,
+                ];
+            }
 
-                    $importedCount++;
-                } catch (\Throwable $e) {
-                    Log::warning("Excepción en fila {$rowNumber} de importación: " . $e->getMessage());
-                    $skippedRows[] = [
-                        'row' => $rowNumber,
-                        'reason' => 'Error de formato en base de datos: ' . $e->getMessage(),
-                        'data' => $this->truncateRowForLog($rowArray),
-                    ];
-                }
+            if (!empty($validPayloads)) {
+                DB::transaction(function () use ($validPayloads, &$importedCount) {
+                    foreach (array_chunk($validPayloads, 500) as $chunk) {
+                        Filedata::insert($chunk);
+                        $importedCount += count($chunk);
+                    }
+                });
             }
 
             return [
@@ -154,7 +151,6 @@ class SpecificationExcelService
         if ($str === '') {
             return null;
         }
-        // Reemplazar comas por puntos en caso de formato decimal europeo/latino
         return str_replace(',', '.', $str);
     }
 

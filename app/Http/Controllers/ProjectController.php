@@ -5,22 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Filedata;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProjectController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:project');
+        $this->middleware('can:project')->except(['show', 'edit', 'update', 'destroy']);
     }
 
-    // Display a listing of the resource.
+    protected function authorizeProject(Project $project): void
+    {
+        $user = auth()->user();
+        if (!$user || !$user->canAccessProject($project)) {
+            abort(403, 'Acceso denegado: No tienes autorización sobre este proyecto.');
+        }
+    }
+
     public function index()
     {
         return view('dashboard.project.project-index');
     }
 
-    //Show the form for creating a new resource.
     public function create()
     {
         $user = auth()->user();
@@ -28,51 +33,63 @@ class ProjectController extends Controller
         return view('dashboard.project.project-create', compact('user'));
     }
 
-    // Store a newly created resource in storage.
     public function store(Request $request)
     {
-        $project = new Project();
+        $user = auth()->user();
 
-        // Asociar el proyecto al usuario actual
-        $project->user()->associate(auth()->user());
-        $project->user_project_counter = (Project::where('user_id', auth()->id())->max('user_project_counter') ?? 0) + 1;
-        $project->project       = $request->project;
-        $project->description   = $request->description;
+        $project = new Project();
+        $project->user()->associate($user);
+        $project->tenant_id = $user->tenant_id;
+        $project->user_project_counter = (Project::where('user_id', $user->id)->max('user_project_counter') ?? 0) + 1;
+        $project->project = $request->project;
+        $project->description = $request->description;
+        $project->is_private = (bool) $request->input('is_private', false);
         $project->save();
 
-        // Redirigir a la página de proyectos con un mensaje de éxito
+        $project->refreshIntegrityHash();
+
         return redirect()->route('project.index')->with('success', '¡Proyecto creado con éxito!');
     }
 
-    //Display the specified resource.
-    public function show($project)
+    public function show($projectId)
     {
+        $projectModel = $projectId instanceof Project ? $projectId : Project::findOrFail($projectId);
+        $this->authorizeProject($projectModel);
+
+        $project = $projectModel->id;
         return view('dashboard.projectProfile.profile-index', compact('project'));
     }
 
-    //Show the form for editing the specified resource.
     public function edit(Project $project)
     {
+        $this->authorizeProject($project);
+
         return view('dashboard.project.project-edit', compact('project'));
     }
 
-    //Update the specified resource in storage.
     public function update(Request $request, Project $project)
     {
-        $project->observaciones = $request->observaciones;
+        $this->authorizeProject($project);
 
+        $project->observations = $request->observaciones ?? $request->observations ?? $project->observations;
+        if ($request->has('project')) {
+            $project->project = $request->project;
+        }
+        if ($request->has('description')) {
+            $project->description = $request->description;
+        }
         $project->save();
+        $project->refreshIntegrityHash();
 
-        $filedata = Filedata::where('masividad', ceil($project->masividad))
-            ->get();
+        $filedata = Filedata::where('masividad', ceil((float) $project->masividad))->get();
 
-        // Redirige al usuario a la página de edición del proyecto
         return view('dashboard.projectAdmin.projectAdmin-show', compact('project', 'filedata'));
     }
 
-    //Remove the specified resource from storage.
     public function destroy(Project $project)
     {
+        $this->authorizeProject($project);
+
         $project->delete();
 
         return redirect()->route('project.index')->with('success', 'El proyecto se eliminó con éxito');

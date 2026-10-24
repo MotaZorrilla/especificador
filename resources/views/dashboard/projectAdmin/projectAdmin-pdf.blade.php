@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Especificador de Pintura Intumescente</title>
-    <link rel="stylesheet" href="./assets/css/pdf.css"> 
+    <link rel="stylesheet" href="./assets/css/pdf.css">
 </head>
 
 <body>
@@ -78,7 +78,7 @@
                             'R' => '',
                             'Z' => 'con forma tipo "Z"',
                         ];
-                        $formaCompleta = $formasCompletas[$profile->forma];
+                        $formaCompleta = $formasCompletas[$profile->forma] ?? '';
                         $properties = collect([
                             'altura' => 'Altura',
                             'base1' => 'Base 1',
@@ -93,11 +93,10 @@
                         $profileProperties = $properties->filter(function ($label, $property) use ($profile) {
                             return isset($profile->$property);
                         });
-                        // Verificamos si debe mostrarse la coletilla de forma completa
                         $mostrarFormaCompleta = !(
                             $profile->perfil == 'Perfil Abierto' && $profileProperties->isEmpty()
                         );
-                        $formaCompleta = $mostrarFormaCompleta ? $formasCompletas[$profile->forma] : '';
+                        $formaCompleta = $mostrarFormaCompleta ? ($formasCompletas[$profile->forma] ?? '') : '';
                     @endphp
                     <p>{{ $profile->perfil }} {{ $formaCompleta }}</p>
                     <h3>Resistencia al fuego: </h3>
@@ -168,6 +167,25 @@
         @endforeach
 
         <br />
+        {{-- Bloque de Verificación Criptográfica QR NCh3040 / ITO --}}
+        @if(isset($qrSvgDataUri) && isset($verificationUrl))
+            <div style="border: 1px solid #1e293b; padding: 10px; margin-top: 14px; margin-bottom: 14px; background-color: #f8fafc;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="width: 130px; vertical-align: middle; text-align: center;">
+                            <img src="{{ $qrSvgDataUri }}" alt="QR Verificación ITO" style="width: 110px; height: 110px;">
+                        </td>
+                        <td style="vertical-align: middle; padding-left: 12px; font-size: 11px;">
+                            <strong>SELLO DE VERIFICACIÓN CRIPTOGRÁFICA EN TERRENO (NCh3040 / NCh935)</strong><br>
+                            <span>UUID Documento: <code>{{ $project->verification_uuid }}</code></span><br>
+                            <span>Firma SHA-256: <code>{{ $integrityHash ?? $project->integrity_hash }}</code></span><br>
+                            <span>URL de Validación Pública (ITO / DOM): {{ $verificationUrl }}</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        @endif
+
         <div class="important-notes">
             <h3><u>Notas Importantes:</u></h3>
             <br />
@@ -223,7 +241,6 @@
                     </ul>
                 </li>
             </ul>
-        </div>
         </div>
     </main>
 

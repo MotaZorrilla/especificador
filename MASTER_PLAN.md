@@ -123,6 +123,23 @@
   - Sincronización git a `origin/main` y despliegue automatizado en `192.168.1.111`.
   - Captura y validación de pantallas en vivo mediante Chrome DevTools MCP confirmando renderizado impecable y navegación bidireccional perfecta.
 
+### 🛡️ FASE 12: Reconstrucción Arquitectónica Limpia v2.0 — Plantilla Maestra Única, Multitenancy Anti-IDOR, Simulador Device Lock 1:1, Lotes Excel y QR Criptográfico en PDF (Completado - 23/10/2026)
+- [x] **Auditoría Colegiada 7D (Protocolo 2) y Especificación OpenSpec:** Creación de `openspec/specs/especificador-v2-mvp/spec.md` bajo notación formal EARS y escenarios BDD Gherkin.
+- [x] **Plantilla Maestra Única (`layouts/master.blade.php`):** Unificación total de la identidad visual original (Argon Dashboard, `logoEntumescenteA.png`, máscara `bg-primary`, `Open Sans` con `tabular-nums` y barra HUD superior de Licencia 1:1 y Simulador), eliminando CDNs externos rotos (`42d5adcbca.js`) y discrepancias entre vistas.
+- [x] **Arquitectura Multitenant (`Tenant`) y Cierre Total de IDOR:**
+  - Migración `2026_10_23_000001_upgrade_especificador_v2_multitenant_licenses_and_qr.php` con tablas `tenants`, `licenses` y `license_audit_logs` (trazabilidad contable del acuerdo de 20% de regalía).
+  - Método `User::canAccessProject(Project $project)` aplicado en `ProjectController`, `ProjectProfileController` y `PdfController`, permitiendo colaboración dentro de la misma empresa (`tenant_id`), aislando proyectos privados (`is_private = true`) y bloqueando con `403 Forbidden` accesos cruzados entre Tenants.
+- [x] **Motor Estequiométrico Desacoplado (`MassivityCalculationEngine` - SRP):** Extracción de las 22 fórmulas geométricas de masividad ($S/V$ en 3 y 4 caras) hacia un servicio puro con protección contra división por cero (`safeRatio`), reduciendo `ProjectProfileController` de 566 a 170 líneas.
+- [x] **Simulador de Bloqueo de Dispositivo 1:1 + Browser Kicking (`DeviceLicenseGuardService` & `SecuritySimulatorController`):**
+  - Vinculación automática de la huella de hardware en el primer acceso (`INITIAL_ACTIVATION`).
+  - Rechazo con `403 DEVICE_MISMATCH` y pantalla `errors/device-locked.blade.php` al detectar un segundo computador no autorizado.
+  - Autogestión de transferencia de equipo hasta **2 veces al año** (`200 REASSIGNED`) y bloqueo al 3er intento (`422 QUOTA_EXCEEDED`), registrando cada evento en `license_audit_logs`.
+- [x] **Optimización de Excel por Lotes (`chunk 500`):** Refactorización transaccional en `SpecificationExcelService` y creación de `ProjectProfileBatchService` (`POST /project/{project}/profiles/batch-import`) con aislamiento de filas corruptas.
+- [x] **Informes PDF con Código QR Criptográfico y Verificador Público ITO (`/verify/{uuid}`):**
+  - Estampado de sello QR SVG determinista en base64, `verification_uuid` y firma `SHA-256` (`X-Document-Verification-UUID` y `X-Document-Integrity-Hash`) en `PdfController@pdf`.
+  - Endpoint público `GET /verify/{uuid}` y vista `verify/certificate.blade.php` para inspectores ITO/DOM en obra sin consumir licencia, detectando adulteraciones en base de datos (`422 ADULTERADO_HASH_MISMATCH`).
+- [x] **Suite de Pruebas Testing Trophy 100% en Verde:** Ampliación de 25 a **37 pruebas automatizadas (149 aserciones en 2.01s)** cubriendo `MassivityCalculationEngineTest`, `TenantIsolationAndIdorSecurityTest`, `DeviceLockAndBrowserKickingSimulatorTest`, `ProjectProfileBatchImportTest` y `PdfQrAndPublicVerificationTest`.
+
 ---
 
 ## 📝 REGISTRO DE DECISIONES DE ARQUITECTURA (ADR)
@@ -136,3 +153,6 @@
 - **ADR-008:** Sanitización de Redirecciones Intended en Sub-Rutas Proxy. Los mecanismos nativos de framework para `intended()` asumen entornos de dominio completo. Al operar en sub-directorios reverse-proxied, las redirecciones capturadas antes del login deben ser descompuestas y reensambladas contra el prefijo base del sistema para impedir fugas hacia el gateway padre.
 - **ADR-009:** Normalización de URL Resolver en Inertia para Micro-Frontends en Sub-Rutas. Las aplicaciones SPA/Inertia montadas tras un reverse proxy requieren la vinculación de `Inertia::resolveUrlUsing()` para sincronizar el enrutador virtual del navegador con el path público asignado en el proxy, impidiendo mutaciones de URL no deseadas a través de `window.history`.
 - **ADR-010:** Coexistencia y Transición Fluida de Vistas Blade y React (Dual-Panel Switcher). En procesos de modernización donde la interfaz original posee valor afectivo o ergonomía validada por el usuario, se establece una arquitectura de convivencia dual mediante un conmutador bidireccional en el header. Esto permite al usuario contrastar en tiempo real ambas implementaciones con los mismos datos en vivo, facilitando una adopción progresiva sin fricciones ni pérdidas de identidad de marca.
+- **ADR-011:** Desacoplamiento Estequiométrico bajo Principio de Responsabilidad Única (`MassivityCalculationEngine`). Las 22 ecuaciones geométricas de masividad ($S/V$ en 3 y 4 caras) se aíslan del controlador HTTP para permitir su invocación determinista tanto desde formularios individuales como desde la importación masiva por lotes (`ProjectProfileBatchService`) y pruebas unitarias en memoria.
+- **ADR-012:** Protección Dual 1:1 (Hardware Fingerprint Binding + Seat Session Kicking) con Cuota Anual de 2 Reasignaciones. Se combina la vinculación de huella de dispositivo (`registered_device_fingerprint`) con la expulsión de sesiones simultáneas de navegador (`SingleDeviceSession`) y una bitácora inmutable (`license_audit_logs`), permitiendo hasta 2 transferencias de equipo al año por autoservicio y garantizando la trazabilidad contable del 20% de regalía comercial.
+- **ADR-013:** Sello QR Vectorial SVG Embebido y Verificación Criptográfica SHA-256 para Inspectores ITO (`/verify/{uuid}`). Para evitar que DomPDF falle por bloqueos de red o timeouts al renderizar códigos QR externos, el sello matricial se genera localmente como Data URI SVG en base64 vinculado al hash SHA-256 de los perfiles del proyecto, permitiendo a los inspectores en terreno validar la autenticidad del informe sin consumir licencias de cálculo.

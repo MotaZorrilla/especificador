@@ -15,6 +15,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
 
     protected $fillable = [
+        'tenant_id',
         'username',
         'firstname',
         'lastname',
@@ -27,7 +28,10 @@ class User extends Authenticatable
         'postal',
         'about',
         'phone',
-        'profile_count'
+        'profile_count',
+        'registered_device_fingerprint',
+        'max_device_transfers',
+        'device_transfers_used',
     ];
 
     protected $hidden = [
@@ -37,6 +41,8 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'max_device_transfers' => 'integer',
+        'device_transfers_used' => 'integer',
     ];
 
     public function setPasswordAttribute($value)
@@ -44,7 +50,17 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
-    // Relación muchos a muchos con Plan
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+    public function license()
+    {
+        return $this->hasOne(License::class)->latestOfMany();
+    }
+
+    // Relación muchos a muchos con Plan (Legacy)
     public function plans()
     {
         return $this->belongsToMany(Plan::class);
@@ -64,5 +80,31 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserDevice::class)->where('is_active', true)->latestOfMany();
     }
-}
 
+    public function remainingDeviceTransfers(): int
+    {
+        $max = $this->max_device_transfers ?? 2;
+        $used = $this->device_transfers_used ?? 0;
+        return max(0, $max - $used);
+    }
+
+    /**
+     * Evalúa si el usuario tiene autorización Multitenant / Anti-IDOR sobre un proyecto.
+     */
+    public function canAccessProject(Project $project): bool
+    {
+        if (method_exists($this, 'hasRole') && $this->hasRole('Admin')) {
+            return true;
+        }
+
+        if ((int) $project->user_id === (int) $this->id) {
+            return true;
+        }
+
+        if ($this->tenant_id !== null && (int) $project->tenant_id === (int) $this->tenant_id && !$project->is_private) {
+            return true;
+        }
+
+        return false;
+    }
+}
